@@ -1,0 +1,2 @@
+include ':app', ':data', ':domain', ':networkdatasource', ':diskdatasource', ':commons', ':presentation'
+rootProject.name='Hackovid20'

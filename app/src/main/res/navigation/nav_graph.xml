@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuFavouritesListButton">
+
+<!--    <fragment-->
+<!--        android:id="@+id/movieListFragment"-->
+<!--        android:name="com.orioltobar.androidklean.view.movielist.MovieListFragment"-->
+<!--        android:label="MovieListFragment">-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_movieListFragment_to_movieFragment"-->
+<!--            app:destination="@id/movieFragment" />-->
+<!--        <argument-->
+<!--            android:name="id"-->
+<!--            app:argType="integer"-->
+<!--            android:defaultValue="-1" />-->
+
+<!--    </fragment>-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/movieFragment"-->
+<!--        android:name="com.orioltobar.androidklean.view.movie.MovieFragment"-->
+<!--        android:label="MovieFragment">-->
+
+<!--        <argument-->
+<!--            android:name="id"-->
+<!--            android:defaultValue="-1L"-->
+<!--            app:argType="long" />-->
+
+<!--    </fragment>-->
+
+    <fragment
+        android:id="@+id/menuFavouritesListButton"
+        android:name="com.orioltobar.androidklean.view.discover.DiscoverFragment"
+        android:label="DiscoverFragment" />
+<!--    <fragment-->
+<!--        android:id="@+id/menuGenresListButton"-->
+<!--        android:name="com.orioltobar.androidklean.view.genrelist.GenreListFragment"-->
+<!--        android:label="GenreListFragment" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_genreListFragment_to_menuMovieListButton"-->
+<!--            app:destination="@id/movieListFragment" />-->
+<!--    </fragment>-->
+
+</navigation>

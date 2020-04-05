@@ -1,0 +1,84 @@
+import buildSrc.Versions
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.orioltobar.androidklean"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "com.orioltobar.androidklean.di.TestRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':diskdatasource')
+    implementation project(':networkdatasource')
+    implementation project(':presentation')
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${Versions.dagger_version}"
+    implementation "com.google.dagger:dagger-android:${Versions.dagger_version}"
+    implementation "com.google.dagger:dagger-android-support:${Versions.dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${Versions.dagger_version}"
+    kapt "com.google.dagger:dagger-android-processor:${Versions.dagger_version}"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines_version}"
+
+    // Lifecyle
+    implementation "androidx.lifecycle:lifecycle-runtime:${Versions.androidx_lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidx_lifecycle}"
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:${Versions.lottie_version}"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${Versions.glide_version}"
+    kapt "com.github.bumptech.glide:compiler:${Versions.glide_version}"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
+    implementation "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
+
+    implementation "androidx.appcompat:appcompat:${Versions.androidx_version}"
+    implementation "androidx.core:core-ktx:${Versions.androidx_core_version}"
+    implementation "androidx.constraintlayout:constraintlayout:${Versions.androidx_constraintlayout_version}"
+    implementation "androidx.palette:palette-ktx:${Versions.palette_version}"
+    testImplementation "junit:junit:${Versions.junit_version}"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:${Versions.dagger_version}"
+    androidTestImplementation "io.mockk:mockk-android:${Versions.mockk_version}"
+    androidTestImplementation "androidx.test.ext:junit:${Versions.junit_test_version}"
+    androidTestImplementation "androidx.arch.core:core-testing:${Versions.androidx_core_testing}"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${Versions.espresso_version}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${Versions.espresso_version}"
+    androidTestImplementation "androidx.navigation:navigation-testing:${Versions.navigation_version}"
+    androidTestImplementation "androidx.test:rules:${Versions.androidx_core_version}"
+    debugImplementation "androidx.fragment:fragment-testing:${Versions.fragment_test_version}"
+}
