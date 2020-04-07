@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.orioltobar.androidklean">
+    package="com.napptilians.doy">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name="com.orioltobar.androidklean.base.MockActivity"
+            android:name="com.napptilians.doy.base.MockActivity"
             android:label="MockActivity" />
 
     </application>
