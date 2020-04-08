@@ -40,6 +40,9 @@ dependencies {
     implementation project(':networkdatasource')
     implementation project(':presentation')
 
+    // Material
+    implementation "com.google.android.material:material:${Versions.material_design}"
+
     // Firebase SDK
     implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
     implementation "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
