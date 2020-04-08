@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_section_1">Secció 1</string>
+    <string name="menu_section_2">Secció 2</string>
+    <string name="under_construction">En construcció</string>
+
+    <string name="join_community">Uneix-te a la comunitat DOY</string>
+    <string name="sign_up">Crear compte</string>
+    <string name="sign_in">Iniciar sessió</string>
+    <string name="google_sign_in">Continuar amb Google</string>
+    <string name="email">E-mail</string>
+    <string name="password">Contrasenya</string>
+    <string name="password_forgot">Has oblidat la contrasenya?</string>
+    <string name="no_account">No tens compte?</string>
+</resources>
