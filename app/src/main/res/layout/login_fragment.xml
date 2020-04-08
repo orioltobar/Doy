@@ -4,8 +4,6 @@
     android:id="@+id/containerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0.7"
-    android:background="@android:color/black"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.Guideline
@@ -17,16 +15,17 @@
 
     <ImageView
         android:id="@+id/compoundLogoImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_xlarge"
+        android:alpha="0.7"
+        android:background="@drawable/image_bg_small"
         android:contentDescription="@null"
         android:src="@drawable/ic_doy_compound_logo"
         app:layout_constraintBottom_toTopOf="@id/innerContainerLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topGuideline" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/innerContainerLayout"

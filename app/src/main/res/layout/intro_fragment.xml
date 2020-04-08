@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     android:alpha="0.7"
+    android:background="@drawable/image_bg"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.Guideline
@@ -56,8 +56,8 @@
     <Button
         android:id="@+id/signUpButton"
         style="@style/App.Intro.Button"
-        android:background="@drawable/filled_button_bg"
         android:layout_marginTop="@dimen/margin_xxlarge"
+        android:background="@drawable/filled_button_bg"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="@id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
@@ -66,9 +66,9 @@
     <Button
         android:id="@+id/signInButton"
         style="@style/App.Intro.Button"
+        android:layout_marginTop="@dimen/margin_large"
         android:background="@drawable/empty_button_bg"
         android:text="@string/sign_in"
-        android:layout_marginTop="@dimen/margin_large"
         app:layout_constraintEnd_toEndOf="@id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
         app:layout_constraintTop_toBottomOf="@id/signUpButton" />
