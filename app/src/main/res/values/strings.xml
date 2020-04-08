@@ -1,6 +1,15 @@
 <resources>
-    <string name="app_name">Hackovid20</string>
+    <string name="app_name">DOY</string>
     <string name="menu_section_1">Section 1</string>
     <string name="menu_section_2">Section 2</string>
     <string name="under_construction">Under construction</string>
+
+    <string name="join_community">Join the DOY community</string>
+    <string name="sign_up">Create account</string>
+    <string name="sign_in">Log in</string>
+    <string name="google_sign_in">Continue with Google</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="password_forgot">Forgot password?</string>
+    <string name="no_account">No account?</string>
 </resources>
