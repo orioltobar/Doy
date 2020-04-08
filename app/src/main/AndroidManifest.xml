@@ -26,6 +26,14 @@
             android:name="com.napptilians.doy.base.MockActivity"
             android:label="MockActivity" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="Default" />
+        <!-- TODO: Add notification icon -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+
     </application>
 
 </manifest>
