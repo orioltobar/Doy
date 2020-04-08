@@ -1,6 +1,7 @@
 package com.napptilians.features.viewmodel
 
 import androidx.lifecycle.*
+import com.napptilians.commons.AppDispatchers
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.movie.MovieModel
@@ -16,17 +17,20 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class MovieViewModel @Inject constructor(
+    appDispatchers: AppDispatchers,
     private val getMovieUseCase: GetMovieUseCase,
     private val getMovieUseCaseFlow: GetMovieUseCaseFlow
 ) :
     BaseViewModel<MovieModel>() {
+
+    private val ioDispatcher = appDispatchers.io
 
     private val _movieDataStream = MutableLiveData<UiStatus<MovieModel, ErrorModel>>()
     val movieDataStream: LiveData<UiStatus<MovieModel, ErrorModel>>
         get() = _movieDataStream
 
     private val _movieUiModelFlow =
-        getMovieUseCaseFlow.execute().flowOn(Dispatchers.IO)
+        getMovieUseCaseFlow.execute().flowOn(ioDispatcher)
             .asLiveData(viewModelScope.coroutineContext)
     val movieModelFlow: LiveData<Response<MovieModel, ErrorModel>>
         get() = _movieUiModelFlow

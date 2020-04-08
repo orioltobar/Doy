@@ -10,7 +10,7 @@ object Versions {
     const val retrofit_version = "2.7.0"
     const val okHttp_version = "3.11.0"
     const val coroutines_version = "1.3.3"
-    const val room_version = "2.2.4"
+    const val room_version = "2.2.5"
     const val junit_version = "4.12"
     const val mockk_version = "1.9.3"
     const val dagger_version = "2.25.4"
