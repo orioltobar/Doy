@@ -38,11 +38,37 @@
         <action
             android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_menuFavouritesListButton_to_introFragment"
+            app:destination="@id/introFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.napptilians.doy.view.chat.ChatFragment"
         android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.napptilians.doy.view.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment2"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.napptilians.doy.view.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.napptilians.doy.view.intro.IntroFragment"
+        android:label="IntroFragment" >
+        <action
+            android:id="@+id/action_introFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_introFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
     <!--    <fragment-->
 <!--        android:id="@+id/menuGenresListButton"-->
 <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->

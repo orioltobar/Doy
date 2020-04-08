@@ -56,7 +56,7 @@
     <Button
         android:id="@+id/signUpButton"
         style="@style/App.Intro.Button"
-        android:layout_marginTop="@dimen/margin_xxlarge"
+        android:layout_marginTop="@dimen/margin_xxxlarge"
         android:background="@drawable/filled_button_bg"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="@id/endGuideline"

@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.commons.error.ErrorModel
 import kotlinx.android.synthetic.main.discover_fragment.*
 
-class DiscoverFragment: BaseFragment() {
+class DiscoverFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,10 +22,17 @@ class DiscoverFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         chatsButton.setOnClickListener {
-            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()
-            findNavController().navigate(navigation)
+            val direction =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()
+            findNavController().navigate(direction)
+        }
+        loginFlowButton.setOnClickListener {
+            val direction =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToIntroFragment()
+            findNavController().navigate(direction)
         }
     }
+
     override fun onError(error: ErrorModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

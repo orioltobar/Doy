@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.commons.error.ErrorModel
 import kotlinx.android.synthetic.main.intro_fragment.*
 
-class IntroFragment: BaseFragment() {
+class IntroFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,9 +22,13 @@ class IntroFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         signUpButton.setOnClickListener {
             // Navigate to Sign Up fragment
+            val direction = IntroFragmentDirections.actionIntroFragmentToRegisterFragment()
+            findNavController().navigate(direction)
         }
         signInButton.setOnClickListener {
             // Navigate to Sign Up fragment
+            val direction = IntroFragmentDirections.actionIntroFragmentToLoginFragment()
+            findNavController().navigate(direction)
         }
         continueGoogleButton.setOnClickListener {
             // Authenticate with Google
