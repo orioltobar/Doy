@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -38,6 +39,9 @@ dependencies {
     implementation project(':diskdatasource')
     implementation project(':networkdatasource')
     implementation project(':presentation')
+
+    // Firebase SDK
+    implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
