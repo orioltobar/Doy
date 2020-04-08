@@ -65,7 +65,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userField"
+            android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -74,28 +74,29 @@
             app:layout_constraintTop_toBottomOf="@id/loginText">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordField"
+            android:id="@+id/password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/password"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="@id/endGuideline"
             app:layout_constraintStart_toStartOf="@id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@id/userField"
+            app:layout_constraintTop_toBottomOf="@id/email"
             app:passwordToggleDrawable="@drawable/password_selector"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/green">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_google"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -110,7 +111,7 @@
             android:textColor="@color/green"
             android:textSize="@dimen/text_size_s"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/passwordField" />
+            app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <Button
             android:id="@+id/signInButton"
