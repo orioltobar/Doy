@@ -3,6 +3,8 @@ package buildSrc
 object Versions {
 
     const val firebase_analytics = "17.3.0"
+    const val firebase_auth = "19.3.0"
+    const val firebase_database = "19.2.1"
     const val google_services = "4.3.3"
     const val androidx_version = "1.1.0"
     const val androidx_core_version = "1.2.0"
