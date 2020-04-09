@@ -6,9 +6,7 @@ import com.napptilians.domain.usecases.GetMovieUseCase
 import com.napptilians.domain.usecases.GetMovieUseCaseFlow
 import com.napptilians.features.base.BaseViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class MovieViewModel @Inject constructor(
     appDispatchers: AppDispatchers,
     private val getMovieUseCase: GetMovieUseCase,

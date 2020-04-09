@@ -13,6 +13,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Remove action bar
+        this.supportActionBar?.hide();
+
         val navHostFragment = NavHostFragment.findNavController(navFragment)
 //        navHostFragment.addOnDestinationChangedListener { _, destination, _ ->
 //            when (destination.id) {

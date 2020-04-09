@@ -17,6 +17,7 @@ dependencies {
 
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines_version}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines_version}"
 
     // Testing
     testApi "junit:junit:${Versions.junit_version}"

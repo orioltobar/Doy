@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -21,9 +22,13 @@ class IntroFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         signUpButton.setOnClickListener {
             // Navigate to Sign Up fragment
+            val direction = IntroFragmentDirections.actionIntroFragmentToRegisterFragment()
+            findNavController().navigate(direction)
         }
         signInButton.setOnClickListener {
             // Navigate to Sign Up fragment
+            val direction = IntroFragmentDirections.actionIntroFragmentToLoginFragment()
+            findNavController().navigate(direction)
         }
         continueGoogleButton.setOnClickListener {
             // Authenticate with Google
@@ -31,10 +36,10 @@ class IntroFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLoading() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
