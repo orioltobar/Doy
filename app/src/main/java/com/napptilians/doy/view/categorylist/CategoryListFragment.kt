@@ -86,6 +86,7 @@ class CategoryListFragment : BaseFragment() {
         categoryList.layoutManager = layoutManager
         categoriesAdapter = CategoryListAdapter()
         categoriesAdapter.setOnClickListener {
+            // TODO: Navigate to Service list screen
             Toast.makeText(
                 context,
                 "Categoria ${it.name}",
