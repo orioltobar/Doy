@@ -2,6 +2,13 @@ package buildSrc
 
 object Versions {
 
+    const val material_design = "1.2.0-alpha05"
+    const val firebase_analytics = "17.3.0"
+    const val firebase_auth = "19.3.0"
+    const val firebase_database = "19.2.1"
+    const val firebase_core_version = "17.3.0"
+    const val firebase_messaging_version = "20.1.4"
+    const val google_services_version = "4.3.3"
     const val androidx_version = "1.1.0"
     const val androidx_core_version = "1.2.0"
     const val androidx_lifecycle = "2.2.0"
@@ -21,9 +28,6 @@ object Versions {
     const val lottie_version = "3.4.0"
     const val glide_version = "4.11.0"
     const val palette_version = "1.0.0"
-    const val google_services_version = "4.3.3"
-    const val firebase_core_version = "17.3.0"
-    const val firebase_messaging_version = "20.1.4"
     const val robolectric_version = "4.3.1"
     const val fragment_test_version = "1.2.2"
 

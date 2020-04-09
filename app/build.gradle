@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -39,6 +40,16 @@ dependencies {
     implementation project(':networkdatasource')
     implementation project(':presentation')
 
+    // Material
+    implementation "com.google.android.material:material:${Versions.material_design}"
+
+    // Firebase SDK
+    implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
+    implementation "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
+    implementation "com.google.firebase:firebase-database:${Versions.firebase_database}"
+    implementation "com.google.firebase:firebase-core:${Versions.firebase_core_version}"
+    implementation "com.google.firebase:firebase-messaging:${Versions.firebase_messaging_version}"
+
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
 
@@ -67,10 +78,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
     implementation "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
 
-    // Firebase
-    implementation "com.google.firebase:firebase-core:${Versions.firebase_core_version}"
-    implementation "com.google.firebase:firebase-messaging:${Versions.firebase_messaging_version}"
-
     implementation "androidx.appcompat:appcompat:${Versions.androidx_version}"
     implementation "androidx.core:core-ktx:${Versions.androidx_core_version}"
     implementation "androidx.constraintlayout:constraintlayout:${Versions.androidx_constraintlayout_version}"
@@ -86,6 +93,3 @@ dependencies {
     androidTestImplementation "androidx.test:rules:${Versions.androidx_core_version}"
     debugImplementation "androidx.fragment:fragment-testing:${Versions.fragment_test_version}"
 }
-
-// ADD THIS AT THE BOTTOM (https://stackoverflow.com/a/38018985/3429953)
-apply plugin: 'com.google.gms.google-services'
