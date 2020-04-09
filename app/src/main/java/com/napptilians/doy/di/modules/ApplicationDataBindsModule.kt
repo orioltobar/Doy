@@ -6,6 +6,7 @@ import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.data.repositories.DoyRepositoryImpl
 import com.napptilians.diskdatasource.data.DbDataBaseImpl
 import com.napptilians.domain.repositories.DoyRepository
+import com.napptilians.networkdatasource.api.data.FirebaseDataSourceImpl
 import com.napptilians.networkdatasource.api.data.NetworkDataSourceImpl
 import dagger.Binds
 import dagger.Module
