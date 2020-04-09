@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Doy</string>
     <string name="menu_section_1">Sección 1</string>
     <string name="menu_section_2">Sección 2</string>
     <string name="under_construction">En construcción</string>
-
     <string name="join_community">Únete a la comunidad de DOY</string>
     <string name="sign_up">Crear cuenta</string>
     <string name="sign_in">Iniciar sesión</string>
+    <string name="create_account">Crear cuenta</string>
     <string name="google_sign_in">Continuar con Google</string>
     <string name="email">E-mail</string>
+    <string name="name">Nombre</string>
     <string name="password">Contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
     <string name="password_forgot">¿Has olvidado la contraseña?</string>
     <string name="no_account">¿No tienes cuenta?</string>
+    <string name="existing_account">¿Ya tienes cuenta?</string>
+    <string name="create">Crear</string>
+    <string name="wrong_credentials">Credenciales erróneas</string>
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
-
 </resources>

@@ -8,6 +8,8 @@
     <dimen name="margin_xlarge">32dp</dimen>
     <dimen name="margin_xxlarge">64dp</dimen>
     <dimen name="padding_small">8dp</dimen>
+    <dimen name="margin_space_bottom">50dp</dimen>
+    <dimen name="margin_login">40dp</dimen>
 
     <!-- Text sizes -->
     <dimen name="text_size_s">12sp</dimen>
