@@ -9,13 +9,13 @@ import com.napptilians.networkdatasource.utils.safeApiCall
 import javax.inject.Inject
 
 class NetworkDataSourceImpl @Inject constructor(
-    private val categoryListService: CategoryListService,
+    private val categoryService: CategoryService,
     private val categoryMapper: CategoryMapper
 ) : NetworkDataSource {
 
     override suspend fun getCategories(categoryIds: List<Long>, lang: String): Response<List<CategoryModel>, ErrorModel> {
         return safeApiCall {
-            categoryListService.getCategories(categoryIds, lang).map {
+            categoryService.getCategories(categoryIds).map {
                 categoryMapper.map(it)
             }
         }
