@@ -37,7 +37,6 @@ class LoginFragment : BaseFragment() {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         }
-
     }
 
     private val passwordTextWatcher = object : TextWatcher {
@@ -49,7 +48,6 @@ class LoginFragment : BaseFragment() {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         }
-
     }
 
     override fun onCreateView(
@@ -62,9 +60,6 @@ class LoginFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         emailEditText.addTextChangedListener(emailTextWatcher)
         passwordEditText.addTextChangedListener(passwordTextWatcher)
-        signInButton.setOnClickListener {
-            //Validate and log the user in
-        }
         signUpText.setOnClickListener {
             // Navigate to Sign Up fragment
             val direction = LoginFragmentDirections.actionLoginFragmentToRegisterFragment2()

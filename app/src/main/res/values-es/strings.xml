@@ -18,4 +18,5 @@
     <string name="existing_account">¿Ya tienes cuenta?</string>
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credenciales erróneas</string>
+    <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
 </resources>

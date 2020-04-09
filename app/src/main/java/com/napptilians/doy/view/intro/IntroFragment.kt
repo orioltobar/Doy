@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.commons.error.ErrorModel
 import kotlinx.android.synthetic.main.intro_fragment.*
 
 class IntroFragment : BaseFragment() {

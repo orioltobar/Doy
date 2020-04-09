@@ -4,14 +4,15 @@ import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.device.DeviceModel
-import com.napptilians.domain.models.movie.MovieModel
-import kotlinx.coroutines.flow.Flow
+import com.napptilians.domain.models.movie.CategoryModel
 
-interface ExampleRepository {
+interface DoyRepository {
 
-    suspend fun getMovie(id: Long): Response<MovieModel, ErrorModel>
+//    suspend fun getMovie(id: Long): Response<MovieModel, ErrorModel>
+//
+//    fun getMovieFlow(): Flow<Response<MovieModel, ErrorModel>>
 
-    fun getMovieFlow(): Flow<Response<MovieModel, ErrorModel>>
+    suspend fun getCategories(categoryIds: List<Long> = emptyList()): Response<List<CategoryModel>, ErrorModel>
 
     suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel>
 

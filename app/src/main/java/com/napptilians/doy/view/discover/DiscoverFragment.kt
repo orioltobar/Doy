@@ -31,6 +31,10 @@ class DiscoverFragment : BaseFragment() {
             firebaseAuth.signOut()
         }
 
+        categoryListButton.setOnClickListener {
+            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
+            findNavController().navigate(navigation)
+        }
         chatsButton.setOnClickListener {
             val direction =
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()
