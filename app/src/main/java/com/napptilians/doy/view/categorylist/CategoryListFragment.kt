@@ -1,6 +1,5 @@
 package com.napptilians.doy.view.categorylist
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,26 +8,18 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.GenericTransitionOptions
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.movie.CategoryModel
-import com.napptilians.domain.models.movie.MovieModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.extensions.getDominantColor
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.CategoriesViewModel
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.category_list_fragment.*
 import kotlinx.android.synthetic.main.movie_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class CategoryListFragment : BaseFragment() {
@@ -95,6 +86,7 @@ class CategoryListFragment : BaseFragment() {
         categoryList.layoutManager = layoutManager
         categoriesAdapter = CategoryListAdapter()
         categoriesAdapter.setOnClickListener {
+            // TODO: Navigate to Service list screen
             Toast.makeText(
                 context,
                 "Categoria ${it.name}",

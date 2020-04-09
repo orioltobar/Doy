@@ -4,7 +4,7 @@ import com.napptilians.networkdatasource.api.models.CategoryApiModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface CategoryListService {
+interface CategoryService {
 
     @GET("/getCategories")
     suspend fun getCategories(

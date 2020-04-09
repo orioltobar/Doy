@@ -3,10 +3,10 @@ package com.napptilians.doy.dagger
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.napptilians.commons.Constants
 import com.napptilians.doy.App
 import com.napptilians.doy.di.modules.ActivityBindingModule
 import com.napptilians.doy.di.modules.AppModule
-import com.napptilians.commons.Constants
 import com.napptilians.networkdatasource.di.BaseUrl
 import com.napptilians.networkdatasource.interceptors.UrlParamInterceptor
 import com.napptilians.networkdatasource.providers.NetworkProvider
@@ -16,13 +16,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Named
-import javax.inject.Singleton
 
 @Singleton
 @Component(

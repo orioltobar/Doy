@@ -6,5 +6,8 @@ import com.napptilians.domain.models.movie.CategoryModel
 
 interface NetworkDataSource {
 
-    suspend fun getCategories(categoryIds: List<Long> = emptyList()): Response<List<CategoryModel>, ErrorModel>
+    suspend fun getCategories(
+        categoryIds: List<Long> = emptyList(),
+        lang: String = "ca"
+    ): Response<List<CategoryModel>, ErrorModel>
 }
