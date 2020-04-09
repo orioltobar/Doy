@@ -22,7 +22,7 @@ interface ApplicationDataBindsModule {
 
     @Binds
     @Singleton
-    fun bindsMovieDataSource(dataSource: NetworkDataSourceImpl): NetworkDataSource
+    fun bindsNetworkDataSource(dataSource: NetworkDataSourceImpl): NetworkDataSource
 
     @Binds
     @Singleton
