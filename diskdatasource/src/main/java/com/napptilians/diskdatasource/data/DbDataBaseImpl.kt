@@ -2,6 +2,7 @@ package com.napptilians.diskdatasource.data
 
 import com.napptilians.commons.Failure
 import com.napptilians.commons.Response
+import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.diskdatasource.Cache
@@ -34,16 +35,11 @@ class DbDataBaseImpl @Inject constructor(
 
     override suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel> =
         deviceDao.getDeviceInfo()?.let {
-            Cache.checkTimestampCache(DEVICE_INFO_CACHE_TIMESTAMP_MS, deviceOutDbMapper.map(it))
-        } ?: run { Failure(ErrorModel("")) }
+            Success(deviceOutDbMapper.map(it))
+        } ?: run { Failure(ErrorModel("data error")) }
 
-    override suspend fun saveDeviceInfo(device: DeviceModel) =
-        deviceDao.insertDeviceInfo(deviceInDbMapper.map(device))
-
-    companion object {
-        // TODO: Check if possible to insert cache timestamp from Firebase Constants
-        private val DEVICE_INFO_CACHE_TIMESTAMP_MS = TimeUnit.DAYS.toMillis(14)
-    }
+    override suspend fun saveDeviceInfo(device: DeviceModel): Response<Unit, ErrorModel> =
+        Success(deviceDao.insertDeviceInfo(deviceInDbMapper.map(device)))
 
 //    /**
 //     * Process the [list] of db models retrieved by the database in order to check if the cache is

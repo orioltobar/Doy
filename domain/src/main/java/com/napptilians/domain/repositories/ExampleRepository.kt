@@ -14,5 +14,5 @@ interface ExampleRepository {
 
     suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel>
 
-    suspend fun saveDeviceInfo(device: DeviceModel)
+    suspend fun saveDeviceInfo(device: DeviceModel): Response<Unit, ErrorModel>
 }
