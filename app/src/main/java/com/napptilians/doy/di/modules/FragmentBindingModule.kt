@@ -5,6 +5,9 @@ import com.napptilians.doy.view.categorylist.CategoryListFragment
 import com.napptilians.doy.view.chat.ChatFragment
 import com.napptilians.doy.view.chat.ChatListFragment
 import com.napptilians.doy.view.discover.DiscoverFragment
+import com.napptilians.doy.view.intro.IntroFragment
+import com.napptilians.doy.view.login.LoginFragment
+import com.napptilians.doy.view.register.RegisterFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -22,6 +25,15 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindAddServiceFragment(): AddServiceFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindRegisterFragment(): RegisterFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindIntroFragment(): IntroFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindLoginFragment(): LoginFragment
 
     @ContributesAndroidInjector
     internal abstract fun bindCategoryListFragment(): CategoryListFragment

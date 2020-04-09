@@ -6,11 +6,17 @@
     <string name="join_community">Join the DOY community</string>
     <string name="sign_up">Create account</string>
     <string name="sign_in">Log in</string>
+    <string name="create_account">Create account</string>
     <string name="google_sign_in">Continue with Google</string>
     <string name="email">E-mail</string>
+    <string name="name">Name</string>
     <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
     <string name="password_forgot">Forgot password?</string>
     <string name="no_account">No account?</string>
+    <string name="existing_account">Already registered?</string>
+    <string name="create">Create</string>
+    <string name="wrong_credentials">Wrong credentials</string>
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
 
     <!-- Add event -->

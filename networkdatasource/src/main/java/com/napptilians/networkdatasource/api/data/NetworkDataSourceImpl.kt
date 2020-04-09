@@ -2,7 +2,6 @@ package com.napptilians.networkdatasource.api.data
 
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.commons.map
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.domain.models.movie.CategoryModel
 import com.napptilians.domain.models.movie.ServiceModel

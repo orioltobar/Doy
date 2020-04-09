@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Doy</string>
     <string name="menu_section_1">Secció 1</string>
     <string name="menu_section_2">Secció 2</string>
     <string name="under_construction">En construcció</string>
-
     <string name="join_community">Uneix-te a la comunitat DOY</string>
     <string name="sign_up">Crear compte</string>
     <string name="sign_in">Iniciar sessió</string>
+    <string name="create_account">Crear compte</string>
     <string name="google_sign_in">Continuar amb Google</string>
     <string name="email">E-mail</string>
+    <string name="name">Nom</string>
     <string name="password">Contrasenya</string>
+    <string name="repeat_password">Repetir contrasenya</string>
     <string name="password_forgot">Has oblidat la contrasenya?</string>
     <string name="no_account">No tens compte?</string>
+    <string name="existing_account">Ja tens compte?</string>
+    <string name="create">Crear</string>
+    <string name="wrong_credentials">Credencials errònies</string>
     <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
 
     <!-- Add event -->
