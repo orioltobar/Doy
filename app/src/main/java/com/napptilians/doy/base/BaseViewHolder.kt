@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
-import javax.inject.Inject
 
 abstract class BaseViewHolder<T>(parent: ViewGroup, @LayoutRes layoutId: Int) :
     RecyclerView.ViewHolder(parent.inflate(layoutId)), LayoutContainer {

@@ -33,7 +33,6 @@ inline fun <T, V, E> Response<T, E>.flatMap(lambda: (T) -> Response<V, E>): Resp
             }
         }
 
-
 /**
  * Either uses [onSuccess] to define a success callback if the result is Success. [onFailure]
  * defines the action to take if the call failed.
@@ -65,7 +64,6 @@ fun <T, E> Response<T, E>.valueOrNull(): T? =
             null
         }
     }
-
 
 /**
  * Returns the result if Success, otherwise throws an exception containing the error in Failure.

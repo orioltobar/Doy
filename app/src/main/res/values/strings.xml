@@ -11,4 +11,5 @@
     <string name="password">Password</string>
     <string name="password_forgot">Forgot password?</string>
     <string name="no_account">No account?</string>
+    <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
 </resources>

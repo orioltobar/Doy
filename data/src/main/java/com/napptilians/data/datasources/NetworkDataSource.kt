@@ -2,9 +2,9 @@ package com.napptilians.data.datasources
 
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.MovieModel
+import com.napptilians.domain.models.movie.CategoryModel
 
 interface NetworkDataSource {
 
-    suspend fun getMovie(id: Long): Response<MovieModel, ErrorModel>
+    suspend fun getCategories(categoryIds: List<Long> = emptyList()): Response<List<CategoryModel>, ErrorModel>
 }

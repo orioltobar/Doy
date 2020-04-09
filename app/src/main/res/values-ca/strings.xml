@@ -12,4 +12,6 @@
     <string name="password">Contrasenya</string>
     <string name="password_forgot">Has oblidat la contrasenya?</string>
     <string name="no_account">No tens compte?</string>
+    <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
+
 </resources>
