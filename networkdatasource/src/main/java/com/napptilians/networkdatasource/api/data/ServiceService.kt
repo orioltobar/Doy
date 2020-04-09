@@ -10,8 +10,4 @@ interface ServiceService {
     suspend fun addService(
         @Body service: ServiceApiModel
     ): Long
-
-    companion object {
-        private const val CATEGORY_ID = "category_id"
-    }
 }

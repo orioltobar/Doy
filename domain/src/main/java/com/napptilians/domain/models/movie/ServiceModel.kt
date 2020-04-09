@@ -1,7 +1,7 @@
 package com.napptilians.domain.models.movie
 
 data class ServiceModel(
-    val id: Long,
+    val serviceId: Long,
     val categoryId: Long,
     val name: String,
     val description: String,
