@@ -9,7 +9,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
 
     override fun map(from: ServiceModel?): ServiceApiModel =
         ServiceApiModel(
-            from?.id ?: -1L,
+            from?.serviceId ?: -1L,
             from?.categoryId ?: -1L,
             from?.name ?: "",
             from?.description ?: "",

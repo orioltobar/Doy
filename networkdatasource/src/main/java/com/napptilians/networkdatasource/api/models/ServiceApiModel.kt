@@ -3,8 +3,8 @@ package com.napptilians.networkdatasource.api.models
 import com.google.gson.annotations.SerializedName
 
 data class ServiceApiModel(
-    @SerializedName("id")
-    val id: Long? = null,
+    @SerializedName("service_id")
+    val serviceId: Long? = null,
     @SerializedName("category_id")
     val categoryId: Long? = null,
     @SerializedName("name")
