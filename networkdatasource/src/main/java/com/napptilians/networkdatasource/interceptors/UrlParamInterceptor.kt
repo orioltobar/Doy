@@ -1,9 +1,9 @@
 package com.napptilians.networkdatasource.interceptors
 
 import com.napptilians.networkdatasource.providers.NetworkProvider
+import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Response
-import javax.inject.Inject
 
 class UrlParamInterceptor @Inject constructor(
     private val networkProvider: NetworkProvider

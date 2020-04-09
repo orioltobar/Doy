@@ -2,10 +2,10 @@ package com.napptilians.doy.di.modules
 
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.NetworkDataSource
-import com.napptilians.data.repositories.ExampleRepositoryImpl
+import com.napptilians.data.repositories.DoyRepositoryImpl
 import com.napptilians.diskdatasource.data.ExampleDataBaseImpl
-import com.napptilians.domain.repositories.ExampleRepository
-import com.napptilians.networkdatasource.api.data.ExampleDataSourceImpl
+import com.napptilians.domain.repositories.DoyRepository
+import com.napptilians.networkdatasource.api.data.NetworkDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -18,11 +18,11 @@ interface ApplicationDataBindsModule {
 
     @Binds
     @Singleton
-    fun bindsMovieRepository(repository: ExampleRepositoryImpl): ExampleRepository
+    fun bindsMovieRepository(repository: DoyRepositoryImpl): DoyRepository
 
     @Binds
     @Singleton
-    fun bindsMovieDataSource(dataSource: ExampleDataSourceImpl): NetworkDataSource
+    fun bindsMovieDataSource(dataSource: NetworkDataSourceImpl): NetworkDataSource
 
     @Binds
     @Singleton

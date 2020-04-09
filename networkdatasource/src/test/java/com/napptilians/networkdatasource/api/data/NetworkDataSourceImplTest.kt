@@ -2,15 +2,19 @@ package com.napptilians.networkdatasource.api.data
 
 import com.napptilians.networkdatasource.api.mappers.MovieMapper
 import com.napptilians.networkdatasource.api.models.MovieApiModel
-import io.mockk.*
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class ExampleDataSourceImplTest {
+class NetworkDataSourceImplTest {
 
     init {
         MockKAnnotations.init(this, relaxUnitFun = true)
@@ -26,7 +30,7 @@ class ExampleDataSourceImplTest {
     private lateinit var movieMock: MovieApiModel
 
     private val dataSource by lazy {
-        ExampleDataSourceImpl(
+        NetworkDataSourceImpl(
             movieService,
             movieMapper
         )
