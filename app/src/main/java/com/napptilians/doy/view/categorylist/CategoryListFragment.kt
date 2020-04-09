@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.category.Category
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.visible
-import kotlinx.android.synthetic.main.category_list_fragment.*
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.category_list_fragment.*
 
 class CategoryListFragment : BaseFragment() {
 
@@ -51,11 +50,11 @@ class CategoryListFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     private fun initViews() {
@@ -70,7 +69,7 @@ class CategoryListFragment : BaseFragment() {
             ).show()
         }
         val itemOffsetDecoration = ItemOffsetDecoration(context, R.dimen.margin_small)
-        categoryList.addItemDecoration(itemOffsetDecoration);
+        categoryList.addItemDecoration(itemOffsetDecoration)
         categoryList.adapter = categoriesAdapter
     }
 

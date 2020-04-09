@@ -18,7 +18,7 @@ class ItemOffsetDecoration(val context: Context?, @DimenRes val itemOffsetId: In
         super.getItemOffsets(outRect, view, parent, state)
         context?.let {
             val itemOffset = context.resources.getDimensionPixelSize(itemOffsetId)
-            outRect.set(itemOffset, itemOffset, itemOffset, itemOffset);
+            outRect.set(itemOffset, itemOffset, itemOffset, itemOffset)
         }
     }
 }

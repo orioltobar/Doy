@@ -5,8 +5,8 @@ import com.napptilians.doy.di.components.AppComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Singleton
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @UseExperimental(ExperimentalCoroutinesApi::class)
 @Singleton

@@ -1,7 +1,6 @@
 package com.napptilians.doy.view.chat
 
 import android.os.Bundle
-import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,8 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.chat.MessageModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import kotlinx.android.synthetic.main.chat_fragment.*
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.chat_fragment.*
 
 class ChatFragment : BaseFragment() {
 
@@ -39,7 +38,7 @@ class ChatFragment : BaseFragment() {
 
         user?.let {
             println("FIREBASE: ${it.displayName}")
-            println("FIREBASE: ${it.photoUrl.toString()}")
+            println("FIREBASE: ${it.photoUrl}")
         } ?: run {
             println("FIREBASE: NOT LOGGED!")
         }
@@ -67,15 +66,15 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     private fun createFireBaseListener() {
-        val postListener = object: ValueEventListener {
+        val postListener = object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
 
                 val toReturn: MutableList<MessageModel> = mutableListOf()
@@ -91,7 +90,6 @@ class ChatFragment : BaseFragment() {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-
             }
         }
 
