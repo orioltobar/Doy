@@ -15,32 +15,30 @@ class LoginFragment : BaseFragment() {
 
     private val emailTextWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         }
-
     }
 
     private val passwordTextWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         }
-
     }
 
     override fun onCreateView(
@@ -54,7 +52,7 @@ class LoginFragment : BaseFragment() {
         emailEditText.addTextChangedListener(emailTextWatcher)
         passwordEditText.addTextChangedListener(passwordTextWatcher)
         signInButton.setOnClickListener {
-            //Validate and log the user in
+            // Validate and log the user in
         }
         signUpText.setOnClickListener {
             // Navigate to Sign Up fragment
@@ -62,10 +60,10 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 }

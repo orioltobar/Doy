@@ -5,10 +5,10 @@ import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
 import com.napptilians.networkdatasource.di.BaseUrl
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Named
 import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 @Module(includes = [ApplicationDataBindsModule::class])
 object AppModule {
@@ -19,7 +19,7 @@ object AppModule {
 
     @Provides
     @BaseUrl
-    fun provideBaseUrl(): String = "https://www.google.com"
+    fun provideBaseUrl(): String = "https://20200409t155054-dot-doy-proj.appspot.com/"
 
     @Provides
     @Singleton

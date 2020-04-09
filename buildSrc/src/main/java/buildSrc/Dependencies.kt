@@ -37,7 +37,7 @@ object Versions {
     const val androidx_constraintlayout_version = "1.1.3"
     const val androidx_legacy_version = "1.0.0"
     const val androidx_multidex_version = "2.0.1"
-    const val androidx_recyclerview_version = "1.0.0"
+    const val androidx_recyclerview_version = "1.1.0"
     const val androidx_transition_version = "1.0.0"
     const val androidx_core_testing = "2.1.0"
 }

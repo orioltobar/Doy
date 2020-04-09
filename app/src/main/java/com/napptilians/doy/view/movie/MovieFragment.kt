@@ -1,33 +1,33 @@
-//package com.napptilians.doy.view.movie
+// package com.napptilians.doy.view.movie
 //
-//import android.graphics.drawable.Drawable
-//import android.os.Bundle
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.fragment.app.viewModels
-//import androidx.lifecycle.Observer
-//import androidx.navigation.fragment.navArgs
-//import com.bumptech.glide.GenericTransitionOptions
-//import com.bumptech.glide.Glide
-//import com.bumptech.glide.load.DataSource
-//import com.bumptech.glide.load.engine.GlideException
-//import com.bumptech.glide.request.RequestListener
-//import com.bumptech.glide.request.target.Target
-//import com.google.android.material.appbar.AppBarLayout
-//import com.napptilians.doy.R
-//import com.napptilians.doy.base.BaseFragment
-//import com.napptilians.doy.extensions.getDominantColor
-//import com.napptilians.commons.error.ErrorModel
-//import com.napptilians.domain.models.movie.MovieModel
-//import com.napptilians.features.UiStatus
-//import com.napptilians.features.viewmodel.MovieViewModel
-//import kotlinx.android.synthetic.main.movie_fragment.*
-//import kotlinx.coroutines.ExperimentalCoroutinesApi
-//import kotlin.math.abs
+// import android.graphics.drawable.Drawable
+// import android.os.Bundle
+// import android.view.LayoutInflater
+// import android.view.View
+// import android.view.ViewGroup
+// import androidx.fragment.app.viebuiwModels
+// import androidx.lifecycle.Observer
+// import androidx.navigation.fragment.navArgs
+// import com.bumptech.glide.GenericTransitionOptions
+// import com.bumptech.glide.Glide
+// import com.bumptech.glide.load.DataSource
+// import com.bumptech.glide.load.engine.GlideException
+// import com.bumptech.glide.request.RequestListener
+// import com.bumptech.glide.request.target.Target
+// import com.google.android.material.appbar.AppBarLayout
+// import com.napptilians.doy.R
+// import com.napptilians.doy.base.BaseFragment
+// import com.napptilians.doy.extensions.getDominantColor
+// import com.napptilians.commons.error.ErrorModel
+// import com.napptilians.domain.models.movie.MovieModel
+// import com.napptilians.features.UiStatus
+// import com.napptilians.features.viewmodel.MovieViewModel
+// import kotlinx.android.synthetic.main.movie_fragment.*
+// import kotlinx.coroutines.ExperimentalCoroutinesApi
+// import kotlin.math.abs
 //
-//@ExperimentalCoroutinesApi
-//class MovieFragment : BaseFragment() {
+// @ExperimentalCoroutinesApi
+// class MovieFragment : BaseFragment() {
 //
 //    private val args: MovieFragmentArgs by navArgs()
 //
@@ -110,4 +110,4 @@
 //            }
 //        })
 //    }
-//}
+// }

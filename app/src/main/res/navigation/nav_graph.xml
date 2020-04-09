@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_menuFavouritesListButton_to_addServiceFragment"
             app:destination="@id/addServiceFragment" />
+        <action
+            android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -50,6 +53,10 @@
         android:id="@+id/addServiceFragment"
         android:name="com.napptilians.doy.view.addservice.AddServiceFragment"
         android:label="AddServiceFragment" />
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.napptilians.doy.view.categorylist.CategoryListFragment"
+        android:label="CategoryListFragment" />
     <!--    <fragment-->
 <!--        android:id="@+id/menuGenresListButton"-->
 <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->

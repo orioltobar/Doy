@@ -1,8 +1,8 @@
 package com.napptilians.doy.di.components
 
 import android.content.Context
-import com.napptilians.doy.App
 import com.napptilians.diskdatasource.di.DatabaseModule
+import com.napptilians.doy.App
 import com.napptilians.doy.di.modules.ActivityBindingModule
 import com.napptilians.doy.di.modules.AppModule
 import com.napptilians.doy.di.modules.FragmentBindingModule

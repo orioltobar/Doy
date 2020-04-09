@@ -1,7 +1,7 @@
 package com.napptilians.doy.base
 
-import com.napptilians.doy.di.ViewModelFactory
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.doy.di.ViewModelFactory
 import com.napptilians.features.Error
 import com.napptilians.features.Loading
 import com.napptilians.features.NewValue

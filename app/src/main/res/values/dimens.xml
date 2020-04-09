@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Margins and paddings -->
+    <dimen name="margin_xsmall">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_xlarge">32dp</dimen>
     <dimen name="margin_xxlarge">64dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
 
     <!-- Text sizes -->
     <dimen name="text_size_s">12sp</dimen>
@@ -23,5 +25,11 @@
     <dimen name="dashed_box_width">184dp</dimen>
     <dimen name="dashed_rectangle_dash_width">3dp</dimen>
     <dimen name="dashed_rectangle_dash_gap_size">3dp</dimen>
+
+    <!-- Category List items -->
+    <dimen name="category_text_size">16sp</dimen>
+    <dimen name="category_radius">8dp</dimen>
+    <dimen name="category_max_height">100dp</dimen>
+    <dimen name="category_max_width">160dp</dimen>
 
 </resources>

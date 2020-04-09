@@ -12,6 +12,7 @@
     <string name="password">Contraseña</string>
     <string name="password_forgot">¿Has olvidado la contraseña?</string>
     <string name="no_account">¿No tienes cuenta?</string>
+    <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
 
     <!-- Add event -->
     <string name="add_service">Crear evento</string>
@@ -22,4 +23,5 @@
     <string name="select_spots">Seleccionar plazas disponibles</string>
     <string name="select_duration">Seleccionar duración</string>
     <string name="description">Descripción</string>
+
 </resources>

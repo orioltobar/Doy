@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.napptilians.doy.di.ViewModelFactory
 import com.napptilians.doy.di.ViewModelKey
+import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import dagger.Binds
 import dagger.Module
@@ -21,4 +22,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MovieViewModel::class)
     internal abstract fun movieViewModel(viewModel: MovieViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoriesViewModel::class)
+    internal abstract fun categoriesViewModel(viewModel: CategoriesViewModel): ViewModel
 }
