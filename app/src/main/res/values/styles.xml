@@ -48,7 +48,7 @@
         <item name="android:textSize">@dimen/text_size_m</item>
         <item name="android:fontFamily">@font/raleway</item>
         <item name="android:textColorHint">@color/hintGray</item>
-        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:layout_marginBottom">@dimen/margin_xsmall</item>
     </style>
 
     <style name="App.AddService.Button">

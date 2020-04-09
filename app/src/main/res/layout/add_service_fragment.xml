@@ -65,74 +65,137 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/selectCategoryInput"
+                    android:id="@+id/categoryView"
                     style="@style/App.AddService.Input"
-                    android:hint="@string/select_category">
+                    android:hint="@string/select_category"
+                    android:visibility="gone">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/selectCategoryEditText"
+                        android:id="@+id/categoryEditText"
                         style="@style/App.AddService.Input"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <RelativeLayout
+                    android:id="@+id/selectCategoryView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/App.AddService.Input"
+                        android:hint="@string/select_category">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/selectCategoryEditText"
+                            style="@style/App.AddService.Input"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:inputType="text" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/padding_small"
+                        android:src="@drawable/ic_arrow_next" />
+
+                </RelativeLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/selectCategoryInput"
+                    android:id="@+id/serviceTitleInput"
                     style="@style/App.AddService.Input"
                     android:hint="@string/service_title">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/selectCategoryEditText"
+                        android:id="@+id/serviceTitleEditText"
                         style="@style/App.AddService.Input"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/selectCategoryInput"
+                    android:id="@+id/selectDateInput"
                     style="@style/App.AddService.Input"
                     android:hint="@string/select_date">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/selectCategoryEditText"
+                        android:id="@+id/selectDateEditText"
                         style="@style/App.AddService.Input"
                         android:inputType="date" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/selectCategoryInput"
-                    style="@style/App.AddService.Input"
-                    android:hint="@string/select_spots">
+                <RelativeLayout
+                    android:id="@+id/selectSpotsView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/selectCategoryEditText"
+                    <com.google.android.material.textfield.TextInputLayout
                         style="@style/App.AddService.Input"
-                        android:inputType="number" />
+                        android:hint="@string/select_spots">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/selectSpotsEditText"
+                            style="@style/App.AddService.Input"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:inputType="number" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/selectCategoryInput"
-                    style="@style/App.AddService.Input"
-                    android:hint="@string/select_duration">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/selectCategoryEditText"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/padding_small"
+                        android:src="@drawable/ic_arrow_next" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/selectDurationView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <com.google.android.material.textfield.TextInputLayout
                         style="@style/App.AddService.Input"
-                        android:inputType="datetime" />
+                        android:hint="@string/select_duration">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/selectDurationEditText"
+                            style="@style/App.AddService.Input"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:inputType="datetime" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/padding_small"
+                        android:src="@drawable/ic_arrow_next" />
+
+                </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/selectCategoryInput"
+                    android:id="@+id/descriptionView"
                     style="@style/App.AddService.Input"
                     android:hint="@string/description">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/selectCategoryEditText"
+                        android:id="@+id/descriptionEditText"
                         style="@style/App.AddService.Input"
-                        android:inputType="textShortMessage" />
+                        android:inputType="textMultiLine" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
