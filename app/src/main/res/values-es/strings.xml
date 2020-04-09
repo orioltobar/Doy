@@ -12,4 +12,14 @@
     <string name="password">Contraseña</string>
     <string name="password_forgot">¿Has olvidado la contraseña?</string>
     <string name="no_account">¿No tienes cuenta?</string>
+
+    <!-- Add event -->
+    <string name="add_service">Crear evento</string>
+    <string name="upload_image">Subir imagen</string>
+    <string name="select_category">Seleccionar categoría</string>
+    <string name="service_title">Título evento</string>
+    <string name="select_date">Seleccionar fecha</string>
+    <string name="select_spots">Seleccionar plazas disponibles</string>
+    <string name="select_duration">Seleccionar duración</string>
+    <string name="description">Descripción</string>
 </resources>

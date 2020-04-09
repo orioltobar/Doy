@@ -10,7 +10,7 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.commons.error.ErrorModel
 import kotlinx.android.synthetic.main.discover_fragment.*
 
-class DiscoverFragment: BaseFragment() {
+class DiscoverFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +23,10 @@ class DiscoverFragment: BaseFragment() {
 
         chatsButton.setOnClickListener {
             val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()
+            findNavController().navigate(navigation)
+        }
+        addServiceButton.setOnClickListener {
+            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
             findNavController().navigate(navigation)
         }
     }

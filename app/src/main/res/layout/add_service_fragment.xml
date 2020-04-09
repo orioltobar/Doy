@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_xlarge">
+
+    <TextView
+        android:id="@+id/loginText"
+        style="@style/App.AddService"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/add_service" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/uploadImageBox"
+                style="@style/App.AddService.ImageBox"
+                android:layout_margin="@dimen/margin_large"
+                android:padding="@dimen/margin_medium">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_add_picture"
+                    android:drawablePadding="@dimen/margin_small"
+                    android:gravity="center_vertical"
+                    android:text="@string/upload_image"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_m" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/selectCategoryInput"
+                    style="@style/App.AddService.Input"
+                    android:hint="@string/select_category">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/selectCategoryEditText"
+                        style="@style/App.AddService.Input"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/selectCategoryInput"
+                    style="@style/App.AddService.Input"
+                    android:hint="@string/service_title">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/selectCategoryEditText"
+                        style="@style/App.AddService.Input"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/selectCategoryInput"
+                    style="@style/App.AddService.Input"
+                    android:hint="@string/select_date">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/selectCategoryEditText"
+                        style="@style/App.AddService.Input"
+                        android:inputType="date" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/selectCategoryInput"
+                    style="@style/App.AddService.Input"
+                    android:hint="@string/select_spots">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/selectCategoryEditText"
+                        style="@style/App.AddService.Input"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/selectCategoryInput"
+                    style="@style/App.AddService.Input"
+                    android:hint="@string/select_duration">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/selectCategoryEditText"
+                        style="@style/App.AddService.Input"
+                        android:inputType="datetime" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/selectCategoryInput"
+                    style="@style/App.AddService.Input"
+                    android:hint="@string/description">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/selectCategoryEditText"
+                        style="@style/App.AddService.Input"
+                        android:inputType="textShortMessage" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/createEventButton"
+        style="@style/App.AddService.Button"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="@string/add_service" />
+
+</LinearLayout>

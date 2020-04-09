@@ -17,4 +17,11 @@
     <!-- Buttons -->
     <dimen name="button_radius">28dp</dimen>
     <dimen name="button_border_width">1dp</dimen>
+
+    <!-- Dashed rectangle -->
+    <dimen name="dashed_box_height">136dp</dimen>
+    <dimen name="dashed_box_width">184dp</dimen>
+    <dimen name="dashed_rectangle_dash_width">3dp</dimen>
+    <dimen name="dashed_rectangle_dash_gap_size">3dp</dimen>
+
 </resources>

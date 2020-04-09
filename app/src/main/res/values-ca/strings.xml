@@ -12,4 +12,15 @@
     <string name="password">Contrasenya</string>
     <string name="password_forgot">Has oblidat la contrasenya?</string>
     <string name="no_account">No tens compte?</string>
+
+    <!-- Add event -->
+    <string name="add_service">Crear event</string>
+    <string name="upload_image">Pujar imatge</string>
+    <string name="select_category">Seleccionar categoria</string>
+    <string name="service_title">Títol event</string>
+    <string name="select_date">Seleccionar data</string>
+    <string name="select_spots">Seleccionar places disponibles</string>
+    <string name="select_duration">Seleccionar duració</string>
+    <string name="description">Descripció</string>
+
 </resources>
