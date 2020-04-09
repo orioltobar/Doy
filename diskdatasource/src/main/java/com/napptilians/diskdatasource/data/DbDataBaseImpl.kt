@@ -5,14 +5,22 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.diskdatasource.Cache
+import com.napptilians.diskdatasource.dao.DeviceDao
 import com.napptilians.diskdatasource.dao.ExampleDao
+import com.napptilians.diskdatasource.mappers.DeviceInDbMapper
+import com.napptilians.diskdatasource.mappers.DeviceOutDbMapper
 import com.napptilians.diskdatasource.mappers.MovieDbMapper
+import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.movie.MovieModel
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class ExampleDataBaseImpl @Inject constructor(
+class DbDataBaseImpl @Inject constructor(
     private val exampleDao: ExampleDao,
-    private val movieDbMapper: MovieDbMapper
+    private val movieDbMapper: MovieDbMapper,
+    private val deviceDao: DeviceDao,
+    private val deviceInDbMapper: DeviceInDbMapper,
+    private val deviceOutDbMapper: DeviceOutDbMapper
 ) : DbDataSource {
 
     override suspend fun getMovie(id: Long): Response<MovieModel, ErrorModel> =
@@ -22,6 +30,19 @@ class ExampleDataBaseImpl @Inject constructor(
 
     override suspend fun saveMovie(movie: MovieModel) {
         return exampleDao.insertWithTimestamp(movieDbMapper.mapToDbModel(movie))
+    }
+
+    override suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel> =
+        deviceDao.getDeviceInfo()?.let {
+            Cache.checkTimestampCache(DEVICE_INFO_CACHE_TIMESTAMP_MS, deviceOutDbMapper.map(it))
+        } ?: run { Failure(ErrorModel("")) }
+
+    override suspend fun saveDeviceInfo(device: DeviceModel) =
+        deviceDao.insertDeviceInfo(deviceInDbMapper.map(device))
+
+    companion object {
+        // TODO: Check if possible to insert cache timestamp from Firebase Constants
+        private val DEVICE_INFO_CACHE_TIMESTAMP_MS = TimeUnit.DAYS.toMillis(14)
     }
 
 //    /**
