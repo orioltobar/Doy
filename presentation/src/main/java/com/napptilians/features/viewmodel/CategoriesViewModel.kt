@@ -22,10 +22,10 @@ class CategoriesViewModel @Inject constructor(
     val categoriesDataStream: LiveData<UiStatus<List<CategoryModel>, ErrorModel>>
         get() = _categoriesDataStream
 
-    fun execute(categoryIds: List<Long> = emptyList()) {
+    fun execute(categoryIds: List<Long> = emptyList(), lang: String = "ca") {
         viewModelScope.launch {
             _categoriesDataStream.value = emitLoadingState()
-            val request = getCategoriesUseCase.execute(categoryIds)
+            val request = getCategoriesUseCase.execute(categoryIds, lang)
             _categoriesDataStream.value = processModel(request)
         }
     }

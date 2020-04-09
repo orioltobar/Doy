@@ -11,7 +11,10 @@ interface DoyRepository {
 //
 //    fun getMovieFlow(): Flow<Response<MovieModel, ErrorModel>>
 
-    suspend fun getCategories(categoryIds: List<Long> = emptyList()): Response<List<CategoryModel>, ErrorModel>
+    suspend fun getCategories(
+        categoryIds: List<Long> = emptyList(),
+        lang: String = "ca"
+    ): Response<List<CategoryModel>, ErrorModel>
 
     suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel>
 

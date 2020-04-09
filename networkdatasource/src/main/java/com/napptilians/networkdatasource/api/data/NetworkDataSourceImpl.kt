@@ -14,9 +14,9 @@ class NetworkDataSourceImpl @Inject constructor(
     private val categoryMapper: CategoryMapper
 ) : NetworkDataSource {
 
-    override suspend fun getCategories(categoryIds: List<Long>): Response<List<CategoryModel>, ErrorModel> {
+    override suspend fun getCategories(categoryIds: List<Long>, lang: String): Response<List<CategoryModel>, ErrorModel> {
         return safeApiCall {
-            categoryListService.getCategories(categoryIds).map {
+            categoryListService.getCategories(categoryIds, lang).map {
                 categoryMapper.map(it)
             }
         }

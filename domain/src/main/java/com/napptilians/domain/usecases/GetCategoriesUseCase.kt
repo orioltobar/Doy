@@ -11,6 +11,6 @@ class GetCategoriesUseCase @Inject constructor(
 ) {
     private val ioDispatcher = appDispatchers.io
 
-    suspend fun execute(categoryIds: List<Long> = emptyList()) =
-        withContext(ioDispatcher) { doyRepository.getCategories(categoryIds) }
+    suspend fun execute(categoryIds: List<Long> = emptyList(), lang: String = "ca") =
+        withContext(ioDispatcher) { doyRepository.getCategories(categoryIds, lang) }
 }

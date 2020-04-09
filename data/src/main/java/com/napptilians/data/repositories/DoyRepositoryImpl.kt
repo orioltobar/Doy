@@ -14,8 +14,8 @@ class DoyRepositoryImpl @Inject constructor(
     private val dbDataSource: DbDataSource
 ) : DoyRepository {
 
-    override suspend fun getCategories(categoryIds: List<Long>): Response<List<CategoryModel>, ErrorModel> {
-        return networkDataSource.getCategories(categoryIds)
+    override suspend fun getCategories(categoryIds: List<Long>, lang: String): Response<List<CategoryModel>, ErrorModel> {
+        return networkDataSource.getCategories(categoryIds, lang)
     }
 
     override suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel> =

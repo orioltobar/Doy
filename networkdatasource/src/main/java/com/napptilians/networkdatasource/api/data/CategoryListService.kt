@@ -8,10 +8,12 @@ interface CategoryListService {
 
     @GET("/getCategories")
     suspend fun getCategories(
-        @Query(CATEGORY_ID) categoryId: List<Long>
+        @Query(CATEGORY_ID) categoryId: List<Long>,
+        @Query(IDIOMA) lang: String
     ): List<CategoryApiModel>
 
     companion object {
         private const val CATEGORY_ID = "category_id"
+        private const val IDIOMA = "idioma"
     }
 }
