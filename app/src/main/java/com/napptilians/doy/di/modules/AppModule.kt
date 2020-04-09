@@ -19,7 +19,7 @@ object AppModule {
 
     @Provides
     @BaseUrl
-    fun provideBaseUrl(): String = "https://20200409t155054-dot-doy-proj.appspot.com/"
+    fun provideBaseUrl(): String = "https://doy-proj.appspot.com/"
 
     @Provides
     @Singleton

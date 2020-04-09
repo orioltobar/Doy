@@ -19,4 +19,16 @@
     <string name="wrong_credentials">Wrong credentials</string>
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
     <string name="loading_services">Please wait until we load your services</string>
+
+    <!-- Add event -->
+    <string name="add_service">Create event</string>
+    <string name="upload_image">Upload image</string>
+    <string name="select_category">Select category</string>
+    <string name="service_title">Event title</string>
+    <string name="select_date">Select date</string>
+    <string name="select_spots">Select available spots</string>
+    <string name="select_duration">Select duration</string>
+    <string name="description">Description</string>
+    <string name="adding_service">Creating event...</string>
+
 </resources>

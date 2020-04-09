@@ -1,5 +1,6 @@
 package com.napptilians.doy.di.modules
 
+import com.napptilians.doy.view.addservice.AddServiceFragment
 import com.napptilians.doy.view.categorylist.CategoryListFragment
 import com.napptilians.doy.view.chat.ChatFragment
 import com.napptilians.doy.view.chat.ChatListFragment
@@ -21,6 +22,9 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindChatFragment(): ChatFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindAddServiceFragment(): AddServiceFragment
 
     @ContributesAndroidInjector
     internal abstract fun bindRegisterFragment(): RegisterFragment

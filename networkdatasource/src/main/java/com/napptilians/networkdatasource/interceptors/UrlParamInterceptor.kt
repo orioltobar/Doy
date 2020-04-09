@@ -12,7 +12,7 @@ class UrlParamInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val newUrl = request.url().newBuilder().apply {
-            // addQueryParameter("Example_Key", networkProvider.valueToBeProvided)
+            // TODO: Add mandatory query params here.
             addQueryParameter(IDIOMA, networkProvider.valueToBeProvided)
         }
         val newRequest = request.newBuilder().url(newUrl.build()).build()

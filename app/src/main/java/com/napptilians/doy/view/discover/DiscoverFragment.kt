@@ -45,6 +45,10 @@ class DiscoverFragment : BaseFragment() {
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToIntroFragment()
             findNavController().navigate(direction)
         }
+        addServiceButton.setOnClickListener {
+            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
+            findNavController().navigate(navigation)
+        }
     }
 
     override fun onError(error: ErrorModel) {

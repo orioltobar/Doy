@@ -29,4 +29,33 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="App.AddService">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_xl</item>
+        <item name="android:fontFamily">@font/raleway_bold</item>
+    </style>
+
+    <style name="App.AddService.ImageBox">
+        <item name="android:layout_width">@dimen/dashed_box_width</item>
+        <item name="android:layout_height">@dimen/dashed_box_height</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_dashed_rectangle</item>
+    </style>
+
+    <style name="App.AddService.Input">
+        <item name="android:textSize">@dimen/text_size_m</item>
+        <item name="android:fontFamily">@font/raleway</item>
+        <item name="android:textColorHint">@color/hintGray</item>
+        <item name="android:layout_marginBottom">@dimen/margin_xsmall</item>
+    </style>
+
+    <style name="App.AddService.Button">
+        <item name="android:textSize">@dimen/text_size_m</item>
+        <item name="android:fontFamily">@font/raleway_extrabold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/filled_button_bg</item>
+    </style>
+
 </resources>

@@ -20,4 +20,16 @@
     <string name="wrong_credentials">Credencials errònies</string>
     <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
     <string name="loading_services">Si us plau, espera mentre carreguem els teus serveis</string>
+
+    <!-- Add event -->
+    <string name="add_service">Crear event</string>
+    <string name="upload_image">Pujar imatge</string>
+    <string name="select_category">Seleccionar categoria</string>
+    <string name="service_title">Títol event</string>
+    <string name="select_date">Seleccionar data</string>
+    <string name="select_spots">Seleccionar places disponibles</string>
+    <string name="select_duration">Seleccionar duració</string>
+    <string name="description">Descripció</string>
+    <string name="adding_service">Creant event...</string>
+
 </resources>
