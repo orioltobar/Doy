@@ -1,22 +1,22 @@
-//package com.napptilians.doy.view.movielist
+// package com.napptilians.doy.view.movielist
 //
-//import android.R
-//import android.widget.FrameLayout
-//import androidx.test.rule.ActivityTestRule
-//import com.napptilians.doy.UiAssertions
-//import com.napptilians.doy.base.MockActivity
-//import com.napptilians.domain.models.movie.MovieGenreDetailModel
-//import com.napptilians.domain.models.movie.MovieGenresModel
-//import com.napptilians.domain.models.movie.MovieModel
-//import io.mockk.MockKAnnotations
-//import io.mockk.every
-//import io.mockk.impl.annotations.MockK
-//import kotlinx.android.synthetic.main.movie_list_item.view.*
-//import org.junit.Before
-//import org.junit.Rule
-//import org.junit.Test
+// import android.R
+// import android.widget.FrameLayout
+// import androidx.test.rule.ActivityTestRule
+// import com.napptilians.doy.UiAssertions
+// import com.napptilians.doy.base.MockActivity
+// import com.napptilians.domain.models.movie.MovieGenreDetailModel
+// import com.napptilians.domain.models.movie.MovieGenresModel
+// import com.napptilians.domain.models.movie.MovieModel
+// import io.mockk.MockKAnnotations
+// import io.mockk.every
+// import io.mockk.impl.annotations.MockK
+// import kotlinx.android.synthetic.main.movie_list_item.view.*
+// import org.junit.Before
+// import org.junit.Rule
+// import org.junit.Test
 //
-//class MovieListViewHolderTest : UiAssertions {
+// class MovieListViewHolderTest : UiAssertions {
 //
 //    init {
 //        MockKAnnotations.init(this, relaxed = true)
@@ -74,4 +74,4 @@
 //        checkTextIsDisplayed(movieModel.releaseDate)
 //        checkViewIsDisplayed(holder.itemView.movieViewHolderCover.id)
 //    }
-//}
+// }

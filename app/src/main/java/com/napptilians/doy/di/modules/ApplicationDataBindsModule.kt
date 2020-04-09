@@ -4,7 +4,7 @@ import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.data.repositories.ExampleRepositoryImpl
-import com.napptilians.diskdatasource.data.ExampleDataBaseImpl
+import com.napptilians.diskdatasource.data.DbDataBaseImpl
 import com.napptilians.domain.repositories.ExampleRepository
 import com.napptilians.networkdatasource.api.data.ExampleDataSourceImpl
 import com.napptilians.networkdatasource.api.data.FirebaseDataSourceImpl
@@ -28,7 +28,7 @@ interface ApplicationDataBindsModule {
 
     @Binds
     @Singleton
-    fun provideMovieDataBaseDataSource(dataSource: ExampleDataBaseImpl): DbDataSource
+    fun provideMovieDataBaseDataSource(dataSource: DbDataBaseImpl): DbDataSource
 
     @Binds
     @Singleton

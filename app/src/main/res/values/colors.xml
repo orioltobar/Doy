@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimaryDark">#5968B6</color>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#00B58D</color>
     <color name="background">#BEBEBE</color>
     <color name="transparent">#00000000</color>
     <color name="list_item">#A89C9C</color>

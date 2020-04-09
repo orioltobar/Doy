@@ -2,9 +2,11 @@ package com.napptilians.doy.di.components
 
 import android.content.Context
 import com.napptilians.doy.App
+import com.napptilians.diskdatasource.di.DatabaseModule
 import com.napptilians.doy.di.modules.ActivityBindingModule
 import com.napptilians.doy.di.modules.AppModule
 import com.napptilians.doy.di.modules.FragmentBindingModule
+import com.napptilians.doy.di.modules.ServiceBindingModule
 import com.napptilians.doy.di.modules.ViewModelModule
 import com.napptilians.diskdatasource.di.DatabaseModule
 import com.napptilians.doy.di.modules.FirebaseModule
@@ -23,6 +25,7 @@ import javax.inject.Singleton
         AppModule::class,
         ActivityBindingModule::class,
         FragmentBindingModule::class,
+        ServiceBindingModule::class,
         NetworkModule::class,
         NetworkServicesModule::class,
         ViewModelModule::class,

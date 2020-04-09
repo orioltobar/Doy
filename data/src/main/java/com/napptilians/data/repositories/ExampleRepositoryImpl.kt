@@ -1,12 +1,10 @@
 package com.napptilians.data.repositories
 
-import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.singleSourceOfTruth
 import com.napptilians.data.datasources.DbDataSource
-import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.domain.models.movie.MovieModel
 import com.napptilians.domain.repositories.ExampleRepository
@@ -53,6 +51,10 @@ class ExampleRepositoryImpl @Inject constructor(
             delay(60000L)
         }
     }
+
+    override suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel> = dbDataSource.getDeviceInfo()
+
+    override suspend fun saveDeviceInfo(device: DeviceModel) = dbDataSource.saveDeviceInfo(device)
 
     /**
      * Retrieves the main genre of the [movie] using a [genres] list.

@@ -1,37 +1,37 @@
-//package com.napptilians.doy.view.movielist
+// package com.napptilians.doy.view.movielist
 //
-//import android.os.Bundle
-//import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.MutableLiveData
-//import androidx.navigation.NavHostController
-//import androidx.navigation.Navigation
-//import androidx.navigation.testing.TestNavHostController
-//import androidx.test.rule.ActivityTestRule
-//import com.napptilians.doy.R
-//import com.napptilians.doy.UiAssertions
-//import com.napptilians.doy.base.MockActivity
-//import com.napptilians.doy.di.TestViewModelModule
-//import com.napptilians.commons.error.ErrorModel
-//import com.napptilians.domain.models.movie.MovieGenreDetailModel
-//import com.napptilians.domain.models.movie.MovieGenresModel
-//import com.napptilians.domain.models.movie.MovieModel
-//import com.napptilians.features.NewValue
-//import com.napptilians.features.UiStatus
-//import com.napptilians.features.viewmodel.MovieListViewModel
-//import io.mockk.MockKAnnotations
-//import io.mockk.every
-//import io.mockk.impl.annotations.MockK
-//import io.mockk.mockk
-//import kotlinx.android.synthetic.main.movie_list_fragment.*
-//import kotlinx.coroutines.ExperimentalCoroutinesApi
-//import org.junit.Assert.assertTrue
-//import org.junit.Before
-//import org.junit.Rule
-//import org.junit.Test
+// import android.os.Bundle
+// import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+// import androidx.lifecycle.LiveData
+// import androidx.lifecycle.MutableLiveData
+// import androidx.navigation.NavHostController
+// import androidx.navigation.Navigation
+// import androidx.navigation.testing.TestNavHostController
+// import androidx.test.rule.ActivityTestRule
+// import com.napptilians.doy.R
+// import com.napptilians.doy.UiAssertions
+// import com.napptilians.doy.base.MockActivity
+// import com.napptilians.doy.di.TestViewModelModule
+// import com.napptilians.commons.error.ErrorModel
+// import com.napptilians.domain.models.movie.MovieGenreDetailModel
+// import com.napptilians.domain.models.movie.MovieGenresModel
+// import com.napptilians.domain.models.movie.MovieModel
+// import com.napptilians.features.NewValue
+// import com.napptilians.features.UiStatus
+// import com.napptilians.features.viewmodel.MovieListViewModel
+// import io.mockk.MockKAnnotations
+// import io.mockk.every
+// import io.mockk.impl.annotations.MockK
+// import io.mockk.mockk
+// import kotlinx.android.synthetic.main.movie_list_fragment.*
+// import kotlinx.coroutines.ExperimentalCoroutinesApi
+// import org.junit.Assert.assertTrue
+// import org.junit.Before
+// import org.junit.Rule
+// import org.junit.Test
 //
-//@ExperimentalCoroutinesApi
-//class MovieListFragmentTest : UiAssertions {
+// @ExperimentalCoroutinesApi
+// class MovieListFragmentTest : UiAssertions {
 //
 //    init {
 //        MockKAnnotations.init(this, relaxed = true)
@@ -129,4 +129,4 @@
 //
 //        return NewValue(listOf(movieModel, movieModel, movieModel, movieModel))
 //    }
-//}
+// }
