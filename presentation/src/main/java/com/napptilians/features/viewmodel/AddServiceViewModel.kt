@@ -25,7 +25,20 @@ class AddServiceViewModel @Inject constructor(
     fun execute() {
         viewModelScope.launch {
             _addServiceDataStream.value = emitLoadingState()
-            val request = addServiceUseCase.execute(ServiceModel(1, 1, "prueba name", "prueba desc", ByteArray(10), "20-20-2020", 1, 30, "123123123oajsdoj"))
+            // TODO: Perform a request with real data
+            val request = addServiceUseCase.execute(
+                ServiceModel(
+                    1,
+                    1,
+                    "prueba name",
+                    "prueba desc",
+                    ByteArray(10),
+                    "2020-04-09",
+                    1,
+                    30,
+                    "123123123oajsdoj"
+                )
+            )
             _addServiceDataStream.value = processModel(request)
         }
     }

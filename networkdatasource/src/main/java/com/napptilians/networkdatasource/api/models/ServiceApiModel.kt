@@ -12,7 +12,7 @@ data class ServiceApiModel(
     @SerializedName("description")
     val description: String? = null,
     @SerializedName("image")
-    val image: ByteArray? = null,
+    val image: String? = null,
     @SerializedName("day")
     val day: String? = null,
     @SerializedName("spots")
