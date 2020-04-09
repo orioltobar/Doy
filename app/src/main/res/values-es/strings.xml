@@ -17,4 +17,5 @@
     <string name="no_account">¿No tienes cuenta?</string>
     <string name="existing_account">¿Ya tienes cuenta?</string>
     <string name="create">Crear</string>
+    <string name="wrong_credentials">Credenciales erróneas</string>
 </resources>

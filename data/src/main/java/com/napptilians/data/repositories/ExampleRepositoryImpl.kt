@@ -1,10 +1,12 @@
 package com.napptilians.data.repositories
 
+import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.singleSourceOfTruth
 import com.napptilians.data.datasources.DbDataSource
+import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.domain.models.movie.MovieModel
 import com.napptilians.domain.repositories.ExampleRepository
@@ -16,7 +18,8 @@ import kotlin.random.Random
 
 class ExampleRepositoryImpl @Inject constructor(
     private val dataSource: NetworkDataSource,
-    private val dbDataSource: DbDataSource
+    private val dbDataSource: DbDataSource,
+    private val firebaseDataSource: FirebaseDataSource
 ) :
     ExampleRepository {
 
@@ -57,4 +60,15 @@ class ExampleRepositoryImpl @Inject constructor(
     private fun getSelectedGenresFromList(
         movie: MovieModel
     ): Any = Any()
+
+    override suspend fun login(
+        email: String,
+        password: String
+    ): Response<AuthResult, ErrorModel> =
+        firebaseDataSource.login(email, password)
+
+    override suspend fun register(
+        email: String,
+        password: String
+    ): Response<AuthResult, ErrorModel> = firebaseDataSource.register(email, password)
 }

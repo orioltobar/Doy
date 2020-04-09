@@ -31,6 +31,16 @@
         app:layout_constraintTop_toTopOf="@id/discoverFragmentProgressBar" />
 
     <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        app:layout_constraintEnd_toStartOf="@id/profileButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/discoverFragmentProgressBar" />
+
+
+    <Button
         android:id="@+id/loginFlowButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

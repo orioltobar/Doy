@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import kotlinx.android.synthetic.main.discover_fragment.*
+import javax.inject.Inject
 
 class DiscoverFragment : BaseFragment() {
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,6 +25,11 @@ class DiscoverFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // TODO: Temp. Remove.
+        logoutButton.setOnClickListener {
+            firebaseAuth.signOut()
+        }
 
         chatsButton.setOnClickListener {
             val direction =

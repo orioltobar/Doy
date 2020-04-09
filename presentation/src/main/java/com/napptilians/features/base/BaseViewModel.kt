@@ -19,4 +19,6 @@ abstract class BaseViewModel<T> : ViewModel() {
         }
 
     fun emitLoadingState(): Loading = Loading
+
+    fun <E> emitFailure(error: E): Error<E> = Error(error)
 }
