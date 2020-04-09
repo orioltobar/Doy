@@ -1,11 +1,14 @@
 package com.napptilians.data.repositories
 
+import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.singleSourceOfTruth
 import com.napptilians.data.datasources.DbDataSource
+import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
+import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.movie.MovieModel
 import com.napptilians.domain.repositories.ExampleRepository
 import kotlinx.coroutines.delay
