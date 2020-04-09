@@ -20,7 +20,10 @@ class DiscoverFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        categoryListButton.setOnClickListener {
+            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
+            findNavController().navigate(navigation)
+        }
         chatsButton.setOnClickListener {
             val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()
             findNavController().navigate(navigation)

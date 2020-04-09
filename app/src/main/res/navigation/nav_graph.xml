@@ -38,11 +38,18 @@
         <action
             android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.napptilians.doy.view.chat.ChatFragment"
         android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.napptilians.doy.view.categorylist.CategoryListFragment"
+        android:label="CategoryListFragment" />
     <!--    <fragment-->
 <!--        android:id="@+id/menuGenresListButton"-->
 <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->
