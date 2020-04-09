@@ -3,7 +3,7 @@ package com.napptilians.doy.di.modules
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.data.repositories.DoyRepositoryImpl
-import com.napptilians.diskdatasource.data.ExampleDataBaseImpl
+import com.napptilians.diskdatasource.data.DbDataBaseImpl
 import com.napptilians.domain.repositories.DoyRepository
 import com.napptilians.networkdatasource.api.data.NetworkDataSourceImpl
 import dagger.Binds
@@ -26,7 +26,7 @@ interface ApplicationDataBindsModule {
 
     @Binds
     @Singleton
-    fun provideMovieDataBaseDataSource(dataSource: ExampleDataBaseImpl): DbDataSource
+    fun provideMovieDataBaseDataSource(dataSource: DbDataBaseImpl): DbDataSource
 
     @Module
     companion object {

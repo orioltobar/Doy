@@ -6,14 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.napptilians.diskdatasource.Converters
+import com.napptilians.diskdatasource.dao.DeviceDao
 import com.napptilians.diskdatasource.dao.ExampleDao
+import com.napptilians.diskdatasource.models.DeviceDbModel
 import com.napptilians.diskdatasource.models.MovieDbModel
 
-@Database(version = 1, entities = [MovieDbModel::class])
+@Database(version = 1, entities = [MovieDbModel::class, DeviceDbModel::class])
 @TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun movieDao(): ExampleDao
+
+    abstract fun deviceDao(): DeviceDao
 
     companion object {
 

@@ -51,6 +51,8 @@ dependencies {
     implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
     implementation "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
     implementation "com.google.firebase:firebase-database:${Versions.firebase_database}"
+    implementation "com.google.firebase:firebase-core:${Versions.firebase_core_version}"
+    implementation "com.google.firebase:firebase-messaging:${Versions.firebase_messaging_version}"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
