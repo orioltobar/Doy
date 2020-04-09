@@ -8,15 +8,20 @@ import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.usecases.GetDeviceInfoUseCase
 import com.napptilians.domain.usecases.SetDeviceInfoUseCase
 import dagger.android.AndroidInjection
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PushNotificationService : FirebaseMessagingService() {
 
     @Inject
     lateinit var appDispatchers: AppDispatchers
+
     @Inject
     lateinit var getDeviceInfoUseCase: GetDeviceInfoUseCase
+
     @Inject
     lateinit var setDeviceInfoUseCase: SetDeviceInfoUseCase
 
