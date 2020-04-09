@@ -1,4 +1,4 @@
-package com.napptilians.doy.view.categorylist
+package com.napptilians.doy.view.servicelist
 
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -13,12 +13,12 @@ class ServiceItemViewHolder(parent: ViewGroup) :
 
     override fun update(model: ServiceModel) {
         Glide.with(itemView)
-            .load(model.pictureUrl)
+            .load(model.)
             .placeholder(R.drawable.ic_logo_colour_green)
             .into(itemView.serviceImage)
         itemView.serviceNameText.text = model.name
         itemView.serviceDateText.text = model.day
         itemView.serviceMaxSpotsText.text = model.spots.toString()
-        itemView.serviceNameText.text = model.duration.toString()
+        itemView.serviceNameText.text = model.durationMin.toString()
     }
 }

@@ -1,4 +1,4 @@
-package com.napptilians.doy.view.categorylist
+package com.napptilians.doy.view.servicelist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.categorylist.CategoryListAdapter
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import javax.inject.Inject
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.category_list_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class CategoryListFragment : BaseFragment() {
+class ServiceListFragment : BaseFragment() {
 
     private val categories = listOf(
         CategoryModel(
@@ -83,7 +84,8 @@ class CategoryListFragment : BaseFragment() {
     private fun initViews() {
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager
-        categoriesAdapter = CategoryListAdapter()
+        categoriesAdapter =
+            CategoryListAdapter()
         categoriesAdapter.setOnClickListener {
             // TODO: Navigate to Service list screen
             Toast.makeText(
