@@ -1,10 +1,12 @@
 package com.napptilians.doy.di.modules
 
 import com.napptilians.data.datasources.DbDataSource
+import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.data.repositories.DoyRepositoryImpl
 import com.napptilians.diskdatasource.data.DbDataBaseImpl
 import com.napptilians.domain.repositories.DoyRepository
+import com.napptilians.networkdatasource.api.data.FirebaseDataSourceImpl
 import com.napptilians.networkdatasource.api.data.NetworkDataSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -27,6 +29,10 @@ interface ApplicationDataBindsModule {
     @Binds
     @Singleton
     fun provideMovieDataBaseDataSource(dataSource: DbDataBaseImpl): DbDataSource
+
+    @Binds
+    @Singleton
+    fun provideFirebaseDataSource(firebaseDataSource: FirebaseDataSourceImpl): FirebaseDataSource
 
     @Module
     companion object {

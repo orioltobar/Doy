@@ -1,5 +1,6 @@
 package com.napptilians.domain.repositories
 
+import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.device.DeviceModel
@@ -20,4 +21,7 @@ interface DoyRepository {
 
     suspend fun saveDeviceInfo(device: DeviceModel): Response<Unit, ErrorModel>
 
+    suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
+
+    suspend fun register(email:String, password:String): Response<AuthResult, ErrorModel>
 }

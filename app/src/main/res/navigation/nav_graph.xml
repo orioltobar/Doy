@@ -39,6 +39,9 @@
             android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
             app:destination="@id/chatFragment" />
         <action
+            android:id="@+id/action_menuFavouritesListButton_to_introFragment"
+            app:destination="@id/introFragment" />
+        <action
             android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
             app:destination="@id/categoryListFragment" />
     </fragment>
@@ -46,6 +49,33 @@
         android:id="@+id/chatFragment"
         android:name="com.napptilians.doy.view.chat.ChatFragment"
         android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.napptilians.doy.view.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment2"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.napptilians.doy.view.register.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.napptilians.doy.view.intro.IntroFragment"
+        android:label="IntroFragment" >
+        <action
+            android:id="@+id/action_introFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_introFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.napptilians.doy.view.categorylist.CategoryListFragment"

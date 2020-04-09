@@ -8,6 +8,7 @@ import com.napptilians.doy.di.modules.AppModule
 import com.napptilians.doy.di.modules.FragmentBindingModule
 import com.napptilians.doy.di.modules.ServiceBindingModule
 import com.napptilians.doy.di.modules.ViewModelModule
+import com.napptilians.doy.di.modules.FirebaseModule
 import com.napptilians.networkdatasource.di.NetworkModule
 import com.napptilians.networkdatasource.di.NetworkServicesModule
 import dagger.BindsInstance
@@ -27,7 +28,8 @@ import javax.inject.Singleton
         NetworkModule::class,
         NetworkServicesModule::class,
         ViewModelModule::class,
-        DatabaseModule::class]
+        DatabaseModule::class,
+        FirebaseModule::class]
 )
 interface AppComponent : AndroidInjector<App> {
 
