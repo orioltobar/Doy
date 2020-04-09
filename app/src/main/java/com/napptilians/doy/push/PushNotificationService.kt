@@ -4,7 +4,6 @@ import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.napptilians.commons.AppDispatchers
-import com.napptilians.commons.either
 import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.usecases.GetDeviceInfoUseCase
 import com.napptilians.domain.usecases.SetDeviceInfoUseCase
@@ -34,12 +33,6 @@ class PushNotificationService : FirebaseMessagingService() {
         Log.d(TAG, "New Firebase token retrieved: $token")
         scope.launch {
             setDeviceInfoUseCase.execute(DeviceModel(0, token))
-            // TODO: Remove this lines from here and use them on LoginViewModel
-            // val request = getDeviceInfoUseCase.execute()
-            // request.either(
-            //     onSuccess = { Log.d(TAG, "Firebase token from DB: ${it.firebaseToken}") },
-            //     onFailure = { Log.e(TAG, "Firebase token from DB could not be obtained") }
-            // )
         }
     }
 
