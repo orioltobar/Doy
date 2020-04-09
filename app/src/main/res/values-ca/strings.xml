@@ -19,4 +19,5 @@
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credencials errònies</string>
     <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
+    <string name="loading_services">Si us plau, espera mentre carreguem els teus serveis</string>
 </resources>

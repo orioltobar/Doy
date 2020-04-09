@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     android:elevation="@dimen/cardview_default_elevation">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/startGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/margin_medium" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/endGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/margin_medium" />
-
     <ImageView
         android:id="@+id/serviceImage"
         android:layout_width="0dp"
@@ -27,11 +13,12 @@
         android:background="@drawable/service_image_bg"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_max="118dp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@id/startGuideline"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_max="118dp"
         tools:src="@drawable/image_bg_small" />
@@ -43,7 +30,7 @@
         android:orientation="vertical"
         android:paddingEnd="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="@id/serviceImage"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/serviceImage"
         app:layout_constraintTop_toTopOf="@id/serviceImage"
         app:layout_constraintVertical_bias="0">

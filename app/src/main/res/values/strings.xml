@@ -18,4 +18,5 @@
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
+    <string name="loading_services">Please wait until we load your services</string>
 </resources>
