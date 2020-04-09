@@ -22,23 +22,40 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/uploadImageBox"
-                style="@style/App.AddService.ImageBox"
-                android:layout_margin="@dimen/margin_large"
-                android:padding="@dimen/margin_medium">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/uploadImageBox"
+                    style="@style/App.AddService.ImageBox"
+                    android:layout_margin="@dimen/margin_large"
+                    android:padding="@dimen/margin_medium">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/ic_add_picture"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:gravity="center_vertical"
+                        android:text="@string/upload_image"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_m" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/serviceImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_add_picture"
-                    android:drawablePadding="@dimen/margin_small"
-                    android:gravity="center_vertical"
-                    android:text="@string/upload_image"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_m" />
+                    android:layout_alignStart="@id/uploadImageBox"
+                    android:layout_alignTop="@id/uploadImageBox"
+                    android:layout_alignEnd="@id/uploadImageBox"
+                    android:layout_alignBottom="@id/uploadImageBox"
+                    android:scaleType="centerCrop" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

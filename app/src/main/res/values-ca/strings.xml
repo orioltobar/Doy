@@ -29,5 +29,6 @@
     <string name="select_spots">Seleccionar places disponibles</string>
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>
+    <string name="adding_service">Creant event...</string>
 
 </resources>

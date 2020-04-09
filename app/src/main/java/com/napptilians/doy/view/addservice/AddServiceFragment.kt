@@ -1,7 +1,10 @@
 package com.napptilians.doy.view.addservice
 
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +22,8 @@ class AddServiceFragment : BaseFragment() {
 
     private val viewModel: AddServiceViewModel by viewModels { vmFactory }
 
+    private lateinit var progressDialog: ProgressDialog
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,22 +32,57 @@ class AddServiceFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createEventButton.setOnClickListener {
-            viewModel.execute()
-            viewModel.addServiceDataStream.observe(
-                viewLifecycleOwner,
-                Observer { handleUiStates(it, ::processNewValue) })
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        uploadImageBox.setOnClickListener { openGallery() }
+        createEventButton.setOnClickListener { createEvent() }
+    }
+
+    private fun openGallery() {
+        activity?.let {
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
         }
+    }
+
+    private fun createEvent() {
+        viewModel.execute()
+        viewModel.addServiceDataStream.observe(
+            viewLifecycleOwner,
+            Observer { handleUiStates(it, ::processNewValue) })
     }
 
     private fun processNewValue(serviceId: Long) {
         // TODO: Store id on the service or what?
-        Log.d("cacatua", "se ha creado un id del servicio: $serviceId")
+        progressDialog.cancel()
     }
 
     override fun onLoading() {
+        progressDialog = ProgressDialog.show(
+            context,
+            "",
+            getString(R.string.adding_service),
+            true
+        )
     }
 
     override fun onError(error: ErrorModel) {
+        progressDialog.cancel()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+        when (requestCode) {
+            GALLERY_REQUEST_CODE -> serviceImageView.setImageURI(data?.data)
+        }
+    }
+
+    companion object {
+        private const val GALLERY_REQUEST_CODE = 100
     }
 }
