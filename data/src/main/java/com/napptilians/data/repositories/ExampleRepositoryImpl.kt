@@ -6,6 +6,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.singleSourceOfTruth
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.NetworkDataSource
+import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.movie.MovieModel
 import com.napptilians.domain.repositories.ExampleRepository
 import kotlinx.coroutines.delay
@@ -17,8 +18,7 @@ import kotlin.random.Random
 class ExampleRepositoryImpl @Inject constructor(
     private val dataSource: NetworkDataSource,
     private val dbDataSource: DbDataSource
-) :
-    ExampleRepository {
+) : ExampleRepository {
 
     override suspend fun getMovie(id: Long): Response<MovieModel, ErrorModel> {
         // TODO: Example.
@@ -50,6 +50,10 @@ class ExampleRepositoryImpl @Inject constructor(
             delay(60000L)
         }
     }
+
+    override suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel> = dbDataSource.getDeviceInfo()
+
+    override suspend fun saveDeviceInfo(device: DeviceModel) = dbDataSource.saveDeviceInfo(device)
 
     /**
      * Retrieves the main genre of the [movie] using a [genres] list.
