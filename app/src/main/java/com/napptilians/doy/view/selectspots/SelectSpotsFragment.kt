@@ -4,15 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.features.UiStatus
+import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import kotlinx.android.synthetic.main.select_spots_fragment.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class SelectSpotsFragment : BaseFragment() {
+
+    private val viewModel: SelectSpotsViewModel by viewModels { vmFactory }
 
     @Inject
     lateinit var spotListAdapter: SpotListAdapter
@@ -25,28 +33,26 @@ class SelectSpotsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+        viewModel.execute()
+        viewModel.spotsDataStream.observe(viewLifecycleOwner,
+            Observer<UiStatus<List<Int>, ErrorModel>> { handleUiStates(it, ::processNewValue) }
+        )
     }
 
-    private fun initViews() {
+    private fun processNewValue(spots: List<Int>) {
         val layoutManager = LinearLayoutManager(context)
         spotsList.layoutManager = layoutManager
         spotListAdapter = SpotListAdapter()
         spotsList.adapter = spotListAdapter
         spotsList.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
-        spotListAdapter.updateItems((MIN_PERSONS..MAX_PERSONS).toList())
+        spotListAdapter.updateItems(spots)
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("Not yet implemented")
+        // Do nothing
     }
 
     override fun onLoading() {
-        TODO("Not yet implemented")
-    }
-
-    companion object {
-        private const val MIN_PERSONS = 1
-        private const val MAX_PERSONS = 10
+        // Do nothing
     }
 }

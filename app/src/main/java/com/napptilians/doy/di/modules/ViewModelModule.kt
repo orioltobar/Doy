@@ -8,6 +8,7 @@ import com.napptilians.features.viewmodel.AddServiceViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
+import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -27,11 +28,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(AddServiceViewModel::class)
-    internal abstract fun addServiceViewModel(viewModel: AddServiceViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(LoginViewModel::class)
     internal abstract fun loginViewModel(viewModel: LoginViewModel): ViewModel
 
@@ -39,4 +35,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CategoriesViewModel::class)
     internal abstract fun categoriesViewModel(viewModel: CategoriesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddServiceViewModel::class)
+    internal abstract fun addServiceViewModel(viewModel: AddServiceViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectSpotsViewModel::class)
+    internal abstract fun selectSpotsViewModel(viewModel: SelectSpotsViewModel): ViewModel
 }
