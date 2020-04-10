@@ -41,4 +41,8 @@
     <string name="description">Description</string>
     <string name="adding_service">Creating event...</string>
 
+    <!-- Generic Dialog -->
+    <string name="wip">Work in progress</string>
+    <string name="wip_explanation">We\'re working at full capacity so you can enjoy this feature as soon as possible.</string>
+
 </resources>

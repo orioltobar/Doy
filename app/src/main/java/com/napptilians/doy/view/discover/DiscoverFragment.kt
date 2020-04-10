@@ -9,8 +9,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.customviews.DoyDialog
+import kotlinx.android.synthetic.main.discover_fragment.addServiceButton
+import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
+import kotlinx.android.synthetic.main.discover_fragment.chatsButton
+import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
+import kotlinx.android.synthetic.main.discover_fragment.logoutButton
+import kotlinx.android.synthetic.main.discover_fragment.popupButton
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.discover_fragment.*
 
 class DiscoverFragment : BaseFragment() {
 
@@ -33,8 +39,21 @@ class DiscoverFragment : BaseFragment() {
             findNavController().navigate(direction)
         }
 
+        popupButton.setOnClickListener {
+            activity?.let { activity ->
+                DoyDialog(activity).apply {
+                    setPopupIcon(R.drawable.ic_rocket)
+                    setPopupTitle(context.resources.getString(R.string.wip))
+                    setPopupSubtitle(context.resources.getString(R.string.wip_explanation))
+                    setPopupFooterMessage("Empieza a disfrutar de formar parte de la comunidad DOY.")
+                    setPopupFooterImage(R.drawable.popup_footer)
+                    show()
+                }
+            }
+        }
         categoryListButton.setOnClickListener {
-            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
+            val navigation =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
             findNavController().navigate(navigation)
         }
         chatsButton.setOnClickListener {
@@ -48,7 +67,8 @@ class DiscoverFragment : BaseFragment() {
             findNavController().navigate(direction)
         }
         addServiceButton.setOnClickListener {
-            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
+            val navigation =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
             findNavController().navigate(navigation)
         }
     }
