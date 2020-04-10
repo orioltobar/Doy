@@ -4,37 +4,37 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/menuFavouritesListButton">
 
-<!--    <fragment-->
-<!--        android:id="@+id/movieListFragment"-->
-<!--        android:name="com.napptilians.doy.view.movielist.MovieListFragment"-->
-<!--        android:label="MovieListFragment">-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/movieListFragment"-->
+    <!--        android:name="com.napptilians.doy.view.movielist.MovieListFragment"-->
+    <!--        android:label="MovieListFragment">-->
 
-<!--        <action-->
-<!--            android:id="@+id/action_movieListFragment_to_movieFragment"-->
-<!--            app:destination="@id/movieFragment" />-->
-<!--        <argument-->
-<!--            android:name="id"-->
-<!--            app:argType="integer"-->
-<!--            android:defaultValue="-1" />-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_movieListFragment_to_movieFragment"-->
+    <!--            app:destination="@id/movieFragment" />-->
+    <!--        <argument-->
+    <!--            android:name="id"-->
+    <!--            app:argType="integer"-->
+    <!--            android:defaultValue="-1" />-->
 
-<!--    </fragment>-->
+    <!--    </fragment>-->
 
-<!--    <fragment-->
-<!--        android:id="@+id/movieFragment"-->
-<!--        android:name="com.napptilians.doy.view.movie.MovieFragment"-->
-<!--        android:label="MovieFragment">-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/movieFragment"-->
+    <!--        android:name="com.napptilians.doy.view.movie.MovieFragment"-->
+    <!--        android:label="MovieFragment">-->
 
-<!--        <argument-->
-<!--            android:name="id"-->
-<!--            android:defaultValue="-1L"-->
-<!--            app:argType="long" />-->
+    <!--        <argument-->
+    <!--            android:name="id"-->
+    <!--            android:defaultValue="-1L"-->
+    <!--            app:argType="long" />-->
 
-<!--    </fragment>-->
+    <!--    </fragment>-->
 
     <fragment
         android:id="@+id/menuFavouritesListButton"
         android:name="com.napptilians.doy.view.discover.DiscoverFragment"
-        android:label="DiscoverFragment" >
+        android:label="DiscoverFragment">
         <action
             android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
             app:destination="@id/chatFragment" />
@@ -55,11 +55,20 @@
     <fragment
         android:id="@+id/addServiceFragment"
         android:name="com.napptilians.doy.view.addservice.AddServiceFragment"
-        android:label="AddServiceFragment" />
+        android:label="AddServiceFragment">
+        <action
+            android:id="@+id/action_addServiceFragment_to_categoriesFragment"
+            app:destination="@id/categoryListFragment">
+            <argument
+                android:name="isAddingService"
+                android:defaultValue="true"
+                app:argType="boolean" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.napptilians.doy.view.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
@@ -67,7 +76,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.napptilians.doy.view.register.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="RegisterFragment">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -75,7 +84,7 @@
     <fragment
         android:id="@+id/introFragment"
         android:name="com.napptilians.doy.view.intro.IntroFragment"
-        android:label="IntroFragment" >
+        android:label="IntroFragment">
         <action
             android:id="@+id/action_introFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -86,14 +95,19 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.napptilians.doy.view.categorylist.CategoryListFragment"
-        android:label="CategoryListFragment" />
+        android:label="CategoryListFragment">
+        <argument
+            android:name="isAddingService"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <!--    <fragment-->
-<!--        android:id="@+id/menuGenresListButton"-->
-<!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->
-<!--        android:label="GenreListFragment" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_genreListFragment_to_menuMovieListButton"-->
-<!--            app:destination="@id/movieListFragment" />-->
-<!--    </fragment>-->
+    <!--        android:id="@+id/menuGenresListButton"-->
+    <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->
+    <!--        android:label="GenreListFragment" >-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_genreListFragment_to_menuMovieListButton"-->
+    <!--            app:destination="@id/movieListFragment" />-->
+    <!--    </fragment>-->
 
 </navigation>

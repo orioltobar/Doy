@@ -28,6 +28,7 @@
     <string name="select_spots">Select available spots</string>
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
+    <string name="add_service_to_category">What category does your event belong to?</string>
     <string name="adding_service">Creating event...</string>
 
 </resources>

@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.register.RegisterFragmentDirections
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,9 +39,12 @@ class AddServiceFragment : BaseFragment() {
 
     private fun setupListeners() {
         uploadImageBox.setOnClickListener { openGallery() }
-        selectCategoryView.setOnClickListener {  }
-        selectSpotsView.setOnClickListener {  }
-        selectDurationView.setOnClickListener {  }
+        selectCategoryEditText.setOnClickListener {
+            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
+            findNavController().navigate(direction)
+        }
+        selectSpotsEditText.setOnClickListener {  }
+        selectDurationEditText.setOnClickListener {  }
         createEventButton.setOnClickListener { createEvent() }
     }
 
