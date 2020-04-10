@@ -1,6 +1,7 @@
 package com.napptilians.doy.view.addservice
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -8,16 +9,19 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.view.register.RegisterFragmentDirections
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.Calendar
 
 @ExperimentalCoroutinesApi
 class AddServiceFragment : BaseFragment() {
@@ -25,6 +29,8 @@ class AddServiceFragment : BaseFragment() {
     private val viewModel: AddServiceViewModel by viewModels { vmFactory }
 
     private lateinit var progressDialog: ProgressDialog
+    private val serviceDateFormat = SimpleDateFormat(SERVICE_DATE_FORMAT, Locale.getDefault())
+    private var selectedCalendarDay: Calendar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,18 +46,42 @@ class AddServiceFragment : BaseFragment() {
     private fun setupListeners() {
         uploadImageBox.setOnClickListener { openGallery() }
         selectCategoryEditText.setOnClickListener {
-            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
+            val direction =
+                AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
             findNavController().navigate(direction)
         }
-        selectSpotsEditText.setOnClickListener {  }
-        selectDurationEditText.setOnClickListener {  }
+        selectDateEditText.setOnClickListener { showServiceDatePicker() }
+        selectSpotsEditText.setOnClickListener { }
+        selectDurationEditText.setOnClickListener { }
         createEventButton.setOnClickListener { createEvent() }
     }
 
     private fun openGallery() {
         activity?.let {
-            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val galleryIntent =
+                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+        }
+    }
+
+
+    private fun updateServiceDate() {
+        selectedCalendarDay?.let { selectDateEditText.setText(serviceDateFormat.format(it.time)) }
+    }
+
+    private fun showServiceDatePicker() {
+        selectedCalendarDay = Calendar.getInstance()
+        activity?.let {
+            DatePickerDialog(
+                it,
+                DatePickerDialog.OnDateSetListener { _: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                    selectedCalendarDay?.set(year, monthOfYear, dayOfMonth)
+                    updateServiceDate()
+                },
+                DEFAULT_SERVICE_DATE_YEAR,
+                DEFAULT_SERVICE_DATE_MONTH,
+                DEFAULT_SERVICE_DATE_DAY
+            ).show()
         }
     }
 
@@ -92,5 +122,10 @@ class AddServiceFragment : BaseFragment() {
 
     companion object {
         private const val GALLERY_REQUEST_CODE = 100
+        private const val SERVICE_DATE_FORMAT = "yyyy-dd-MM"
+        private val calendar = Calendar.getInstance()
+        private val DEFAULT_SERVICE_DATE_YEAR = calendar.get(Calendar.YEAR)
+        private val DEFAULT_SERVICE_DATE_MONTH = calendar.get(Calendar.MONTH)
+        private val DEFAULT_SERVICE_DATE_DAY = calendar.get(Calendar.DAY_OF_MONTH)
     }
 }

@@ -125,6 +125,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/selectDateEditText"
                         style="@style/App.AddService.Input"
+                        android:clickable="true"
+                        android:focusable="false"
                         android:inputType="date" />
 
                 </com.google.android.material.textfield.TextInputLayout>
