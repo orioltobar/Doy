@@ -39,8 +39,7 @@ class DiscoverFragment : BaseFragment() {
 
         popupButton.setOnClickListener {
             activity?.let { activity ->
-                val dialog = DoyDialog(activity)
-                dialog.apply {
+                DoyDialog(activity).apply {
                     setPopupIcon(R.drawable.ic_rocket)
                     setPopupTitle(context.resources.getString(R.string.wip))
                     setPopupSubtitle(context.resources.getString(R.string.wip_explanation))
