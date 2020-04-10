@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="viewModel"
             type="com.napptilians.features.viewmodel.AddServiceViewModel" />
@@ -10,18 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_xlarge">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/loginText"
             style="@style/App.AddService"
             android:layout_marginTop="@dimen/margin_large"
+            android:padding="@dimen/margin_xlarge"
             android:text="@string/add_service" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/margin_xlarge"
             android:layout_weight="1">
 
             <LinearLayout
@@ -219,7 +222,7 @@
 
         <Button
             android:id="@+id/createEventButton"
-            style="@style/App.AddService.Button"
+            style="@style/App.PrimaryButton"
             android:layout_marginTop="@dimen/margin_small"
             android:enabled="@{viewModel.isValidService}"
             android:text="@string/add_service" />

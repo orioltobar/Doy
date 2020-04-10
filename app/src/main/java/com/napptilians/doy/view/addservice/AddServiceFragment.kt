@@ -40,11 +40,8 @@ class AddServiceFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //inflater.inflate(R.layout.add_service_fragment, container, false)
-        // 2. Inflate the layout with data binding
         val binding: AddServiceFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.add_service_fragment, container, false)
         binding.lifecycleOwner = this
-        // 3. Set the viewModel instance
         binding.viewModel = viewModel
         return binding.root
     }

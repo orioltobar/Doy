@@ -85,6 +85,7 @@ class CategoryListFragment : BaseFragment() {
     private fun initViews() {
         if (args.isAddingService) {
             titleText.visible()
+            // TODO: Also show toolbar for back button
         }
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager
