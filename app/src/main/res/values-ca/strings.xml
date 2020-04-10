@@ -45,6 +45,8 @@
     <string name="person">persona</string>
     <string name="persons">persones</string>
     <string name="how_long_duration">Quanta gent es pot unir al teu event?</string>
+    <string name="hour">hora</string>
+    <string name="hours">hores</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>

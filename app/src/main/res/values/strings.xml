@@ -45,6 +45,8 @@
     <string name="person">person</string>
     <string name="persons">persons</string>
     <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
+    <string name="hour">hour</string>
+    <string name="hours">hours</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>

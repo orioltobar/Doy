@@ -11,9 +11,9 @@ class DurationListViewHolder(private val parent: ViewGroup) :
     override fun update(model: Int) {
         itemView.durationText.text = model.toString()
         if (model == 1) {
-            itemView.durationText.append(" hora")
+            itemView.durationText.append(" " + parent.context.getString(R.string.hour))
         } else {
-            itemView.durationText.append(" horas")
+            itemView.durationText.append(" " + parent.context.getString(R.string.hours))
         }
     }
 }

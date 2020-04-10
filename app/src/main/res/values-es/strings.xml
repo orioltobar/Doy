@@ -46,6 +46,8 @@
     <string name="person">persona</string>
     <string name="persons">personas</string>
     <string name="how_long_duration">¿Cuánto durará aproximadamente?</string>
+    <string name="hour">hora</string>
+    <string name="hours">horas</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>
