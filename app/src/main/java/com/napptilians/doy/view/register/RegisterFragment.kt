@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.doy.MainActivity
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.features.UiStatus
+import com.napptilians.features.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.register_fragment.*
 import javax.inject.Inject
 
@@ -17,6 +21,8 @@ class RegisterFragment : BaseFragment() {
 
     @Inject
     lateinit var fireBaseAuth: FirebaseAuth
+
+    private val viewModel: RegisterViewModel by viewModels { vmFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,43 +33,47 @@ class RegisterFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        println("FBauth: ${fireBaseAuth.app.name}")
-
         registerFragmentSignInText.setOnClickListener {
             val direction = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
             findNavController().navigate(direction)
         }
-
         registerFragmentCreateButton.setOnClickListener {
             sendRegister()
         }
+
+        // LiveData Observer
+        viewModel.registerDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<Unit, ErrorModel>> {
+                handleUiStates(it) { moveToMainScreen() }
+            }
+        )
+    }
+
+    private fun moveToMainScreen() {
+        registerFragmentProgressView.visibility = View.GONE
+        Toast.makeText(activity, "SUCCESS", Toast.LENGTH_LONG).show()
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        registerFragmentProgressView.visibility = View.GONE
+        val errorString = error.message
+            ?.takeIf { it.isNotEmpty() }
+            ?.let { it }
+            ?: run { getString(R.string.generic_error) }
+
+        Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
     }
 
     override fun onLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        registerFragmentProgressView.visibility = View.VISIBLE
     }
 
     private fun sendRegister() {
-        val user = registerFragmentEmailEditText.text.toString().replace(" ", "")
-        // password 6 characters min
+        val name = registerFragmentNameEditText.text.toString()
+        val email = registerFragmentEmailEditText.text.toString().replace(" ", "")
         val password = registerFragmentPasswordEditText.text.toString()
-
-        val activity = activity as? MainActivity
-        activity?.let {
-            if (user.isNotEmpty() && password.isNotEmpty()) {
-                fireBaseAuth.createUserWithEmailAndPassword(user, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            println("SUCCESS: ${task.result}")
-                        } else {
-                            println("FAILED")
-                        }
-                    }
-            }
-        }
+        val repeatPassword = registerFragmentRepeatPasswordEditText.text.toString()
+        viewModel.register(name, email, password, repeatPassword)
     }
 }

@@ -7,6 +7,7 @@ import com.napptilians.doy.view.discover.DiscoverFragment
 import com.napptilians.doy.view.intro.IntroFragment
 import com.napptilians.doy.view.login.LoginFragment
 import com.napptilians.doy.view.register.RegisterFragment
+import com.napptilians.doy.view.splash.SplashFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -33,4 +34,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindCategoryListFragment(): CategoryListFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindSplashFragment(): SplashFragment
 }

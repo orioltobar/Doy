@@ -6,6 +6,7 @@ import com.napptilians.commons.Constants.RETROFIT_TIMEOUT
 import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
 import com.napptilians.networkdatasource.api.data.CategoryListService
 import com.napptilians.networkdatasource.api.data.MovieService
+import com.napptilians.networkdatasource.api.data.UserService
 import com.napptilians.networkdatasource.interceptors.UrlParamInterceptor
 import com.napptilians.networkdatasource.providers.NetworkProvider
 import dagger.Module
@@ -78,9 +79,13 @@ object NetworkServicesModule {
 
     @Provides
     @Singleton
-    fun provideMovieService(retrofit: Retrofit) = retrofit.create(MovieService::class.java)
+    fun provideMovieService(retrofit: Retrofit): MovieService = retrofit.create(MovieService::class.java)
 
     @Provides
     @Singleton
-    fun provideCategoryListService(retrofit: Retrofit) = retrofit.create(CategoryListService::class.java)
+    fun provideCategoryListService(retrofit: Retrofit): CategoryListService = retrofit.create(CategoryListService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserService(retrofit: Retrofit): UserService = retrofit.create(UserService::class.java)
 }

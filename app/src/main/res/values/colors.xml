@@ -9,4 +9,5 @@
     <color name="gray">#414141</color>
     <color name="grayStrong">#262626</color>
     <color name="green">@color/colorAccent</color>
+    <color name="white">#ffffff</color>
 </resources>

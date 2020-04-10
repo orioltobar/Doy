@@ -19,4 +19,6 @@
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credencials errònies</string>
     <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
+    <string name="splash_text">Fet amb amor a Barcelona</string>
+    <string name="generic_error">En aquest moment no es pot completar la vostra petició.</string>
 </resources>
