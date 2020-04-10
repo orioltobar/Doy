@@ -58,7 +58,10 @@ class AddServiceFragment : BaseFragment() {
             findNavController().navigate(direction)
         }
         selectDateEditText.setOnClickListener { showServiceDatePicker() }
-        selectSpotsEditText.setOnClickListener { }
+        selectSpotsEditText.setOnClickListener {
+            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToSelectSpotsFragment()
+            findNavController().navigate(direction)
+        }
         selectDurationEditText.setOnClickListener { }
         createEventButton.setOnClickListener { createEvent() }
     }

@@ -53,19 +53,6 @@
         android:name="com.napptilians.doy.view.chat.ChatFragment"
         android:label="ChatFragment" />
     <fragment
-        android:id="@+id/addServiceFragment"
-        android:name="com.napptilians.doy.view.addservice.AddServiceFragment"
-        android:label="AddServiceFragment">
-        <action
-            android:id="@+id/action_addServiceFragment_to_categoriesFragment"
-            app:destination="@id/categoryListFragment">
-            <argument
-                android:name="isAddingService"
-                android:defaultValue="true"
-                app:argType="boolean" />
-        </action>
-    </fragment>
-    <fragment
         android:id="@+id/loginFragment"
         android:name="com.napptilians.doy.view.login.LoginFragment"
         android:label="LoginFragment">
@@ -101,6 +88,26 @@
             android:defaultValue="false"
             app:argType="boolean" />
     </fragment>
+    <fragment
+        android:id="@+id/addServiceFragment"
+        android:name="com.napptilians.doy.view.addservice.AddServiceFragment"
+        android:label="AddServiceFragment">
+        <action
+            android:id="@+id/action_addServiceFragment_to_categoriesFragment"
+            app:destination="@id/categoryListFragment">
+            <argument
+                android:name="isAddingService"
+                android:defaultValue="true"
+                app:argType="boolean" />
+        </action>
+        <action
+            android:id="@+id/action_addServiceFragment_to_selectSpotsFragment"
+            app:destination="@id/selectSpotsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectSpotsFragment"
+        android:name="com.napptilians.doy.view.selectspots.SelectSpotsFragment"
+        android:label="SelectSpotsFragment" />
     <!--    <fragment-->
     <!--        android:id="@+id/menuGenresListButton"-->
     <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->

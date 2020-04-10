@@ -31,5 +31,9 @@
     <string name="description">Descripción</string>
     <string name="add_service_to_category">¿A qué categoría pertenece tu evento?</string>
     <string name="adding_service">Creando evento...</string>
+    <string name="how_many_spots">¿Cuánta gente se puede unir a tu evento?</string>
+    <string name="save">Guardar</string>
+    <string name="person">persona</string>
+    <string name="persons">personas</string>
 
 </resources>
