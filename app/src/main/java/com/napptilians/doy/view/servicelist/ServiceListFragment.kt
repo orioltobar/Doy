@@ -7,99 +7,94 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.CategoryModel
+import com.napptilians.domain.models.movie.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
-import com.napptilians.doy.view.categorylist.CategoryListAdapter
 import com.napptilians.features.UiStatus
-import com.napptilians.features.viewmodel.CategoriesViewModel
+import com.napptilians.features.viewmodel.ServicesViewModel
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.category_list_fragment.*
+import kotlinx.android.synthetic.main.service_list_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 class ServiceListFragment : BaseFragment() {
 
-    private val categories = listOf(
-        CategoryModel(
-            1,
-            "Deporte y bienestar",
-            "https://storage.googleapis.com/doy-proj.appspot.com/deporteybienestar.png"
-        ),
-        CategoryModel(
-            2,
-            "Música",
-            "https://storage.googleapis.com/doy-proj.appspot.com/musica.png"
-        ),
-        CategoryModel(
-            3,
-            "Jocs",
-            "https://storage.googleapis.com/doy-proj.appspot.com/arte.png"
-        )
-    )
-
-    private val viewModel: CategoriesViewModel by viewModels { vmFactory }
+    private val viewModel: ServicesViewModel by viewModels { vmFactory }
+    private val args: ServiceListFragmentArgs by navArgs()
 
     @Inject
-    lateinit var categoriesAdapter: CategoryListAdapter
+    lateinit var servicesAdapter: ServiceListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.category_list_fragment, container, false)
+    ): View? = inflater.inflate(R.layout.service_list_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        viewModel.execute()
-        viewModel.categoriesDataStream.observe(
+        viewModel.execute(args.categoryId)
+        viewModel.servicesDataStream.observe(
             viewLifecycleOwner,
-            Observer<UiStatus<List<CategoryModel>, ErrorModel>> { handleUiStates(it, ::processNewValue) })
+            Observer<UiStatus<List<ServiceModel>, ErrorModel>> {
+                handleUiStates(
+                    it,
+                    ::processNewValue
+                )
+            })
     }
 
-    private fun processNewValue(model: List<CategoryModel>) {
-        categoriesAdapter.updateItems(model)
-        categoryList.visible()
-        loadingProgress.gone()
-        loadingText.gone()
+    private fun processNewValue(model: List<ServiceModel>) {
+        if (model.isNotEmpty()) {
+            servicesAdapter.updateItems(model)
+            serviceList.visible()
+            loadingProgress.gone()
+            loadingText.gone()
+        } else {
+            serviceList.visible()
+            loadingProgress.gone()
+            loadingText.text = resources.getString(R.string.no_services)
+            loadingText.visible()
+        }
     }
 
     override fun onError(error: ErrorModel) {
-        categoryList.gone()
-        loadingProgress.visible()
+        serviceList.gone()
+        loadingProgress.gone()
+        loadingText.text = resources.getString(R.string.generic_error)
         loadingText.visible()
     }
 
     override fun onLoading() {
-        categoryList.gone()
+        serviceList.gone()
         loadingProgress.visible()
         loadingText.visible()
     }
 
     private fun initViews() {
-        val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
-        categoryList.layoutManager = layoutManager
-        categoriesAdapter =
-            CategoryListAdapter()
-        categoriesAdapter.setOnClickListener {
+        args.name.takeUnless { it.isEmpty() }?.let { name ->
+            titleText.text = name
+            titleText.visible()
+        }
+        val layoutManager = LinearLayoutManager(context)
+        serviceList.layoutManager = layoutManager
+        servicesAdapter = ServiceListAdapter()
+        servicesAdapter.setOnClickListener {
             // TODO: Navigate to Service list screen
             Toast.makeText(
                 context,
-                "Categoria ${it.name}",
+                "Servei ${it.name}",
                 Toast.LENGTH_LONG
             ).show()
         }
-        val itemOffsetDecoration = ItemOffsetDecoration(context, R.dimen.margin_xsmall)
-        categoryList.addItemDecoration(itemOffsetDecoration)
-        categoryList.adapter = categoriesAdapter
-    }
-
-    companion object {
-        private const val NUMBER_OF_COLUMNS = 2
+//        val  dividerItemDecoration =  DividerItemDecoration(context, layoutManager.orientation)
+//        serviceList.addItemDecoration(dividerItemDecoration)
+        serviceList.adapter = servicesAdapter
     }
 }

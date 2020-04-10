@@ -74,7 +74,7 @@ object NetworkModule {
             get() = apiKey
 
         override val language: String
-            get() = Locale.getDefault().displayLanguage
+            get() = Locale.getDefault().language
     }
 }
 

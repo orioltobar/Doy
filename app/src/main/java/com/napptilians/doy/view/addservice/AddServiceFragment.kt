@@ -37,9 +37,9 @@ class AddServiceFragment : BaseFragment() {
 
     private fun setupListeners() {
         uploadImageBox.setOnClickListener { openGallery() }
-        selectCategoryView.setOnClickListener {  }
-        selectSpotsView.setOnClickListener {  }
-        selectDurationView.setOnClickListener {  }
+        selectCategoryView.setOnClickListener { }
+        selectSpotsView.setOnClickListener { }
+        selectDurationView.setOnClickListener { }
         createEventButton.setOnClickListener { createEvent() }
     }
 

@@ -86,7 +86,23 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.napptilians.doy.view.categorylist.CategoryListFragment"
-        android:label="CategoryListFragment" />
+        android:label="CategoryListFragment" >
+
+        <action
+            android:id="@+id/action_categoryListFragment_to_serviceListFragment"
+            app:destination="@id/serviceListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceListFragment"
+        android:name="com.napptilians.doy.view.servicelist.ServiceListFragment"
+        android:label="ServiceListFragment" >
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
     <!--    <fragment-->
 <!--        android:id="@+id/menuGenresListButton"-->
 <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->

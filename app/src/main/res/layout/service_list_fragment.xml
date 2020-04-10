@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:foreground="?attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/startGuideline"
@@ -27,10 +27,12 @@
         android:layout_marginBottom="@dimen/margin_medium"
         android:fontFamily="@font/raleway_extrabold"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/serviceList"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Conversación"
+        android:textSize="@dimen/text_size_xl"
         android:textColor="@color/grayStrong"
         tools:visibility="visible" />
 

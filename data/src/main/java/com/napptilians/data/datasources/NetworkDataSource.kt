@@ -9,5 +9,7 @@ interface NetworkDataSource {
 
     suspend fun getCategories(categoryIds: List<Long> = emptyList()): Response<List<CategoryModel>, ErrorModel>
 
+    suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel>
+
     suspend fun addService(service: ServiceModel): Response<Long, ErrorModel>
 }

@@ -41,4 +41,8 @@ class DoyRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): Response<AuthResult, ErrorModel> = firebaseDataSource.register(email, password)
+
+    override suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel> {
+        return networkDataSource.getServices(categoryId)
+    }
 }

@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream
 import java.io.UnsupportedEncodingException
 import java.net.URLDecoder
 
-
 private const val UTF_8 = "UTF-8"
 private const val BASE_64_ENCODED_BITMAP_PREFIX = "data:image/png;base64,"
 private val COMPRESS_FORMAT = Bitmap.CompressFormat.PNG
