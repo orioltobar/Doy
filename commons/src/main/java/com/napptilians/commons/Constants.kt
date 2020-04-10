@@ -6,6 +6,7 @@ object Constants {
     const val DEFAULT_GENRE_ID = 12
     const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w300"
 
+    const val MINIMUM_PASSWORD_LENGTH = 6
     // Network constants
     const val RETROFIT_TIMEOUT = 60L
     const val CACHE_TIME_MINUTES = 10L

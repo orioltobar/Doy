@@ -20,6 +20,7 @@ class LoginViewModel @Inject constructor(
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
+            _loginDataStream.value = emitLoadingState()
             val request = loginUseCase(email, password)
             _loginDataStream.value = processModel(request)
         }

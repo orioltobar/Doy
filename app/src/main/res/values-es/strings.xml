@@ -18,7 +18,8 @@
     <string name="existing_account">¿Ya tienes cuenta?</string>
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credenciales erróneas</string>
-    <string name="generic_error">Parece que ha habido un error.</string>
+    <string name="server_error">Ha ocurrido un error</string>
+    <string name="generic_error">En este momento no puede completarse tu petición.</string>
 
     <!-- Category list -->
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
@@ -43,5 +44,4 @@
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>
     <string name="wip_explanation">Estamos trabajando a toda velocidad para que puedas disfrutar de esta funcionalidad lo antes posible.</string>
-
 </resources>

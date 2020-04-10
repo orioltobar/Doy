@@ -2,34 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/menuFavouritesListButton">
-
-<!--    <fragment-->
-<!--        android:id="@+id/movieListFragment"-->
-<!--        android:name="com.napptilians.doy.view.movielist.MovieListFragment"-->
-<!--        android:label="MovieListFragment">-->
-
-<!--        <action-->
-<!--            android:id="@+id/action_movieListFragment_to_movieFragment"-->
-<!--            app:destination="@id/movieFragment" />-->
-<!--        <argument-->
-<!--            android:name="id"-->
-<!--            app:argType="integer"-->
-<!--            android:defaultValue="-1" />-->
-
-<!--    </fragment>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/movieFragment"-->
-<!--        android:name="com.napptilians.doy.view.movie.MovieFragment"-->
-<!--        android:label="MovieFragment">-->
-
-<!--        <argument-->
-<!--            android:name="id"-->
-<!--            android:defaultValue="-1L"-->
-<!--            app:argType="long" />-->
-
-<!--    </fragment>-->
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/menuFavouritesListButton"
@@ -39,14 +12,14 @@
             android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
             app:destination="@id/chatFragment" />
         <action
+            android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
+        <action
             android:id="@+id/action_menuFavouritesListButton_to_addServiceFragment"
             app:destination="@id/addServiceFragment" />
         <action
             android:id="@+id/action_menuFavouritesListButton_to_introFragment"
             app:destination="@id/introFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
-            app:destination="@id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -63,6 +36,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_menuFavouritesListButton"
+            app:destination="@id/menuFavouritesListButton" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -71,6 +47,9 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_menuFavouritesListButton"
+            app:destination="@id/menuFavouritesListButton" />
     </fragment>
     <fragment
         android:id="@+id/introFragment"
@@ -103,13 +82,16 @@
             android:name="name"
             app:argType="string" />
     </fragment>
-    <!--    <fragment-->
-<!--        android:id="@+id/menuGenresListButton"-->
-<!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->
-<!--        android:label="GenreListFragment" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_genreListFragment_to_menuMovieListButton"-->
-<!--            app:destination="@id/movieListFragment" />-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.napptilians.doy.view.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_introFragment"
+            app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_menuFavouritesListButton"
+            app:destination="@id/menuFavouritesListButton" />
+    </fragment>
 
 </navigation>

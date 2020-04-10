@@ -10,12 +10,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.view.customviews.DoyDialog
-import kotlinx.android.synthetic.main.discover_fragment.addServiceButton
-import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
-import kotlinx.android.synthetic.main.discover_fragment.chatsButton
-import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
-import kotlinx.android.synthetic.main.discover_fragment.logoutButton
-import kotlinx.android.synthetic.main.discover_fragment.popupButton
+import kotlinx.android.synthetic.main.discover_fragment.*
 import javax.inject.Inject
 
 class DiscoverFragment : BaseFragment() {
@@ -33,8 +28,11 @@ class DiscoverFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // TODO: Temp. Remove.
-        logoutButton.setOnClickListener {
+        loginFlowButton.setOnClickListener {
             firebaseAuth.signOut()
+            val direction =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToIntroFragment()
+            findNavController().navigate(direction)
         }
 
         popupButton.setOnClickListener {
@@ -68,6 +66,13 @@ class DiscoverFragment : BaseFragment() {
             val navigation =
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
             findNavController().navigate(navigation)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        firebaseAuth.currentUser?.let {
+            discoverUserUid.text = it.uid
         }
     }
 
