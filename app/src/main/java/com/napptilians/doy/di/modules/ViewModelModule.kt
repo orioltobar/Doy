@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.napptilians.doy.di.ViewModelFactory
 import com.napptilians.doy.di.ViewModelKey
-import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
+import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import dagger.Binds
 import dagger.Module

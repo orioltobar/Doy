@@ -14,7 +14,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // Remove action bar
-        this.supportActionBar?.hide();
+        this.supportActionBar?.hide()
 
         val navHostFragment = NavHostFragment.findNavController(navFragment)
 //        navHostFragment.addOnDestinationChangedListener { _, destination, _ ->
@@ -28,5 +28,8 @@ class MainActivity : BaseActivity() {
 //            }
 //        }
         NavigationUI.setupWithNavController(navBottom, navHostFragment)
+        navBottom.setOnNavigationItemSelectedListener {
+            true
+        }
     }
 }
