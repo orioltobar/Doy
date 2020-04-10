@@ -13,7 +13,7 @@ private const val BASE_64_ENCODED_BITMAP_PREFIX = "data:image/png;base64,"
 private val COMPRESS_FORMAT = Bitmap.CompressFormat.PNG
 private const val COMPRESS_QUALITY = 100
 
-fun Uri.toByteArray(): ByteArray? = BitmapFactory.decodeFile(encodedPath).toByteArray()
+fun Uri.toByteArray(): ByteArray? = BitmapFactory.decodeFile(encodedPath)?.toByteArray()
 
 fun Bitmap.toByteArray(): ByteArray? {
     val outputStream = ByteArrayOutputStream()

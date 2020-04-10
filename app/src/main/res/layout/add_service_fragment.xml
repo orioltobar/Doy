@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="viewModel"
             type="com.napptilians.features.viewmodel.AddServiceViewModel" />
@@ -32,8 +33,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_xlarge"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="@dimen/margin_xlarge">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,7 +97,8 @@
                                 style="@style/App.AddService.Input"
                                 android:clickable="true"
                                 android:focusable="false"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:text="@={viewModel.serviceCategory}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -153,7 +155,8 @@
                                 style="@style/App.AddService.Input"
                                 android:clickable="true"
                                 android:focusable="false"
-                                android:inputType="number" />
+                                android:inputType="text"
+                                android:text="@={viewModel.serviceSpots}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,7 +185,8 @@
                                 style="@style/App.AddService.Input"
                                 android:clickable="true"
                                 android:focusable="false"
-                                android:inputType="datetime" />
+                                android:inputType="text"
+                                android:text="@={viewModel.serviceDuration}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

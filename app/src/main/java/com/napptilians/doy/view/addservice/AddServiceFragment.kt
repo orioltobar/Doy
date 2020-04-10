@@ -19,6 +19,7 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
 import com.napptilians.doy.extensions.getNavigationResult
 import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.*
@@ -151,7 +152,10 @@ class AddServiceFragment : BaseFragment() {
             return
         }
         when (requestCode) {
-            GALLERY_REQUEST_CODE -> serviceImageView.setImageURI(data?.data)
+            GALLERY_REQUEST_CODE -> {
+                serviceImageView.setImageURI(data?.data)
+                viewModel.service.image = data?.data?.toByteArray()
+            }
         }
     }
 
