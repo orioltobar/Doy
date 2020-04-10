@@ -57,9 +57,10 @@
 
     <style name="App.AddService.Input">
         <item name="android:textSize">@dimen/text_size_m</item>
-        <item name="android:fontFamily">@font/raleway</item>
         <item name="android:textColorHint">@color/hintGray</item>
+        <item name="android:fontFamily">@font/raleway_medium</item>
         <item name="android:layout_marginBottom">@dimen/margin_xsmall</item>
+        <item name="android:imeOptions">actionDone</item>
     </style>
 
     <style name="App.AddService.Button">
@@ -67,6 +68,10 @@
         <item name="android:fontFamily">@font/raleway_extrabold</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/filled_button_bg</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
 </resources>

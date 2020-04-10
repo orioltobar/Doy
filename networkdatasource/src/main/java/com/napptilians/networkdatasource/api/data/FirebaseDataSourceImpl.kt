@@ -27,4 +27,9 @@ class FirebaseDataSourceImpl @Inject constructor(private val firebaseAuth: Fireb
         safeApiCall {
             firebaseAuth.createUserWithEmailAndPassword(email, password).await()
         }.map { it }
+
+    override suspend fun removeCurrentUser(): Response<Unit?, ErrorModel> =
+        safeApiCall {
+            firebaseAuth.currentUser?.delete()?.await()
+        }.map { Unit }
 }

@@ -23,7 +23,8 @@ interface DoyRepository {
 
     suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
 
-    suspend fun register(email: String, password: String): Response<AuthResult, ErrorModel>
+    suspend fun register(name: String, password: String, email: String, token: String): Response<Unit, ErrorModel>
 
     suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel>
+
 }

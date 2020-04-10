@@ -9,6 +9,7 @@
     <color name="gray">#414141</color>
     <color name="grayStrong">#262626</color>
     <color name="green">#00B58D</color>
-    <color name="hintGray">#9b9b9b</color>
     <color name="greenDark">#00A47F</color>
+    <color name="hintGray">#9b9b9b</color>
+    <color name="white">#ffffff</color>
 </resources>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.napptilians.commons.error.ErrorModel
@@ -24,6 +25,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class CategoryListFragment : BaseFragment() {
 
     private val viewModel: CategoriesViewModel by viewModels { vmFactory }
+    private val args: CategoryListFragmentArgs by navArgs()
 
     @Inject
     lateinit var categoriesAdapter: CategoryListAdapter
@@ -73,6 +75,10 @@ class CategoryListFragment : BaseFragment() {
     }
 
     private fun initViews() {
+        if (args.isAddingService) {
+            titleText.visible()
+            // TODO: Also show toolbar for back button
+        }
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager
         categoriesAdapter = CategoryListAdapter()

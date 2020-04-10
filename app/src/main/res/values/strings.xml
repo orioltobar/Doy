@@ -38,10 +38,17 @@
     <string name="select_spots">Select available spots</string>
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
+    <string name="add_service_to_category">What category does your event belong to?</string>
     <string name="adding_service">Creating event...</string>
+    <string name="how_many_spots">How many people can join your event?</string>
+    <string name="save">Save</string>
+    <string name="person">person</string>
+    <string name="persons">persons</string>
+    <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
+    <string name="hour">hour</string>
+    <string name="hours">hours</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
     <string name="wip_explanation">We\'re working at full capacity so you can enjoy this feature as soon as possible.</string>
-
 </resources>
