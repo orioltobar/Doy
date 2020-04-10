@@ -34,5 +34,6 @@
     <string name="save">Save</string>
     <string name="person">person</string>
     <string name="persons">persons</string>
+    <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
 
 </resources>

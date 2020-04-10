@@ -62,7 +62,10 @@ class AddServiceFragment : BaseFragment() {
             val direction = AddServiceFragmentDirections.actionAddServiceFragmentToSelectSpotsFragment()
             findNavController().navigate(direction)
         }
-        selectDurationEditText.setOnClickListener { }
+        selectDurationEditText.setOnClickListener {
+            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToSelectDurationFragment()
+            findNavController().navigate(direction)
+        }
         createEventButton.setOnClickListener { createEvent() }
     }
 

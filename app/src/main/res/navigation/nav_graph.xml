@@ -103,11 +103,18 @@
         <action
             android:id="@+id/action_addServiceFragment_to_selectSpotsFragment"
             app:destination="@id/selectSpotsFragment" />
+        <action
+            android:id="@+id/action_addServiceFragment_to_selectDurationFragment"
+            app:destination="@id/selectDurationFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectSpotsFragment"
         android:name="com.napptilians.doy.view.selectspots.SelectSpotsFragment"
         android:label="SelectSpotsFragment" />
+    <fragment
+        android:id="@+id/selectDurationFragment"
+        android:name="com.napptilians.doy.view.selectduration.SelectDurationFragment"
+        android:label="SelectDurationFragment" />
     <!--    <fragment-->
     <!--        android:id="@+id/menuGenresListButton"-->
     <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->

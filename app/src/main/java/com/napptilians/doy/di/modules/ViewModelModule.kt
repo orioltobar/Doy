@@ -9,6 +9,7 @@ import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
+import com.napptilians.features.viewmodel.SelectDurationViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -45,4 +46,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectSpotsViewModel::class)
     internal abstract fun selectSpotsViewModel(viewModel: SelectSpotsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectDurationViewModel::class)
+    internal abstract fun selectDurationViewModel(viewModel: SelectDurationViewModel): ViewModel
 }

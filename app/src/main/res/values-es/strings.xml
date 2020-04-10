@@ -35,5 +35,6 @@
     <string name="save">Guardar</string>
     <string name="person">persona</string>
     <string name="persons">personas</string>
+    <string name="how_long_duration">¿Cuánto durará aproximadamente?</string>
 
 </resources>

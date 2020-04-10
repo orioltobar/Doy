@@ -2,7 +2,6 @@
 <layout>
 
     <data>
-
         <variable
             name="viewModel"
             type="com.napptilians.features.viewmodel.AddServiceViewModel" />

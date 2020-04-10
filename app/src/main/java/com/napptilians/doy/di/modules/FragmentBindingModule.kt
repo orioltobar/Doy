@@ -8,6 +8,7 @@ import com.napptilians.doy.view.discover.DiscoverFragment
 import com.napptilians.doy.view.intro.IntroFragment
 import com.napptilians.doy.view.login.LoginFragment
 import com.napptilians.doy.view.register.RegisterFragment
+import com.napptilians.doy.view.selectduration.SelectDurationFragment
 import com.napptilians.doy.view.selectspots.SelectSpotsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -41,4 +42,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindSelectSpotsFragment(): SelectSpotsFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindSelectDurationFragment(): SelectDurationFragment
 }
