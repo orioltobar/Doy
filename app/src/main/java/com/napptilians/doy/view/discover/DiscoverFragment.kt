@@ -10,7 +10,12 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.view.customviews.DoyDialog
-import kotlinx.android.synthetic.main.discover_fragment.*
+import kotlinx.android.synthetic.main.discover_fragment.addServiceButton
+import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
+import kotlinx.android.synthetic.main.discover_fragment.chatsButton
+import kotlinx.android.synthetic.main.discover_fragment.discoverUserUid
+import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
+import kotlinx.android.synthetic.main.discover_fragment.popupButton
 import javax.inject.Inject
 
 class DiscoverFragment : BaseFragment() {

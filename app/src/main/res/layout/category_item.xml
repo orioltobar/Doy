@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="@dimen/cardview_default_elevation"
-    android:maxWidth="@dimen/category_max_width"
     android:maxHeight="@dimen/category_max_height"
     android:background="?attr/selectableItemBackground">
 

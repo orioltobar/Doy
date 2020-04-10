@@ -19,6 +19,8 @@ data class ServiceApiModel(
     val spots: Int? = null,
     @SerializedName("duration")
     val durationMin: Int? = null,
+    @SerializedName("hour")
+    val hour: String? = null,
     @SerializedName("owner_id")
     val ownerId: String? = null
 )

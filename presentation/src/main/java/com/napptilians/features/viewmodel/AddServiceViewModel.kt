@@ -74,6 +74,7 @@ class AddServiceViewModel @Inject constructor(
                     "prueba desc",
                     ByteArray(10),
                     "2020-04-09",
+                    null,
                     1,
                     30,
                     "123123123oajsdoj"
