@@ -10,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.databinding.AddServiceFragmentBinding
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,6 +31,7 @@ class AddServiceFragment : BaseFragment() {
     private val viewModel: AddServiceViewModel by viewModels { vmFactory }
 
     private lateinit var progressDialog: ProgressDialog
+
     private val serviceDateFormat = SimpleDateFormat(SERVICE_DATE_FORMAT, Locale.getDefault())
     private var selectedCalendarDay: Calendar? = null
 
@@ -36,7 +39,15 @@ class AddServiceFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.add_service_fragment, container, false)
+    ): View? {
+        //inflater.inflate(R.layout.add_service_fragment, container, false)
+        // 2. Inflate the layout with data binding
+        val binding: AddServiceFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.add_service_fragment, container, false)
+        binding.lifecycleOwner = this
+        // 3. Set the viewModel instance
+        binding.viewModel = viewModel
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,8 +57,7 @@ class AddServiceFragment : BaseFragment() {
     private fun setupListeners() {
         uploadImageBox.setOnClickListener { openGallery() }
         selectCategoryEditText.setOnClickListener {
-            val direction =
-                AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
+            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
             findNavController().navigate(direction)
         }
         selectDateEditText.setOnClickListener { showServiceDatePicker() }
@@ -66,7 +76,10 @@ class AddServiceFragment : BaseFragment() {
 
 
     private fun updateServiceDate() {
-        selectedCalendarDay?.let { selectDateEditText.setText(serviceDateFormat.format(it.time)) }
+        selectedCalendarDay?.let {
+            viewModel.addServiceDataStream
+            selectDateEditText.setText(serviceDateFormat.format(it.time))
+        }
     }
 
     private fun showServiceDatePicker() {

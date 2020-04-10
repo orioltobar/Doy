@@ -1,216 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    android:padding="@dimen/margin_xlarge">
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.napptilians.features.viewmodel.AddServiceViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/loginText"
-        style="@style/App.AddService"
-        android:layout_marginTop="@dimen/margin_large"
-        android:text="@string/add_service" />
-
-    <ScrollView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_xlarge">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/loginText"
+            style="@style/App.AddService"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/add_service" />
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <LinearLayout
-                    android:id="@+id/uploadImageBox"
-                    style="@style/App.AddService.ImageBox"
-                    android:layout_margin="@dimen/margin_large"
-                    android:padding="@dimen/margin_medium">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/ic_add_picture"
-                        android:drawablePadding="@dimen/margin_small"
-                        android:gravity="center_vertical"
-                        android:text="@string/upload_image"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_m" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/serviceImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/uploadImageBox"
-                    android:layout_alignTop="@id/uploadImageBox"
-                    android:layout_alignEnd="@id/uploadImageBox"
-                    android:layout_alignBottom="@id/uploadImageBox"
-                    android:scaleType="centerCrop" />
-
-            </RelativeLayout>
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginEnd="@dimen/margin_small"
                 android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/categoryView"
-                    style="@style/App.AddService.Input"
-                    android:hint="@string/select_category"
-                    android:visibility="gone">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/categoryEditText"
-                        style="@style/App.AddService.Input"
-                        android:inputType="text" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
                 <RelativeLayout
-                    android:id="@+id/selectCategoryView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:id="@+id/uploadImageBox"
+                        style="@style/App.AddService.ImageBox"
+                        android:layout_margin="@dimen/margin_large"
+                        android:padding="@dimen/margin_medium">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_add_picture"
+                            android:drawablePadding="@dimen/margin_small"
+                            android:gravity="center_vertical"
+                            android:text="@string/upload_image"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/text_size_m" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/serviceImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/uploadImageBox"
+                        android:layout_alignTop="@id/uploadImageBox"
+                        android:layout_alignEnd="@id/uploadImageBox"
+                        android:layout_alignBottom="@id/uploadImageBox"
+                        android:scaleType="centerCrop" />
+
+                </RelativeLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/categoryView"
                         style="@style/App.AddService.Input"
-                        android:hint="@string/select_category">
+                        android:hint="@string/select_category"
+                        android:visibility="gone">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/selectCategoryEditText"
+                            android:id="@+id/categoryEditText"
                             style="@style/App.AddService.Input"
-                            android:clickable="true"
-                            android:focusable="false"
                             android:inputType="text" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:padding="@dimen/padding_small"
-                        android:src="@drawable/ic_arrow_next" />
+                    <RelativeLayout
+                        android:id="@+id/selectCategoryView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                </RelativeLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/App.AddService.Input"
+                            android:hint="@string/select_category">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/serviceTitleInput"
-                    style="@style/App.AddService.Input"
-                    android:hint="@string/service_title">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/selectCategoryEditText"
+                                style="@style/App.AddService.Input"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:inputType="text" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/serviceTitleEditText"
-                        style="@style/App.AddService.Input"
-                        android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/padding_small"
+                            android:src="@drawable/ic_arrow_next" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/selectDateInput"
-                    style="@style/App.AddService.Input"
-                    android:hint="@string/select_date">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/selectDateEditText"
-                        style="@style/App.AddService.Input"
-                        android:clickable="true"
-                        android:focusable="false"
-                        android:inputType="date" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <RelativeLayout
-                    android:id="@+id/selectSpotsView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    </RelativeLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/serviceTitleInput"
                         style="@style/App.AddService.Input"
-                        android:hint="@string/select_spots">
+                        android:hint="@string/service_title">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/selectSpotsEditText"
+                            android:id="@+id/serviceTitleEditText"
                             style="@style/App.AddService.Input"
-                            android:clickable="true"
-                            android:focusable="false"
-                            android:inputType="number" />
+                            android:inputType="text"
+                            android:text="@={viewModel.service.name}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:padding="@dimen/padding_small"
-                        android:src="@drawable/ic_arrow_next" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/selectDurationView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/selectDateInput"
                         style="@style/App.AddService.Input"
-                        android:hint="@string/select_duration">
+                        android:hint="@string/select_date">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/selectDurationEditText"
+                            android:id="@+id/selectDateEditText"
                             style="@style/App.AddService.Input"
                             android:clickable="true"
                             android:focusable="false"
-                            android:inputType="datetime" />
+                            android:inputType="date"
+                            android:text="@={viewModel.service.day}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
+                    <RelativeLayout
+                        android:id="@+id/selectSpotsView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:padding="@dimen/padding_small"
-                        android:src="@drawable/ic_arrow_next" />
+                        android:layout_gravity="center">
 
-                </RelativeLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/App.AddService.Input"
+                            android:hint="@string/select_spots">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/descriptionView"
-                    style="@style/App.AddService.Input"
-                    android:hint="@string/description">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/selectSpotsEditText"
+                                style="@style/App.AddService.Input"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:inputType="number" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/descriptionEditText"
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/padding_small"
+                            android:src="@drawable/ic_arrow_next" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/selectDurationView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/App.AddService.Input"
+                            android:hint="@string/select_duration">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/selectDurationEditText"
+                                style="@style/App.AddService.Input"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:inputType="datetime" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/padding_small"
+                            android:src="@drawable/ic_arrow_next" />
+
+                    </RelativeLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/descriptionView"
                         style="@style/App.AddService.Input"
-                        android:inputType="textMultiLine" />
+                        android:hint="@string/description">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/descriptionEditText"
+                            style="@style/App.AddService.Input"
+                            android:inputType="textMultiLine"
+                            android:text="@={viewModel.service.description}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+        <Button
+            android:id="@+id/createEventButton"
+            style="@style/App.AddService.Button"
+            android:layout_marginTop="@dimen/margin_small"
+            android:enabled="@{viewModel.valid}"
+            android:text="@string/add_service" />
 
-    <Button
-        android:id="@+id/createEventButton"
-        style="@style/App.AddService.Button"
-        android:layout_marginTop="@dimen/margin_small"
-        android:text="@string/add_service" />
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

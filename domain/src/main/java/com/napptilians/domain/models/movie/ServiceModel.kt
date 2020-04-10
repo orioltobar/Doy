@@ -1,13 +1,13 @@
 package com.napptilians.domain.models.movie
 
 data class ServiceModel(
-    val serviceId: Long,
-    val categoryId: Long,
-    val name: String,
-    val description: String,
-    val image: ByteArray,
-    val day: String,
-    val spots: Int,
-    val durationMin: Int,
-    val ownerId: String
+    var serviceId: Long? = null,
+    var categoryId: Long? = null,
+    var name: String? = null,
+    var description: String? = null,
+    var image: ByteArray? = null,
+    var day: String? = null,
+    var spots: Int? = null,
+    var durationMin: Int? = null,
+    var ownerId: String? = null
 )
