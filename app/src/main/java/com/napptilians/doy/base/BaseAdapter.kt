@@ -17,6 +17,8 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<T>> : RecyclerView.Adapter<VH>
         notifyDataSetChanged()
     }
 
+    fun getItems(): List<T> = items
+
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {

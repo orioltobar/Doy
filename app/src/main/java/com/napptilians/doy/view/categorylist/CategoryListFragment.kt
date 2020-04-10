@@ -81,14 +81,26 @@ class CategoryListFragment : BaseFragment() {
         }
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager
-        categoriesAdapter = CategoryListAdapter()
-        categoriesAdapter.setOnClickListener {
-            val navigation =
-                CategoryListFragmentDirections.actionCategoryListFragmentToServiceListFragment(
-                    it.categoryId,
-                    it.name
-                )
-            findNavController().navigate(navigation)
+        categoriesAdapter = CategoryListAdapter().apply { isAddingService = args.isAddingService }
+        categoriesAdapter.setOnClickListener { clickedCategory ->
+            if (args.isAddingService) {
+                categoriesAdapter.getItems().forEachIndexed { index, categoryModel ->
+                    if (categoryModel != clickedCategory && categoryModel.isSelected) {
+                        categoryModel.isSelected = false
+                        categoriesAdapter.notifyItemChanged(index)
+                    } else if (categoryModel == clickedCategory && !categoryModel.isSelected) {
+                        categoryModel.isSelected = true
+                        categoriesAdapter.notifyItemChanged(index)
+                    }
+                }
+            } else {
+                val navigation =
+                    CategoryListFragmentDirections.actionCategoryListFragmentToServiceListFragment(
+                        clickedCategory.categoryId,
+                        clickedCategory.name
+                    )
+                findNavController().navigate(navigation)
+            }
         }
         val itemOffsetDecoration = ItemOffsetDecoration(context, R.dimen.margin_xsmall)
         categoryList.addItemDecoration(itemOffsetDecoration)
