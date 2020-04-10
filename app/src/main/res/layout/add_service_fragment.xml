@@ -121,7 +121,7 @@
                             android:id="@+id/serviceTitleEditText"
                             style="@style/App.AddService.Input"
                             android:inputType="text"
-                            android:text="@={viewModel.service.name}" />
+                            android:text="@={viewModel.serviceName}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,7 +136,7 @@
                             android:clickable="true"
                             android:focusable="false"
                             android:inputType="date"
-                            android:text="@={viewModel.service.day}" />
+                            android:text="@={viewModel.serviceDay}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -207,7 +207,7 @@
                             android:id="@+id/descriptionEditText"
                             style="@style/App.AddService.Input"
                             android:inputType="textMultiLine"
-                            android:text="@={viewModel.service.description}" />
+                            android:text="@={viewModel.serviceDescription}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,7 +221,7 @@
             android:id="@+id/createEventButton"
             style="@style/App.AddService.Button"
             android:layout_marginTop="@dimen/margin_small"
-            android:enabled="@{viewModel.valid}"
+            android:enabled="@{viewModel.isValidService}"
             android:text="@string/add_service" />
 
     </LinearLayout>

@@ -23,23 +23,44 @@ class AddServiceViewModel @Inject constructor(
     val addServiceDataStream: LiveData<UiStatus<Long, ErrorModel>>
         get() = _addServiceDataStream
 
-    val service = MutableLiveData<ServiceModel>(ServiceModel())
-    val valid = MediatorLiveData<Boolean>()
+    private var service = ServiceModel()
+    val serviceCategory = MutableLiveData("")
+    val serviceName = MutableLiveData("")
+    val serviceDay = MutableLiveData("")
+    val serviceHour = MutableLiveData("")
+    val serviceSpots = MutableLiveData("")
+    val serviceDuration = MutableLiveData("")
+    val serviceDescription = MutableLiveData<String>("")
+    val isValidService = MediatorLiveData<Boolean>()
 
     init {
-        valid.addSource(service) {
-            Log.d("Cacatua", "checking service validation")
-            valid.value = isFormValid(it)
+        isValidService.apply {
+            addSource(serviceName) {
+                service.name = serviceName.value
+                Log.d(TAG, "serviceNameChanged: $serviceName")
+                isValidService.value = isFormValid(service)
+            }
+            addSource(serviceDay) {
+                service.day = serviceDay.value
+                Log.d(TAG, "serviceDayChanged: $serviceName")
+                isValidService.value = it.isNotBlank()
+            }
+            addSource(serviceDescription) {
+                service.description = serviceDescription.value
+                Log.d(TAG, "serviceDescriptionChanged: $serviceName")
+                isValidService.value = isFormValid(service)
+            }
+            // TODO: Add other sources :)
         }
     }
 
     private fun isFormValid(service: ServiceModel): Boolean =
-        service.categoryId != null
-                && service.name != null
-                && service.day != null
-                && service.spots != null
-                && service.durationMin != null
-                && service.description != null
+        // !service.categoryId.isNullOrBlank() &&
+        !service.name.isNullOrBlank()
+                && !service.day.isNullOrBlank()
+        //        && !service.spots.isNullOrBlank()
+        //        && !service.durationMin.isNullOrBlank()
+                && !service.description.isNullOrBlank()
 
     fun execute() {
         viewModelScope.launch {
@@ -60,5 +81,9 @@ class AddServiceViewModel @Inject constructor(
             )
             _addServiceDataStream.value = processModel(request)
         }
+    }
+
+    companion object {
+        private val TAG = AddServiceViewModel::class.java.simpleName
     }
 }
