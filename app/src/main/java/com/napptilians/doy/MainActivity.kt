@@ -28,5 +28,8 @@ class MainActivity : BaseActivity() {
 //            }
 //        }
         NavigationUI.setupWithNavController(navBottom, navHostFragment)
+        navBottom.setOnNavigationItemSelectedListener {
+            true
+        }
     }
 }
