@@ -16,7 +16,7 @@ class NetworkDataSourceImpl @Inject constructor(
     private val categoryMapper: CategoryMapper,
     private val serviceService: ServiceService,
     private val serviceInMapper: ServiceInMapper,
-    private val userService: UserService,
+    private val userService: UserService
 ) : NetworkDataSource {
 
     override suspend fun getCategories(categoryIds: List<Long>): Response<List<CategoryModel>, ErrorModel> {

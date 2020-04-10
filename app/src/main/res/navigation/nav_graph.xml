@@ -20,9 +20,6 @@
         <action
             android:id="@+id/action_menuFavouritesListButton_to_introFragment"
             app:destination="@id/introFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
-            app:destination="@id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
