@@ -29,6 +29,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
     }
 
     private fun setImage(model: ServiceModel) {
+        itemView.serviceImage.clipToOutline = true
         Glide.with(itemView)
             .load(model.image)
             .placeholder(R.drawable.image_bg)
@@ -50,7 +51,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
             DATE_FORMAT_USER,
             Locale(Locale.getDefault().language, Locale.getDefault().country)
         )
-        itemView.serviceDateText.text = formatterUserFriendly.format(model.date)
+        itemView.serviceDateText.text = formatterUserFriendly.format(model.date).capitalize()
     }
 
     private fun setMaxSpots(model: ServiceModel) {

@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
 import kotlinx.android.synthetic.main.discover_fragment.chatsButton
 import kotlinx.android.synthetic.main.discover_fragment.discoverUserUid
 import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
-import kotlinx.android.synthetic.main.discover_fragment.logoutButton
 import kotlinx.android.synthetic.main.discover_fragment.popupButton
 import javax.inject.Inject
 
