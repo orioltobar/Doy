@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/menuFavouritesListButton"
         android:name="com.napptilians.doy.view.discover.DiscoverFragment"
-        android:label="DiscoverFragment" >
+        android:label="DiscoverFragment">
         <action
             android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
             app:destination="@id/chatFragment" />
@@ -26,13 +26,9 @@
         android:name="com.napptilians.doy.view.chat.ChatFragment"
         android:label="ChatFragment" />
     <fragment
-        android:id="@+id/addServiceFragment"
-        android:name="com.napptilians.doy.view.addservice.AddServiceFragment"
-        android:label="AddServiceFragment" />
-    <fragment
         android:id="@+id/loginFragment"
         android:name="com.napptilians.doy.view.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
@@ -43,7 +39,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.napptilians.doy.view.register.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="RegisterFragment">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -54,7 +50,7 @@
     <fragment
         android:id="@+id/introFragment"
         android:name="com.napptilians.doy.view.intro.IntroFragment"
-        android:label="IntroFragment" >
+        android:label="IntroFragment">
         <action
             android:id="@+id/action_introFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -65,12 +61,42 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.napptilians.doy.view.categorylist.CategoryListFragment"
-        android:label="CategoryListFragment" >
-
+        android:label="CategoryListFragment">
+        <argument
+            android:name="isAddingService"
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_categoryListFragment_to_serviceListFragment"
             app:destination="@id/serviceListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addServiceFragment"
+        android:name="com.napptilians.doy.view.addservice.AddServiceFragment"
+        android:label="AddServiceFragment">
+        <action
+            android:id="@+id/action_addServiceFragment_to_categoriesFragment"
+            app:destination="@id/categoryListFragment">
+            <argument
+                android:name="isAddingService"
+                android:defaultValue="true"
+                app:argType="boolean" />
+        </action>
+        <action
+            android:id="@+id/action_addServiceFragment_to_selectSpotsFragment"
+            app:destination="@id/selectSpotsFragment" />
+        <action
+            android:id="@+id/action_addServiceFragment_to_selectDurationFragment"
+            app:destination="@id/selectDurationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectSpotsFragment"
+        android:name="com.napptilians.doy.view.selectspots.SelectSpotsFragment"
+        android:label="SelectSpotsFragment" />
+    <fragment
+        android:id="@+id/selectDurationFragment"
+        android:name="com.napptilians.doy.view.selectduration.SelectDurationFragment"
+        android:label="SelectDurationFragment" />
     <fragment
         android:id="@+id/serviceListFragment"
         android:name="com.napptilians.doy.view.servicelist.ServiceListFragment"

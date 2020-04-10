@@ -38,7 +38,15 @@
     <string name="select_spots">Seleccionar places disponibles</string>
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>
+    <string name="add_service_to_category">¿A què categoria perteneix el teu event?</string>
     <string name="adding_service">Creant event...</string>
+    <string name="how_many_spots">Quanta gent es pot unir al teu event?</string>
+    <string name="save">Guardar</string>
+    <string name="person">persona</string>
+    <string name="persons">persones</string>
+    <string name="how_long_duration">Quanta gent es pot unir al teu event?</string>
+    <string name="hour">hora</string>
+    <string name="hours">hores</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>

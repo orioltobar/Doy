@@ -30,14 +30,14 @@ class ServiceItemViewHolder(parent: ViewGroup) :
     }
 
     private fun setName(model: ServiceModel) {
-        if (model.name.isEmpty()) {
+        if (model.name.isNullOrEmpty()) {
             return
         }
         itemView.serviceNameText.text = model.name
     }
 
     private fun setDate(model: ServiceModel) {
-        if (model.day.isEmpty()) {
+        if (model.day.isNullOrEmpty()) {
             return
         }
         itemView.serviceDateText.text = model.day
