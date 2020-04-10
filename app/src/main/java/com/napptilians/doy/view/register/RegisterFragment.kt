@@ -52,10 +52,12 @@ class RegisterFragment : BaseFragment() {
 
     private fun moveToMainScreen() {
         registerFragmentProgressView.visibility = View.GONE
-        Toast.makeText(activity, "SUCCESS", Toast.LENGTH_LONG).show()
+        val direction = RegisterFragmentDirections.actionRegisterFragmentToMenuFavouritesListButton()
+        findNavController().navigate(direction)
     }
 
     override fun onError(error: ErrorModel) {
+        enableRegisterButton()
         registerFragmentProgressView.visibility = View.GONE
         val errorString = error.message
             ?.takeIf { it.isNotEmpty() }
@@ -70,10 +72,19 @@ class RegisterFragment : BaseFragment() {
     }
 
     private fun sendRegister() {
+        disableRegisterButton()
         val name = registerFragmentNameEditText.text.toString()
         val email = registerFragmentEmailEditText.text.toString().replace(" ", "")
         val password = registerFragmentPasswordEditText.text.toString()
         val repeatPassword = registerFragmentRepeatPasswordEditText.text.toString()
         viewModel.register(name, email, password, repeatPassword)
+    }
+
+    private fun disableRegisterButton() {
+        registerFragmentCreateButton.isClickable = false
+    }
+
+    private fun enableRegisterButton() {
+        registerFragmentCreateButton.isClickable = true
     }
 }

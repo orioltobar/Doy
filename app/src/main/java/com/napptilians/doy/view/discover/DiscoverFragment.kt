@@ -29,6 +29,8 @@ class DiscoverFragment : BaseFragment() {
         // TODO: Temp. Remove.
         logoutButton.setOnClickListener {
             firebaseAuth.signOut()
+            val direction = DiscoverFragmentDirections.actionMenuFavouritesListButtonToIntroFragment()
+            findNavController().navigate(direction)
         }
 
         categoryListButton.setOnClickListener {
@@ -47,6 +49,12 @@ class DiscoverFragment : BaseFragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        firebaseAuth.currentUser?.let {
+            discoverUserUid.text = it.uid
+        }
+    }
     override fun onError(error: ErrorModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

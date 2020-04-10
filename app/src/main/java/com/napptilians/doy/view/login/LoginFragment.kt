@@ -84,18 +84,23 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
+        enableLoginButton()
+        loginFragmentProgressView.visibility = View.GONE
         Toast.makeText(activity, error.errorMessage, Toast.LENGTH_LONG).show()
     }
 
     override fun onLoading() {
-        println("Do nothing")
+        loginFragmentProgressView.visibility = View.VISIBLE
     }
 
     private fun processNewValue(auth: AuthResult) {
-        println("something")
+        loginFragmentProgressView.visibility = View.GONE
+        val direction = LoginFragmentDirections.actionLoginFragmentToMenuFavouritesListButton()
+        findNavController().navigate(direction)
     }
 
     private fun sendData() {
+        disableLoginButton()
         val email = emailEditText.text.toString().replace(" ", "")
         val password = passwordEditText.text.toString()
         if (password.isEmpty() || email.isEmpty()) {
@@ -103,5 +108,13 @@ class LoginFragment : BaseFragment() {
         } else {
             viewModel.login(email, password)
         }
+    }
+
+    private fun disableLoginButton() {
+        signInButton.isClickable = false
+    }
+
+    private fun enableLoginButton() {
+        signInButton.isClickable = true
     }
 }

@@ -4,11 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import javax.inject.Inject
 
 class SplashFragment : BaseFragment() {
+
+    @Inject
+    lateinit var fireBaseAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,11 +22,23 @@ class SplashFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.splash_screen, container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Check if user is logged.
+        val direction = if (fireBaseAuth.currentUser == null) {
+            SplashFragmentDirections.actionSplashFragmentToIntroFragment()
+        } else {
+            SplashFragmentDirections.actionSplashFragmentToMenuFavouritesListButton()
+        }
+        findNavController().navigate(direction)
+    }
+
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }
