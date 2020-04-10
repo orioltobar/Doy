@@ -18,6 +18,8 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
+import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.visible
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,8 +31,6 @@ import java.util.Calendar
 class AddServiceFragment : BaseFragment() {
 
     private val viewModel: AddServiceViewModel by viewModels { vmFactory }
-
-    private lateinit var progressDialog: ProgressDialog
 
     private val serviceDateFormat = SimpleDateFormat(SERVICE_DATE_FORMAT, Locale.getDefault())
     private var selectedCalendarDay: Calendar? = null
@@ -110,20 +110,15 @@ class AddServiceFragment : BaseFragment() {
 
     private fun processNewValue(serviceId: Long) {
         // TODO: Store id on the service or what?
-        progressDialog.cancel()
+        progressBar.gone()
     }
 
     override fun onLoading() {
-        progressDialog = ProgressDialog.show(
-            context,
-            "",
-            getString(R.string.adding_service),
-            true
-        )
+        progressBar.visible()
     }
 
     override fun onError(error: ErrorModel) {
-        progressDialog.cancel()
+        progressBar.gone()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

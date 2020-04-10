@@ -13,6 +13,15 @@
         android:background="@android:color/white"
         android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_medium"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/gray"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/loginText"
             style="@style/App.AddService"
