@@ -4,33 +4,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/movieListFragment"-->
-    <!--        android:name="com.napptilians.doy.view.movielist.MovieListFragment"-->
-    <!--        android:label="MovieListFragment">-->
-
-    <!--        <action-->
-    <!--            android:id="@+id/action_movieListFragment_to_movieFragment"-->
-    <!--            app:destination="@id/movieFragment" />-->
-    <!--        <argument-->
-    <!--            android:name="id"-->
-    <!--            app:argType="integer"-->
-    <!--            android:defaultValue="-1" />-->
-
-    <!--    </fragment>-->
-
-    <!--    <fragment-->
-    <!--        android:id="@+id/movieFragment"-->
-    <!--        android:name="com.napptilians.doy.view.movie.MovieFragment"-->
-    <!--        android:label="MovieFragment">-->
-
-    <!--        <argument-->
-    <!--            android:name="id"-->
-    <!--            android:defaultValue="-1L"-->
-    <!--            app:argType="long" />-->
-
-    <!--    </fragment>-->
-
     <fragment
         android:id="@+id/menuFavouritesListButton"
         android:name="com.napptilians.doy.view.discover.DiscoverFragment"
@@ -124,14 +97,6 @@
         android:id="@+id/selectDurationFragment"
         android:name="com.napptilians.doy.view.selectduration.SelectDurationFragment"
         android:label="SelectDurationFragment" />
-    <!--    <fragment-->
-    <!--        android:id="@+id/menuGenresListButton"-->
-    <!--        android:name="com.napptilians.doy.view.genrelist.GenreListFragment"-->
-    <!--        android:label="GenreListFragment" >-->
-    <!--        <action-->
-    <!--            android:id="@+id/action_genreListFragment_to_menuMovieListButton"-->
-    <!--            app:destination="@id/movieListFragment" />-->
-    <!--    </fragment>-->
     <fragment
         android:id="@+id/serviceListFragment"
         android:name="com.napptilians.doy.view.servicelist.ServiceListFragment"
