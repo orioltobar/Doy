@@ -5,10 +5,10 @@ import com.napptilians.diskdatasource.di.DatabaseModule
 import com.napptilians.doy.App
 import com.napptilians.doy.di.modules.ActivityBindingModule
 import com.napptilians.doy.di.modules.AppModule
+import com.napptilians.doy.di.modules.FirebaseModule
 import com.napptilians.doy.di.modules.FragmentBindingModule
 import com.napptilians.doy.di.modules.ServiceBindingModule
 import com.napptilians.doy.di.modules.ViewModelModule
-import com.napptilians.doy.di.modules.FirebaseModule
 import com.napptilians.networkdatasource.di.NetworkModule
 import com.napptilians.networkdatasource.di.NetworkServicesModule
 import dagger.BindsInstance
