@@ -40,4 +40,8 @@
     <string name="description">Descripció</string>
     <string name="adding_service">Creant event...</string>
 
+    <!-- Generic Dialog -->
+    <string name="wip">En construcció…</string>
+    <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
+
 </resources>
