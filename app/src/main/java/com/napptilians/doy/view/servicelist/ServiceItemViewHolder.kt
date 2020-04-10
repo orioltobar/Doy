@@ -7,7 +7,13 @@ import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseViewHolder
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
-import kotlinx.android.synthetic.main.service_item.view.*
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import kotlinx.android.synthetic.main.service_item.view.serviceDateText
+import kotlinx.android.synthetic.main.service_item.view.serviceDurationText
+import kotlinx.android.synthetic.main.service_item.view.serviceImage
+import kotlinx.android.synthetic.main.service_item.view.serviceMaxSpotsText
+import kotlinx.android.synthetic.main.service_item.view.serviceNameText
 
 class ServiceItemViewHolder(parent: ViewGroup) :
     BaseViewHolder<ServiceModel>(parent, R.layout.service_item) {
@@ -40,7 +46,11 @@ class ServiceItemViewHolder(parent: ViewGroup) :
         if (model.day.isEmpty()) {
             return
         }
-        itemView.serviceDateText.text = model.day
+        val formatterUserFriendly = DateTimeFormatter.ofPattern(
+            DATE_FORMAT_USER,
+            Locale(Locale.getDefault().language, Locale.getDefault().country)
+        )
+        itemView.serviceDateText.text = formatterUserFriendly.format(model.date)
     }
 
     private fun setMaxSpots(model: ServiceModel) {
@@ -61,5 +71,9 @@ class ServiceItemViewHolder(parent: ViewGroup) :
         itemView.serviceDurationText.text =
             itemView.resources.getString(R.string.service_duration, model.durationMin)
         itemView.serviceDurationText.visible()
+    }
+
+    companion object {
+        private const val DATE_FORMAT_USER = "EEEE d, k:mm"
     }
 }

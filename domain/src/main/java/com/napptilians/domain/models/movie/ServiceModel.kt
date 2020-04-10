@@ -1,5 +1,7 @@
 package com.napptilians.domain.models.movie
 
+import java.time.ZonedDateTime
+
 data class ServiceModel(
     val serviceId: Long,
     val categoryId: Long,
@@ -7,6 +9,7 @@ data class ServiceModel(
     val description: String,
     val image: ByteArray,
     val day: String,
+    val date: ZonedDateTime?,
     val spots: Int,
     val durationMin: Int,
     val ownerId: String
