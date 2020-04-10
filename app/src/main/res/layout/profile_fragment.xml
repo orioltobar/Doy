@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/profileTitle"
+        style="@style/App.Intro"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/profile"
+        android:textColor="@color/grayStrong"
+        android:textSize="@dimen/text_size_xl"
+        app:layout_constraintStart_toStartOf="@id/startGuideline"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <ImageView
+        android:id="@+id/profileEditMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_edit"
+        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+
+    <View
+        android:id="@+id/profilePhotoPlaceHolder"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@drawable/bg_dashed_oval"
+        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+        app:layout_constraintStart_toStartOf="@id/startGuideline"
+        app:layout_constraintTop_toBottomOf="@id/profileTitle" />
+
+    <ImageView
+        android:id="@+id/profilePhotoSmiley"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_smile"
+        app:layout_constraintBottom_toBottomOf="@id/profilePhotoPlaceHolder"
+        app:layout_constraintEnd_toEndOf="@id/profilePhotoPlaceHolder"
+        app:layout_constraintStart_toStartOf="@id/profilePhotoPlaceHolder"
+        app:layout_constraintTop_toTopOf="@id/profilePhotoPlaceHolder" />
+
+    <FrameLayout
+        android:id="@+id/profileInfoFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        app:layout_constraintEnd_toEndOf="@id/endGuideline"
+        app:layout_constraintStart_toStartOf="@id/startGuideline"
+        app:layout_constraintTop_toBottomOf="@id/profilePhotoPlaceHolder" />
+
+    <TextView
+        android:id="@+id/profileInfoLogOutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="@string/logout"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_s"
+        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
+        app:layout_constraintStart_toStartOf="@id/startGuideline" />
+
+    <Button
+        android:id="@+id/profileInfoSaveChangesButton"
+        style="@style/App.PrimaryButton"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="@string/add_service"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/margin_large" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/margin_large" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,4 +51,10 @@
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>
     <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
+
+    <!-- Profile -->
+    <string name="profile">Perfil</string>
+    <string name="bio_default">Vols explicar alguna cosa sobre tu?</string>
+    <string name="events_by_user">Eventos creados por mi</string>
+    <string name="logout">Tancar sessió</string>
 </resources>

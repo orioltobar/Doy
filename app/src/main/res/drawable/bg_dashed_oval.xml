@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <stroke
+        android:width="@dimen/button_border_width"
+        android:color="@color/colorPrimary"
+        android:dashGap="@dimen/dashed_rectangle_dash_gap_size"
+        android:dashWidth="@dimen/dashed_rectangle_dash_width" />
+
+</shape>

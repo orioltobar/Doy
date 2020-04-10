@@ -67,6 +67,10 @@ class DiscoverFragment : BaseFragment() {
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
             findNavController().navigate(navigation)
         }
+        profileButton.setOnClickListener {
+            val direction = DiscoverFragmentDirections.actionMenuFavouritesListButtonToProfileFragment()
+            findNavController().navigate(direction)
+        }
     }
 
     override fun onResume() {
