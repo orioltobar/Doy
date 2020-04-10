@@ -17,9 +17,9 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.CategoriesViewModel
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.category_list_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class CategoryListFragment : BaseFragment() {
@@ -90,6 +90,7 @@ class CategoryListFragment : BaseFragment() {
         categoryList.layoutManager = layoutManager
         categoriesAdapter = CategoryListAdapter()
         categoriesAdapter.setOnClickListener {
+            // TODO: Navigate to Service list screen
             Toast.makeText(
                 context,
                 "Categoria ${it.name}",

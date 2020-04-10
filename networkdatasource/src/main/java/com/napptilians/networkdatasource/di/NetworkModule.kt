@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.napptilians.commons.Constants.RETROFIT_TIMEOUT
 import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
-import com.napptilians.networkdatasource.api.data.CategoryListService
+import com.napptilians.networkdatasource.api.data.CategoryService
 import com.napptilians.networkdatasource.api.data.MovieService
 import com.napptilians.networkdatasource.api.data.ServiceService
 import com.napptilians.networkdatasource.interceptors.UrlParamInterceptor
@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Locale
 
 @Module
 object NetworkModule {
@@ -71,6 +72,9 @@ object NetworkModule {
     ): NetworkProvider = object : NetworkProvider {
         override val valueToBeProvided: String
             get() = apiKey
+
+        override val language: String
+            get() = Locale.getDefault().displayLanguage
     }
 }
 
@@ -83,7 +87,7 @@ object NetworkServicesModule {
 
     @Provides
     @Singleton
-    fun provideCategoryListService(retrofit: Retrofit) = retrofit.create(CategoryListService::class.java)
+    fun provideCategoryListService(retrofit: Retrofit) = retrofit.create(CategoryService::class.java)
 
     @Provides
     @Singleton
