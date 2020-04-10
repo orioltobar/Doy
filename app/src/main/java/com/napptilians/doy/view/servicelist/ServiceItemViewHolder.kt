@@ -32,7 +32,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
         itemView.serviceImage.clipToOutline = true
         Glide.with(itemView)
             .load(model.image)
-            .placeholder(R.drawable.image_bg)
+            .placeholder(R.drawable.ic_logo_colour_green)
             .into(itemView.serviceImage)
     }
 
@@ -75,6 +75,6 @@ class ServiceItemViewHolder(parent: ViewGroup) :
     }
 
     companion object {
-        private const val DATE_FORMAT_USER = "EEEE d, k:mm"
+        private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
     }
 }

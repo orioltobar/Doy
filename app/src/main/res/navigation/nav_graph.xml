@@ -107,6 +107,9 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_serviceListFragment_to_serviceDetailFragment"
+            app:destination="@id/serviceDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -118,6 +121,14 @@
         <action
             android:id="@+id/action_splashFragment_to_menuFavouritesListButton"
             app:destination="@id/menuFavouritesListButton" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceDetailFragment"
+        android:name="com.napptilians.doy.view.servicedetail.ServiceDetailFragment"
+        android:label="ServiceDetailFragment" >
+        <argument
+            android:name="serviceId"
+            app:argType="long" />
     </fragment>
 
 </navigation>

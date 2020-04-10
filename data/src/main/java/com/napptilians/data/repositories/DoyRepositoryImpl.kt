@@ -6,7 +6,6 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.commons.flatMap
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
@@ -65,7 +64,11 @@ class DoyRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel> {
-        return networkDataSource.getServices(categoryId)
+    override suspend fun getServices(
+        categoryIds: List<Long>,
+        serviceId: Long?,
+        uid: Long?
+    ): Response<List<ServiceModel>, ErrorModel> {
+        return networkDataSource.getServices(categoryIds, serviceId, uid)
     }
 }
