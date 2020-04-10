@@ -18,7 +18,6 @@
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
     <string name="generic_error">Looks like there was some sort of error</string>
-    <string name="splash_text">Made with love in Barcelona</string>
 
     <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
@@ -44,5 +43,4 @@
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
     <string name="wip_explanation">We\'re working at full capacity so you can enjoy this feature as soon as possible.</string>
-
 </resources>

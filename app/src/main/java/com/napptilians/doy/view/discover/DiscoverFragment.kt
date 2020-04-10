@@ -10,12 +10,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.view.customviews.DoyDialog
-import kotlinx.android.synthetic.main.discover_fragment.addServiceButton
-import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
-import kotlinx.android.synthetic.main.discover_fragment.chatsButton
-import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
-import kotlinx.android.synthetic.main.discover_fragment.logoutButton
-import kotlinx.android.synthetic.main.discover_fragment.popupButton
+import kotlinx.android.synthetic.main.discover_fragment.*
 import javax.inject.Inject
 
 class DiscoverFragment : BaseFragment() {
@@ -33,9 +28,10 @@ class DiscoverFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // TODO: Temp. Remove.
-        logoutButton.setOnClickListener {
+        loginFlowButton.setOnClickListener {
             firebaseAuth.signOut()
-            val direction = DiscoverFragmentDirections.actionMenuFavouritesListButtonToIntroFragment()
+            val direction =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToIntroFragment()
             findNavController().navigate(direction)
         }
 
@@ -79,6 +75,7 @@ class DiscoverFragment : BaseFragment() {
             discoverUserUid.text = it.uid
         }
     }
+
     override fun onError(error: ErrorModel) {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
