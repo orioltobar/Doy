@@ -23,7 +23,7 @@ class AddServiceViewModel @Inject constructor(
     val addServiceDataStream: LiveData<UiStatus<Long, ErrorModel>>
         get() = _addServiceDataStream
 
-    private var service = ServiceModel()
+    var service = ServiceModel()
     val serviceCategory = MutableLiveData("")
     val serviceName = MutableLiveData("")
     val serviceDay = MutableLiveData("")

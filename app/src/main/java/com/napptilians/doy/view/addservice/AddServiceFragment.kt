@@ -2,7 +2,6 @@ package com.napptilians.doy.view.addservice
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -18,6 +17,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
+import com.napptilians.doy.extensions.getNavigationResult
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.viewmodel.AddServiceViewModel
@@ -40,7 +40,8 @@ class AddServiceFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: AddServiceFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.add_service_fragment, container, false)
+        val binding: AddServiceFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.add_service_fragment, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         return binding.root
@@ -48,22 +49,37 @@ class AddServiceFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupSharedObservers()
         setupListeners()
+    }
+
+    private fun setupSharedObservers() {
+        getNavigationResult("selectCategoryId")?.observe(
+            viewLifecycleOwner,
+            Observer<String> { viewModel.service.categoryId = it.toLong() }
+        )
+        getNavigationResult("selectCategoryName")?.observe(
+            viewLifecycleOwner,
+            Observer<String> { selectCategoryEditText.setText(it) }
+        )
     }
 
     private fun setupListeners() {
         uploadImageBox.setOnClickListener { openGallery() }
         selectCategoryEditText.setOnClickListener {
-            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
+            val direction =
+                AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
             findNavController().navigate(direction)
         }
         selectDateEditText.setOnClickListener { showServiceDatePicker() }
         selectSpotsEditText.setOnClickListener {
-            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToSelectSpotsFragment()
+            val direction =
+                AddServiceFragmentDirections.actionAddServiceFragmentToSelectSpotsFragment()
             findNavController().navigate(direction)
         }
         selectDurationEditText.setOnClickListener {
-            val direction = AddServiceFragmentDirections.actionAddServiceFragmentToSelectDurationFragment()
+            val direction =
+                AddServiceFragmentDirections.actionAddServiceFragmentToSelectDurationFragment()
             findNavController().navigate(direction)
         }
         createEventButton.setOnClickListener { createEvent() }

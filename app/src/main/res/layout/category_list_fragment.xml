@@ -75,4 +75,13 @@
         app:layout_constraintTop_toBottomOf="@+id/titleText"
         tools:visibility="visible" />
 
+    <Button
+        android:id="@+id/saveButton"
+        style="@style/App.PrimaryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/categoryList" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

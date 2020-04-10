@@ -23,7 +23,7 @@ class CategoryItemViewHolder constructor(parent: ViewGroup, private val isAdding
                 itemView.categoryImage.alpha = 1f
             } else {
                 itemView.tickImageView.gone()
-                itemView.categoryImage.alpha = 0.4f
+                itemView.categoryImage.alpha = 0.5f
             }
         } else {
             itemView.tickImageView.gone()
