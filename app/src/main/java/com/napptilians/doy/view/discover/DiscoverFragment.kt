@@ -13,6 +13,7 @@ import com.napptilians.doy.view.customviews.DoyDialog
 import kotlinx.android.synthetic.main.discover_fragment.addServiceButton
 import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
 import kotlinx.android.synthetic.main.discover_fragment.chatsButton
+import kotlinx.android.synthetic.main.discover_fragment.detailButton
 import kotlinx.android.synthetic.main.discover_fragment.discoverUserUid
 import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
 import kotlinx.android.synthetic.main.discover_fragment.popupButton
