@@ -6,6 +6,7 @@ import com.napptilians.commons.Constants.RETROFIT_TIMEOUT
 import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
 import com.napptilians.networkdatasource.api.data.CategoryService
 import com.napptilians.networkdatasource.api.data.MovieService
+import com.napptilians.networkdatasource.api.data.ServiceService
 import com.napptilians.networkdatasource.interceptors.UrlParamInterceptor
 import com.napptilians.networkdatasource.providers.NetworkProvider
 import dagger.Module
@@ -73,7 +74,7 @@ object NetworkModule {
             get() = apiKey
 
         override val language: String
-            get() = Locale.getDefault().displayLanguage
+            get() = Locale.getDefault().language
     }
 }
 
@@ -87,4 +88,8 @@ object NetworkServicesModule {
     @Provides
     @Singleton
     fun provideCategoryListService(retrofit: Retrofit) = retrofit.create(CategoryService::class.java)
+
+    @Provides
+    @Singleton
+    fun proviceServiceService(retrofit: Retrofit) = retrofit.create(ServiceService::class.java)
 }

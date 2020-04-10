@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 class CategoriesViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
-) : BaseViewModel<MovieModel>() {
+) : BaseViewModel<CategoryModel>() {
 
     private val _categoriesDataStream = MutableLiveData<UiStatus<List<CategoryModel>, ErrorModel>>()
     val categoriesDataStream: LiveData<UiStatus<List<CategoryModel>, ErrorModel>>

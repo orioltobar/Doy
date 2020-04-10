@@ -18,5 +18,30 @@
     <string name="existing_account">¿Ya tienes cuenta?</string>
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credenciales erróneas</string>
+    <string name="generic_error">Parece que ha habido un error.</string>
+
+    <!-- Category list -->
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
+    <string name="no_categories">Aún no tenemos categorías disponibles</string>
+
+    <!-- Service list -->
+    <string name="loading_services">Por favor espera mientras cargamos tus servicios</string>
+    <string name="no_services">Parece que no hay servicios para esta categoría. ¡Comprueba más tarde!</string>
+    <string name="max_spots">Máx. %1$d</string>
+
+    <!-- Add event -->
+    <string name="add_service">Crear evento</string>
+    <string name="upload_image">Subir imagen</string>
+    <string name="select_category">Seleccionar categoría</string>
+    <string name="service_title">Título evento</string>
+    <string name="select_date">Seleccionar fecha</string>
+    <string name="select_spots">Seleccionar plazas disponibles</string>
+    <string name="select_duration">Seleccionar duración</string>
+    <string name="description">Descripción</string>
+    <string name="adding_service">Creando evento...</string>
+
+    <!-- Generic Dialog -->
+    <string name="wip">En construcción…</string>
+    <string name="wip_explanation">Estamos trabajando a toda velocidad para que puedas disfrutar de esta funcionalidad lo antes posible.</string>
+
 </resources>

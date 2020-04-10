@@ -8,6 +8,7 @@ import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.movie.CategoryModel
+import com.napptilians.domain.models.movie.ServiceModel
 import com.napptilians.domain.repositories.DoyRepository
 import javax.inject.Inject
 
@@ -24,7 +25,11 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel> =
         dbDataSource.getDeviceInfo()
 
-    override suspend fun saveDeviceInfo(device: DeviceModel) = dbDataSource.saveDeviceInfo(device)
+    override suspend fun saveDeviceInfo(device: DeviceModel): Response<Unit, ErrorModel> =
+        dbDataSource.saveDeviceInfo(device)
+
+    override suspend fun addService(service: ServiceModel): Response<Long, ErrorModel> =
+        networkDataSource.addService(service)
 
     override suspend fun login(
         email: String,
@@ -36,4 +41,8 @@ class DoyRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): Response<AuthResult, ErrorModel> = firebaseDataSource.register(email, password)
+
+    override suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel> {
+        return networkDataSource.getServices(categoryId)
+    }
 }

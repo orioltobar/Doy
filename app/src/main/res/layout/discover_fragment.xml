@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:lottie_autoPlay="true"
         app:lottie_fileName="loading.json"
         app:lottie_loop="true" />
@@ -39,6 +40,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/discoverFragmentProgressBar" />
 
+    <Button
+        android:id="@+id/popupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Popup"
+        app:layout_constraintEnd_toStartOf="@id/profileButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/loginFlowButton" />
 
     <Button
         android:id="@+id/loginFlowButton"
@@ -97,6 +106,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/detailButton"
         app:layout_constraintTop_toTopOf="@id/detailButton" />
+
+    <Button
+        android:id="@+id/addServiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="AÑADIR SERVICIO"
+        app:layout_constraintTop_toBottomOf="@id/detailButton"
+        app:layout_constraintEnd_toEndOf="@id/chatsButton"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

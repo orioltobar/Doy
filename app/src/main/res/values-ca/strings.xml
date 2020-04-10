@@ -18,5 +18,30 @@
     <string name="existing_account">Ja tens compte?</string>
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credencials errònies</string>
+    <string name="generic_error">Sembla que hi ha hagut algun tipus d\'error</string>
+
+    <!-- Category list -->
     <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
+    <string name="no_categories">Encara no tenim categories disponibles</string>
+
+    <!-- Service list -->
+    <string name="loading_services">Si us plau, espera mentre carreguem els teus serveis</string>
+    <string name="no_services">Sembla que no hi ha serveis per aquesta categoria. ¡Comprova més tard!</string>
+    <string name="max_spots">Max. %1$d</string>
+
+    <!-- Add event -->
+    <string name="add_service">Crear event</string>
+    <string name="upload_image">Pujar imatge</string>
+    <string name="select_category">Seleccionar categoria</string>
+    <string name="service_title">Títol event</string>
+    <string name="select_date">Seleccionar data</string>
+    <string name="select_spots">Seleccionar places disponibles</string>
+    <string name="select_duration">Seleccionar duració</string>
+    <string name="description">Descripció</string>
+    <string name="adding_service">Creant event...</string>
+
+    <!-- Generic Dialog -->
+    <string name="wip">En construcció…</string>
+    <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
+
 </resources>
