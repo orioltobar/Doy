@@ -13,6 +13,7 @@ class UrlParamInterceptor @Inject constructor(
         val request = chain.request()
         val newUrl = request.url().newBuilder().apply {
             addQueryParameter(IDIOMA, networkProvider.valueToBeProvided)
+            // TODO: Add mandatory query params here.
         }
         val newRequest = request.newBuilder().url(newUrl.build()).build()
         return chain.proceed(newRequest)

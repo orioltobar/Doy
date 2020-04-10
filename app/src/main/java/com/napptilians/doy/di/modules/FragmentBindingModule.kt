@@ -8,11 +8,15 @@ import com.napptilians.doy.view.discover.DiscoverFragment
 import com.napptilians.doy.view.intro.IntroFragment
 import com.napptilians.doy.view.login.LoginFragment
 import com.napptilians.doy.view.register.RegisterFragment
+import com.napptilians.doy.view.servicelist.ServiceListFragment
+import com.napptilians.doy.view.splash.SplashFragment
 import com.napptilians.doy.view.selectduration.SelectDurationFragment
 import com.napptilians.doy.view.selectspots.SelectSpotsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @Module
 abstract class FragmentBindingModule {
 
@@ -36,6 +40,12 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindCategoryListFragment(): CategoryListFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindServiceListFragment(): ServiceListFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindSplashFragment(): SplashFragment
 
     @ContributesAndroidInjector
     internal abstract fun bindAddServiceFragment(): AddServiceFragment

@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.customviews.DoyDialog
 import kotlinx.android.synthetic.main.discover_fragment.*
 import javax.inject.Inject
 
@@ -27,12 +28,28 @@ class DiscoverFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // TODO: Temp. Remove.
-        logoutButton.setOnClickListener {
+        loginFlowButton.setOnClickListener {
             firebaseAuth.signOut()
+            val direction =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToIntroFragment()
+            findNavController().navigate(direction)
         }
 
+        popupButton.setOnClickListener {
+            activity?.let { activity ->
+                DoyDialog(activity).apply {
+                    setPopupIcon(R.drawable.ic_rocket)
+                    setPopupTitle(context.resources.getString(R.string.wip))
+                    setPopupSubtitle(context.resources.getString(R.string.wip_explanation))
+                    setPopupFooterMessage("Empieza a disfrutar de formar parte de la comunidad DOY.")
+                    setPopupFooterImage(R.drawable.popup_footer)
+                    show()
+                }
+            }
+        }
         categoryListButton.setOnClickListener {
-            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
+            val navigation =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
             findNavController().navigate(navigation)
         }
         chatsButton.setOnClickListener {
@@ -46,16 +63,24 @@ class DiscoverFragment : BaseFragment() {
             findNavController().navigate(direction)
         }
         addServiceButton.setOnClickListener {
-            val navigation = DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
+            val navigation =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
             findNavController().navigate(navigation)
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        firebaseAuth.currentUser?.let {
+            discoverUserUid.text = it.uid
+        }
+    }
+
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 }

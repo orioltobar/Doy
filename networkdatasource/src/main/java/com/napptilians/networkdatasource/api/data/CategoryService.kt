@@ -8,7 +8,7 @@ interface CategoryService {
 
     @GET("/getCategories")
     suspend fun getCategories(
-        @Query(CATEGORY_ID) categoryId: List<Long>
+        @Query(CATEGORY_ID) categoryIds: List<Long>
     ): List<CategoryApiModel>
 
     companion object {

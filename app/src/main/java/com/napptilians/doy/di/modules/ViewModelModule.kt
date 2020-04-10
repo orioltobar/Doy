@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.napptilians.doy.di.ViewModelFactory
 import com.napptilians.doy.di.ViewModelKey
 import com.napptilians.features.viewmodel.AddServiceViewModel
-import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
+import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
+import com.napptilians.features.viewmodel.ServicesViewModel
+import com.napptilians.features.viewmodel.RegisterViewModel
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import com.napptilians.features.viewmodel.SelectDurationViewModel
 import dagger.Binds
@@ -36,6 +38,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CategoriesViewModel::class)
     internal abstract fun categoriesViewModel(viewModel: CategoriesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterViewModel::class)
+    internal abstract fun registerViewModel(viewModel: RegisterViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ServicesViewModel::class)
+    internal abstract fun servicesViewModel(viewModel: ServicesViewModel): ViewModel
 
     @Binds
     @IntoMap
