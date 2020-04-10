@@ -17,5 +17,27 @@
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
+    <string name="generic_error">Looks like there was some sort of error</string>
+
+    <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
+    <string name="no_categories">There are no categories available yet.</string>
+
+    <!-- Service list -->
+    <string name="loading_services">Si us plau, espera mentre carreguem els teus serveis</string>
+    <string name="no_services">It looks like there are no services for this category. ¡Check later!</string>
+    <string name="max_spots">Max. %1$d</string>
+    <string name="service_duration" translatable="false">%1$d min.</string>
+
+    <!-- Add event -->
+    <string name="add_service">Create event</string>
+    <string name="upload_image">Upload image</string>
+    <string name="select_category">Select category</string>
+    <string name="service_title">Event title</string>
+    <string name="select_date">Select date</string>
+    <string name="select_spots">Select available spots</string>
+    <string name="select_duration">Select duration</string>
+    <string name="description">Description</string>
+    <string name="adding_service">Creating event...</string>
+
 </resources>
