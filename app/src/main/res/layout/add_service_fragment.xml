@@ -82,19 +82,6 @@
                     android:layout_marginEnd="@dimen/margin_small"
                     android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/categoryView"
-                        style="@style/App.AddService.Input"
-                        android:hint="@string/select_category"
-                        android:visibility="gone">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/categoryEditText"
-                            style="@style/App.AddService.Input"
-                            android:inputType="text" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <RelativeLayout
                         android:id="@+id/selectCategoryView"
                         android:layout_width="match_parent"
