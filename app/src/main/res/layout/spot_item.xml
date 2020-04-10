@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_medium"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/spotText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:fontFamily="@font/raleway_bold"
         android:padding="@dimen/padding_small"
         android:textColor="@color/grayStrong"
@@ -18,7 +20,9 @@
         tools:text="2 personas" />
 
     <ImageView
+        android:id="@+id/tickImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_tickon_white" />
 
 </LinearLayout>

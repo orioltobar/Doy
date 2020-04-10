@@ -12,8 +12,4 @@ class CategoryListAdapter @Inject constructor() : BaseAdapter<CategoryModel, Cat
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryItemViewHolder {
         return CategoryItemViewHolder(parent, isAddingService)
     }
-
-    override fun onBindViewHolder(holder: CategoryItemViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
-    }
 }

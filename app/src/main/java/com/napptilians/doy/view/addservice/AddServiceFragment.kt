@@ -62,6 +62,14 @@ class AddServiceFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer<String> { selectCategoryEditText.setText(it) }
         )
+        getNavigationResult("selectedSpots")?.observe(
+            viewLifecycleOwner,
+            Observer<String> { selectSpotsEditText.setText(it) }
+        )
+        getNavigationResult("selectedDuration")?.observe(
+            viewLifecycleOwner,
+            Observer<String> { selectDurationEditText.setText(it) }
+        )
     }
 
     private fun setupListeners() {
