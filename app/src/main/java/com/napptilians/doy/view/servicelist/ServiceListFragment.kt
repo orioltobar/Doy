@@ -93,8 +93,6 @@ class ServiceListFragment : BaseFragment() {
                 Toast.LENGTH_LONG
             ).show()
         }
-//        val  dividerItemDecoration =  DividerItemDecoration(context, layoutManager.orientation)
-//        serviceList.addItemDecoration(dividerItemDecoration)
         serviceList.adapter = servicesAdapter
     }
 }
