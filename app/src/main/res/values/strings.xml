@@ -54,6 +54,7 @@
 
     <!-- Profile -->
     <string name="profile">Profile</string>
+    <string name="edit_profile">Edit profile</string>
     <string name="bio_default">Do you want to explain something about you?</string>
     <string name="events_by_user">Events created by me</string>
     <string name="logout">Log out</string>

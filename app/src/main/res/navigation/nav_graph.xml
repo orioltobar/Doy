@@ -125,6 +125,10 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.napptilians.doy.view.user.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_introFragment"
+            app:destination="@id/introFragment" />
+    </fragment>
 
 </navigation>
