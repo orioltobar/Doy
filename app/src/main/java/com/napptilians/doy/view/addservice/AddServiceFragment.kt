@@ -3,6 +3,7 @@ package com.napptilians.doy.view.addservice
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
+import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.getNavigationResult
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.toByteArray
@@ -154,7 +156,7 @@ class AddServiceFragment : BaseFragment() {
         when (requestCode) {
             GALLERY_REQUEST_CODE -> {
                 serviceImageView.setImageURI(data?.data)
-                viewModel.service.image = data?.data?.toByteArray()
+                viewModel.service.image = BitmapFactory.decodeStream(context!!.contentResolver.openInputStream(data!!.data!!))?.toByteArray()?.encodeByteArrayToBase64()
             }
         }
     }

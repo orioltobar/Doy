@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.napptilians.domain.models.movie.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseViewHolder
+import com.napptilians.doy.extensions.decodeByteArrayFromBase64
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import kotlinx.android.synthetic.main.service_item.view.*
@@ -24,7 +25,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
 
     private fun setImage(model: ServiceModel) {
         Glide.with(itemView)
-            .load(model.image)
+            .load(model.image?.decodeByteArrayFromBase64())
             .placeholder(R.drawable.image_bg)
             .into(itemView.serviceImage)
     }

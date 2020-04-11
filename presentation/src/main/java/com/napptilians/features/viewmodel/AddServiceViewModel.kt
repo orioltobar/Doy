@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.movie.ServiceModel
 import com.napptilians.domain.usecases.AddServiceUseCase
+import com.napptilians.domain.usecases.GetDeviceInfoUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class AddServiceViewModel @Inject constructor(
-    private val addServiceUseCase: AddServiceUseCase
+    private val addServiceUseCase: AddServiceUseCase,
+    private val getDeviceInfoUseCase: GetDeviceInfoUseCase
 ) : BaseViewModel<AddServiceViewModel>() {
 
     private val _addServiceDataStream = MutableLiveData<UiStatus<Long, ErrorModel>>()
