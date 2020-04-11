@@ -20,6 +20,8 @@ import kotlinx.android.synthetic.main.profile_fragment.profileEditMode
 import kotlinx.android.synthetic.main.profile_fragment.profileFragmentProgressView
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoFrameLayout
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoLogOutText
+import kotlinx.android.synthetic.main.profile_fragment.profileInfoSaveChangesButton
+import kotlinx.android.synthetic.main.profile_fragment.profileTitle
 
 class ProfileFragment : BaseFragment() {
 
@@ -44,13 +46,23 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Show read view as default.
         defaultView()
+
         profileEditMode.setOnClickListener {
             switchEditMode()
         }
 
         profileInfoLogOutText.setOnClickListener {
             viewModel.logout()
+        }
+
+        profileInfoSaveChangesButton.setOnClickListener {
+            editModeView?.let {
+                val name = it.getUserName()
+                val description = it.getDescription()
+                viewModel.updateUser(name = name, description = description)
+            }
         }
 
         viewModel.userDataStream.observe(
@@ -78,7 +90,7 @@ class ProfileFragment : BaseFragment() {
     private fun processNewValue(user: UserModel) {
         profileFragmentProgressView.gone()
         if (isEditMode) {
-            return
+            switchEditMode()
         }
         readModeView?.apply {
             updateFields(user)
@@ -116,11 +128,18 @@ class ProfileFragment : BaseFragment() {
     private fun switchEditMode() {
         context?.let {
             if (!isEditMode) {
-                val readView = ProfileEditView(it)
+                profileTitle.text = getString(R.string.edit_profile)
+                profileInfoLogOutText.gone()
+                profileInfoSaveChangesButton.visible()
+                val editView = ProfileEditView(it)
+                editView.setUserMail(viewModel.getUserEmail())
                 profileInfoFrameLayout.removeAllViews()
-                profileInfoFrameLayout.addView(readView)
+                profileInfoFrameLayout.addView(editView)
                 isEditMode = true
             } else {
+                profileTitle.text = getString(R.string.profile)
+                profileInfoLogOutText.visible()
+                profileInfoSaveChangesButton.gone()
                 val readView = ProfileReadView(it)
                 profileInfoFrameLayout.removeAllViews()
                 profileInfoFrameLayout.addView(readView)

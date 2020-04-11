@@ -58,12 +58,13 @@ class NetworkDataSourceImpl @Inject constructor(
 
     override suspend fun updateUser(
         userUid: String,
+        name: String?,
         token: String?,
         description: String?,
         image: String?
     ): Response<UserModel, ErrorModel> =
         safeApiCall {
-            val body = UserUpdateRequestApiModel(userUid, token, description, image)
+            val body = UserUpdateRequestApiModel(userUid, name, token, description, image)
             userService.updateUser(body)
         }.map {
             userMapper.map(it[0])

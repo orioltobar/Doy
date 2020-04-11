@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.discover_fragment.detailButton
 import kotlinx.android.synthetic.main.discover_fragment.discoverUserUid
 import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
 import kotlinx.android.synthetic.main.discover_fragment.popupButton
+import kotlinx.android.synthetic.main.discover_fragment.profileButton
 import javax.inject.Inject
 
 class DiscoverFragment : BaseFragment() {

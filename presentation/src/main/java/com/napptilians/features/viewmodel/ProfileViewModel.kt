@@ -26,6 +26,8 @@ class ProfileViewModel @Inject constructor(
 
     private val userUid: String get() = firebaseAuth.currentUser?.uid ?: ""
 
+    private var email: String = ""
+
     private val _userDataStream = MutableLiveData<UiStatus<UserModel, ErrorModel>>()
     val userDataStream: LiveData<UiStatus<UserModel, ErrorModel>> get() = _userDataStream
 
@@ -40,10 +42,10 @@ class ProfileViewModel @Inject constructor(
         getUser(userUid)
     }
 
-    fun updateUser(token: String? = null, description: String? = null, image: String? = null) {
+    fun updateUser(name: String? = null, token: String? = null, description: String? = null, image: String? = null) {
         viewModelScope.launch {
             _updateUserDataStream.value = emitLoadingState()
-            val request = updateUserUseCase(userUid, token, description, image)
+            val request = updateUserUseCase(userUid, name, token, description, image)
             _updateUserDataStream.value = processModel(request)
         }
     }
@@ -57,6 +59,8 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun getUserEmail(): String = email
+
     private fun getUser(userUid: String) {
         viewModelScope.launch {
             _userDataStream.value = emitLoadingState()
@@ -69,6 +73,7 @@ class ProfileViewModel @Inject constructor(
 
             // Check if push token is the same.
             getUserRequest.valueOrNull()?.let { user ->
+                email = user.email
                 if (user.pushToken != deviceToken) {
                     refreshPushToken(userUid, deviceToken)
                 }

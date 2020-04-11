@@ -68,7 +68,7 @@
         android:id="@+id/profileInfoSaveChangesButton"
         style="@style/App.PrimaryButton"
         android:layout_marginTop="@dimen/margin_small"
-        android:text="@string/add_service"
+        android:text="@string/update_profile"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
 

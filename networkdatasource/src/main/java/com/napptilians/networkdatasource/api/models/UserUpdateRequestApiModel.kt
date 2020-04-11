@@ -6,6 +6,9 @@ data class UserUpdateRequestApiModel(
     @SerializedName("uid")
     val uid: String? = null,
 
+    @SerializedName("name")
+    val name: String? = null,
+
     @SerializedName("token")
     val pushToken: String? = null,
 

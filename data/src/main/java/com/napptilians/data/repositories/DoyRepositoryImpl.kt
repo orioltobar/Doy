@@ -92,11 +92,12 @@ class DoyRepositoryImpl @Inject constructor(
 
     override suspend fun updateUser(
         userUid: String,
+        name: String?,
         token: String?,
         description: String?,
         image: String?
     ): Response<UserModel, ErrorModel> {
-        val request = networkDataSource.updateUser(userUid, token, description, image)
+        val request = networkDataSource.updateUser(userUid, name, token, description, image)
         return request.flatMap { user ->
             dbDataSource.saveUser(user)
             dbDataSource.getUser(user.uid)

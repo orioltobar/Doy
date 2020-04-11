@@ -22,6 +22,7 @@ interface NetworkDataSource {
 
     suspend fun updateUser(
         userUid: String,
+        name: String? = null,
         token: String? = null,
         description: String? = null,
         image: String? = null

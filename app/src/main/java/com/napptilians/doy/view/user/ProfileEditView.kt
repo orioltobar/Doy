@@ -5,6 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.napptilians.doy.R
+import kotlinx.android.synthetic.main.profile_fragment_edit_mode.view.profileDescriptionEditText
+import kotlinx.android.synthetic.main.profile_fragment_edit_mode.view.profileEmailEditModeEditText
+import kotlinx.android.synthetic.main.profile_fragment_edit_mode.view.profileNameEditText
 
 class ProfileEditView @JvmOverloads constructor(
     context: Context,
@@ -15,4 +18,12 @@ class ProfileEditView @JvmOverloads constructor(
     init {
         LayoutInflater.from(context).inflate(R.layout.profile_fragment_edit_mode, this, true)
     }
+
+    fun setUserMail(mail: String) {
+        profileEmailEditModeEditText.setText(mail)
+    }
+
+    fun getUserName(): String = profileNameEditText.text.toString()
+
+    fun getDescription(): String = profileDescriptionEditText.text.toString()
 }

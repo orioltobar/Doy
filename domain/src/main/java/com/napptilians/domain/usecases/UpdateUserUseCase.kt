@@ -17,11 +17,12 @@ class UpdateUserUseCase @Inject constructor(
 
     suspend operator fun invoke(
         userUid: String,
+        name: String? = null,
         token: String? = null,
         description: String? = null,
         image: String? = null
     ): Response<UserModel, ErrorModel> =
         withContext(ioDispatchers) {
-            doyRepository.updateUser(userUid, token, description, image)
+            doyRepository.updateUser(userUid, name, token, description, image)
         }
 }
