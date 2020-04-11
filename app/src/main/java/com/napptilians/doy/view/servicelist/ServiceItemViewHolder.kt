@@ -5,7 +5,6 @@ import com.bumptech.glide.Glide
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseViewHolder
-import com.napptilians.doy.extensions.decodeByteArrayFromBase64
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import java.time.format.DateTimeFormatter
@@ -28,7 +27,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
     private fun setImage(model: ServiceModel) {
         itemView.serviceImage.clipToOutline = true
         Glide.with(itemView)
-            .load(model.image?.decodeByteArrayFromBase64())
+            .load(model.image)
             .placeholder(R.drawable.ic_logo_colour_green)
             .into(itemView.serviceImage)
     }

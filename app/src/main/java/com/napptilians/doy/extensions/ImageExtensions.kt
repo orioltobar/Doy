@@ -9,7 +9,6 @@ import java.io.UnsupportedEncodingException
 import java.net.URLDecoder
 
 private const val UTF_8 = "UTF-8"
-private const val BASE_64_ENCODED_BITMAP_PREFIX = "data:image/png;base64,"
 private val COMPRESS_FORMAT = Bitmap.CompressFormat.PNG
 private const val COMPRESS_QUALITY = 30
 private const val DEFAULT_IMAGE_WIDTH = 1536
@@ -27,20 +26,18 @@ fun ByteArray.toBitmap(): Bitmap = BitmapFactory.decodeByteArray(this, 0, size)
 
 fun ByteArray.encodeByteArrayToBase64(): String? =
     if (isEmpty()) null
-    else BASE_64_ENCODED_BITMAP_PREFIX + Base64.encodeToString(this, Base64.DEFAULT)
+    else Base64.encodeToString(this, Base64.DEFAULT)
 
 fun String.decodeByteArrayFromBase64(): ByteArray? {
     if (isBlank()) {
         return null
     }
-    var urlDecodedBitmap: String
-    try {
+    val urlDecodedBitmap = try {
         // NOTE: Restoring plus signs as URLDecoder accidentally translates it into white spaces
-        urlDecodedBitmap = URLDecoder.decode(this, UTF_8).replace(" ", "+")
-        urlDecodedBitmap = urlDecodedBitmap.replace(BASE_64_ENCODED_BITMAP_PREFIX, "")
+        URLDecoder.decode(this, UTF_8).replace(" ", "+")
     } catch (e: UnsupportedEncodingException) {
         e.printStackTrace()
-        urlDecodedBitmap = this
+        this
     }
     return Base64.decode(urlDecodedBitmap, Base64.DEFAULT)
 }
