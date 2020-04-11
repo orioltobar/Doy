@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.AddServiceUseCase
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class AddServiceViewModel @Inject constructor(
-    private val addServiceUseCase: AddServiceUseCase
+    private val addServiceUseCase: AddServiceUseCase,
+    private val firebaseAuth: FirebaseAuth
 ) : BaseViewModel<AddServiceViewModel>() {
 
     private val _addServiceDataStream = MutableLiveData<UiStatus<Long, ErrorModel>>()
@@ -78,7 +80,7 @@ class AddServiceViewModel @Inject constructor(
     fun execute() {
         viewModelScope.launch {
             _addServiceDataStream.value = emitLoadingState()
-            // TODO: Get user id to set as Service ownerId
+            service.ownerId = firebaseAuth.currentUser?.uid ?: ""
             val request = addServiceUseCase.execute(service)
             _addServiceDataStream.value = processModel(request)
         }

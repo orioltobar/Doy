@@ -17,8 +17,6 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -60,6 +58,7 @@
                 android:padding="@dimen/margin_medium">
 
                 <TextView
+                    android:id="@+id/serviceDetailTitle"
                     style="@style/App.ServiceDetail.Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,6 +66,7 @@
                     android:text="¡Mi gato me ignora! ¿Hablamos?" />
 
                 <TextView
+                    android:id="@+id/serviceDetailDescription"
                     style="@style/App.ServiceDetail"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_xlarge"
