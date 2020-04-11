@@ -16,8 +16,7 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class AddServiceViewModel @Inject constructor(
-    private val addServiceUseCase: AddServiceUseCase,
-    private val getDeviceInfoUseCase: GetDeviceInfoUseCase
+    private val addServiceUseCase: AddServiceUseCase
 ) : BaseViewModel<AddServiceViewModel>() {
 
     private val _addServiceDataStream = MutableLiveData<UiStatus<Long, ErrorModel>>()
@@ -80,6 +79,7 @@ class AddServiceViewModel @Inject constructor(
     fun execute() {
         viewModelScope.launch {
             _addServiceDataStream.value = emitLoadingState()
+            // TODO: Get user id to set as Service ownerId
             val request = addServiceUseCase.execute(service)
             _addServiceDataStream.value = processModel(request)
         }
