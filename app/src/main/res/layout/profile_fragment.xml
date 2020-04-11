@@ -31,7 +31,7 @@
         android:clickable="false"
         android:focusable="false"
         android:visibility="gone"
-        app:cardCornerRadius="250dp"
+        app:cardCornerRadius="@dimen/profile_card_radius"
         app:cardBackgroundColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/profilePhotoPlaceHolder"
         app:layout_constraintEnd_toEndOf="@+id/profilePhotoPlaceHolder"
