@@ -33,9 +33,6 @@ class ProfileReadView @JvmOverloads constructor(
     }
 
     fun updateFields(user: UserModel) {
-        // Profile Image
-        // TODO: Pending.
-
         // Name
         profileNameReadModeName.text = user.name
 

@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -27,21 +26,14 @@ import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ProfileViewModel
-import kotlinx.android.synthetic.main.profile_fragment.profileEditMode
-import kotlinx.android.synthetic.main.profile_fragment.profileFragmentProgressView
-import kotlinx.android.synthetic.main.profile_fragment.profileImageCardView
-import kotlinx.android.synthetic.main.profile_fragment.profileImageView
-import kotlinx.android.synthetic.main.profile_fragment.profileInfoFrameLayout
-import kotlinx.android.synthetic.main.profile_fragment.profileInfoLogOutText
-import kotlinx.android.synthetic.main.profile_fragment.profileInfoSaveChangesButton
-import kotlinx.android.synthetic.main.profile_fragment.profilePhotoPlaceHolder
-import kotlinx.android.synthetic.main.profile_fragment.profileTitle
+import kotlinx.android.synthetic.main.profile_fragment.*
 
 class ProfileFragment : BaseFragment() {
 
     // TODO: Re-do the logic after MVP
 
     private var isEditMode: Boolean = false
+    private var isEditingImage: Boolean = false
 
     private val viewModel: ProfileViewModel by viewModels { vmFactory }
 
@@ -69,7 +61,6 @@ class ProfileFragment : BaseFragment() {
             switchEditMode()
         }
         profilePhotoPlaceHolder.setOnClickListener {
-            switchEditMode()
             openGallery()
         }
 
@@ -81,11 +72,7 @@ class ProfileFragment : BaseFragment() {
             editModeView?.let {
                 val name = it.getUserName()
                 val description = it.getDescription()
-                viewModel.updateUser(
-                    name = name,
-                    description = description,
-                    image = profileImageView?.drawable?.toBitmap()?.toByteArray()?.encodeByteArrayToBase64()
-                )
+                viewModel.updateUser(name = name, description = description)
                 profileInfoSaveChangesButton.notClickable()
             }
         }
@@ -123,14 +110,24 @@ class ProfileFragment : BaseFragment() {
     private fun processNewValue(user: UserModel) {
         profileFragmentProgressView.gone()
         profileInfoSaveChangesButton.clickable()
-        if (isEditMode) {
+        if (user.image.isNotEmpty()) {
+            profileImageCardView.visible()
+            Glide.with(profileImageView)
+                .load(user.image)
+                .placeholder(profileImageView?.drawable)
+                .into(profileImageView)
+        } else {
+            profileImageCardView.gone()
+        }
+        if (isEditMode && !isEditingImage) {
             switchEditMode()
+            readModeView?.apply {
+                updateFields(user)
+                profileInfoFrameLayout.removeAllViews()
+                profileInfoFrameLayout.addView(this)
+            }
         }
-        readModeView?.apply {
-            updateFields(user)
-            profileInfoFrameLayout.removeAllViews()
-            profileInfoFrameLayout.addView(this)
-        }
+        isEditingImage = false
     }
 
     override fun onError(error: ErrorModel) {
@@ -156,15 +153,6 @@ class ProfileFragment : BaseFragment() {
         context?.let {
             profileInfoFrameLayout.removeAllViews()
             profileInfoFrameLayout.addView(readModeView)
-            if (viewModel.getUserImage().isNotEmpty()) {
-                profileImageCardView.visible()
-                Glide.with(profileImageView)
-                    .load(viewModel.getUserImage())
-                    .placeholder(null)
-                    .into(profileImageView)
-            } else {
-                profileImageCardView.gone()
-            }
         }
     }
 
@@ -210,7 +198,8 @@ class ProfileFragment : BaseFragment() {
                     imageBitmap?.let {
                         profileImageCardView.visible()
                         profileImageView.setImageBitmap(it)
-                        // viewModel.updateUser(image = it.toByteArray()?.encodeByteArrayToBase64())
+                        viewModel.updateUser(image = it.toByteArray()?.encodeByteArrayToBase64())
+                        isEditingImage = true
                     }
                 }
             }
