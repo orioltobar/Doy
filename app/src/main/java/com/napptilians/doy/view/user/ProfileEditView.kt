@@ -23,6 +23,14 @@ class ProfileEditView @JvmOverloads constructor(
         profileEmailEditModeEditText.setText(mail)
     }
 
+    fun setUserName(name: String) {
+        profileNameEditText.setText(name)
+    }
+
+    fun setUserDescription(description: String) {
+        profileDescriptionEditText.setText(description)
+    }
+
     fun getUserName(): String = profileNameEditText.text.toString()
 
     fun getDescription(): String = profileDescriptionEditText.text.toString()

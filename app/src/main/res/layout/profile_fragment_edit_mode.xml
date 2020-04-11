@@ -17,8 +17,7 @@
             android:id="@+id/profileNameEditText"
             style="@style/App.AddService.Input"
             android:clickable="true"
-            android:focusable="true"
-            android:inputType="text" />
+            android:focusable="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

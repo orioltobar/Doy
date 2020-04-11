@@ -19,10 +19,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profileBioContainerReadMode"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_large"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profileNameReadModeName">
 
         <View
@@ -46,8 +47,8 @@
 
         <TextView
             android:id="@+id/profileBioPlaceHolderText"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:ellipsize="end"
             android:fontFamily="@font/raleway"
             android:lineSpacingExtra="8sp"
@@ -56,8 +57,7 @@
             app:layout_constraintEnd_toEndOf="@id/profileNameReadModeShape"
             app:layout_constraintStart_toStartOf="@id/profileNameReadModeShape"
             app:layout_constraintTop_toTopOf="@id/profileNameReadModeShape"
-            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip. "
-            tools:visibility="gone" />
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip. " />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,8 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginTop="56dp"
-        android:clickable="true"
         android:background="?attr/selectableItemBackground"
+        android:clickable="true"
         app:layout_constraintTop_toBottomOf="@id/profileBioContainerReadMode">
 
         <View
