@@ -41,7 +41,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
     }
 
     private fun setDate(model: ServiceModel) {
-        if (model.day.isNullOrEmpty()) {
+        if (model.day.isNullOrEmpty() || model.date == null) {
             return
         }
         val formatterUserFriendly = DateTimeFormatter.ofPattern(
