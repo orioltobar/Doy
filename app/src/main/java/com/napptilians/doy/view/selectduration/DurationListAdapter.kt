@@ -1,7 +1,7 @@
 package com.napptilians.doy.view.selectduration
 
 import android.view.ViewGroup
-import com.napptilians.domain.models.movie.DurationModel
+import com.napptilians.domain.models.service.DurationModel
 import com.napptilians.doy.base.BaseAdapter
 import javax.inject.Inject
 

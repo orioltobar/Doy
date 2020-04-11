@@ -1,4 +1,4 @@
-package com.napptilians.domain.models.movie
+package com.napptilians.domain.models.service
 
 data class SpotsModel(
     val numberOfSpots: Int,

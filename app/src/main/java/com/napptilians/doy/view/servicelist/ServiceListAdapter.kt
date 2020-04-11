@@ -1,7 +1,7 @@
 package com.napptilians.doy.view.servicelist
 
 import android.view.ViewGroup
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.base.BaseAdapter
 import javax.inject.Inject
 

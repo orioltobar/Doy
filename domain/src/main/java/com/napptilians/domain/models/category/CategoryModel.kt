@@ -1,4 +1,4 @@
-package com.napptilians.domain.models.movie
+package com.napptilians.domain.models.category
 
 data class CategoryModel(
     val categoryId: Long,
