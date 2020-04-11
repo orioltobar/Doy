@@ -12,7 +12,7 @@ data class UserUpdateRequestApiModel(
     @SerializedName("token")
     val pushToken: String? = null,
 
-    @SerializedName("description")
+    @SerializedName("bio")
     val description: String? = null,
 
     @SerializedName("image")

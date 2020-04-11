@@ -12,7 +12,9 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.extensions.clickable
 import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.notClickable
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ProfileViewModel
@@ -24,6 +26,8 @@ import kotlinx.android.synthetic.main.profile_fragment.profileInfoSaveChangesBut
 import kotlinx.android.synthetic.main.profile_fragment.profileTitle
 
 class ProfileFragment : BaseFragment() {
+
+    // TODO: Re-do the logic after MVP
 
     private var isEditMode: Boolean = false
 
@@ -62,6 +66,7 @@ class ProfileFragment : BaseFragment() {
                 val name = it.getUserName()
                 val description = it.getDescription()
                 viewModel.updateUser(name = name, description = description)
+                profileInfoSaveChangesButton.notClickable()
             }
         }
 
@@ -89,6 +94,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun processNewValue(user: UserModel) {
         profileFragmentProgressView.gone()
+        profileInfoSaveChangesButton.clickable()
         if (isEditMode) {
             switchEditMode()
         }
@@ -131,19 +137,24 @@ class ProfileFragment : BaseFragment() {
                 profileTitle.text = getString(R.string.edit_profile)
                 profileInfoLogOutText.gone()
                 profileInfoSaveChangesButton.visible()
-                val editView = ProfileEditView(it)
-                editView.setUserMail(viewModel.getUserEmail())
-                profileInfoFrameLayout.removeAllViews()
-                profileInfoFrameLayout.addView(editView)
-                isEditMode = true
+                editModeView?.apply {
+                    setUserMail(viewModel.getUserEmail())
+                    setUserName(viewModel.getUserName())
+                    setUserDescription(viewModel.getUserDescription())
+                    profileInfoFrameLayout.removeAllViews()
+                    profileInfoFrameLayout.addView(this)
+                    isEditMode = true
+                }
+
             } else {
                 profileTitle.text = getString(R.string.profile)
                 profileInfoLogOutText.visible()
                 profileInfoSaveChangesButton.gone()
-                val readView = ProfileReadView(it)
-                profileInfoFrameLayout.removeAllViews()
-                profileInfoFrameLayout.addView(readView)
-                isEditMode = false
+                readModeView?.apply {
+                    profileInfoFrameLayout.removeAllViews()
+                    profileInfoFrameLayout.addView(this)
+                    isEditMode = false
+                }
             }
         }
     }
