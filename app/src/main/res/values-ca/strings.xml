@@ -29,7 +29,7 @@
     <string name="no_services">Sembla que no hi ha serveis per aquesta categoria. ¡Comprova més tard!</string>
     <string name="max_spots">Max. %1$d</string>
 
-    <!-- Add event -->
+    <!-- Add service -->
     <string name="add_service">Crear event</string>
     <string name="upload_image">Pujar imatge</string>
     <string name="select_category">Seleccionar categoria</string>
@@ -51,9 +51,20 @@
     <string name="add_service_success">Has creat el teu event!</string>
     <string name="add_service_success_message">Recorda ser puntual y tenir-ho tot preparat amb antelació.</string>
 
+    <!-- Service detail -->
+    <string name="when">¿Quan?</string>
+    <string name="duration">Duració:</string>
+    <string name="spots">Places:</string>
+    <string name="spots_reserved">1 persona apuntada</string>
+    <string name="confirm_assistance">Assistiré</string>
+
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>
     <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
+
+    <!-- Generic Error Dialog -->
+    <string name="error_title">Ups! Alguna cosa ha anat malament</string>
+    <string name="error_message">Torna a intentar-ho en uns minuts.</string>
 
     <!-- Profile -->
     <string name="profile">Perfil</string>

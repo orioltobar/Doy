@@ -29,7 +29,7 @@
     <string name="max_spots">Max. %1$d</string>
     <string name="service_duration" translatable="false">%1$d min.</string>
 
-    <!-- Add event -->
+    <!-- Add service -->
     <string name="add_service">Create event</string>
     <string name="upload_image">Upload image</string>
     <string name="select_category">Select category</string>
@@ -51,9 +51,20 @@
     <string name="add_service_success">Your event has been created!</string>
     <string name="add_service_success_message">Remember to be punctual and have everything prepared in advance.</string>
 
+    <!-- Service detail -->
+    <string name="when">When?</string>
+    <string name="duration">Duration:</string>
+    <string name="spots">Spots:</string>
+    <string name="spots_reserved">1 reserved spot</string>
+    <string name="confirm_assistance">Assist</string>
+
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
     <string name="wip_explanation">We\'re working at full capacity so you can enjoy this feature as soon as possible.</string>
+
+    <!-- Generic Error Dialog -->
+    <string name="error_title">Ups! Something went wrong</string>
+    <string name="error_message">Try again in a few minutes.</string>
 
     <!-- Profile -->
     <string name="profile">Profile</string>

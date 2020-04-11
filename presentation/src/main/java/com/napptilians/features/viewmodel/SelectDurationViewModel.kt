@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.DurationModel
+import com.napptilians.domain.models.service.DurationModel
 import com.napptilians.domain.models.movie.MovieModel
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
@@ -23,7 +23,11 @@ class SelectDurationViewModel @Inject constructor() : BaseViewModel<MovieModel>(
     fun execute() {
         viewModelScope.launch {
             _durationsDataStream.value = emitLoadingState()
-            val durationList = (MIN_HOURS..MAX_HOURS).toList().map { DurationModel(it) }
+            val durationList = (MIN_HOURS..MAX_HOURS).toList().map {
+                DurationModel(
+                    it
+                )
+            }
             _durationsDataStream.value = processModel(Success(durationList))
         }
     }

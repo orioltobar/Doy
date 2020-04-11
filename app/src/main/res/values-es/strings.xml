@@ -30,7 +30,7 @@
     <string name="no_services">Parece que no hay servicios para esta categoría. ¡Comprueba más tarde!</string>
     <string name="max_spots">Máx. %1$d</string>
 
-    <!-- Add event -->
+    <!-- Add service -->
     <string name="add_service">Crear evento</string>
     <string name="upload_image">Subir imagen</string>
     <string name="select_category">Seleccionar categoría</string>
@@ -52,9 +52,20 @@
     <string name="add_service_success">¡Has creado tu evento!</string>
     <string name="add_service_success_message">Recuerda ser puntual y tenerlo todo preparado con antelación.</string>
 
+    <!-- Service detail -->
+    <string name="when">¿Cuándo?</string>
+    <string name="duration">Duración:</string>
+    <string name="spots">Plazas:</string>
+    <string name="spots_reserved">1 persona apuntada</string>
+    <string name="confirm_assistance">Asistiré</string>
+
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>
     <string name="wip_explanation">Estamos trabajando a toda velocidad para que puedas disfrutar de esta funcionalidad lo antes posible.</string>
+
+    <!-- Generic Error Dialog -->
+    <string name="error_title">Ups! Algo ha ido mal</string>
+    <string name="error_message">Vuelve a intentarlo en unos minutos.</string>
 
     <!-- Profile -->
     <string name="profile">Perfil</string>

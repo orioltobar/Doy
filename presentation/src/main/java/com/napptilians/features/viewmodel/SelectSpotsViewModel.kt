@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.movie.MovieModel
-import com.napptilians.domain.models.movie.SpotsModel
+import com.napptilians.domain.models.service.SpotsModel
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,7 +23,11 @@ class SelectSpotsViewModel @Inject constructor() : BaseViewModel<MovieModel>() {
     fun execute() {
         viewModelScope.launch {
             _spotsDataStream.value = emitLoadingState()
-            val spotList = (MIN_PERSONS..MAX_PERSONS).toList().map { SpotsModel(it) }
+            val spotList = (MIN_PERSONS..MAX_PERSONS).toList().map {
+                SpotsModel(
+                    it
+                )
+            }
             _spotsDataStream.value = processModel(Success(spotList))
         }
     }

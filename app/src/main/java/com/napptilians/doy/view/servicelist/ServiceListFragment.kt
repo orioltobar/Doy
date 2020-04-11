@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
@@ -89,11 +89,9 @@ class ServiceListFragment : BaseFragment() {
         serviceList.layoutManager = layoutManager
         servicesAdapter = ServiceListAdapter()
         servicesAdapter.setOnClickListener {
-            it.serviceId?.let { id ->
-                val navigation =
-                    ServiceListFragmentDirections.actionServiceListFragmentToServiceDetailFragment(id)
-                findNavController().navigate(navigation)
-            }
+            val navigation =
+                ServiceListFragmentDirections.actionServiceListFragmentToServiceDetailFragment(it)
+            findNavController().navigate(navigation)
         }
         serviceList.adapter = servicesAdapter
     }

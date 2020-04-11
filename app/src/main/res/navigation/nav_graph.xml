@@ -138,8 +138,8 @@
         android:name="com.napptilians.doy.view.servicedetail.ServiceDetailFragment"
         android:label="ServiceDetailFragment" >
         <argument
-            android:name="serviceId"
-            app:argType="long" />
+            android:name="service"
+            app:argType="com.napptilians.domain.models.service.ServiceModel" />
     </fragment>
     <fragment
         android:id="@+id/chatListFragment"
