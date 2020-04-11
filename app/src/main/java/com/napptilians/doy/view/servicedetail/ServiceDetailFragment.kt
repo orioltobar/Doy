@@ -5,17 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyDialog
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
 import kotlinx.android.synthetic.main.service_detail_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Locale
 
 @ExperimentalCoroutinesApi
 class ServiceDetailFragment : BaseFragment() {
@@ -32,6 +37,7 @@ class ServiceDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        setupListeners()
     }
 
     private fun initViews() {
@@ -41,27 +47,50 @@ class ServiceDetailFragment : BaseFragment() {
                 .into(toolbarImage)
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
-            setDate(this)
+            setDate(date)
             serviceDetailDuration.text = "$durationMin min"
             serviceDetailSpots.text = "${spots ?: 0}"
         }
     }
 
-    private fun setDate(model: ServiceModel) {
-        if (model.day.isNullOrEmpty() || model.date == null) {
-            return
+    private fun setDate(date: ZonedDateTime?) {
+        date?.let {
+            val formatterUserFriendly = DateTimeFormatter.ofPattern(
+                DATE_FORMAT_USER,
+                Locale(Locale.getDefault().language, Locale.getDefault().country)
+            )
+            serviceDetailDate.text = formatterUserFriendly.format(date).capitalize()
         }
-        val formatterUserFriendly = DateTimeFormatter.ofPattern(
-            DATE_FORMAT_USER,
-            Locale(Locale.getDefault().language, Locale.getDefault().country)
-        )
-        serviceDetailDate.text = formatterUserFriendly.format(model.date).capitalize()
+    }
+
+    private fun setupListeners() {
+        confirmAssistanceButton.setOnClickListener {
+            viewModel.execute(args.service.serviceId ?: -1L)
+            viewModel.addAttendeeServiceDataStream.observe(
+                viewLifecycleOwner,
+                Observer { handleUiStates(it, ::processNewValue) })
+        }
+    }
+
+    private fun processNewValue(unit: Unit) {
+        progressBar.gone()
+        activity?.let { activity ->
+            DoyDialog(activity).apply {
+                setPopupIcon(R.drawable.ic_thumb_up)
+                setPopupTitle(context.resources.getString(R.string.add_attendee_success))
+                setPopupSubtitle(context.resources.getString(R.string.add_attendee_success_message))
+                show()
+            }
+        }
     }
 
     override fun onError(error: ErrorModel) {
+        progressBar.gone()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {
+        progressBar.visible()
     }
 
     companion object {

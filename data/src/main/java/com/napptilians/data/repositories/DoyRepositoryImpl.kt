@@ -37,6 +37,9 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun addService(service: ServiceModel): Response<Long, ErrorModel> =
         networkDataSource.addService(service)
 
+    override suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> =
+        networkDataSource.addAttendee(userUid, serviceId)
+
     override suspend fun login(
         email: String,
         password: String

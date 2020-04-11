@@ -25,6 +25,12 @@ interface ServiceService {
         @Body service: ServiceApiModel
     ): Long
 
+    @POST("/addAttendee")
+    suspend fun addAttendee(
+        @Query(UID) uid: String = "",
+        @Query(SERVICE_ID) serviceId: Long? = null
+    )
+
     companion object {
         private const val CATEGORY_ID = "category_id"
         private const val SERVICE_ID = "service_id"
