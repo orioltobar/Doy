@@ -11,6 +11,8 @@ class GetServicesUseCase @Inject constructor(
 ) {
     private val ioDispatcher = appDispatchers.io
 
-    suspend fun execute(categoryId: Long) =
-        withContext(ioDispatcher) { doyRepository.getServices(categoryId) }
+    suspend fun execute(categoryIds: List<Long>,
+                        serviceId: Long?,
+                        uid: Long?) =
+        withContext(ioDispatcher) { doyRepository.getServices(categoryIds, serviceId, uid) }
 }

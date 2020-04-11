@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:background="@drawable/service_image_bg"
         android:contentDescription="@null"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_max="118dp"
-        tools:src="@drawable/image_bg_small" />
+        tools:src="@drawable/ic_logo_colour_green" />
 
     <LinearLayout
         android:layout_width="0dp"

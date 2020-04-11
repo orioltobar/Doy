@@ -8,6 +8,8 @@ import com.napptilians.doy.base.BaseViewHolder
 import com.napptilians.doy.extensions.decodeByteArrayFromBase64
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import kotlinx.android.synthetic.main.service_item.view.*
 
 class ServiceItemViewHolder(parent: ViewGroup) :
@@ -24,9 +26,10 @@ class ServiceItemViewHolder(parent: ViewGroup) :
     }
 
     private fun setImage(model: ServiceModel) {
+        itemView.serviceImage.clipToOutline = true
         Glide.with(itemView)
             .load(model.image?.decodeByteArrayFromBase64())
-            .placeholder(R.drawable.image_bg)
+            .placeholder(R.drawable.ic_logo_colour_green)
             .into(itemView.serviceImage)
     }
 
@@ -41,7 +44,11 @@ class ServiceItemViewHolder(parent: ViewGroup) :
         if (model.day.isNullOrEmpty()) {
             return
         }
-        itemView.serviceDateText.text = model.day
+        val formatterUserFriendly = DateTimeFormatter.ofPattern(
+            DATE_FORMAT_USER,
+            Locale(Locale.getDefault().language, Locale.getDefault().country)
+        )
+        itemView.serviceDateText.text = formatterUserFriendly.format(model.date).capitalize()
     }
 
     private fun setMaxSpots(model: ServiceModel) {
@@ -62,5 +69,9 @@ class ServiceItemViewHolder(parent: ViewGroup) :
         itemView.serviceDurationText.text =
             itemView.resources.getString(R.string.service_duration, model.durationMin)
         itemView.serviceDurationText.visible()
+    }
+
+    companion object {
+        private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
     }
 }

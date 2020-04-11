@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="?attr/selectableItemBackground"
     android:elevation="@dimen/cardview_default_elevation"
-    android:maxWidth="@dimen/category_max_width"
-    android:maxHeight="@dimen/category_max_height">
+    android:maxHeight="@dimen/category_max_height"
+    android:foreground="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/categoryImage"

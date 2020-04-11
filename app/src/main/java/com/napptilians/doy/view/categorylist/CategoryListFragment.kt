@@ -118,7 +118,7 @@ class CategoryListFragment : BaseFragment() {
                 findNavController().navigate(navigation)
             }
         }
-        val itemOffsetDecoration = ItemOffsetDecoration(context, R.dimen.margin_xsmall)
+        val itemOffsetDecoration = ItemOffsetDecoration(10)
         categoryList.addItemDecoration(itemOffsetDecoration)
         categoryList.adapter = categoriesAdapter
     }

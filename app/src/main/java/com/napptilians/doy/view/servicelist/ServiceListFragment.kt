@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
@@ -17,9 +17,12 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ServicesViewModel
-import javax.inject.Inject
-import kotlinx.android.synthetic.main.service_list_fragment.*
+import kotlinx.android.synthetic.main.service_list_fragment.loadingProgress
+import kotlinx.android.synthetic.main.service_list_fragment.loadingText
+import kotlinx.android.synthetic.main.service_list_fragment.serviceList
+import kotlinx.android.synthetic.main.service_list_fragment.titleText
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class ServiceListFragment : BaseFragment() {
@@ -39,7 +42,7 @@ class ServiceListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        viewModel.execute(args.categoryId)
+        viewModel.execute(listOf(args.categoryId), null, null)
         viewModel.servicesDataStream.observe(
             viewLifecycleOwner,
             Observer<UiStatus<List<ServiceModel>, ErrorModel>> {
@@ -86,12 +89,11 @@ class ServiceListFragment : BaseFragment() {
         serviceList.layoutManager = layoutManager
         servicesAdapter = ServiceListAdapter()
         servicesAdapter.setOnClickListener {
-            // TODO: Navigate to Service list screen
-            Toast.makeText(
-                context,
-                "Servei ${it.name}",
-                Toast.LENGTH_LONG
-            ).show()
+            it.serviceId?.let { id ->
+                val navigation =
+                    ServiceListFragmentDirections.actionServiceListFragmentToServiceDetailFragment(id)
+                findNavController().navigate(navigation)
+            }
         }
         serviceList.adapter = servicesAdapter
     }
