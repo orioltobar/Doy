@@ -56,7 +56,10 @@ class AddServiceViewModel @Inject constructor(
                 isValidService.value = isFormValid(service)
             }
             addSource(serviceDuration) {
-                service.durationMin = serviceDuration.value?.toIntOrNull()?.div(60) // hours to mins
+                service.durationMin = serviceDuration.value
+                    ?.substringBefore(" ")
+                    ?.toIntOrNull()
+                    ?.times(60) // hours to mins
                 isValidService.value = isFormValid(service)
             }
         }

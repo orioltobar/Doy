@@ -74,7 +74,13 @@ class AddServiceFragment : BaseFragment() {
         )
         getNavigationResult("selectedDuration")?.observe(
             viewLifecycleOwner,
-            Observer<String> { selectDurationEditText.setText(it) }
+            Observer<String> {
+                if (it.toInt() == 1) {
+                    selectDurationEditText.setText("$it ${context?.getString(R.string.hour)}")
+                } else {
+                    selectDurationEditText.setText("$it ${context?.getString(R.string.hours)}")
+                }
+            }
         )
     }
 
