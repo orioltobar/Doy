@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
@@ -13,10 +14,12 @@ import com.napptilians.doy.view.customviews.DoyDialog
 import kotlinx.android.synthetic.main.discover_fragment.addServiceButton
 import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
 import kotlinx.android.synthetic.main.discover_fragment.chatsButton
-import kotlinx.android.synthetic.main.discover_fragment.detailButton
 import kotlinx.android.synthetic.main.discover_fragment.discoverUserUid
+import kotlinx.android.synthetic.main.discover_fragment.eventsButton
 import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
 import kotlinx.android.synthetic.main.discover_fragment.popupButton
+import java.time.Instant
+import java.time.ZoneId
 import javax.inject.Inject
 
 class DiscoverFragment : BaseFragment() {
@@ -58,6 +61,16 @@ class DiscoverFragment : BaseFragment() {
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
             findNavController().navigate(navigation)
         }
+
+        eventsButton.setOnClickListener {
+//            val now = Instant.now()
+//            val local = now.atZone(ZoneId.of("Europe/Madrid"))
+//            Toast.makeText(context, local.toString(), Toast.LENGTH_LONG).show()
+            val direction =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToEventsFragment2()
+            findNavController().navigate(direction)
+        }
+
         chatsButton.setOnClickListener {
             val direction =
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()

@@ -88,11 +88,11 @@
         app:layout_constraintTop_toTopOf="@id/categoryListButton" />
 
     <Button
-        android:id="@+id/detailButton"
+        android:id="@+id/eventsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="DETALLE DEL SERVICIO"
+        android:text="MIS EVENTOS"
         app:layout_constraintEnd_toStartOf="@id/chatsButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/categoryListButton" />
@@ -102,10 +102,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CHATS"
-        app:layout_constraintBottom_toBottomOf="@id/detailButton"
+        app:layout_constraintBottom_toBottomOf="@id/eventsButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/detailButton"
-        app:layout_constraintTop_toTopOf="@id/detailButton" />
+        app:layout_constraintStart_toEndOf="@id/eventsButton"
+        app:layout_constraintTop_toTopOf="@id/eventsButton" />
 
     <Button
         android:id="@+id/addServiceButton"
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="AÑADIR SERVICIO"
-        app:layout_constraintTop_toBottomOf="@id/detailButton"
+        app:layout_constraintTop_toBottomOf="@id/eventsButton"
         app:layout_constraintEnd_toEndOf="@id/chatsButton"
         app:layout_constraintStart_toStartOf="parent"/>
 

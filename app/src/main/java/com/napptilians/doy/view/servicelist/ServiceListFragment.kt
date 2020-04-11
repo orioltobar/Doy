@@ -42,7 +42,7 @@ class ServiceListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        viewModel.execute(listOf(args.categoryId), null, null)
+        viewModel.execute(categoryIds = listOf(args.categoryId))
         viewModel.servicesDataStream.observe(
             viewLifecycleOwner,
             Observer<UiStatus<List<ServiceModel>, ErrorModel>> {
@@ -91,7 +91,9 @@ class ServiceListFragment : BaseFragment() {
         servicesAdapter.setOnClickListener {
             it.serviceId?.let { id ->
                 val navigation =
-                    ServiceListFragmentDirections.actionServiceListFragmentToServiceDetailFragment(id)
+                    ServiceListFragmentDirections.actionServiceListFragmentToServiceDetailFragment(
+                        id
+                    )
                 findNavController().navigate(navigation)
             }
         }

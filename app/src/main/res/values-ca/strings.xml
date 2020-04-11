@@ -51,4 +51,10 @@
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>
     <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
+
+    <!-- My events -->
+    <string name="your_events">Els teus esdeveniments</string>
+    <string name="tab_upcoming">Propers</string>
+    <string name="tab_past">Passats</string>
+
 </resources>

@@ -51,4 +51,10 @@
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
     <string name="wip_explanation">We\'re working at full capacity so you can enjoy this feature as soon as possible.</string>
+
+    <!-- My events -->
+    <string name="your_events">Your events</string>
+    <string name="tab_upcoming">Upcoming</string>
+    <string name="tab_past">Past</string>
+
 </resources>

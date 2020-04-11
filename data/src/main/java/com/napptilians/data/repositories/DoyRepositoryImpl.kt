@@ -6,6 +6,7 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.map
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
@@ -67,8 +68,14 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun getServices(
         categoryIds: List<Long>,
         serviceId: Long?,
-        uid: Long?
+        uid: String?
     ): Response<List<ServiceModel>, ErrorModel> {
-        return networkDataSource.getServices(categoryIds, serviceId, uid)
+        return networkDataSource.getServices(categoryIds, serviceId, uid).map {
+            it.sortedWith(comparator)
+        }
     }
+
+    private val comparator: Comparator<ServiceModel>
+        get() = compareBy({ it.date }, { it.name })
+
 }

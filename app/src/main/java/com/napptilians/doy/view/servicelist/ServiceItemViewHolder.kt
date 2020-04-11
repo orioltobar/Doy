@@ -7,13 +7,13 @@ import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseViewHolder
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 import kotlinx.android.synthetic.main.service_item.view.serviceDateText
 import kotlinx.android.synthetic.main.service_item.view.serviceDurationText
 import kotlinx.android.synthetic.main.service_item.view.serviceImage
 import kotlinx.android.synthetic.main.service_item.view.serviceMaxSpotsText
 import kotlinx.android.synthetic.main.service_item.view.serviceNameText
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ServiceItemViewHolder(parent: ViewGroup) :
     BaseViewHolder<ServiceModel>(parent, R.layout.service_item) {
@@ -44,7 +44,8 @@ class ServiceItemViewHolder(parent: ViewGroup) :
     }
 
     private fun setDate(model: ServiceModel) {
-        if (model.day.isNullOrEmpty()) {
+        itemView.serviceDateText.gone()
+        if (model.date == null) {
             return
         }
         val formatterUserFriendly = DateTimeFormatter.ofPattern(
@@ -52,6 +53,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
             Locale(Locale.getDefault().language, Locale.getDefault().country)
         )
         itemView.serviceDateText.text = formatterUserFriendly.format(model.date).capitalize()
+        itemView.serviceDateText.visible()
     }
 
     private fun setMaxSpots(model: ServiceModel) {

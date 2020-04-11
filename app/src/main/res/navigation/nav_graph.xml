@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_menuFavouritesListButton_to_introFragment"
             app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_menuFavouritesListButton_to_eventsFragment2"
+            app:destination="@id/eventsFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -130,5 +133,9 @@
             android:name="serviceId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.napptilians.doy.view.events.EventsFragment"
+        android:label="EventsFragment" />
 
 </navigation>
