@@ -70,6 +70,33 @@
         <item name="android:background">@drawable/filled_button_bg</item>
     </style>
 
+    <style name="App.ServiceDetail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_m</item>
+        <item name="android:textColor">@color/grayStrong</item>
+        <item name="android:fontFamily">@font/raleway</item>
+    </style>
+
+    <style name="App.ServiceDetail.Title">
+        <item name="android:textSize">@dimen/text_size_xxl</item>
+        <item name="android:fontFamily">@font/raleway_bold</item>
+    </style>
+
+    <style name="App.ServiceDetail.Data">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">@font/raleway_bold</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="App.ServiceDetail.Response">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">@font/raleway_medium</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>

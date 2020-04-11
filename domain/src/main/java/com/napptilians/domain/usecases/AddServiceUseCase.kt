@@ -3,7 +3,7 @@ package com.napptilians.domain.usecases
 import com.napptilians.commons.AppDispatchers
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.repositories.DoyRepository
 import javax.inject.Inject
 import kotlinx.coroutines.withContext
