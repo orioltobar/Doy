@@ -69,7 +69,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_medium"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
@@ -82,6 +82,6 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/categoryList" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
