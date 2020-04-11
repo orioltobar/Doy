@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.CategoryModel
-import com.napptilians.domain.models.movie.MovieModel
+import com.napptilians.domain.models.category.CategoryModel
 import com.napptilians.domain.usecases.GetCategoriesUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel

@@ -12,8 +12,8 @@ import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.domain.models.device.DeviceModel
-import com.napptilians.domain.models.movie.CategoryModel
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.category.CategoryModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.repositories.DoyRepository
 import javax.inject.Inject

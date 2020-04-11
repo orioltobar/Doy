@@ -1,7 +1,7 @@
 package com.napptilians.doy.view.selectspots
 
 import android.view.ViewGroup
-import com.napptilians.domain.models.movie.SpotsModel
+import com.napptilians.domain.models.service.SpotsModel
 import com.napptilians.doy.base.BaseAdapter
 import javax.inject.Inject
 
