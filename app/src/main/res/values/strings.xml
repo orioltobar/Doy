@@ -62,4 +62,7 @@
     <string name="events_by_user">Events created by me</string>
     <string name="logout">Log out</string>
     <string name="update_profile">Update profile</string>
+
+    <!-- Chat -->
+    <string name="chat">Chat</string>
 </resources>

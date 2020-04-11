@@ -63,4 +63,7 @@
     <string name="events_by_user">Events creats per mi</string>
     <string name="logout">Cerrar sesión</string>
     <string name="update_profile">Actualitzar perfil</string>
+
+    <!-- Chat -->
+    <string name="chat">Chat</string>
 </resources>

@@ -62,4 +62,7 @@
     <string name="events_by_user">Eventos creados por mi</string>
     <string name="logout">Tancar sessió</string>
     <string name="update_profile">Actualitzar perfil</string>
+
+    <!-- Chat -->
+    <string name="chat">Chat</string>
 </resources>
