@@ -1,5 +1,6 @@
 package com.napptilians.domain.models.service
 
+import java.io.Serializable
 import java.time.ZonedDateTime
 
 data class ServiceModel(
@@ -14,4 +15,4 @@ data class ServiceModel(
     var spots: Int? = null,
     var durationMin: Int? = null,
     var ownerId: String? = null
-)
+): Serializable

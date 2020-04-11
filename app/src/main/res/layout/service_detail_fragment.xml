@@ -42,14 +42,112 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_medium"
-            android:text="cacatua" />
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_medium">
+
+                <TextView
+                    style="@style/App.ServiceDetail.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_xxlarge"
+                    android:text="¡Mi gato me ignora! ¿Hablamos?" />
+
+                <TextView
+                    style="@style/App.ServiceDetail"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_xlarge"
+                    android:ellipsize="end"
+                    android:lineSpacingMultiplier="1.25"
+                    android:maxLines="4"
+                    android:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
+
+                <TextView
+                    style="@style/App.ServiceDetail"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_xlarge"
+                    android:ellipsize="end"
+                    android:lineSpacingMultiplier="1.25"
+                    android:maxLines="4"
+                    android:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
+
+                <TextView
+                    style="@style/App.ServiceDetail"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_xlarge"
+                    android:ellipsize="end"
+                    android:lineSpacingMultiplier="1.25"
+                    android:maxLines="4"
+                    android:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_calendar"
+                        android:drawablePadding="@dimen/margin_medium"
+                        android:text="@string/save"
+                        android:textColor="@color/grayStrong"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_clock"
+                        android:drawablePadding="@dimen/margin_medium"
+                        android:text="@string/save"
+                        android:textColor="@color/grayStrong"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_profile"
+                        android:drawablePadding="@dimen/margin_medium"
+                        android:text="@string/save"
+                        android:textColor="@color/grayStrong"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
@@ -60,5 +158,20 @@
         android:layout_margin="@dimen/margin_medium"
         app:layout_anchor="@id/appBar"
         app:layout_anchorGravity="bottom|end" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/confirmAssistanceButton"
+            style="@style/App.PrimaryButton"
+            android:text="@string/save" />
+
+    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

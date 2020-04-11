@@ -12,8 +12,8 @@ private const val UTF_8 = "UTF-8"
 private const val BASE_64_ENCODED_BITMAP_PREFIX = "data:image/png;base64,"
 private val COMPRESS_FORMAT = Bitmap.CompressFormat.PNG
 private const val COMPRESS_QUALITY = 30
-private const val DEFAULT_IMAGE_WIDTH = 640
-private const val DEFAULT_IMAGE_HEIGHT = 480
+private const val DEFAULT_IMAGE_WIDTH = 1536
+private const val DEFAULT_IMAGE_HEIGHT = 1152
 
 fun Uri.toByteArray(): ByteArray? = BitmapFactory.decodeFile(encodedPath)?.toByteArray()
 
