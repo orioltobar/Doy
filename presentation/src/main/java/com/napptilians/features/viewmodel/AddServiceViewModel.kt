@@ -31,7 +31,7 @@ class AddServiceViewModel @Inject constructor(
     val serviceHour = MutableLiveData("")
     val serviceSpots = MutableLiveData("")
     val serviceDuration = MutableLiveData("")
-    val serviceDescription = MutableLiveData<String>("")
+    val serviceDescription = MutableLiveData("")
     val isValidService = MediatorLiveData<Boolean>()
 
     init {

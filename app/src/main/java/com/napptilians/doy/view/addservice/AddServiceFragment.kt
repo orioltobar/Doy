@@ -14,10 +14,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
+import com.napptilians.doy.extensions.decodeByteArrayFromBase64
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.getNavigationResult
 import com.napptilians.doy.extensions.gone
@@ -74,6 +76,14 @@ class AddServiceFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer<String> { selectDurationEditText.setText(it) }
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Glide.with(serviceImageView)
+            .load(viewModel.service.image?.decodeByteArrayFromBase64())
+            .into(serviceImageView)
+
     }
 
     private fun setupListeners() {
@@ -137,7 +147,7 @@ class AddServiceFragment : BaseFragment() {
     }
 
     private fun processNewValue(serviceId: Long) {
-        // TODO: Store id on the service or what?
+        // TODO: Store id on the service?
         progressBar.gone()
     }
 
@@ -156,9 +166,12 @@ class AddServiceFragment : BaseFragment() {
         }
         when (requestCode) {
             GALLERY_REQUEST_CODE -> {
-                serviceImageView.setImageURI(data?.data)
-                viewModel.service.image = BitmapFactory.decodeStream(
-                    context!!.contentResolver.openInputStream(data!!.data!!))?.resize()?.toByteArray()?.encodeByteArrayToBase64()
+                data?.data?.let { imageUri ->
+                    val imageBitmap = BitmapFactory.decodeStream(
+                        context?.contentResolver?.openInputStream(imageUri)
+                    )?.resize()
+                    viewModel.service.image = imageBitmap?.toByteArray()?.encodeByteArrayToBase64()
+                }
             }
         }
     }

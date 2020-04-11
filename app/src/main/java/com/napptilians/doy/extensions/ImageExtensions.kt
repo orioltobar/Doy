@@ -23,6 +23,8 @@ fun Bitmap.toByteArray(): ByteArray? {
     return outputStream.toByteArray()
 }
 
+fun ByteArray.toBitmap(): Bitmap = BitmapFactory.decodeByteArray(this, 0, size)
+
 fun ByteArray.encodeByteArrayToBase64(): String? =
     if (isEmpty()) null
     else BASE_64_ENCODED_BITMAP_PREFIX + Base64.encodeToString(this, Base64.DEFAULT)
