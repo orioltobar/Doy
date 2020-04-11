@@ -215,7 +215,7 @@ class AddServiceFragment : BaseFragment() {
 
     companion object {
         private const val GALLERY_REQUEST_CODE = 100
-        private const val SERVICE_DATE_FORMAT = "yyyy-dd-MM"
+        private const val SERVICE_DATE_FORMAT = "yyyy-MM-dd"
         private val calendar = Calendar.getInstance()
         private val DEFAULT_SERVICE_DATE_YEAR = calendar.get(Calendar.YEAR)
         private val DEFAULT_SERVICE_DATE_MONTH = calendar.get(Calendar.MONTH)
