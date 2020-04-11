@@ -2,7 +2,7 @@ package com.napptilians.doy.view.servicelist
 
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseViewHolder
 import com.napptilians.doy.extensions.decodeByteArrayFromBase64

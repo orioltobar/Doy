@@ -4,8 +4,8 @@ import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.device.DeviceModel
-import com.napptilians.domain.models.movie.CategoryModel
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.category.CategoryModel
+import com.napptilians.domain.models.service.ServiceModel
 
 interface DoyRepository {
 

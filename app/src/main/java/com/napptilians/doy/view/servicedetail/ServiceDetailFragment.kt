@@ -16,7 +16,11 @@ class ServiceDetailFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.service_detail, container, false)
+    ): View? = inflater.inflate(R.layout.service_detail_fragment, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     override fun onError(error: ErrorModel) {
     }

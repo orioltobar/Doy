@@ -5,9 +5,8 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.AddServiceUseCase
-import com.napptilians.domain.usecases.GetDeviceInfoUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
