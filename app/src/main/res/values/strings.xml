@@ -55,6 +55,10 @@
     <string name="wip">Work in progress</string>
     <string name="wip_explanation">We\'re working at full capacity so you can enjoy this feature as soon as possible.</string>
 
+    <!-- Generic Error Dialog -->
+    <string name="error_title">Ups! Something went wrong</string>
+    <string name="error_message">Try again in a few minutes.</string>
+
     <!-- Profile -->
     <string name="profile">Profile</string>
     <string name="edit_profile">Edit profile</string>
@@ -62,4 +66,5 @@
     <string name="events_by_user">Events created by me</string>
     <string name="logout">Log out</string>
     <string name="update_profile">Update profile</string>
+
 </resources>

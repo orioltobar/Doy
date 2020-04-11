@@ -55,6 +55,10 @@
     <string name="wip">En construcció…</string>
     <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
 
+    <!-- Generic Error Dialog -->
+    <string name="error_title">Ups! Alguna cosa ha anat malament</string>
+    <string name="error_message">Torna a intentar-ho en uns minuts.</string>
+
     <!-- Profile -->
     <string name="profile">Perfil</string>
     <string name="edit_profile">Editar perfil</string>
@@ -62,4 +66,5 @@
     <string name="events_by_user">Eventos creados por mi</string>
     <string name="logout">Tancar sessió</string>
     <string name="update_profile">Actualitzar perfil</string>
+
 </resources>
