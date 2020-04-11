@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.movie.EventsModel
 import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.usecases.GetEventsUseCase
 import com.napptilians.domain.usecases.GetServicesUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
@@ -15,11 +16,11 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class EventsViewModel @Inject constructor(
-    private val getServicesUseCase: GetServicesUseCase
+    private val getEventsUseCase: GetEventsUseCase
 ) : BaseViewModel<ServiceModel>() {
 
-    private val _eventsDataStream = MutableLiveData<UiStatus<EventsModel, ErrorModel>>()
-    val eventsDataStream: LiveData<UiStatus<EventsModel, ErrorModel>>
+    private val _eventsDataStream = MutableLiveData<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>>()
+    val eventsDataStream: LiveData<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>>
         get() = _eventsDataStream
 
     fun execute(
@@ -29,7 +30,7 @@ class EventsViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             _eventsDataStream.value = emitLoadingState()
-            val request = getServicesUseCase.execute(categoryIds, serviceId, uid)
+            val request = getEventsUseCase.execute(categoryIds, serviceId, uid)
             _eventsDataStream.value = null
         }
     }

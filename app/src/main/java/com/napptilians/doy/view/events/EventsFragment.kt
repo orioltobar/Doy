@@ -28,7 +28,7 @@ import java.time.ZoneId
 @ExperimentalCoroutinesApi
 class EventsFragment : BaseFragment() {
 
-    private val viewModel: ServicesViewModel by viewModels { vmFactory }
+    private val viewModel: EventsViewModel by viewModels { vmFactory }
 
     private val user = "123123123oajsdoj"
 
@@ -42,9 +42,9 @@ class EventsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         viewModel.execute(uid = user)
-        viewModel.servicesDataStream.observe(
+        viewModel.eventsDataStream.observe(
             viewLifecycleOwner,
-            Observer<UiStatus<List<ServiceModel>, ErrorModel>> {
+            Observer<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>> {
                 handleUiStates(
                     it,
                     ::processNewValue
@@ -58,9 +58,8 @@ class EventsFragment : BaseFragment() {
     override fun onLoading() {
     }
 
-    private fun processNewValue(model: List<ServiceModel>) {
+    private fun processNewValue(model: Map<String, List<ServiceModel>>) {
         // TODO: This should not be handled by the view, but time constraints happen.
-        val h = model.groupBy { it.date?.let { date -> date < Instant.now().atZone(ZoneId.of("Europe/Madrid")) }}
         Toast.makeText(context, "Lhola", Toast.LENGTH_SHORT).show()
     }
 
