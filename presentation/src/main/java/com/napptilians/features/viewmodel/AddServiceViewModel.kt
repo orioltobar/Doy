@@ -28,7 +28,7 @@ class AddServiceViewModel @Inject constructor(
     val serviceCategory = MutableLiveData("")
     val serviceName = MutableLiveData("")
     val serviceDay = MutableLiveData("")
-    val serviceHour = MutableLiveData("")
+    val serviceDate = MutableLiveData("")
     val serviceSpots = MutableLiveData("")
     val serviceDuration = MutableLiveData("")
     val serviceDescription = MutableLiveData("")
@@ -45,6 +45,10 @@ class AddServiceViewModel @Inject constructor(
             }
             addSource(serviceDay) {
                 service.day = serviceDay.value
+                isValidService.value = isFormValid(service)
+            }
+            addSource(serviceDate) {
+                service.hour = serviceDate.value
                 isValidService.value = isFormValid(service)
             }
             addSource(serviceDescription) {

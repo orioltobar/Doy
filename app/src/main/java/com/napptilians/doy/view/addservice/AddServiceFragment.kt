@@ -2,6 +2,7 @@ package com.napptilians.doy.view.addservice
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -40,6 +41,7 @@ class AddServiceFragment : BaseFragment() {
 
     private val serviceDateFormat = SimpleDateFormat(SERVICE_DATE_FORMAT, Locale.getDefault())
     private var selectedCalendarDay: Calendar? = null
+    private var selectedTime: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,7 +101,8 @@ class AddServiceFragment : BaseFragment() {
                 AddServiceFragmentDirections.actionAddServiceFragmentToCategoriesFragment()
             findNavController().navigate(direction)
         }
-        selectDateEditText.setOnClickListener { showServiceDatePicker() }
+        selectDayEditText.setOnClickListener { showServiceDayPicker() }
+        selectTimeEditText.setOnClickListener { showServiceTimePicker() }
         selectSpotsEditText.setOnClickListener {
             val direction =
                 AddServiceFragmentDirections.actionAddServiceFragmentToSelectSpotsFragment()
@@ -121,26 +124,45 @@ class AddServiceFragment : BaseFragment() {
         }
     }
 
-
-    private fun updateServiceDate() {
+    private fun updateServiceDay() {
         selectedCalendarDay?.let {
-            viewModel.addServiceDataStream
-            selectDateEditText.setText(serviceDateFormat.format(it.time))
+            selectDayEditText.setText(serviceDateFormat.format(it.time))
         }
     }
 
-    private fun showServiceDatePicker() {
+    private fun updateServiceTime() {
+        selectedTime?.let {
+            selectTimeEditText.setText(it)
+        }
+    }
+
+    private fun showServiceDayPicker() {
         selectedCalendarDay = Calendar.getInstance()
         activity?.let {
             DatePickerDialog(
                 it,
                 DatePickerDialog.OnDateSetListener { _: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                     selectedCalendarDay?.set(year, monthOfYear, dayOfMonth)
-                    updateServiceDate()
+                    updateServiceDay()
                 },
                 DEFAULT_SERVICE_DATE_YEAR,
                 DEFAULT_SERVICE_DATE_MONTH,
                 DEFAULT_SERVICE_DATE_DAY
+            ).show()
+        }
+    }
+
+    private fun showServiceTimePicker() {
+        activity?.let {
+            TimePickerDialog(
+                it,
+                TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                    selectedTime = "$hourOfDay:$minute"
+                    updateServiceTime()
+                },
+                DEFAULT_SERVICE_DATE_HOUR,
+                DEFAULT_SERVICE_DATE_MINUTE,
+                true
             ).show()
         }
     }
@@ -189,5 +211,7 @@ class AddServiceFragment : BaseFragment() {
         private val DEFAULT_SERVICE_DATE_YEAR = calendar.get(Calendar.YEAR)
         private val DEFAULT_SERVICE_DATE_MONTH = calendar.get(Calendar.MONTH)
         private val DEFAULT_SERVICE_DATE_DAY = calendar.get(Calendar.DAY_OF_MONTH)
+        private val DEFAULT_SERVICE_DATE_HOUR = calendar.get(Calendar.HOUR_OF_DAY)
+        private val DEFAULT_SERVICE_DATE_MINUTE = calendar.get(Calendar.MINUTE)
     }
 }

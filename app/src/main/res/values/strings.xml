@@ -34,7 +34,8 @@
     <string name="upload_image">Upload image</string>
     <string name="select_category">Select category</string>
     <string name="service_title">Event title</string>
-    <string name="select_date">Select date</string>
+    <string name="select_day">Select day</string>
+    <string name="select_date">Select start time</string>
     <string name="select_spots">Select available spots</string>
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>

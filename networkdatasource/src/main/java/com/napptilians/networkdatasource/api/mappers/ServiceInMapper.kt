@@ -21,7 +21,8 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from?.day ?: "",
             from?.spots ?: 1,
             from?.durationMin ?: 30,
-            ownerId = from?.ownerId ?: ""
+            from?.hour ?: "",
+            from?.ownerId ?: ""
         )
 
     fun map(from: ServiceApiModel): ServiceModel =
@@ -32,6 +33,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.description ?: "",
             from.image ?: "",
             from.day ?: "",
+            from.hour ?: "",
             parseDate(from),
             from.spots ?: 1,
             from.durationMin ?: 30,

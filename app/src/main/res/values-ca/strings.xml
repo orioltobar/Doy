@@ -34,7 +34,8 @@
     <string name="upload_image">Pujar imatge</string>
     <string name="select_category">Seleccionar categoria</string>
     <string name="service_title">Títol event</string>
-    <string name="select_date">Seleccionar data</string>
+    <string name="select_day">Seleccionar dia</string>
+    <string name="select_date">Seleccionar hora d\'inici</string>
     <string name="select_spots">Seleccionar places disponibles</string>
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>

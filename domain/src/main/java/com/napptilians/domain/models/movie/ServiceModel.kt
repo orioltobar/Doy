@@ -9,6 +9,7 @@ data class ServiceModel(
     var description: String? = null,
     var image: String? = null,
     var day: String? = null,
+    var hour: String? = null,
     val date: ZonedDateTime? = null,
     var spots: Int? = null,
     var durationMin: Int? = null,
