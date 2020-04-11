@@ -29,6 +29,7 @@ class ProfileViewModel @Inject constructor(
     private var email: String = ""
     private var name: String = ""
     private var description: String = ""
+    private var image: String = ""
 
     private val _userDataStream = MutableLiveData<UiStatus<UserModel, ErrorModel>>()
     val userDataStream: LiveData<UiStatus<UserModel, ErrorModel>> get() = _userDataStream
@@ -67,6 +68,8 @@ class ProfileViewModel @Inject constructor(
 
     fun getUserDescription(): String = description
 
+    fun getUserImage(): String = image
+
     private fun getUser(userUid: String) {
         viewModelScope.launch {
             _userDataStream.value = emitLoadingState()
@@ -82,6 +85,7 @@ class ProfileViewModel @Inject constructor(
                 email = user.email
                 name = user.name
                 description = user.description
+                image = user.image
                 if (user.pushToken != deviceToken) {
                     refreshPushToken(userUid, deviceToken)
                 }

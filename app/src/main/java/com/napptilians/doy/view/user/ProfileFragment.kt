@@ -1,28 +1,40 @@
 package com.napptilians.doy.view.user
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.clickable
+import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.notClickable
+import com.napptilians.doy.extensions.resize
+import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.profile_fragment.profileEditMode
 import kotlinx.android.synthetic.main.profile_fragment.profileFragmentProgressView
+import kotlinx.android.synthetic.main.profile_fragment.profileImageCardView
+import kotlinx.android.synthetic.main.profile_fragment.profileImageView
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoFrameLayout
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoLogOutText
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoSaveChangesButton
+import kotlinx.android.synthetic.main.profile_fragment.profilePhotoPlaceHolder
 import kotlinx.android.synthetic.main.profile_fragment.profileTitle
 
 class ProfileFragment : BaseFragment() {
@@ -56,6 +68,10 @@ class ProfileFragment : BaseFragment() {
         profileEditMode.setOnClickListener {
             switchEditMode()
         }
+        profilePhotoPlaceHolder.setOnClickListener {
+            switchEditMode()
+            openGallery()
+        }
 
         profileInfoLogOutText.setOnClickListener {
             viewModel.logout()
@@ -65,7 +81,11 @@ class ProfileFragment : BaseFragment() {
             editModeView?.let {
                 val name = it.getUserName()
                 val description = it.getDescription()
-                viewModel.updateUser(name = name, description = description)
+                viewModel.updateUser(
+                    name = name,
+                    description = description,
+                    image = profileImageView?.drawable?.toBitmap()?.toByteArray()?.encodeByteArrayToBase64()
+                )
                 profileInfoSaveChangesButton.notClickable()
             }
         }
@@ -90,6 +110,14 @@ class ProfileFragment : BaseFragment() {
                 handleUiStates(it) { logout() }
             }
         )
+    }
+
+    private fun openGallery() {
+        activity?.let {
+            val galleryIntent =
+                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+        }
     }
 
     private fun processNewValue(user: UserModel) {
@@ -128,6 +156,15 @@ class ProfileFragment : BaseFragment() {
         context?.let {
             profileInfoFrameLayout.removeAllViews()
             profileInfoFrameLayout.addView(readModeView)
+            if (viewModel.getUserImage().isNotEmpty()) {
+                profileImageCardView.visible()
+                Glide.with(profileImageView)
+                    .load(viewModel.getUserImage())
+                    .placeholder(null)
+                    .into(profileImageView)
+            } else {
+                profileImageCardView.gone()
+            }
         }
     }
 
@@ -157,5 +194,30 @@ class ProfileFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+        when (requestCode) {
+            GALLERY_REQUEST_CODE -> {
+                data?.data?.let { imageUri ->
+                    val imageBitmap = BitmapFactory.decodeStream(
+                        context?.contentResolver?.openInputStream(imageUri)
+                    )?.resize()
+                    imageBitmap?.let {
+                        profileImageCardView.visible()
+                        profileImageView.setImageBitmap(it)
+                        // viewModel.updateUser(image = it.toByteArray()?.encodeByteArrayToBase64())
+                    }
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val GALLERY_REQUEST_CODE = 101
     }
 }
