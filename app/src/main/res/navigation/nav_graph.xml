@@ -135,6 +135,9 @@
         <action
             android:id="@+id/action_profileFragment_to_introFragment"
             app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
     </fragment>
     <fragment
         android:id="@+id/serviceDetailFragment"
@@ -147,6 +150,10 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.napptilians.doy.view.events.EventsFragment"
-        android:label="EventsFragment" />
+        android:label="EventsFragment" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

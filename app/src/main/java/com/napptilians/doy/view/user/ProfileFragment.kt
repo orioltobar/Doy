@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.doy.R
@@ -24,8 +25,12 @@ import kotlinx.android.synthetic.main.profile_fragment.profileInfoFrameLayout
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoLogOutText
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoSaveChangesButton
 import kotlinx.android.synthetic.main.profile_fragment.profileTitle
+import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     // TODO: Re-do the logic after MVP
 
@@ -38,7 +43,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private val readModeView: ProfileReadView? by lazy {
-        context?.let { ProfileReadView(it) }
+        context?.let { ProfileReadView(it, onMyEventsClicked = { navigateToMyEvents() }) }
     }
 
     override fun onCreateView(
@@ -122,6 +127,14 @@ class ProfileFragment : BaseFragment() {
     private fun logout() {
         val direction = ProfileFragmentDirections.actionProfileFragmentToIntroFragment()
         findNavController().navigate(direction)
+    }
+
+    private fun navigateToMyEvents() {
+        firebaseAuth.currentUser?.let {
+            val navigation =
+                ProfileFragmentDirections.actionProfileFragmentToEventsFragment(it.uid)
+            findNavController().navigate(navigation)
+        }
     }
 
     private fun defaultView() {

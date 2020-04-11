@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.doy.R
 import com.napptilians.doy.extensions.gone
@@ -20,15 +22,16 @@ import kotlinx.android.synthetic.main.profile_fragment_read_mode.view.profileNam
 class ProfileReadView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
+    defStyleAttr: Int = 0,
+    onMyEventsClicked: () -> Unit = {}
+ ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
         LayoutInflater.from(context).inflate(R.layout.profile_fragment_read_mode, this, true)
 
         // Events
         profileEventsReadModeContainer.setOnClickListener {
-            println("Clicked!")
+            onMyEventsClicked()
         }
     }
 
