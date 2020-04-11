@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_menuFavouritesListButton_to_introFragment"
             app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_menuFavouritesListButton_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -121,6 +124,14 @@
         <action
             android:id="@+id/action_splashFragment_to_menuFavouritesListButton"
             app:destination="@id/menuFavouritesListButton" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.napptilians.doy.view.user.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_introFragment"
+            app:destination="@id/introFragment" />
     </fragment>
     <fragment
         android:id="@+id/serviceDetailFragment"

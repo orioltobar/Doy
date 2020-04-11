@@ -6,12 +6,15 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.flatMap
+import com.napptilians.commons.singleSourceOfTruth
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.movie.CategoryModel
 import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.repositories.DoyRepository
 import javax.inject.Inject
 
@@ -64,11 +67,40 @@ class DoyRepositoryImpl @Inject constructor(
         )
     }
 
+    override suspend fun logout(userUid: String) {
+        dbDataSource.removeUser(userUid)
+        networkDataSource.updateUser(userUid = userUid, token = "")
+    }
+
     override suspend fun getServices(
         categoryIds: List<Long>,
         serviceId: Long?,
         uid: Long?
     ): Response<List<ServiceModel>, ErrorModel> {
         return networkDataSource.getServices(categoryIds, serviceId, uid)
+    }
+
+    override suspend fun getUser(userUid: String): Response<UserModel, ErrorModel> =
+        singleSourceOfTruth(
+            dbDataSource = { dbDataSource.getUser(userUid) },
+            networkDataSource = { networkDataSource.getUser(userUid) },
+            dbCallback = { user ->
+                dbDataSource.saveUser(user)
+                dbDataSource.getUser(user.uid)
+            }
+        )
+
+    override suspend fun updateUser(
+        userUid: String,
+        name: String?,
+        token: String?,
+        description: String?,
+        image: String?
+    ): Response<UserModel, ErrorModel> {
+        val request = networkDataSource.updateUser(userUid, name, token, description, image)
+        return request.flatMap { user ->
+            dbDataSource.saveUser(user)
+            dbDataSource.getUser(user.uid)
+        }
     }
 }

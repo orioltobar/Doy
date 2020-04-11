@@ -4,6 +4,7 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.movie.CategoryModel
 import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.user.UserModel
 
 interface NetworkDataSource {
 
@@ -18,6 +19,16 @@ interface NetworkDataSource {
         uid: String,
         token: String
     ): Response<Unit, ErrorModel>
+
+    suspend fun updateUser(
+        userUid: String,
+        name: String? = null,
+        token: String? = null,
+        description: String? = null,
+        image: String? = null
+    ): Response<UserModel, ErrorModel>
+
+    suspend fun getUser(userUid: String): Response<UserModel, ErrorModel>
 
     suspend fun getServices(
         categoryIds: List<Long> = emptyList(),
