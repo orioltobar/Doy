@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.EventsModel
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.GetEventsUseCase
-import com.napptilians.domain.usecases.GetServicesUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,7 +17,8 @@ class EventsViewModel @Inject constructor(
     private val getEventsUseCase: GetEventsUseCase
 ) : BaseViewModel<ServiceModel>() {
 
-    private val _eventsDataStream = MutableLiveData<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>>()
+    private val _eventsDataStream =
+        MutableLiveData<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>>()
     val eventsDataStream: LiveData<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>>
         get() = _eventsDataStream
 
@@ -31,7 +30,7 @@ class EventsViewModel @Inject constructor(
         viewModelScope.launch {
             _eventsDataStream.value = emitLoadingState()
             val request = getEventsUseCase.execute(categoryIds, serviceId, uid)
-            _eventsDataStream.value = null
+            _eventsDataStream.value = processModel(request)
         }
     }
 }

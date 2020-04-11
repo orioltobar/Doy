@@ -5,25 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.movie.EventsModel
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.EventsViewModel
-import com.napptilians.features.viewmodel.ServicesViewModel
 import kotlinx.android.synthetic.main.events_fragment.eventsTabLayout
 import kotlinx.android.synthetic.main.events_fragment.eventsViewPager
 import kotlinx.android.synthetic.main.events_fragment.titleText
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.time.Instant
-import java.time.ZoneId
 
 @ExperimentalCoroutinesApi
 class EventsFragment : BaseFragment() {

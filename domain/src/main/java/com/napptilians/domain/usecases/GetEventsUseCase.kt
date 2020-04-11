@@ -6,7 +6,7 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.flatMap
-import com.napptilians.domain.models.movie.ServiceModel
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.repositories.DoyRepository
 import kotlinx.coroutines.withContext
 import java.time.Instant
