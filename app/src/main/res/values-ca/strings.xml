@@ -38,7 +38,7 @@
     <string name="select_spots">Seleccionar places disponibles</string>
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>
-    <string name="add_service_to_category">¿A què categoria perteneix el teu event?</string>
+    <string name="add_service_to_category">¿A quina categoria pertany el teu esdeveniment?</string>
     <string name="adding_service">Creant event...</string>
     <string name="how_many_spots">Quanta gent es pot unir al teu event?</string>
     <string name="save">Guardar</string>
