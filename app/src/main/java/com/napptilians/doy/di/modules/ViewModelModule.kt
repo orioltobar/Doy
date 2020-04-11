@@ -8,6 +8,7 @@ import com.napptilians.features.viewmodel.AddServiceViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
+import com.napptilians.features.viewmodel.ProfileViewModel
 import com.napptilians.features.viewmodel.ServicesViewModel
 import com.napptilians.features.viewmodel.RegisterViewModel
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
@@ -69,4 +70,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectDurationViewModel::class)
     internal abstract fun selectDurationViewModel(viewModel: SelectDurationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    internal abstract fun profileViewModel(viewModel: ProfileViewModel): ViewModel
 }

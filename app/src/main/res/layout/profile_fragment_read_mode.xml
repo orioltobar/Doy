@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/profileNameReadModeName"
+        style="@style/App.Intro"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/raleway_bold"
+        android:textColor="@color/grayStrong"
+        android:textSize="@dimen/text_size_m_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileBioContainerReadMode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileNameReadModeName">
+
+        <View
+            android:id="@+id/profileNameReadModeShape"
+            android:layout_width="0dp"
+            android:layout_height="116dp"
+            android:background="@drawable/bg_dashed_rectangle"
+            app:layout_constraintTop_toBottomOf="@id/profileNameReadModeName" />
+
+        <TextView
+            android:id="@+id/profileBioPlaceHolderDefaultText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_semibold"
+            android:text="@string/bio_default"
+            android:textColor="@color/green"
+            app:layout_constraintBottom_toBottomOf="@id/profileNameReadModeShape"
+            app:layout_constraintEnd_toEndOf="@id/profileNameReadModeShape"
+            app:layout_constraintStart_toStartOf="@id/profileNameReadModeShape"
+            app:layout_constraintTop_toTopOf="@id/profileNameReadModeShape" />
+
+        <TextView
+            android:id="@+id/profileBioPlaceHolderText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:fontFamily="@font/raleway"
+            android:lineSpacingExtra="8sp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/profileNameReadModeShape"
+            app:layout_constraintEnd_toEndOf="@id/profileNameReadModeShape"
+            app:layout_constraintStart_toStartOf="@id/profileNameReadModeShape"
+            app:layout_constraintTop_toTopOf="@id/profileNameReadModeShape"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip. " />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileEventsReadModeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="56dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        app:layout_constraintTop_toBottomOf="@id/profileBioContainerReadMode">
+
+        <View
+            android:id="@+id/profileEventsReadModeTopSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profileEventsReadMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/profileEventsCalendarIconReadMode"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_calendar"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/profileEventsCalendarTextReadMode"
+                style="@style/App.Intro"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:fontFamily="@font/raleway_bold"
+                android:text="@string/events_by_user"
+                android:textColor="@color/grayStrong"
+                android:textSize="@dimen/text_size_m_2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profileEventsCalendarIconReadMode"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:background="@drawable/ic_arrow_next"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/profileEventsReadModeTopSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

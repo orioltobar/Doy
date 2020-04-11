@@ -8,20 +8,24 @@ import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.diskdatasource.Cache
 import com.napptilians.diskdatasource.dao.DeviceDao
 import com.napptilians.diskdatasource.dao.ExampleDao
+import com.napptilians.diskdatasource.dao.UserDao
 import com.napptilians.diskdatasource.mappers.DeviceInDbMapper
 import com.napptilians.diskdatasource.mappers.DeviceOutDbMapper
 import com.napptilians.diskdatasource.mappers.MovieDbMapper
+import com.napptilians.diskdatasource.mappers.UserDbMapper
 import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.movie.MovieModel
-import java.util.concurrent.TimeUnit
+import com.napptilians.domain.models.user.UserModel
 import javax.inject.Inject
 
 class DbDataBaseImpl @Inject constructor(
     private val exampleDao: ExampleDao,
     private val movieDbMapper: MovieDbMapper,
     private val deviceDao: DeviceDao,
+    private val userDao: UserDao,
     private val deviceInDbMapper: DeviceInDbMapper,
-    private val deviceOutDbMapper: DeviceOutDbMapper
+    private val deviceOutDbMapper: DeviceOutDbMapper,
+    private val userDbMapper: UserDbMapper
 ) : DbDataSource {
 
     override suspend fun getMovie(id: Long): Response<MovieModel, ErrorModel> =
@@ -36,35 +40,19 @@ class DbDataBaseImpl @Inject constructor(
     override suspend fun getDeviceInfo(): Response<DeviceModel, ErrorModel> =
         deviceDao.getDeviceInfo()?.let {
             Success(deviceOutDbMapper.map(it))
-        } ?: run { Failure(ErrorModel("data error")) }
+        } ?: run { Failure(ErrorModel("db error")) }
 
     override suspend fun saveDeviceInfo(device: DeviceModel): Response<Unit, ErrorModel> =
         Success(deviceDao.insertDeviceInfo(deviceInDbMapper.map(device)))
 
-//    /**
-//     * Process the [list] of db models retrieved by the database in order to check if the cache is
-//     * expired or the response is empty. In that case a Failure is returned.
-//     */
-//    private suspend fun processDbResponse(list: List<MovieDbModel>): Response<List<MovieModel>, ErrorModel> {
-//        val movieList: MutableList<MovieModel> = mutableListOf()
-//        for (model in list) {
-//            val movie = Cache.checkTimestampCache(model.timeStamp, movieDbMapper.map(model))
-//            if (movie is Success) {
-//                val genres = movieGenreDao.getGenres()
-//                val genresFiltered = movie.result.genreIds.flatMap { ids ->
-//                    genres.filter { it.id == ids }.map(movieGenreDbMapper::map)
-//                }
-//                movie.result.genres = MovieGenresModel(genresFiltered)
-//                movieList.add(movie.result)
-//            } else {
-//                movieList.clear()
-//                break
-//            }
-//        }
-//        return if (movieList.isNotEmpty()) {
-//            Success(movieList.toList())
-//        } else {
-//            Failure(ErrorModel("Error in MovieDataBase"))
-//        }
-//    }
+    override suspend fun getUser(uid: String): Response<UserModel, ErrorModel> =
+        userDao.getUser(uid)?.let {
+            Success(userDbMapper.map(it))
+        } ?: run { Failure(ErrorModel("db error")) }
+
+    override suspend fun saveUser(user: UserModel): Response<Unit, ErrorModel> =
+        Success(userDao.insertUser(userDbMapper.mapToDbModel(user)))
+
+    override suspend fun removeUser(uid: String): Response<Unit, ErrorModel> =
+        Success(userDao.deleteUser(uid))
 }
