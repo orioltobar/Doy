@@ -72,8 +72,12 @@ class DoyRepositoryImpl @Inject constructor(
         networkDataSource.updateUser(userUid = userUid, token = "")
     }
 
-    override suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel> {
-        return networkDataSource.getServices(categoryId)
+    override suspend fun getServices(
+        categoryIds: List<Long>,
+        serviceId: Long?,
+        uid: Long?
+    ): Response<List<ServiceModel>, ErrorModel> {
+        return networkDataSource.getServices(categoryIds, serviceId, uid)
     }
 
     override suspend fun getUser(userUid: String): Response<UserModel, ErrorModel> =

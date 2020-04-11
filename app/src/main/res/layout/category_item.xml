@@ -5,23 +5,23 @@
     android:id="@+id/category_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
     android:elevation="@dimen/cardview_default_elevation"
-    android:maxWidth="@dimen/category_max_width"
     android:maxHeight="@dimen/category_max_height"
-    android:background="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/categoryImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/category_item_bg"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/category_container"
         app:layout_constraintEnd_toEndOf="@id/category_container"
         app:layout_constraintStart_toStartOf="@id/category_container"
         app:layout_constraintTop_toTopOf="@id/category_container"
-        tools:src="@drawable/image_bg_small"
-        android:contentDescription="@null"/>
+        tools:src="@drawable/image_bg_small" />
 
     <TextView
         android:id="@+id/categoryText"
@@ -29,13 +29,24 @@
         android:layout_height="0dp"
         android:fontFamily="@font/raleway_bold"
         android:gravity="center"
-        tools:text="Conversación"
+        android:padding="@dimen/padding_small"
         android:textColor="@android:color/white"
         android:textSize="@dimen/category_text_size"
-        android:padding="@dimen/padding_small"
         app:layout_constraintBottom_toBottomOf="@id/category_container"
         app:layout_constraintEnd_toEndOf="@id/category_container"
         app:layout_constraintStart_toStartOf="@id/category_container"
-        app:layout_constraintTop_toTopOf="@id/category_container" />
+        app:layout_constraintTop_toTopOf="@id/category_container"
+        tools:text="Conversación" />
+
+    <ImageView
+        android:id="@+id/tickImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_small"
+        android:src="@drawable/ic_tickon_white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

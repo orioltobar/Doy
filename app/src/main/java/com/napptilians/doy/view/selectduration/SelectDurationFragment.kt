@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.movie.DurationModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.SelectDurationViewModel
 import kotlinx.android.synthetic.main.select_duration_fragment.*
@@ -21,6 +24,7 @@ import javax.inject.Inject
 class SelectDurationFragment : BaseFragment() {
 
     private val viewModel: SelectDurationViewModel by viewModels { vmFactory }
+    private var selectedDurationHours: Int = 0
 
     @Inject
     lateinit var durationListAdapter: DurationListAdapter
@@ -33,19 +37,40 @@ class SelectDurationFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListeners()
         viewModel.execute()
         viewModel.durationsDataStream.observe(viewLifecycleOwner,
-            Observer<UiStatus<List<Int>, ErrorModel>> { handleUiStates(it, ::processNewValue) }
+            Observer<UiStatus<List<DurationModel>, ErrorModel>> { handleUiStates(it, ::processNewValue) }
         )
     }
 
-    private fun processNewValue(durations: List<Int>) {
+    private fun setupListeners() {
+        saveButton.setOnClickListener {
+            setNavigationResult(selectedDurationHours.toString(), "selectedDuration")
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun processNewValue(durations: List<DurationModel>) {
         val layoutManager = LinearLayoutManager(context)
         durationList.layoutManager = layoutManager
         durationListAdapter = DurationListAdapter()
         durationList.adapter = durationListAdapter
         durationList.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
         durationListAdapter.updateItems(durations)
+        durationListAdapter.setOnClickListener { clickedCategory ->
+            saveButton.isEnabled = true
+            durationListAdapter.getItems().forEachIndexed { index, durationModel ->
+                if (durationModel != clickedCategory && durationModel.isSelected) {
+                    durationModel.isSelected = false
+                    durationListAdapter.notifyItemChanged(index)
+                } else if (durationModel == clickedCategory && !durationModel.isSelected) {
+                    selectedDurationHours = durationModel.numberOfHours
+                    durationModel.isSelected = true
+                    durationListAdapter.notifyItemChanged(index)
+                }
+            }
+        }
     }
 
     override fun onError(error: ErrorModel) {

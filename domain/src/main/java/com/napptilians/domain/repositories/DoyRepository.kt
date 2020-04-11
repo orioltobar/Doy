@@ -20,11 +20,20 @@ interface DoyRepository {
 
     suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
 
-    suspend fun register(name: String, password: String, email: String, token: String): Response<Unit, ErrorModel>
+    suspend fun register(
+        name: String,
+        password: String,
+        email: String,
+        token: String
+    ): Response<Unit, ErrorModel>
 
     suspend fun logout(userUid: String)
 
-    suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel>
+    suspend fun getServices(
+        categoryIds: List<Long> = emptyList(),
+        serviceId: Long? = null,
+        uid: Long? = null
+    ): Response<List<ServiceModel>, ErrorModel>
 
     suspend fun getUser(userUid: String): Response<UserModel, ErrorModel>
 

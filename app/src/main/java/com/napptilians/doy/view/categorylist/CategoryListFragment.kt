@@ -6,26 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.movie.CategoryModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.CategoriesViewModel
-import javax.inject.Inject
 import kotlinx.android.synthetic.main.category_list_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class CategoryListFragment : BaseFragment() {
 
     private val viewModel: CategoriesViewModel by viewModels { vmFactory }
     private val args: CategoryListFragmentArgs by navArgs()
+    private var selectedCategoryId: Long = -1L
+    private var selectedCategoryName: String = ""
 
     @Inject
     lateinit var categoriesAdapter: CategoryListAdapter
@@ -77,20 +81,44 @@ class CategoryListFragment : BaseFragment() {
     private fun initViews() {
         if (args.isAddingService) {
             titleText.visible()
+            with(saveButton) {
+                visible()
+                isEnabled = false
+                setOnClickListener {
+                    setNavigationResult(selectedCategoryId.toString(), "selectCategoryId")
+                    setNavigationResult(selectedCategoryName, "selectCategoryName")
+                    findNavController().popBackStack()
+                }
+            }
             // TODO: Also show toolbar for back button
         }
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager
-        categoriesAdapter = CategoryListAdapter()
-        categoriesAdapter.setOnClickListener {
-            val navigation =
-                CategoryListFragmentDirections.actionCategoryListFragmentToServiceListFragment(
-                    it.categoryId,
-                    it.name
-                )
-            findNavController().navigate(navigation)
+        categoriesAdapter = CategoryListAdapter().apply { isAddingService = args.isAddingService }
+        categoriesAdapter.setOnClickListener { clickedCategory ->
+            if (args.isAddingService) {
+                saveButton.isEnabled = true
+                categoriesAdapter.getItems().forEachIndexed { index, categoryModel ->
+                    if (categoryModel != clickedCategory && categoryModel.isSelected) {
+                        categoryModel.isSelected = false
+                        categoriesAdapter.notifyItemChanged(index)
+                    } else if (categoryModel == clickedCategory && !categoryModel.isSelected) {
+                        selectedCategoryId = categoryModel.categoryId
+                        selectedCategoryName = categoryModel.name
+                        categoryModel.isSelected = true
+                        categoriesAdapter.notifyItemChanged(index)
+                    }
+                }
+            } else {
+                val navigation =
+                    CategoryListFragmentDirections.actionCategoryListFragmentToServiceListFragment(
+                        clickedCategory.categoryId,
+                        clickedCategory.name
+                    )
+                findNavController().navigate(navigation)
+            }
         }
-        val itemOffsetDecoration = ItemOffsetDecoration(context, R.dimen.margin_xsmall)
+        val itemOffsetDecoration = ItemOffsetDecoration(10)
         categoryList.addItemDecoration(itemOffsetDecoration)
         categoryList.adapter = categoriesAdapter
     }

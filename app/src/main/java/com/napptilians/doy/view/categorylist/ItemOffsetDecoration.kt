@@ -1,12 +1,10 @@
 package com.napptilians.doy.view.categorylist
 
-import android.content.Context
 import android.graphics.Rect
 import android.view.View
-import androidx.annotation.DimenRes
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemOffsetDecoration(val context: Context?, @DimenRes val itemOffsetId: Int) :
+class ItemOffsetDecoration(private val space: Int) :
     RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
@@ -16,9 +14,9 @@ class ItemOffsetDecoration(val context: Context?, @DimenRes val itemOffsetId: In
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        context?.let {
-            val itemOffset = context.resources.getDimensionPixelSize(itemOffsetId)
-            outRect.set(0, itemOffset, 0, itemOffset)
-        }
+        outRect.left = space;
+        outRect.right = space;
+        outRect.bottom = space;
+        outRect.top = space;
     }
 }

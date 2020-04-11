@@ -35,9 +35,9 @@ class NetworkDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getServices(categoryId: Long): Response<List<ServiceModel>, ErrorModel> {
+    override suspend fun getServices(categoryIds: List<Long>, serviceId: Long?, uid: Long?): Response<List<ServiceModel>, ErrorModel> {
         return safeApiCall {
-            serviceService.getServices(categoryId).map {
+            serviceService.getServices(categoryIds, null, null).map {
                 serviceInMapper.map(it)
             }
         }

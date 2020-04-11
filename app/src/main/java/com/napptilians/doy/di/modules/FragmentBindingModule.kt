@@ -12,6 +12,7 @@ import com.napptilians.doy.view.servicelist.ServiceListFragment
 import com.napptilians.doy.view.splash.SplashFragment
 import com.napptilians.doy.view.selectduration.SelectDurationFragment
 import com.napptilians.doy.view.selectspots.SelectSpotsFragment
+import com.napptilians.doy.view.servicedetail.ServiceDetailFragment
 import com.napptilians.doy.view.user.ProfileFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -59,4 +60,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindProfileFragment(): ProfileFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindServiceDetailFragment(): ServiceDetailFragment
 }

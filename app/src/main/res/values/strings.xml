@@ -34,7 +34,8 @@
     <string name="upload_image">Upload image</string>
     <string name="select_category">Select category</string>
     <string name="service_title">Event title</string>
-    <string name="select_date">Select date</string>
+    <string name="select_day">Select day</string>
+    <string name="select_date">Select start time</string>
     <string name="select_spots">Select available spots</string>
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
@@ -47,6 +48,8 @@
     <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
     <string name="hour">hour</string>
     <string name="hours">hours</string>
+    <string name="add_service_success">Your event has been created!</string>
+    <string name="add_service_success_message">Remember to be punctual and have everything prepared in advance.</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
