@@ -21,6 +21,7 @@ import com.napptilians.doy.databinding.AddServiceFragmentBinding
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.getNavigationResult
 import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.viewmodel.AddServiceViewModel
@@ -156,7 +157,8 @@ class AddServiceFragment : BaseFragment() {
         when (requestCode) {
             GALLERY_REQUEST_CODE -> {
                 serviceImageView.setImageURI(data?.data)
-                viewModel.service.image = BitmapFactory.decodeStream(context!!.contentResolver.openInputStream(data!!.data!!))?.toByteArray()?.encodeByteArrayToBase64()
+                viewModel.service.image = BitmapFactory.decodeStream(
+                    context!!.contentResolver.openInputStream(data!!.data!!))?.resize()?.toByteArray()?.encodeByteArrayToBase64()
             }
         }
     }
