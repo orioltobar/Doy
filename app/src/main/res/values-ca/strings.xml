@@ -48,6 +48,8 @@
     <string name="how_long_duration">Quanta gent es pot unir al teu event?</string>
     <string name="hour">hora</string>
     <string name="hours">hores</string>
+    <string name="add_service_success">Has creat el teu event!</string>
+    <string name="add_service_success_message">Recorda ser puntual y tenir-ho tot preparat amb antelació.</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>

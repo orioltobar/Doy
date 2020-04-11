@@ -48,6 +48,8 @@
     <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
     <string name="hour">hour</string>
     <string name="hours">hours</string>
+    <string name="add_service_success">Your event has been created!</string>
+    <string name="add_service_success_message">Remember to be punctual and have everything prepared in advance.</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>

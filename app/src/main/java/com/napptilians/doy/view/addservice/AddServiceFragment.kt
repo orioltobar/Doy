@@ -27,6 +27,7 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -175,8 +176,16 @@ class AddServiceFragment : BaseFragment() {
     }
 
     private fun processNewValue(serviceId: Long) {
-        // TODO: Store id on the service?
         progressBar.gone()
+        activity?.let { activity ->
+            DoyDialog(activity).apply {
+                setPopupIcon(R.drawable.ic_thumb_up)
+                setPopupTitle(context.resources.getString(R.string.add_service_success))
+                setPopupSubtitle(context.resources.getString(R.string.add_service_success_message))
+                show()
+                setOnDismissListener { findNavController().popBackStack() }
+            }
+        }
     }
 
     override fun onLoading() {

@@ -49,6 +49,8 @@
     <string name="how_long_duration">¿Cuánto durará aproximadamente?</string>
     <string name="hour">hora</string>
     <string name="hours">horas</string>
+    <string name="add_service_success">¡Has creado tu evento!</string>
+    <string name="add_service_success_message">Recuerda ser puntual y tenerlo todo preparado con antelación.</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>
