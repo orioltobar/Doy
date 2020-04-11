@@ -9,6 +9,7 @@ import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.EventsViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
+import com.napptilians.features.viewmodel.ProfileViewModel
 import com.napptilians.features.viewmodel.ServicesViewModel
 import com.napptilians.features.viewmodel.RegisterViewModel
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
@@ -70,4 +71,9 @@ abstract class ViewModelModule {
     @ViewModelKey(EventsViewModel::class)
     internal abstract fun eventsViewModel(viewModel: EventsViewModel): ViewModel
 
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    internal abstract fun profileViewModel(viewModel: ProfileViewModel): ViewModel
 }

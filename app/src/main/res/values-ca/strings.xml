@@ -34,11 +34,12 @@
     <string name="upload_image">Pujar imatge</string>
     <string name="select_category">Seleccionar categoria</string>
     <string name="service_title">Títol event</string>
-    <string name="select_date">Seleccionar data</string>
+    <string name="select_day">Seleccionar dia</string>
+    <string name="select_date">Seleccionar hora d\'inici</string>
     <string name="select_spots">Seleccionar places disponibles</string>
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>
-    <string name="add_service_to_category">¿A què categoria perteneix el teu event?</string>
+    <string name="add_service_to_category">¿A quina categoria pertany el teu esdeveniment?</string>
     <string name="adding_service">Creant event...</string>
     <string name="how_many_spots">Quanta gent es pot unir al teu event?</string>
     <string name="save">Guardar</string>
@@ -47,10 +48,24 @@
     <string name="how_long_duration">Quanta gent es pot unir al teu event?</string>
     <string name="hour">hora</string>
     <string name="hours">hores</string>
+    <string name="add_service_success">Has creat el teu event!</string>
+    <string name="add_service_success_message">Recorda ser puntual y tenir-ho tot preparat amb antelació.</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>
     <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
+
+    <!-- Generic Error Dialog -->
+    <string name="error_title">Ups! Alguna cosa ha anat malament</string>
+    <string name="error_message">Torna a intentar-ho en uns minuts.</string>
+
+    <!-- Profile -->
+    <string name="profile">Perfil</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="bio_default">Vols explicar alguna cosa sobre tu?</string>
+    <string name="events_by_user">Eventos creados por mi</string>
+    <string name="logout">Tancar sessió</string>
+    <string name="update_profile">Actualitzar perfil</string>
 
     <!-- My events -->
     <string name="your_events">Els teus esdeveniments</string>

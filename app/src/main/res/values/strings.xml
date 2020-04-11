@@ -34,7 +34,8 @@
     <string name="upload_image">Upload image</string>
     <string name="select_category">Select category</string>
     <string name="service_title">Event title</string>
-    <string name="select_date">Select date</string>
+    <string name="select_day">Select day</string>
+    <string name="select_date">Select start time</string>
     <string name="select_spots">Select available spots</string>
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
@@ -47,10 +48,24 @@
     <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
     <string name="hour">hour</string>
     <string name="hours">hours</string>
+    <string name="add_service_success">Your event has been created!</string>
+    <string name="add_service_success_message">Remember to be punctual and have everything prepared in advance.</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
     <string name="wip_explanation">We\'re working at full capacity so you can enjoy this feature as soon as possible.</string>
+
+    <!-- Generic Error Dialog -->
+    <string name="error_title">Ups! Something went wrong</string>
+    <string name="error_message">Try again in a few minutes.</string>
+
+    <!-- Profile -->
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="bio_default">Do you want to explain something about you?</string>
+    <string name="events_by_user">Events created by me</string>
+    <string name="logout">Log out</string>
+    <string name="update_profile">Update profile</string>
 
     <!-- My events -->
     <string name="your_events">Your events</string>

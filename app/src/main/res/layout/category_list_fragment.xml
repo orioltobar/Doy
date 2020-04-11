@@ -47,19 +47,19 @@
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_xlarge"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/add_service_to_category"
         android:textColor="@color/grayStrong"
         android:textSize="@dimen/text_size_xl"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/categoryList"
         app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible" />
 
@@ -67,13 +67,21 @@
         android:id="@+id/categoryList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_medium"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
         tools:visibility="visible"
         tools:listitem="@layout/category_item"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        style="@style/App.PrimaryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

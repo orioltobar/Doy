@@ -8,7 +8,9 @@ import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import kotlinx.android.synthetic.main.intro_fragment.*
+import kotlinx.android.synthetic.main.intro_fragment.continueGoogleButton
+import kotlinx.android.synthetic.main.intro_fragment.signInButton
+import kotlinx.android.synthetic.main.intro_fragment.signUpButton
 
 class IntroFragment : BaseFragment() {
 

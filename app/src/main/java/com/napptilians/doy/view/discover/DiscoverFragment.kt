@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
 import kotlinx.android.synthetic.main.discover_fragment.popupButton
 import java.time.Instant
 import java.time.ZoneId
+import kotlinx.android.synthetic.main.discover_fragment.profileButton
 import javax.inject.Inject
 
 class DiscoverFragment : BaseFragment() {
@@ -85,6 +86,10 @@ class DiscoverFragment : BaseFragment() {
             val navigation =
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToAddServiceFragment()
             findNavController().navigate(navigation)
+        }
+        profileButton.setOnClickListener {
+            val direction = DiscoverFragmentDirections.actionMenuFavouritesListButtonToProfileFragment()
+            findNavController().navigate(direction)
         }
     }
 

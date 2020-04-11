@@ -12,4 +12,8 @@
     <color name="greenDark">#00A47F</color>
     <color name="hintGray">#9b9b9b</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="light_gray">#e5e5e5</color>
+    <color name="medium_gray">#9b9b9b</color>
+    <color name="red">#e54d52</color>
 </resources>
