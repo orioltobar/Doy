@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_create" />
 
     <item
-        android:id="@+id/menuChat"
+        android:id="@+id/chatListFragment"
         android:icon="@drawable/ic_chat" />
 
     <item

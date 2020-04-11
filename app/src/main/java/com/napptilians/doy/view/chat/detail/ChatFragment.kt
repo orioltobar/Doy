@@ -1,4 +1,4 @@
-package com.napptilians.doy.view.chat
+package com.napptilians.doy.view.chat.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -2,7 +2,7 @@ package com.napptilians.doy.di.modules
 
 import com.napptilians.doy.view.addservice.AddServiceFragment
 import com.napptilians.doy.view.categorylist.CategoryListFragment
-import com.napptilians.doy.view.chat.ChatFragment
+import com.napptilians.doy.view.chat.detail.ChatFragment
 import com.napptilians.doy.view.chat.ChatListFragment
 import com.napptilians.doy.view.discover.DiscoverFragment
 import com.napptilians.doy.view.intro.IntroFragment
