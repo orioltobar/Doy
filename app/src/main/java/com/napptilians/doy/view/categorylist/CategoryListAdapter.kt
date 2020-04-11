@@ -7,7 +7,9 @@ import javax.inject.Inject
 
 class CategoryListAdapter @Inject constructor() : BaseAdapter<CategoryModel, CategoryItemViewHolder>() {
 
+    var isAddingService: Boolean = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryItemViewHolder {
-        return CategoryItemViewHolder(parent)
+        return CategoryItemViewHolder(parent, isAddingService)
     }
 }

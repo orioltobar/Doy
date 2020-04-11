@@ -35,7 +35,8 @@
     <string name="upload_image">Subir imagen</string>
     <string name="select_category">Seleccionar categoría</string>
     <string name="service_title">Título evento</string>
-    <string name="select_date">Seleccionar fecha</string>
+    <string name="select_day">Seleccionar día</string>
+    <string name="select_date">Seleccionar hora de inicio</string>
     <string name="select_spots">Seleccionar plazas disponibles</string>
     <string name="select_duration">Seleccionar duración</string>
     <string name="description">Descripción</string>
@@ -48,6 +49,8 @@
     <string name="how_long_duration">¿Cuánto durará aproximadamente?</string>
     <string name="hour">hora</string>
     <string name="hours">horas</string>
+    <string name="add_service_success">¡Has creado tu evento!</string>
+    <string name="add_service_success_message">Recuerda ser puntual y tenerlo todo preparado con antelación.</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>

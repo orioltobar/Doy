@@ -5,7 +5,6 @@ import android.util.Log
 import com.napptilians.commons.Mapper
 import com.napptilians.domain.models.movie.ServiceModel
 import com.napptilians.networkdatasource.api.models.ServiceApiModel
-import java.nio.charset.Charset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -18,11 +17,12 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from?.categoryId ?: -1L,
             from?.name ?: "",
             from?.description ?: "",
-            from?.image?.toString(),
+            from?.image ?: "",
             from?.day ?: "",
             from?.spots ?: 1,
             from?.durationMin ?: 30,
-            ownerId = from?.ownerId ?: ""
+            from?.hour ?: "",
+            from?.ownerId ?: ""
         )
 
     fun map(from: ServiceApiModel): ServiceModel =
@@ -31,8 +31,9 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.categoryId ?: -1L,
             from.name ?: "",
             from.description ?: "",
-            from.image?.toByteArray(Charset.defaultCharset()) ?: ByteArray(0),
+            from.image ?: "",
             from.day ?: "",
+            from.hour ?: "",
             parseDate(from),
             from.spots ?: 1,
             from.durationMin ?: 30,

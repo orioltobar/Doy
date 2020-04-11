@@ -5,7 +5,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/loginText"
         style="@style/App.AddService"
         android:layout_marginTop="@dimen/margin_large"
         android:padding="@dimen/margin_xlarge"
@@ -14,19 +13,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/spotsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_medium"
         android:layout_weight="1" />
 
     <Button
+        android:id="@+id/saveButton"
         style="@style/App.PrimaryButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:enabled="false"
         android:text="@string/save" />
 
 </LinearLayout>

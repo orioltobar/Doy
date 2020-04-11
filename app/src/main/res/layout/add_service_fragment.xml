@@ -32,8 +32,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_xlarge"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="@dimen/margin_xlarge">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,7 +96,8 @@
                                 style="@style/App.AddService.Input"
                                 android:clickable="true"
                                 android:focusable="false"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:text="@={viewModel.serviceCategory}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,12 +125,12 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/selectDateInput"
+                        android:id="@+id/selectDayInput"
                         style="@style/App.AddService.Input"
-                        android:hint="@string/select_date">
+                        android:hint="@string/select_day">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/selectDateEditText"
+                            android:id="@+id/selectDayEditText"
                             style="@style/App.AddService.Input"
                             android:clickable="true"
                             android:focusable="false"
@@ -138,34 +139,20 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <RelativeLayout
-                        android:id="@+id/selectSpotsView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/selectTimeInput"
+                        style="@style/App.AddService.Input"
+                        android:hint="@string/select_date">
 
-                        <com.google.android.material.textfield.TextInputLayout
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/selectTimeEditText"
                             style="@style/App.AddService.Input"
-                            android:hint="@string/select_spots">
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:inputType="date"
+                            android:text="@={viewModel.serviceDate}" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/selectSpotsEditText"
-                                style="@style/App.AddService.Input"
-                                android:clickable="true"
-                                android:focusable="false"
-                                android:inputType="number" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:padding="@dimen/padding_small"
-                            android:src="@drawable/ic_arrow_next" />
-
-                    </RelativeLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <RelativeLayout
                         android:id="@+id/selectDurationView"
@@ -182,7 +169,38 @@
                                 style="@style/App.AddService.Input"
                                 android:clickable="true"
                                 android:focusable="false"
-                                android:inputType="datetime" />
+                                android:inputType="text"
+                                android:text="@={viewModel.serviceDuration}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/padding_small"
+                            android:src="@drawable/ic_arrow_next" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/selectSpotsView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/App.AddService.Input"
+                            android:hint="@string/select_spots">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/selectSpotsEditText"
+                                style="@style/App.AddService.Input"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:inputType="text"
+                                android:text="@={viewModel.serviceSpots}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
