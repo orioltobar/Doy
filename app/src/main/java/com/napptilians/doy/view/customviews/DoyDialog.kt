@@ -12,16 +12,16 @@ import kotlinx.android.synthetic.main.generic_popup.popupIcon
 import kotlinx.android.synthetic.main.generic_popup.popupSubtitle
 import kotlinx.android.synthetic.main.generic_popup.popupTitle
 
-class DoyDialog(
+open class DoyDialog(
     context: Context
 ) : Dialog(context) {
 
     init {
         super.onStart()
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.generic_popup)
-        setCancelable(true)
-        setCanceledOnTouchOutside(true)
+        this.setContentView(R.layout.generic_popup)
+        this.setCancelable(true)
+        this.setCanceledOnTouchOutside(true)
     }
 
     fun setPopupIcon(@DrawableRes drawableResId: Int) {
