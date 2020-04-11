@@ -88,11 +88,11 @@ object NetworkServicesModule {
 
     @Provides
     @Singleton
-    fun provideCategoryListService(retrofit: Retrofit) = retrofit.create(CategoryService::class.java)
+    fun provideCategoryListService(retrofit: Retrofit): CategoryService = retrofit.create(CategoryService::class.java)
 
     @Provides
     @Singleton
-    fun proviceServiceService(retrofit: Retrofit) = retrofit.create(ServiceService::class.java)
+    fun proviceServiceService(retrofit: Retrofit): ServiceService = retrofit.create(ServiceService::class.java)
 
     @Provides
     @Singleton
