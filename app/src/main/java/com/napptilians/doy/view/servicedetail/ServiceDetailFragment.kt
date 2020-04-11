@@ -11,11 +11,8 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.decodeByteArrayFromBase64
-import com.napptilians.doy.view.categorylist.CategoryListFragmentArgs
-import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
-import kotlinx.android.synthetic.main.service_detail_fragment.toolbarImage
-import kotlinx.android.synthetic.main.service_item.view.serviceImage
+import kotlinx.android.synthetic.main.service_detail_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -40,6 +37,11 @@ class ServiceDetailFragment : BaseFragment() {
             Glide.with(toolbarImage)
                 .load(image?.decodeByteArrayFromBase64())
                 .into(toolbarImage)
+            serviceDetailTitle.text = name
+            serviceDetailDescription.text = description
+            serviceDetailDate.text = day + date
+            serviceDetailDuration.text = "$durationMin min"
+            serviceDetailSpots.text = "${spots ?: 0}"
         }
     }
 

@@ -1,5 +1,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -60,35 +61,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_xxlarge"
-                    android:text="¡Mi gato me ignora! ¿Hablamos?" />
+                    tools:text="¡Mi gato me ignora! ¿Hablamos?" />
 
                 <TextView
                     android:id="@+id/serviceDetailDescription"
                     style="@style/App.ServiceDetail"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_xlarge"
-                    android:ellipsize="end"
                     android:lineSpacingMultiplier="1.25"
-                    android:maxLines="4"
-                    android:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
-
-                <TextView
-                    style="@style/App.ServiceDetail"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_xlarge"
-                    android:ellipsize="end"
-                    android:lineSpacingMultiplier="1.25"
-                    android:maxLines="4"
-                    android:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
-
-                <TextView
-                    style="@style/App.ServiceDetail"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_xlarge"
-                    android:ellipsize="end"
-                    android:lineSpacingMultiplier="1.25"
-                    android:maxLines="4"
-                    android:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
+                    tools:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,13 +78,16 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/App.ServiceDetail.Data"
                         android:drawableStart="@drawable/ic_calendar"
                         android:drawablePadding="@dimen/margin_medium"
-                        android:text="@string/save"
-                        android:textColor="@color/grayStrong"
-                        android:textStyle="bold" />
+                        android:text="@string/when" />
+
+                    <TextView
+                        android:id="@+id/serviceDetailDate"
+                        style="@style/App.ServiceDetail.Response"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        tools:text="19:30" />
 
                 </LinearLayout>
 
@@ -114,13 +98,16 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/App.ServiceDetail.Data"
                         android:drawableStart="@drawable/ic_clock"
                         android:drawablePadding="@dimen/margin_medium"
-                        android:text="@string/save"
-                        android:textColor="@color/grayStrong"
-                        android:textStyle="bold" />
+                        android:text="@string/duration" />
+
+                    <TextView
+                        android:id="@+id/serviceDetailDuration"
+                        style="@style/App.ServiceDetail.Response"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        tools:text="30 minutos" />
 
                 </LinearLayout>
 
@@ -131,13 +118,16 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/App.ServiceDetail.Data"
                         android:drawableStart="@drawable/ic_profile"
                         android:drawablePadding="@dimen/margin_medium"
-                        android:text="@string/save"
-                        android:textColor="@color/grayStrong"
-                        android:textStyle="bold" />
+                        android:text="@string/spots" />
+
+                    <TextView
+                        android:id="@+id/serviceDetailSpots"
+                        style="@style/App.ServiceDetail.Response"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        tools:text="1" />
 
                 </LinearLayout>
 
@@ -167,7 +157,7 @@
         <Button
             android:id="@+id/confirmAssistanceButton"
             style="@style/App.PrimaryButton"
-            android:text="@string/save" />
+            android:text="@string/confirm_assistance" />
 
     </FrameLayout>
 
