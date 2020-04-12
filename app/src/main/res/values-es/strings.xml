@@ -20,7 +20,7 @@
     <string name="wrong_credentials">Credenciales erróneas</string>
     <string name="server_error">Ha ocurrido un error</string>
 
-    <!-- Register & Login -->
+    <!-- Register & Login & Recover Password-->
     <string name="account_created">¡Cuenta creada!</string>
     <string name="welcome">Bienvenido a la comunidad de DOY. A partir de ahora ya puedes unirte a los eventos que más te interesen. ¡Es muy fácil! Cuando llegue el día y la hora del evento únicamente tendrás que entrar en esta sección Chats para iniciar la videollamada.</string>
     <string name="start_enjoying">Empieza a disfrutar de formar parte de la comunidad DOY.</string>
@@ -30,6 +30,10 @@
     <string name="empty_name">Necesitamos tu nombre para registrarte</string>
     <string name="firebase_invalid_user">Este usuario no existe en nuestra base de datos</string>
     <string name="firebase_invalid_credentials">Parece que las credenciales son erróneas. Inténtalo otra vez.</string>
+    <string name="forgot_password">¿Has olvidado tu contraseña?</string>
+    <string name="forgot_password_no_problem">¡No hay problema, nos pasa a todos!</string>
+    <string name="forgot_password_message">Por favor, introduce la dirección de e-mail que usaste al registrarte y te enviaremos un enlace para restablecer tu contraseña.</string>
+    <string name="send">Enviar</string>
 
     <!-- Category list -->
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
@@ -83,7 +87,7 @@
 
     <!-- Generic Error Dialog -->
     <string name="error_title">Ups! Algo ha ido mal</string>
-    <string name="error_message">Vuelve a intentarlo en unos minutos.</string>
+    <string name="error_message">Vuelve a intentarlo en unos segundos.</string>
 
     <!-- Profile -->
     <string name="profile">Perfil</string>
@@ -101,4 +105,8 @@
     <string name="loading_events">Cargando eventos...</string>
     <string name="no_events">Parece que no tienes ningún evento en esta sección.</string>
 
+    <!-- Chat -->
+    <string name="chat">Chat</string>
+    <string name="no_chats">Todavía no tienes ningún chat abierto. \n\nApúntate a un evento para iniciar un chat</string>
+    <string name="chat_in_progress">Estamos trabajando a toda velocitat para implementar un chat grupal con soporte de videollamadas, por el momento, escribe unos mensajes al organizador!</string>
 </resources>

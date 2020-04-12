@@ -9,6 +9,9 @@ data class UserDbModel(
     @PrimaryKey
     val uid: String,
 
+    @ColumnInfo(name = "id")
+    val id: Long,
+
     @ColumnInfo(name = "name")
     val name: String,
 

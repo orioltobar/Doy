@@ -9,6 +9,7 @@ class UserMapper @Inject constructor() : Mapper<UserApiModel, UserModel> {
 
     override fun map(from: UserApiModel?): UserModel =
         UserModel(
+            from?.id ?: -1L,
             from?.name ?: "",
             from?.email ?: "",
             from?.uid ?: "",

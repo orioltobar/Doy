@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.login_fragment.loginFragmentEmailField
 import kotlinx.android.synthetic.main.login_fragment.loginFragmentPasswordEditText
 import kotlinx.android.synthetic.main.login_fragment.loginFragmentPasswordField
 import kotlinx.android.synthetic.main.login_fragment.loginFragmentProgressView
+import kotlinx.android.synthetic.main.login_fragment.recoverPassText
 import kotlinx.android.synthetic.main.login_fragment.signInButton
 import kotlinx.android.synthetic.main.login_fragment.signUpText
 import javax.inject.Inject
@@ -76,6 +77,12 @@ class LoginFragment : BaseFragment() {
             val direction = LoginFragmentDirections.actionLoginFragmentToRegisterFragment2()
             findNavController().navigate(direction)
         }
+        recoverPassText.setOnClickListener {
+            // Navigate to Recover pass fragment
+            val direction = LoginFragmentDirections.actionLoginFragmentToRecoverPasswordFragment()
+            findNavController().navigate(direction)
+        }
+
         signInButton.apply {
             alpha = 0.2f
             isEnabled = false

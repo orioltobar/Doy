@@ -7,9 +7,11 @@ import com.napptilians.doy.di.ViewModelKey
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.EventsViewModel
+import com.napptilians.features.viewmodel.ChatListViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import com.napptilians.features.viewmodel.ProfileViewModel
+import com.napptilians.features.viewmodel.RecoverPasswordViewModel
 import com.napptilians.features.viewmodel.ServicesViewModel
 import com.napptilians.features.viewmodel.RegisterViewModel
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
@@ -49,6 +51,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(RecoverPasswordViewModel::class)
+    internal abstract fun recoverPasswordViewModel(viewModel: RecoverPasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(ServicesViewModel::class)
     internal abstract fun servicesViewModel(viewModel: ServicesViewModel): ViewModel
 
@@ -82,4 +89,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     internal abstract fun profileViewModel(viewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChatListViewModel::class)
+    internal abstract fun chatListViewModel(viewModel: ChatListViewModel): ViewModel
 }
