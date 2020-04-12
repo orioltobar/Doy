@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.napptilians.commons.error.FirebaseErrors
 import com.napptilians.commons.error.LoginErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
@@ -32,7 +34,9 @@ import kotlinx.android.synthetic.main.login_fragment.signInButton
 import kotlinx.android.synthetic.main.login_fragment.signUpText
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment() {
+class LoginFragment : BaseFragment(), ToolbarBehaviour {
+
+    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -70,6 +74,7 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        enableHomeAsUp(false) { findNavController().popBackStack() }
         loginFragmentEmailEditText.addTextChangedListener(textWatcher)
         loginFragmentPasswordEditText.addTextChangedListener(textWatcher)
         signUpText.setOnClickListener {

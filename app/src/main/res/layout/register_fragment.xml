@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/toolbar" />
+
     <ProgressBar
         android:id="@+id/registerFragmentProgressView"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -45,6 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@id/registerFragmentLogo" />
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentNameField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,6 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@id/registerFragmentTitle">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,10 +72,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentEmailField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:hint="@string/email"
                 app:errorEnabled="true"
                 app:helperTextEnabled="true"
@@ -80,6 +84,7 @@
                 app:layout_constraintTop_toBottomOf="@id/registerFragmentNameField">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentEmailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,10 +95,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentPasswordField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:hint="@string/password"
                 app:errorEnabled="true"
                 app:helperTextEnabled="true"
@@ -105,6 +110,7 @@
                 app:passwordToggleTint="@color/green">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,10 +120,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentRepeatPasswordField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:hint="@string/repeat_password"
                 app:errorEnabled="true"
                 app:helperTextEnabled="true"
@@ -129,6 +135,7 @@
                 app:passwordToggleTint="@color/green">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentRepeatPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,7 +148,7 @@
                 android:id="@+id/registerFragmentCreateButton"
                 style="@style/App.Intro.Button"
                 android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_xxlarge"
+                android:layout_marginTop="@dimen/margin_xlarge"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:background="@drawable/filled_button_bg"
                 android:text="@string/create"
@@ -153,7 +160,7 @@
                 android:id="@+id/registerFragmentExistingAccountContainer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="84dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@id/endGuideline"

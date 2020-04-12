@@ -33,6 +33,7 @@
 
     <style name="App.Intro.Button">
         <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">56dp</item>
     </style>
 
     <style name="App.PrimaryButton">

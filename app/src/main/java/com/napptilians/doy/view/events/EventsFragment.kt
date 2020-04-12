@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import com.napptilians.domain.usecases.GetEventsUseCase.Companion.PAST
 import com.napptilians.domain.usecases.GetEventsUseCase.Companion.UPCOMING
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
@@ -24,11 +26,14 @@ import kotlinx.android.synthetic.main.events_fragment.eventsErrorText
 import kotlinx.android.synthetic.main.events_fragment.eventsTabLayout
 import kotlinx.android.synthetic.main.events_fragment.eventsViewPager
 import kotlinx.android.synthetic.main.events_fragment.titleText
+import kotlinx.android.synthetic.main.toolbar.toolbar
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class EventsFragment : BaseFragment() {
+class EventsFragment : BaseFragment(), ToolbarBehaviour {
+
+    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
 
     private val viewModel: EventsViewModel by viewModels { vmFactory }
     private val args: EventsFragmentArgs by navArgs()
@@ -86,6 +91,11 @@ class EventsFragment : BaseFragment() {
                     ::processNewValue
                 )
             })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        genericToolbar?.gone()
     }
 
     private fun processNewValue(model: Map<String, List<ServiceModel>>) {
