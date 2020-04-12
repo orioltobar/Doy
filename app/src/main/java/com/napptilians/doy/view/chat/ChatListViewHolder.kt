@@ -9,7 +9,9 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemEventName
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemMessageCounterContainer
+import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemPhotoCardView
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemPhotoShape
+import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemPhotoView
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.profilePhotoSmiley
 
 class ChatListViewHolder(viewGroup: ViewGroup) :
@@ -26,10 +28,11 @@ class ChatListViewHolder(viewGroup: ViewGroup) :
         val urlRegex = android.util.Patterns.WEB_URL
         val isUrl = urlRegex.matcher(model.image ?: "").find()
         model.image?.takeIf { isUrl }?.let {
+            itemView.chatListItemPhotoCardView.visible()
             Glide.with(itemView.chatListItemPhotoShape)
                 .load(it)
                 .placeholder(R.drawable.ic_smile)
-                .into(itemView.chatListItemPhotoShape)
+                .into(itemView.chatListItemPhotoView)
             itemView.profilePhotoSmiley.gone()
         } ?: run { itemView.profilePhotoSmiley.visible() }
     }

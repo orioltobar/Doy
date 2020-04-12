@@ -11,4 +11,6 @@ interface FirebaseDataSource {
     suspend fun register(email:String, password:String): Response<AuthResult, ErrorModel>
 
     suspend fun removeCurrentUser(): Response<Unit?, ErrorModel>
+
+    suspend fun recoverPassword(email: String): Response<Unit?, ErrorModel>
 }

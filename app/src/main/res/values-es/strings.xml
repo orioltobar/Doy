@@ -14,6 +14,7 @@
     <string name="password">Contraseña</string>
     <string name="repeat_password">Repetir contraseña</string>
     <string name="password_forgot">¿Has olvidado la contraseña?</string>
+    <string name="recover_password">¡Comprueba tu cuenta de correo electrónico para recuperar tu contraseña!</string>
     <string name="no_account">¿No tienes cuenta?</string>
     <string name="existing_account">¿Ya tienes cuenta?</string>
     <string name="create">Crear</string>

@@ -14,6 +14,7 @@
     <string name="password">Contrasenya</string>
     <string name="repeat_password">Repetir contrasenya</string>
     <string name="password_forgot">Has oblidat la contrasenya?</string>
+    <string name="recover_password">Revisa el teu compte de correu electrònic per recuperar la teva contraseña!</string>
     <string name="no_account">No tens compte?</string>
     <string name="existing_account">Ja tens compte?</string>
     <string name="create">Crear</string>
