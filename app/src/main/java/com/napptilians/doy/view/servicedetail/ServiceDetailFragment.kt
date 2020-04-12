@@ -45,6 +45,9 @@ class ServiceDetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        context?.let {
+            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white)
+        }
         toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
         initViews()
         setupListeners()

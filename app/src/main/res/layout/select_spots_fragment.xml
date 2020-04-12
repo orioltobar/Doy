@@ -8,8 +8,10 @@
 
     <TextView
         style="@style/App.AddService"
-        android:layout_marginTop="@dimen/margin_large"
-        android:padding="@dimen/margin_xlarge"
+        android:paddingStart="@dimen/margin_xlarge"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingEnd="@dimen/margin_xlarge"
+        android:paddingBottom="@dimen/margin_large"
         android:text="@string/how_many_spots" />
 
     <androidx.recyclerview.widget.RecyclerView

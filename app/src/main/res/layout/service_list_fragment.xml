@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foreground="?attr/selectableItemBackground"
-    android:layout_marginTop="@dimen/margin_xlarge">
+    android:layout_marginTop="@dimen/margin_xxlarge">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/startGuideline"

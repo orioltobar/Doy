@@ -52,6 +52,7 @@
         android:id="@+id/titleText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_medium"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/add_service_to_category"
