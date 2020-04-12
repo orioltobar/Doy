@@ -1,5 +1,7 @@
 package com.napptilians.doy.view.servicelist
 
+
+import android.util.TypedValue
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.napptilians.domain.models.service.ServiceModel
@@ -13,13 +15,25 @@ import kotlinx.android.synthetic.main.service_item.view.serviceImage
 import kotlinx.android.synthetic.main.service_item.view.serviceMaxSpotsText
 import kotlinx.android.synthetic.main.service_item.view.serviceNameText
 import java.time.format.DateTimeFormatter
-import java.util.Locale
+import java.util.*
 
-class ServiceItemViewHolder(parent: ViewGroup) :
+
+class ServiceItemViewHolder(private val parent: ViewGroup, private val isPastService: Boolean) :
     BaseViewHolder<ServiceModel>(parent, R.layout.service_item) {
 
     override fun update(model: ServiceModel) {
         with(model) {
+            if (isPastService) {
+                itemView.setBackgroundResource(0)
+            } else {
+                val outValue = TypedValue()
+                parent.context.theme.resolveAttribute(
+                    R.attr.selectableItemBackground,
+                    outValue,
+                    true
+                )
+                itemView.setBackgroundResource(outValue.resourceId)
+            }
             setImage(this)
             setName(this)
             setDate(this)

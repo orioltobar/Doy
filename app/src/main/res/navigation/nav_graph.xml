@@ -153,7 +153,16 @@
         android:label="EventsFragment" >
         <argument
             android:name="userId"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="onlyMyEvents"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_eventsFragment_to_serviceDetailFragment2"
+            app:destination="@id/serviceDetailFragment" />
     </fragment>
 
 </navigation>

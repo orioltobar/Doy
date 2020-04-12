@@ -6,14 +6,14 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.commons.map
 import com.napptilians.commons.flatMap
+import com.napptilians.commons.map
 import com.napptilians.commons.singleSourceOfTruth
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
-import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.category.CategoryModel
+import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.repositories.DoyRepository
@@ -41,7 +41,10 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> =
         networkDataSource.addAttendee(userUid, serviceId)
 
-    override suspend fun deleteAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> =
+    override suspend fun deleteAttendee(
+        userUid: String,
+        serviceId: Long
+    ): Response<Unit, ErrorModel> =
         networkDataSource.deleteAttendee(userUid, serviceId)
 
     override suspend fun login(
@@ -113,7 +116,12 @@ class DoyRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getMyServices(uid: String?): Response<List<ServiceModel>, ErrorModel> {
+        return networkDataSource.getMyServices(uid).map {
+            it.sortedWith(comparator)
+        }
+    }
+
     private val comparator: Comparator<ServiceModel>
         get() = compareBy({ it.date }, { it.name })
-
 }

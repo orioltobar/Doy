@@ -63,7 +63,7 @@ class DiscoverFragment : BaseFragment() {
         eventsButton.setOnClickListener {
             firebaseAuth.currentUser?.let {
                 val direction =
-                    DiscoverFragmentDirections.actionMenuFavouritesListButtonToEventsFragment2(it.uid)
+                    DiscoverFragmentDirections.actionMenuFavouritesListButtonToEventsFragment2(it.uid, false)
                 findNavController().navigate(direction)
             }
         }

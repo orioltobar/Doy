@@ -17,7 +17,10 @@ import kotlinx.android.synthetic.main.event_page.eventsLoadingProgress
 import kotlinx.android.synthetic.main.event_page.eventsLoadingText
 import javax.inject.Inject
 
-class EventTabFragment : BaseFragment() {
+class EventTabFragment(
+    private val isPastService: Boolean = false,
+    private val onEventClicked: (ServiceModel) -> Unit = {}
+) : BaseFragment() {
 
     @Inject
     lateinit var eventsAdapter: ServiceListAdapter
@@ -30,7 +33,7 @@ class EventTabFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+        initViews(isPastService)
     }
 
     fun setItems(events: List<ServiceModel>) {
@@ -47,21 +50,20 @@ class EventTabFragment : BaseFragment() {
         }
     }
 
-    override fun onError(error: ErrorModel) {
-
+    fun setAlphaToPastEvents(alpha: Float) {
+        eventsList.alpha = alpha
     }
 
-    override fun onLoading() {
+    override fun onError(error: ErrorModel) {}
 
-    }
+    override fun onLoading() {}
 
-    private fun initViews() {
+    private fun initViews(isPastService: Boolean) {
         val layoutManager = LinearLayoutManager(context)
-        layoutManager.recycleChildrenOnDetach = true
         eventsList.layoutManager = layoutManager
-        eventsAdapter = ServiceListAdapter()
+        eventsAdapter= ServiceListAdapter().apply { isPastService }
         eventsAdapter.setOnClickListener {
-            println("Event clicked!")
+            onEventClicked(it)
         }
         eventsList.adapter = eventsAdapter
     }

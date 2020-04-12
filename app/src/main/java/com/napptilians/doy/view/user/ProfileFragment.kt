@@ -165,7 +165,7 @@ class ProfileFragment : BaseFragment() {
     private fun navigateToMyEvents() {
         firebaseAuth.currentUser?.let {
             val navigation =
-                ProfileFragmentDirections.actionProfileFragmentToEventsFragment(it.uid)
+                ProfileFragmentDirections.actionProfileFragmentToEventsFragment(it.uid, true)
             findNavController().navigate(navigation)
         }
     }
