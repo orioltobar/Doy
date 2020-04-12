@@ -16,8 +16,10 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.chat.ChatModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentHeaderTitle
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentSendButton
 import kotlinx.android.synthetic.main.chat_fragment.fireBaseChatMessages
 import javax.inject.Inject
@@ -46,6 +48,18 @@ class ChatFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // TODO: In progress dialog
+        activity?.let { activity ->
+            DoyDialog(activity).apply {
+                setPopupIcon(R.drawable.ic_rocket)
+                setPopupTitle(context.resources.getString(R.string.wip))
+                setPopupSubtitle(context.resources.getString(R.string.chat_in_progress))
+                show()
+            }
+        }
+
+        chatFragmentHeaderTitle.text = args.serviceTitle
 
         val chatId = args.serviceId.toString()
         databaseReference = FirebaseDatabase.getInstance().reference

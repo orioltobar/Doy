@@ -10,7 +10,6 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.error.Errors
 import com.napptilians.commons.error.LoginErrors
 import com.napptilians.domain.usecases.LoginUseCase
-import com.napptilians.commons.error.RegisterErrors
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -48,8 +47,8 @@ class LoginViewModel @Inject constructor(
             !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
                 false to LoginErrors.InvalidEmail
             }
-            password.isEmpty() -> {
-                false to LoginErrors.EmptyPassword
+            password.length < Constants.MINIMUM_PASSWORD_LENGTH -> {
+                false to LoginErrors.InvalidPassword
             }
             else -> true to null
         }

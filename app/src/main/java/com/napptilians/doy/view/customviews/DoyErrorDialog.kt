@@ -8,7 +8,7 @@ class DoyErrorDialog(
 ) : DoyDialog(context) {
 
     init {
-        setPopupIcon(R.drawable.ic_error)
+        setPopupIcon(R.drawable.ic_error_sad)
         setPopupTitle(context.resources.getString(R.string.error_title))
         setPopupSubtitle(context.resources.getString(R.string.error_message))
     }

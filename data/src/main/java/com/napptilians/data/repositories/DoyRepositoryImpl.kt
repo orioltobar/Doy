@@ -82,6 +82,9 @@ class DoyRepositoryImpl @Inject constructor(
         networkDataSource.updateUser(userUid = userUid, token = "")
     }
 
+    override suspend fun recoverPassword(email: String): Response<Unit?, ErrorModel> =
+        firebaseDataSource.recoverPassword(email)
+
     override suspend fun getServices(
         categoryIds: List<Long>,
         serviceId: Long?,

@@ -33,6 +33,8 @@ interface DoyRepository {
 
     suspend fun logout(userUid: String)
 
+    suspend fun recoverPassword(email: String): Response<Unit?, ErrorModel>
+
     suspend fun getServices(
         categoryIds: List<Long> = emptyList(),
         serviceId: Long? = null,

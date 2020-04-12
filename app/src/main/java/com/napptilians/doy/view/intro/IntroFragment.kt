@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.customviews.DoyDialog
 import kotlinx.android.synthetic.main.intro_fragment.continueGoogleButton
 import kotlinx.android.synthetic.main.intro_fragment.signInButton
 import kotlinx.android.synthetic.main.intro_fragment.signUpButton
@@ -34,6 +35,14 @@ class IntroFragment : BaseFragment() {
         }
         continueGoogleButton.setOnClickListener {
             // Authenticate with Google
+            activity?.let { activity ->
+                DoyDialog(activity).apply {
+                    setPopupIcon(R.drawable.ic_rocket)
+                    setPopupTitle(context.resources.getString(R.string.wip))
+                    setPopupSubtitle(context.resources.getString(R.string.wip_explanation))
+                    show()
+                }
+            }
         }
     }
 

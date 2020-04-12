@@ -13,7 +13,8 @@
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
     <string name="password_forgot">Forgot password?</string>
-    <string name="no_account">No account?</string>
+    <string name="recover_password">Check your email account to recover your password!</string>
+    <string name="no_account">Don\'t you have an account?</string>
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
@@ -28,7 +29,9 @@
     <string name="passwords_dont_match">Passwords don\'t match.</string>
     <string name="invalid_email">¡Oops! This e-mail isn\'t valid.</string>
     <string name="empty_name">We need your name to log you in</string>
-    <string name="empty_password">Password can\'t be empty</string>
+    <string name="firebase_invalid_user">This user does not exist in our records</string>
+    <string name="firebase_invalid_credentials">Looks like credentials were incorrect. Try again.</string>
+    <string name="firebase_user_already_exists">This username is not available. Please choose a different one.</string>
     <string name="forgot_password">Have you forgotten your password?</string>
     <string name="forgot_password_no_problem">There is no problem, it happens to all of us!</string>
     <string name="forgot_password_message">Please enter the email address you used when registering and we will send you a link to reset your password.</string>
@@ -108,4 +111,5 @@
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="no_chats">You don\'t have any open chat. \n\n Join an event to open a new chat.</string>
+    <string name="chat_in_progress">We are working at full capacity to implement a group chat with video call support, at the moment, try to write a message to the host of the event!</string>
 </resources>

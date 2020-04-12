@@ -5,32 +5,6 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/menuFavouritesListButton"
-        android:name="com.napptilians.doy.view.discover.DiscoverFragment"
-        android:label="DiscoverFragment">
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
-            app:destination="@id/chatFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
-            app:destination="@id/categoryListFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_addServiceFragment"
-            app:destination="@id/addServiceFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_introFragment"
-            app:destination="@id/introFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_eventsFragment2"
-            app:destination="@id/eventsFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_menuFavouritesListButton_to_chatListFragment"
-            app:destination="@id/chatListFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/chatFragment"
         android:name="com.napptilians.doy.view.chat.detail.ChatFragment"
         android:label="ChatFragment">
@@ -46,6 +20,10 @@
             android:name="senderName"
             android:defaultValue='""'
             app:argType="string" />
+        <argument
+            android:name="serviceTitle"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -58,8 +36,8 @@
             android:id="@+id/action_loginFragment_to_recoverPasswordFragment"
             app:destination="@id/recoverPasswordFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_menuFavouritesListButton"
-            app:destination="@id/menuFavouritesListButton" />
+            android:id="@+id/action_loginFragment_to_categoryListFragment2"
+            app:destination="@id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/recoverPasswordFragment"
@@ -73,8 +51,8 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_registerFragment_to_menuFavouritesListButton"
-            app:destination="@id/menuFavouritesListButton" />
+            android:id="@+id/action_registerFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/introFragment"
@@ -148,8 +126,8 @@
             android:id="@+id/action_splashFragment_to_introFragment"
             app:destination="@id/introFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_menuFavouritesListButton"
-            app:destination="@id/menuFavouritesListButton" />
+            android:id="@+id/action_splashFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

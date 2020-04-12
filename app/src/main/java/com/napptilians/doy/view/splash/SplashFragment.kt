@@ -29,7 +29,7 @@ class SplashFragment : BaseFragment() {
         val direction = if (fireBaseAuth.currentUser == null) {
             SplashFragmentDirections.actionSplashFragmentToIntroFragment()
         } else {
-            SplashFragmentDirections.actionSplashFragmentToMenuFavouritesListButton()
+            SplashFragmentDirections.actionSplashFragmentToCategoryListFragment()
         }
         findNavController().navigate(direction)
     }
