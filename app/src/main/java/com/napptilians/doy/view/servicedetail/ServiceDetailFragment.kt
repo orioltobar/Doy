@@ -16,6 +16,7 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.CancelAssistDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
@@ -93,11 +94,17 @@ class ServiceDetailFragment : BaseFragment() {
                 Observer { handleUiStates(it, ::processConfirmAssistNewValue) })
         }
         cancelAssistanceButton.setOnClickListener {
-            viewModel.executeDelete(args.service.serviceId ?: -1L)
-            viewModel.deleteAttendeeServiceDataStream.observe(
-                viewLifecycleOwner,
-                Observer { handleUiStates(it, ::processCancelAssistNewValue) })
+            context?.let { context ->
+                CancelAssistDialog(context) { performCancelAssist() }.show()
+            }
         }
+    }
+
+    private fun performCancelAssist() {
+        viewModel.executeDelete(args.service.serviceId ?: -1L)
+        viewModel.deleteAttendeeServiceDataStream.observe(
+            viewLifecycleOwner,
+            Observer { handleUiStates(it, ::processCancelAssistNewValue) })
     }
 
     private fun processConfirmAssistNewValue(unit: Unit) {

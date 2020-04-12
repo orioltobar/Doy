@@ -61,6 +61,8 @@
     <string name="add_attendee_success_message">L\'esdeveniment s\'acaba d\'afegir a la secció <b>Xat</b> perquè puguis resoldre qualsevol dubte abans de l\'esdeveniment.\n\nRecorda ser puntual, i si finalment no vas a poder assistir-hi, cancel·lar-amb antelació.</string>
     <string name="assist_to_event_yes">Assistiràs a aquest event!</string>
     <string name="assist_to_event_cancel">No vull assistir</string>
+    <string name="confirm_assist_to_event_cancel">¿Estàs segur de què no vols assistir a l\'event?</string>
+    <string name="confirm_assist_to_event_cancel_yes">Estic segur, no vull assistir</string>
     <string name="your_service">Aquest event és teu. Gràcies per ajudar!</string>
 
     <!-- Generic Dialog -->
