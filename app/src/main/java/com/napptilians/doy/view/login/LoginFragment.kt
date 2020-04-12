@@ -15,10 +15,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.LoginViewModel
+import kotlinx.android.synthetic.main.login_fragment.emailEditText
+import kotlinx.android.synthetic.main.login_fragment.loginFragmentProgressView
+import kotlinx.android.synthetic.main.login_fragment.passwordEditText
+import kotlinx.android.synthetic.main.login_fragment.signInButton
+import kotlinx.android.synthetic.main.login_fragment.signUpText
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.login_fragment.*
 
 class LoginFragment : BaseFragment() {
 
@@ -86,6 +91,7 @@ class LoginFragment : BaseFragment() {
         enableLoginButton()
         loginFragmentProgressView.visibility = View.GONE
         Toast.makeText(activity, error.errorMessage, Toast.LENGTH_LONG).show()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {

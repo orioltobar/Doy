@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -12,17 +13,27 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.chat.MessageModel
+import com.napptilians.domain.models.chat.ChatModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.customviews.DoyErrorDialog
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentSendButton
+import kotlinx.android.synthetic.main.chat_fragment.fireBaseChatMessages
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.chat_fragment.*
 
+
+// TODO: Re do this view after MVP.
 class ChatFragment : BaseFragment() {
 
     private val auth: FirebaseAuth? get() = FirebaseAuth.getInstance()
     private val user: FirebaseUser? get() = FirebaseAuth.getInstance().currentUser
-    private val databaseReference: DatabaseReference? by lazy { FirebaseDatabase.getInstance().reference }
+
+    private var databaseReference: DatabaseReference? = null
+
+    private val args: ChatFragmentArgs by navArgs()
+
+    private lateinit var firebaseListener: ValueEventListener
 
     @Inject
     lateinit var adapter: ChatAdapter
@@ -36,14 +47,12 @@ class ChatFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        user?.let {
-            println("FIREBASE: ${it.displayName}")
-            println("FIREBASE: ${it.photoUrl}")
-        } ?: run {
-            println("FIREBASE: NOT LOGGED!")
-        }
+        val chatId = args.serviceId.toString()
+        databaseReference = FirebaseDatabase.getInstance().reference
+        firebaseListener = createFireBaseListener()
+        databaseReference?.child(MESSAGE_TABLE_NAME)?.child(chatId)
+            ?.addValueEventListener(firebaseListener)
 
-        createFireBaseListener()
         fireBaseChatMessages.adapter = adapter
 
         chatFragmentSendButton.setOnClickListener {
@@ -53,46 +62,53 @@ class ChatFragment : BaseFragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        databaseReference?.removeEventListener(firebaseListener)
+    }
+
     private fun sendData(text: String) {
-        val message = MessageModel(text)
-        databaseReference?.child("messages")?.push()?.setValue(message)
+        val senderName = args.senderName
+        val chatId = args.serviceId.toString()
+
+        val message = ChatModel(chatId, text, senderName, args.userId.toString())
+        databaseReference?.child(MESSAGE_TABLE_NAME)?.child(chatId)?.push()?.setValue(message)
         chatFragmentEditText.setText("")
     }
 
-    private fun refreshRecycler(messages: List<MessageModel>) {
+    private fun refreshRecycler(messages: List<ChatModel>) {
         adapter.updateItems(messages)
         adapter.notifyDataSetChanged()
-        fireBaseChatMessages.scrollToPosition(messages.size - 1)
+        fireBaseChatMessages?.scrollToPosition(messages.size - 1)
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun createFireBaseListener() {
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
+    private fun createFireBaseListener() = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val toReturn: MutableList<ChatModel> = mutableListOf()
+            for (data in dataSnapshot.children) {
+                val messageData = data.getValue<ChatModel>(ChatModel::class.java)
+                val message = messageData?.let { it } ?: continue
 
-                val toReturn: MutableList<MessageModel> = mutableListOf()
-                for (data in p0.children) {
-                    val messageData = data.getValue<MessageModel>(MessageModel::class.java)
-                    val message = messageData?.let { it } ?: continue
-
-                    toReturn.add(message)
-                }
-                toReturn.sortBy { message -> message.timeStamp }
-
-                refreshRecycler(toReturn.toList())
+                toReturn.add(message)
             }
+            toReturn.sortBy { message -> message.timeStamp }
 
-            override fun onCancelled(p0: DatabaseError) {
-            }
+            refreshRecycler(toReturn.toList())
         }
 
-        databaseReference?.child("messages")?.addValueEventListener(postListener)
+        override fun onCancelled(p0: DatabaseError) {
+        }
     }
+
+    companion object {
+        private const val MESSAGE_TABLE_NAME = "messages"
+    }
+
 }

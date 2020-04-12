@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingTop="@dimen/margin_medium">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatListItemPhotoContainer"
         android:layout_width="48dp"
-        android:layout_height="48dp">
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:id="@+id/chatListItemPhotoShape"
@@ -56,6 +62,7 @@
             style="@style/App.Intro"
             android:layout_width="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_xsmall"
             android:fontFamily="@font/raleway_semibold"
             android:textColor="@color/grayStrong"
             android:textSize="@dimen/text_size_s"
@@ -63,33 +70,44 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/chatListItemMessageCounter"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chatListItemMessageCounterContainer"
         android:layout_width="17dp"
         android:layout_height="17dp"
-        android:background="@drawable/bg_filled_oval"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="@dimen/margin_small"
-        app:layout_constraintBottom_toBottomOf="@id/chatListItemMessageCounter"
-        app:layout_constraintEnd_toEndOf="@id/chatListItemMessageCounter"
-        app:layout_constraintStart_toStartOf="@id/chatListItemMessageCounter"
-        app:layout_constraintTop_toTopOf="@id/chatListItemMessageCounter"
-        tools:text="+9" />
+        <View
+            android:id="@+id/chatListItemMessageShape"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_filled_oval"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="@id/chatListItemMessageShape"
+            app:layout_constraintEnd_toEndOf="@id/chatListItemMessageShape"
+            app:layout_constraintStart_toStartOf="@id/chatListItemMessageShape"
+            app:layout_constraintTop_toTopOf="@id/chatListItemMessageShape"
+            tools:text="+9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/light_gray"
         android:layout_marginTop="@dimen/margin_medium"
-        app:layout_constraintTop_toBottomOf="@id/chatListItemPhotoContainer"
+        android:background="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatListItemPhotoContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

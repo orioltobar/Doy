@@ -12,7 +12,7 @@ interface ServiceService {
     suspend fun getServices(
         @Query(CATEGORY_ID) categoryId: List<Long> = emptyList(),
         @Query(SERVICE_ID) serviceId: Long? = null,
-        @Query(UID) uid: Long? = null
+        @Query(UID) uid: String? = null
     ): List<ServiceApiModel>
 
     @GET("/getMyServices")

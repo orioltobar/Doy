@@ -5,10 +5,10 @@ import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
 import com.napptilians.networkdatasource.di.BaseUrl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
-import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Named
+import javax.inject.Singleton
 
 @Module(includes = [ApplicationDataBindsModule::class])
 object AppModule {

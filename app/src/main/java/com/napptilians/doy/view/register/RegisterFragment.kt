@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.register_fragment.*
@@ -65,6 +66,7 @@ class RegisterFragment : BaseFragment() {
             ?: run { getString(R.string.generic_error) }
 
         Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {

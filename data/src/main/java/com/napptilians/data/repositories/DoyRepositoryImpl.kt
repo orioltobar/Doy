@@ -75,7 +75,7 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun getServices(
         categoryIds: List<Long>,
         serviceId: Long?,
-        uid: Long?
+        uid: String?
     ): Response<List<ServiceModel>, ErrorModel> {
         return networkDataSource.getServices(categoryIds, serviceId, uid)
     }

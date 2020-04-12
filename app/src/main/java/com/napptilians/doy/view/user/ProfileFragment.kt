@@ -16,6 +16,7 @@ import com.napptilians.doy.extensions.clickable
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.notClickable
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.profile_fragment.profileEditMode
@@ -113,6 +114,7 @@ class ProfileFragment : BaseFragment() {
             ?: run { getString(R.string.generic_error) }
 
         Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {

@@ -9,6 +9,7 @@ class UserDbMapper @Inject constructor() : Mapper<UserDbModel, UserModel> {
 
     override fun map(from: UserDbModel?): UserModel =
         UserModel(
+            from?.id ?: -1L,
             from?.name ?: "",
             from?.email ?: "",
             from?.uid ?: "",
@@ -20,6 +21,7 @@ class UserDbMapper @Inject constructor() : Mapper<UserDbModel, UserModel> {
     fun mapToDbModel(from: UserModel): UserDbModel =
         UserDbModel(
             from.uid,
+            from.id,
             from.name,
             from.email,
             from.pushToken,

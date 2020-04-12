@@ -64,7 +64,7 @@
 
     <!-- Generic Error Dialog -->
     <string name="error_title">Ups! Something went wrong</string>
-    <string name="error_message">Try again in a few minutes.</string>
+    <string name="error_message">Try again in a few seconds.</string>
 
     <!-- Profile -->
     <string name="profile">Profile</string>
@@ -76,4 +76,5 @@
 
     <!-- Chat -->
     <string name="chat">Chat</string>
+    <string name="no_chats">You don\'t have any open chat. \n\n Join an event to open a new chat.</string>
 </resources>
