@@ -30,8 +30,7 @@
             android:id="@+id/profileNameReadModeShape"
             android:layout_width="0dp"
             android:layout_height="116dp"
-            android:background="@drawable/bg_dashed_rectangle"
-            app:layout_constraintTop_toBottomOf="@id/profileNameReadModeName" />
+            android:background="@drawable/bg_dashed_rectangle" />
 
         <TextView
             android:id="@+id/profileBioPlaceHolderDefaultText"
@@ -116,7 +115,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
-            android:id="@+id/profileEventsReadModeTopSeparator"
+            android:id="@+id/profileEventsReadModeTopSeparator2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/light_gray"

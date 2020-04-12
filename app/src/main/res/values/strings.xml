@@ -18,6 +18,8 @@
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
+    <string name="server_error">An error has occurred</string>
+    <string name="generic_error">Your request cannot be performed at this time.</string>
 
     <!-- Register & Login & Recover pass-->
     <string name="account_created">Account created!</string>
