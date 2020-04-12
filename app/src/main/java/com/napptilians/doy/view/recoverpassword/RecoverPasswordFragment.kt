@@ -95,7 +95,7 @@ class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
             setHintTextAppearance(R.style.ErrorTheme)
             setErrorTextAppearance(R.style.ErrorTheme)
             error = getString(messageIdRes)
-            setErrorIconDrawable(R.drawable.ic_error_sad)
+            setErrorIconDrawable(R.drawable.ic_error)
         }
     }
 
