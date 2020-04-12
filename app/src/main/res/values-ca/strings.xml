@@ -18,7 +18,8 @@
     <string name="existing_account">Ja tens compte?</string>
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credencials errònies</string>
-    <string name="generic_error">Sembla que hi ha hagut algun tipus d\'error</string>
+    <string name="server_error">Hi ha hagut un error</string>
+    <string name="generic_error">En aquest moment no pot completar la teva petició.</string>
 
     <!-- Category list -->
     <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
