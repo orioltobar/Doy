@@ -26,11 +26,22 @@ android {
         // Add only non-scalable alternative dimensional resources (others will be created custom)
         resConfigs "nodpi"
     }
+
+    signingConfigs {
+        // Add signing configuration for release variant in order to generate signed apk correctly
+        release {
+            storeFile file("../certs/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
