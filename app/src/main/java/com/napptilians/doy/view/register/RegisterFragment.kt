@@ -1,6 +1,8 @@
 package com.napptilians.doy.view.register
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +13,16 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.error.RegisterErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.view.customviews.DoyDialog
-import com.napptilians.commons.error.RegisterErrors
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.RegisterViewModel
+import kotlinx.android.synthetic.main.login_fragment.loginFragmentEmailEditText
+import kotlinx.android.synthetic.main.login_fragment.loginFragmentPasswordEditText
+import kotlinx.android.synthetic.main.login_fragment.signInButton
 import kotlinx.android.synthetic.main.register_fragment.registerFragmentCreateButton
 import kotlinx.android.synthetic.main.register_fragment.registerFragmentEmailEditText
 import kotlinx.android.synthetic.main.register_fragment.registerFragmentEmailField
@@ -38,6 +43,34 @@ class RegisterFragment : BaseFragment() {
 
     private val viewModel: RegisterViewModel by viewModels { vmFactory }
 
+    private val textWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            if (checkEmptyFields()) {
+                registerFragmentCreateButton.apply {
+                    isEnabled = true
+                    alpha = 1f
+                }
+            } else {
+                registerFragmentCreateButton.apply {
+                    isEnabled = false
+                    alpha = 0.2f
+                }
+            }
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
+
+    private fun checkEmptyFields(): Boolean {
+        return registerFragmentNameEditText.text?.isEmpty() == false
+            && registerFragmentEmailEditText.text?.isEmpty() == false
+            && registerFragmentPasswordEditText.text?.isEmpty() == false
+            && registerFragmentRepeatPasswordEditText.text?.isEmpty() == false
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,12 +80,21 @@ class RegisterFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        registerFragmentNameEditText.addTextChangedListener(textWatcher)
+        registerFragmentEmailEditText.addTextChangedListener(textWatcher)
+        registerFragmentPasswordEditText.addTextChangedListener(textWatcher)
+        registerFragmentRepeatPasswordEditText.addTextChangedListener(textWatcher)
+
         registerFragmentSignInText.setOnClickListener {
             val direction = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
             findNavController().navigate(direction)
         }
-        registerFragmentCreateButton.setOnClickListener {
-            sendRegister()
+        registerFragmentCreateButton.apply {
+            alpha = 0.2f
+            isEnabled = false
+            setOnClickListener {
+                sendRegister()
+            }
         }
 
         // LiveData Observer

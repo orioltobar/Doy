@@ -13,7 +13,7 @@
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
     <string name="password_forgot">Forgot password?</string>
-    <string name="no_account">No account?</string>
+    <string name="no_account">Don\'t you have an account?</string>
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
@@ -26,7 +26,9 @@
     <string name="passwords_dont_match">Passwords don\'t match.</string>
     <string name="invalid_email">¡Oops! This e-mail isn\'t valid.</string>
     <string name="empty_name">We need your name to log you in</string>
-    <string name="empty_password">Password can\'t be empty</string>
+    <string name="credentials_error">We need your name to log you in</string>
+    <string name="firebase_invalid_user">This user does not exist in our records</string>
+    <string name="firebase_invalid_credentials">Looks like credentials were incorrect. Try again.</string>
 
     <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>

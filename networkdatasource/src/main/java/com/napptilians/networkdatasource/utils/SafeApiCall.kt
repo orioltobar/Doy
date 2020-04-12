@@ -1,9 +1,12 @@
 package com.napptilians.networkdatasource.utils
 
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.napptilians.commons.Failure
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.error.FirebaseErrors
 
 /**
  * This function is used to wrap a [call] to an API in a safe way. The result is expressed as a
@@ -19,6 +22,10 @@ suspend fun <T> safeApiCall(
         } else {
             Success(response)
         }
+    } catch (exception: FirebaseAuthInvalidUserException) {
+        Failure(ErrorModel(null, FirebaseErrors.InvalidUser))
+    } catch (exception: FirebaseAuthInvalidCredentialsException) {
+        Failure(ErrorModel(null, FirebaseErrors.InvalidCredentials))
     } catch (exception: Exception) {
         Failure(ErrorModel(exception.message ?: ""))
     }

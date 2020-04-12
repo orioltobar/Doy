@@ -19,7 +19,6 @@
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credenciales erróneas</string>
     <string name="server_error">Ha ocurrido un error</string>
-    <string name="generic_error">En este momento no puede completarse tu petición.</string>
 
     <!-- Register & Login -->
     <string name="account_created">¡Cuenta creada!</string>
@@ -29,7 +28,8 @@
     <string name="passwords_dont_match">Las contraseñas no coinciden.</string>
     <string name="invalid_email">¡Uy! Este e-mail no es válido.</string>
     <string name="empty_name">Necesitamos tu nombre para registrarte</string>
-    <string name="empty_password">La contraseña no puede estar vacía</string>
+    <string name="firebase_invalid_user">Este usuario no existe en nuestra base de datos</string>
+    <string name="firebase_invalid_credentials">Parece que las credenciales son erróneas. Inténtalo otra vez.</string>
 
     <!-- Category list -->
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
