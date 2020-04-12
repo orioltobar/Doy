@@ -22,8 +22,8 @@
             app:argType="string" />
         <argument
             android:name="serviceTitle"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -172,6 +172,9 @@
         <action
             android:id="@+id/action_eventsFragment_to_serviceDetailFragment2"
             app:destination="@id/serviceDetailFragment" />
+        <action
+            android:id="@+id/action_eventsFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
     </fragment>
 
 </navigation>

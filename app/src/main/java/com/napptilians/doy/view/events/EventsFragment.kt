@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -36,6 +37,23 @@ class EventsFragment : BaseFragment() {
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (args.onlyMyEvents) {
+
+            val callback = object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    // Handle the back button event
+                    val navigation =
+                        EventsFragmentDirections.actionEventsFragmentToCategoryListFragment()
+                    findNavController().navigate(navigation)
+                }
+            }
+            requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+            // The callback can be enabled or disabled here or in handleOnBackPressed()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +68,7 @@ class EventsFragment : BaseFragment() {
     }
 
     override fun onLoading() {}
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
