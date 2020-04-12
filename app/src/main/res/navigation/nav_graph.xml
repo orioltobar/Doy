@@ -9,6 +9,9 @@
         android:name="com.napptilians.doy.view.discover.DiscoverFragment"
         android:label="DiscoverFragment">
         <action
+            android:id="@+id/action_menuFavouritesListButton_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
             android:id="@+id/action_menuFavouritesListButton_to_categoryListFragment"
             app:destination="@id/categoryListFragment" />
         <action
@@ -17,6 +20,9 @@
         <action
             android:id="@+id/action_menuFavouritesListButton_to_introFragment"
             app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_menuFavouritesListButton_to_eventsFragment2"
+            app:destination="@id/eventsFragment" />
         <action
             android:id="@+id/action_menuFavouritesListButton_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -145,6 +151,9 @@
         <action
             android:id="@+id/action_profileFragment_to_introFragment"
             app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
     </fragment>
     <fragment
         android:id="@+id/serviceDetailFragment"
@@ -161,6 +170,23 @@
         <action
             android:id="@+id/action_chatListFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.napptilians.doy.view.events.EventsFragment"
+        android:label="EventsFragment" >
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="onlyMyEvents"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_eventsFragment_to_serviceDetailFragment2"
+            app:destination="@id/serviceDetailFragment" />
     </fragment>
 
 </navigation>

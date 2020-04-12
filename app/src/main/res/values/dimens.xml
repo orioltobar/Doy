@@ -6,6 +6,7 @@
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_xlarge">32dp</dimen>
+    <dimen name="margin_xlargex">36dp</dimen>
     <dimen name="margin_xxlarge">64dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="margin_space_bottom">50dp</dimen>
@@ -38,5 +39,9 @@
 
     <!-- Service detail -->
     <dimen name="service_image_height">250dp</dimen>
+    <dimen name="service_owner_image_height">56dp</dimen>
+
+    <!-- User profile -->
+    <dimen name="profile_card_radius">250dp</dimen>
 
 </resources>

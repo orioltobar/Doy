@@ -101,4 +101,9 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
+    <style name="ErrorTheme" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

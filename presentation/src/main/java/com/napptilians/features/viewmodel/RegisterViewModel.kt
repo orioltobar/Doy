@@ -1,5 +1,6 @@
 package com.napptilians.features.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import com.napptilians.commons.valueOrNull
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.usecases.GetDeviceInfoUseCase
 import com.napptilians.domain.usecases.RegisterUseCase
+import com.napptilians.features.RegisterErrors
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -37,8 +39,9 @@ class RegisterViewModel @Inject constructor(
         repeatPassword: String
     ) {
         viewModelScope.launch {
-            if (!checkCredentials(name, email, password, repeatPassword)) {
-                _registerDataStream.value = emitFailure(ErrorModel(""))
+            val errors = checkCredentials(name, email, password, repeatPassword)
+            if (!errors.first) {
+                _registerDataStream.value = emitFailure(ErrorModel(errorCause = errors.second))
             } else {
                 val deviceTokenRequest = getDeviceInfoUseCase.execute()
                 val deviceToken = deviceTokenRequest.valueOrNull()?.firebaseToken ?: ""
@@ -49,24 +52,29 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("NewApi")
     private fun checkCredentials(
         name: String,
         email: String,
         password: String,
         repeatPassword: String
-    ): Boolean {
+    ): Pair<Boolean, RegisterErrors?> {
         // Expressed as when expression for improved readability.
+        android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         return when {
+            name.isEmpty() ->{
+               false to RegisterErrors.EmptyName
+            }
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                false to RegisterErrors.InvalidEmail
+            }
             password.length < Constants.MINIMUM_PASSWORD_LENGTH -> {
-                false
+                false to RegisterErrors.ShortPassword
             }
             password != repeatPassword -> {
-                false
+                false to RegisterErrors.PasswordsDontMatch
             }
-            email.isEmpty() -> {
-                false
-            }
-            else -> name.isNotEmpty()
+            else -> true to null
         }
     }
 }

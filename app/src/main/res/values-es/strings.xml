@@ -21,6 +21,15 @@
     <string name="server_error">Ha ocurrido un error</string>
     <string name="generic_error">En este momento no puede completarse tu petición.</string>
 
+    <!-- Register -->
+    <string name="account_created">¡Cuenta creada!</string>
+    <string name="welcome">Bienvenido a la comunidad de DOY. A partir de ahora ya puedes unirte a los eventos que más te interesen. ¡Es muy fácil! Cuando llegue el día y la hora del evento únicamente tendrás que entrar en esta sección Chats para iniciar la videollamada.</string>
+    <string name="start_enjoying">Empieza a disfrutar de formar parte de la comunidad DOY.</string>
+    <string name="password_too_short">La contraseña debe tener mínimo 6 caracteres.</string>
+    <string name="passwords_dont_match">Las contraseñas no coinciden.</string>
+    <string name="invalid_email">¡Uy! Este e-mail no es válido.</string>
+    <string name="empty_name">Necesitamos tu nombre para registrarte</string>
+
     <!-- Category list -->
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>
     <string name="no_categories">Aún no tenemos categorías disponibles</string>
@@ -56,8 +65,16 @@
     <string name="when">¿Cuándo?</string>
     <string name="duration">Duración:</string>
     <string name="spots">Plazas:</string>
-    <string name="spots_reserved">1 persona apuntada</string>
+    <string name="spot_reserved">%1d persona apuntada</string>
+    <string name="spots_reserved">%1d personas apuntadas</string>
     <string name="confirm_assistance">Asistiré</string>
+    <string name="add_attendee_success">¡Te has apuntado correctamente!</string>
+    <string name="add_attendee_success_message">El evento se acaba de añadir a la sección <b>Chat</b> para que puedas resolver cualquier duda antes del evento.\n\nRecuerda ser puntual, y si finalmente no vas a poder asistir, cancelarlo con antelación.</string>
+    <string name="assist_to_event_yes">¡Assistirás a este evento!</string>
+    <string name="assist_to_event_cancel">No quiero asistir</string>
+    <string name="confirm_assist_to_event_cancel">¿Estás seguro de que no quieres asistir al evento?</string>
+    <string name="confirm_assist_to_event_cancel_yes">Estoy seguro, no quiero asistir</string>
+    <string name="your_service">Este evento es tuyo. ¡Gracias por ayudar!</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>
@@ -74,6 +91,14 @@
     <string name="events_by_user">Events creats per mi</string>
     <string name="logout">Cerrar sesión</string>
     <string name="update_profile">Actualitzar perfil</string>
+
+    <!-- My events -->
+    <string name="your_events">Tus eventos</string>
+    <string name="my_own_events">Events created by me</string>
+    <string name="tab_upcoming">Próximos</string>
+    <string name="tab_past">Pasados</string>
+    <string name="loading_events">Cargando eventos...</string>
+    <string name="no_events">Parece que no tienes ningún evento en esta sección.</string>
 
     <!-- Chat -->
     <string name="chat">Chat</string>

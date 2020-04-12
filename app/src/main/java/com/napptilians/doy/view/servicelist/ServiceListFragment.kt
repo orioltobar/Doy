@@ -42,7 +42,7 @@ class ServiceListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        viewModel.execute(listOf(args.categoryId), null, null)
+        viewModel.execute(listOf(args.categoryId), null)
         viewModel.servicesDataStream.observe(
             viewLifecycleOwner,
             Observer<UiStatus<List<ServiceModel>, ErrorModel>> {
@@ -70,7 +70,7 @@ class ServiceListFragment : BaseFragment() {
     override fun onError(error: ErrorModel) {
         serviceList.gone()
         loadingProgress.gone()
-        loadingText.text = resources.getString(R.string.generic_error)
+        loadingText.text = resources.getString(R.string.error_message)
         loadingText.visible()
     }
 

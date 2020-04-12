@@ -17,13 +17,25 @@ interface ServiceService {
 
     @GET("/getMyServices")
     suspend fun getMyServices(
-        @Query(UID) uid: Long
+        @Query(UID) uid: String? = null
     ): List<ServiceApiModel>
 
     @POST("/addService")
     suspend fun addService(
         @Body service: ServiceApiModel
     ): Long
+
+    @POST("/addAttendee")
+    suspend fun addAttendee(
+        @Query(UID) uid: String = "",
+        @Query(SERVICE_ID) serviceId: Long? = null
+    )
+
+    @POST("/deleteAssistance")
+    suspend fun deleteAttendee(
+        @Query(UID) uid: String = "",
+        @Query(SERVICE_ID) serviceId: Long? = null
+    )
 
     companion object {
         private const val CATEGORY_ID = "category_id"

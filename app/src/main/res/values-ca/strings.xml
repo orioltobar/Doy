@@ -55,8 +55,25 @@
     <string name="when">¿Quan?</string>
     <string name="duration">Duració:</string>
     <string name="spots">Places:</string>
-    <string name="spots_reserved">1 persona apuntada</string>
+    <string name="spot_reserved">%1d persona apuntada</string>
+    <string name="spots_reserved">%1d persones apuntades</string>
     <string name="confirm_assistance">Assistiré</string>
+    <string name="add_attendee_success">T\'has apuntat correctament!</string>
+    <string name="add_attendee_success_message">L\'esdeveniment s\'acaba d\'afegir a la secció <b>Xat</b> perquè puguis resoldre qualsevol dubte abans de l\'esdeveniment.\n\nRecorda ser puntual, i si finalment no vas a poder assistir-hi, cancel·lar-amb antelació.</string>
+    <string name="assist_to_event_yes">Assistiràs a aquest event!</string>
+    <string name="assist_to_event_cancel">No vull assistir</string>
+    <string name="confirm_assist_to_event_cancel">¿Estàs segur de què no vols assistir a l\'event?</string>
+    <string name="confirm_assist_to_event_cancel_yes">Estic segur, no vull assistir</string>
+    <string name="your_service">Aquest event és teu. Gràcies per ajudar!</string>
+
+    <!-- Register -->
+    <string name="account_created">¡Compte creat!</string>
+    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. ¡És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Chats per iniciar la videotrucada.</string>
+    <string name="start_enjoying">Comença a gauidr de formar part de la comunitat DOY.</string>
+    <string name="password_too_short">La contrasenya ha de tenir mínim 6 caracters.</string>
+    <string name="passwords_dont_match">Les contrasenyes no coincideixen.</string>
+    <string name="invalid_email">¡Uy! Aquest e-mail no es vàlid.</string>
+    <string name="empty_name">Necessitem el teu nom per a registrarte</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>
@@ -77,4 +94,12 @@
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="no_chats">Encara no tens cap chat obert. \n\nApunta\'t a un event per iniciar un event</string>
+    <!-- My events -->
+    <string name="your_events">Els teus esdeveniments</string>
+    <string name="my_own_events">Events created by me</string>
+    <string name="tab_upcoming">Propers</string>
+    <string name="tab_past">Passats</string>
+    <string name="loading_events">Carregant esdeveniments...</string>
+    <string name="no_events">Sembla que no tens cap esdeveniment en aquesta secció.</string>
+
 </resources>

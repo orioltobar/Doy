@@ -5,6 +5,7 @@ import com.napptilians.commons.Failure
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.features.Error
+import com.napptilians.commons.error.Errors
 import com.napptilians.features.Loading
 import com.napptilians.features.NewValue
 import com.napptilians.features.UiStatus

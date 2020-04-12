@@ -35,7 +35,11 @@ class NetworkDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getServices(categoryIds: List<Long>, serviceId: Long?, uid: String?): Response<List<ServiceModel>, ErrorModel> {
+    override suspend fun getServices(
+        categoryIds: List<Long>,
+        serviceId: Long?,
+        uid: String?
+    ): Response<List<ServiceModel>, ErrorModel> {
         return safeApiCall {
             serviceService.getServices(categoryIds, serviceId, uid).map {
                 serviceInMapper.map(it)
@@ -46,6 +50,21 @@ class NetworkDataSourceImpl @Inject constructor(
     override suspend fun addService(service: ServiceModel): Response<Long, ErrorModel> {
         return safeApiCall {
             serviceService.addService(serviceInMapper.map(service))
+        }
+    }
+
+    override suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> {
+        return safeApiCall {
+            serviceService.addAttendee(userUid, serviceId)
+        }
+    }
+
+    override suspend fun deleteAttendee(
+        userUid: String,
+        serviceId: Long
+    ): Response<Unit, ErrorModel> {
+        return safeApiCall {
+            serviceService.deleteAttendee(userUid, serviceId)
         }
     }
 
@@ -76,4 +95,12 @@ class NetworkDataSourceImpl @Inject constructor(
         }.map {
             userMapper.map(it[0])
         }
+
+    override suspend fun getMyServices(uid: String?): Response<List<ServiceModel>, ErrorModel> {
+        return safeApiCall {
+            serviceService.getMyServices(uid).map {
+                serviceInMapper.map(it)
+            }
+        }
+    }
 }

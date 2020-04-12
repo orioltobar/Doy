@@ -6,11 +6,13 @@
         android:icon="@drawable/ic_home" />
 
     <item
-        android:id="@+id/menuEvents"
+        android:id="@+id/eventsFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_calendar" />
 
     <item
-        android:id="@+id/menuAdd"
+        android:id="@+id/addServiceFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_create" />
 
     <item

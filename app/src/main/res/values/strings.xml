@@ -17,7 +17,15 @@
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
-    <string name="generic_error">Looks like there was some sort of error</string>
+
+    <!-- Register -->
+    <string name="account_created">Account created!</string>
+    <string name="welcome">Welcome to the DOY community. From now on, you can start joining the events you are more interested on. It is very easy! When the day and hour of the event come, you will just have to enter the Chats section to start the videocall.</string>
+    <string name="start_enjoying">Start and enjoy being part of the DOY community</string>
+    <string name="password_too_short">Password must have at least 6 characters.</string>
+    <string name="passwords_dont_match">Passwords don\'t match.</string>
+    <string name="invalid_email">¡Oops! This e-mail isn\'t valid.</string>
+    <string name="empty_name">We need your name to log you in</string>
 
     <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
@@ -55,8 +63,16 @@
     <string name="when">When?</string>
     <string name="duration">Duration:</string>
     <string name="spots">Spots:</string>
-    <string name="spots_reserved">1 reserved spot</string>
+    <string name="spot_reserved">%1d reserved spot</string>
+    <string name="spots_reserved">%1d reserved spots</string>
     <string name="confirm_assistance">Assist</string>
+    <string name="add_attendee_success">You have signed up successfully!</string>
+    <string name="add_attendee_success_message">The event has just been added to the <b>Chat</b> section so you can answer any questions before the event.\n\nRemember to be punctual, and if you finally will not be able to attend, cancel it in advance.</string>
+    <string name="assist_to_event_yes">You will assist to this event!</string>
+    <string name="assist_to_event_cancel">I don\'t want to assist anymore</string>
+    <string name="confirm_assist_to_event_cancel">Are you sure you don\'t want to assist to the event?</string>
+    <string name="confirm_assist_to_event_cancel_yes">I am sure, I don\'t want to assist</string>
+    <string name="your_service">This is your event. Thanks for helping!</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
@@ -73,6 +89,14 @@
     <string name="events_by_user">Events created by me</string>
     <string name="logout">Log out</string>
     <string name="update_profile">Update profile</string>
+
+    <!-- My events -->
+    <string name="your_events">Your events</string>
+    <string name="my_own_events">Events created by me</string>
+    <string name="tab_upcoming">Upcoming</string>
+    <string name="tab_past">Past</string>
+    <string name="loading_events">Loading events...</string>
+    <string name="no_events">It looks like you don\'t have events in this section.</string>
 
     <!-- Chat -->
     <string name="chat">Chat</string>

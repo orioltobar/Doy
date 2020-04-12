@@ -5,20 +5,16 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.repositories.DoyRepository
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlinx.coroutines.withContext
 
-class GetServicesUseCase @Inject constructor(
+class DeleteAttendeeUseCase @Inject constructor(
     appDispatchers: AppDispatchers,
     private val doyRepository: DoyRepository
 ) {
+
     private val ioDispatcher = appDispatchers.io
 
-    suspend fun execute(
-        categoryIds: List<Long> = emptyList(),
-        serviceId: Long? = null,
-        uid: String? = null
-    ): Response<List<ServiceModel>, ErrorModel> =
-        withContext(ioDispatcher) { doyRepository.getServices(categoryIds, serviceId, uid) }
+    suspend fun execute(userUid: String, serviceId: Long): Response<Unit, ErrorModel> =
+        withContext(ioDispatcher) { doyRepository.deleteAttendee(userUid, serviceId) }
 }
-
