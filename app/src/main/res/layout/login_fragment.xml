@@ -124,7 +124,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/titleText"
+                    android:id="@+id/recoverPassText"
                     style="@style/App.Intro"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"

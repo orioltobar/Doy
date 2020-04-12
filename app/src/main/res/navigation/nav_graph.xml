@@ -39,9 +39,16 @@
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
         <action
+            android:id="@+id/action_loginFragment_to_recoverPasswordFragment"
+            app:destination="@id/recoverPasswordFragment" />
+        <action
             android:id="@+id/action_loginFragment_to_menuFavouritesListButton"
             app:destination="@id/menuFavouritesListButton" />
     </fragment>
+    <fragment
+        android:id="@+id/recoverPasswordFragment"
+        android:name="com.napptilians.doy.view.recoverpassword.RecoverPasswordFragment"
+        android:label="RecoverPasswordFragment" />
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.napptilians.doy.view.register.RegisterFragment"
@@ -106,7 +113,7 @@
     <fragment
         android:id="@+id/serviceListFragment"
         android:name="com.napptilians.doy.view.servicelist.ServiceListFragment"
-        android:label="ServiceListFragment" >
+        android:label="ServiceListFragment">
         <argument
             android:name="categoryId"
             app:argType="long" />
@@ -120,7 +127,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.napptilians.doy.view.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_introFragment"
             app:destination="@id/introFragment" />
@@ -131,7 +138,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.napptilians.doy.view.user.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_introFragment"
             app:destination="@id/introFragment" />
@@ -142,7 +149,7 @@
     <fragment
         android:id="@+id/serviceDetailFragment"
         android:name="com.napptilians.doy.view.servicedetail.ServiceDetailFragment"
-        android:label="ServiceDetailFragment" >
+        android:label="ServiceDetailFragment">
         <argument
             android:name="service"
             app:argType="com.napptilians.domain.models.service.ServiceModel" />
@@ -150,16 +157,16 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.napptilians.doy.view.events.EventsFragment"
-        android:label="EventsFragment" >
+        android:label="EventsFragment">
         <argument
             android:name="userId"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="onlyMyEvents"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_eventsFragment_to_serviceDetailFragment2"
             app:destination="@id/serviceDetailFragment" />
