@@ -38,7 +38,6 @@
                 android:id="@+id/compoundLogoImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_xlarge"
                 android:alpha="0.7"
                 android:background="@drawable/image_bg_small"
                 android:contentDescription="@null"
@@ -89,6 +88,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     app:layout_constraintStart_toStartOf="@id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@id/loginText">
@@ -96,7 +96,10 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/emailEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:imeOptions="actionNext" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,7 +108,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
-                    app:endIconMode="password_toggle"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     app:layout_constraintStart_toStartOf="@id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@id/email"

@@ -18,6 +18,11 @@
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
 
+    <!-- Register -->
+    <string name="account_created">Account created!</string>
+    <string name="welcome">Welcome to the DOY community. From now on, you can start joining the events you are more interested on. It is very easy! When the day and hour of the event come, you will just have to enter the Chats section to start the videocall.</string>
+    <string name="start_enjoying">Start and enjoy being part of the DOY community</string>
+
     <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
     <string name="no_categories">There are no categories available yet.</string>
