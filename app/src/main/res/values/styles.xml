@@ -25,6 +25,12 @@
         <item name="android:textColor">@color/grayStrong</item>
     </style>
 
+    <style name="App.TitleXxl">
+        <item name="android:textSize">@dimen/text_size_xxl</item>
+        <item name="android:fontFamily">@font/raleway_bold</item>
+        <item name="android:textColor">@color/grayStrong</item>
+    </style>
+
     <style name="App.Intro.Button">
         <item name="android:textAllCaps">false</item>
     </style>
