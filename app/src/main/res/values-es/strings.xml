@@ -83,7 +83,7 @@
 
     <!-- Generic Error Dialog -->
     <string name="error_title">Ups! Algo ha ido mal</string>
-    <string name="error_message">Vuelve a intentarlo en unos minutos.</string>
+    <string name="error_message">Vuelve a intentarlo en unos segundos.</string>
 
     <!-- Profile -->
     <string name="profile">Perfil</string>
@@ -101,4 +101,7 @@
     <string name="loading_events">Cargando eventos...</string>
     <string name="no_events">Parece que no tienes ningún evento en esta sección.</string>
 
+    <!-- Chat -->
+    <string name="chat">Chat</string>
+    <string name="no_chats">Todavía no tienes ningún chat abierto. \n\nApúntate a un evento para iniciar un chat</string>
 </resources>

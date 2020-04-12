@@ -25,6 +25,7 @@ import com.napptilians.doy.extensions.notClickable
 import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.profile_fragment.profileEditMode
@@ -133,7 +134,8 @@ class ProfileFragment : BaseFragment() {
             profileImageCardView.gone()
         }
         if (isEditMode && !isEditingImage) {
-            switchEditMode()
+            switchEditMode(user)
+        } else {
             readModeView?.apply {
                 updateFields(user)
                 profileInfoFrameLayout.removeAllViews()
@@ -151,6 +153,7 @@ class ProfileFragment : BaseFragment() {
             ?: run { getString(R.string.error_message) }
 
         Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {
@@ -177,7 +180,7 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun switchEditMode() {
+    private fun switchEditMode(user: UserModel? = null) {
         context?.let {
             if (!isEditMode) {
                 profileTitle.text = getString(R.string.edit_profile)
@@ -197,6 +200,7 @@ class ProfileFragment : BaseFragment() {
                 profileInfoLogOutText.visible()
                 profileInfoSaveChangesButton.gone()
                 readModeView?.apply {
+                    user?.let { updateFields(it) }
                     profileInfoFrameLayout.removeAllViews()
                     profileInfoFrameLayout.addView(this)
                     isEditMode = false

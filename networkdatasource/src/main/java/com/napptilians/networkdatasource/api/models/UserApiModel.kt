@@ -3,6 +3,9 @@ package com.napptilians.networkdatasource.api.models
 import com.google.gson.annotations.SerializedName
 
 data class UserApiModel(
+    @SerializedName("user_id")
+    val id: Long? = null,
+
     @SerializedName("name")
     val name: String? = null,
 

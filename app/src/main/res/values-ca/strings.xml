@@ -82,7 +82,7 @@
 
     <!-- Generic Error Dialog -->
     <string name="error_title">Ups! Alguna cosa ha anat malament</string>
-    <string name="error_message">Torna a intentar-ho en uns minuts.</string>
+    <string name="error_message">Torna a intentar-ho en uns segons.</string>
 
     <!-- Profile -->
     <string name="profile">Perfil</string>
@@ -100,4 +100,7 @@
     <string name="loading_events">Carregant esdeveniments...</string>
     <string name="no_events">Sembla que no tens cap esdeveniment en aquesta secció.</string>
 
+    <!-- Chat -->
+    <string name="chat">Chat</string>
+    <string name="no_chats">Encara no tens cap chat obert. \n\nApunta\'t a un event per iniciar un event</string>
 </resources>

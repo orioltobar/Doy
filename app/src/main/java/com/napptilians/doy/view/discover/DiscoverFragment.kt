@@ -70,7 +70,7 @@ class DiscoverFragment : BaseFragment() {
 
         chatsButton.setOnClickListener {
             val direction =
-                DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatListFragment()
             findNavController().navigate(direction)
         }
         loginFlowButton.setOnClickListener {
