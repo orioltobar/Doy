@@ -21,11 +21,27 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.napptilians.doy.di.TestRunner"
+        // Add only alternative resources of the supported locales
+        resConfigs "es", "ca", "en"
+        // Add only non-scalable alternative dimensional resources (others will be created custom)
+        resConfigs "nodpi"
+    }
+
+    signingConfigs {
+        // Add signing configuration for release variant in order to generate signed apk correctly
+        release {
+            storeFile file("../certs/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
