@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment() {
         }
         recoverPassText.setOnClickListener {
             // Navigate to Recover pass fragment
-            val direction = LoginFragmentDirections.actionLoginFragmentToRegisterFragment2()
+            val direction = LoginFragmentDirections.actionLoginFragmentToRecoverPasswordFragment()
             findNavController().navigate(direction)
         }
 

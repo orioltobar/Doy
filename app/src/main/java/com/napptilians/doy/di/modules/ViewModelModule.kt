@@ -11,6 +11,7 @@ import com.napptilians.features.viewmodel.ChatListViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import com.napptilians.features.viewmodel.ProfileViewModel
+import com.napptilians.features.viewmodel.RecoverPasswordViewModel
 import com.napptilians.features.viewmodel.ServicesViewModel
 import com.napptilians.features.viewmodel.RegisterViewModel
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
@@ -47,6 +48,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RegisterViewModel::class)
     internal abstract fun registerViewModel(viewModel: RegisterViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RecoverPasswordViewModel::class)
+    internal abstract fun recoverPasswordViewModel(viewModel: RecoverPasswordViewModel): ViewModel
 
     @Binds
     @IntoMap
