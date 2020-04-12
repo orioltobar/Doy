@@ -62,7 +62,7 @@ class ChatListFragment : BaseFragment() {
                     serviceModel.ownerId ?: ""
                 )
                 if (values is NewValue) {
-                    processTargetUser(values.result)
+                    processTargetUser(values.result, serviceModel.name ?: "")
                 }
             }
         }
@@ -97,12 +97,13 @@ class ChatListFragment : BaseFragment() {
         } ?: run { chatListNoChatMessage.visible() }
     }
 
-    private fun processTargetUser(chatUsersInfo: List<Pair<Long, String>>) {
+    private fun processTargetUser(chatUsersInfo: List<Pair<Long, String>>, serviceTitle: String) {
         chatUsersInfo.takeIf { it.size >= 2 }?.let {
             val direction = ChatListFragmentDirections.actionChatListFragmentToChatFragment(
-                it[0].first, // current user Id
-                it[1].first, // service Id
-                it[0].second // sender name
+                it[0].first,  // current user Id
+                it[1].first,  // service Id
+                it[0].second, // sender name
+                serviceTitle  // event name
             )
             findNavController().navigate(direction)
         }

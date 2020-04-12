@@ -102,4 +102,5 @@
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="no_chats">You don\'t have any open chat. \n\n Join an event to open a new chat.</string>
+    <string name="chat_in_progress">We are working at full capacity to implement a group chat with video call support, at the moment, try to write a message to the host of the event!</string>
 </resources>

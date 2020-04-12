@@ -46,6 +46,10 @@
             android:name="senderName"
             android:defaultValue='""'
             app:argType="string" />
+        <argument
+            android:name="serviceTitle"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
