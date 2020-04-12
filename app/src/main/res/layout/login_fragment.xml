@@ -40,7 +40,7 @@
                 android:id="@+id/compoundLogoImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.9"
+                android:alpha="0.85"
                 android:background="@drawable/image_bg_small"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_doy_compound_logo"
