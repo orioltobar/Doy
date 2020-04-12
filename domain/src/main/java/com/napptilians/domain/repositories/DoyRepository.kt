@@ -20,6 +20,8 @@ interface DoyRepository {
 
     suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel>
 
+    suspend fun deleteAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel>
+
     suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
 
     suspend fun register(

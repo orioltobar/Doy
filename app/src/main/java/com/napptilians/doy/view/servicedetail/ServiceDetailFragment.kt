@@ -73,10 +73,16 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun setupListeners() {
         confirmAssistanceButton.setOnClickListener {
-            viewModel.execute(args.service.serviceId ?: -1L)
+            viewModel.executeAdd(args.service.serviceId ?: -1L)
             viewModel.addAttendeeServiceDataStream.observe(
                 viewLifecycleOwner,
                 Observer { handleUiStates(it, ::processConfirmAssistNewValue) })
+        }
+        cancelAssistanceButton.setOnClickListener {
+            viewModel.executeDelete(args.service.serviceId ?: -1L)
+            viewModel.deleteAttendeeServiceDataStream.observe(
+                viewLifecycleOwner,
+                Observer { handleUiStates(it, ::processCancelAssistNewValue) })
         }
     }
 
@@ -92,6 +98,12 @@ class ServiceDetailFragment : BaseFragment() {
         }
         confirmAssistanceButton.invisible()
         cancelAssistanceView.visible()
+    }
+
+    private fun processCancelAssistNewValue(unit: Unit) {
+        progressBar.gone()
+        confirmAssistanceButton.visible()
+        cancelAssistanceView.gone()
     }
 
     override fun onError(error: ErrorModel) {
