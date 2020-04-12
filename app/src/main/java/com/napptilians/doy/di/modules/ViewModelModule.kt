@@ -7,6 +7,7 @@ import com.napptilians.doy.di.ViewModelKey
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.EventsViewModel
+import com.napptilians.features.viewmodel.ChatListViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import com.napptilians.features.viewmodel.ProfileViewModel
@@ -82,4 +83,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     internal abstract fun profileViewModel(viewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChatListViewModel::class)
+    internal abstract fun chatListViewModel(viewModel: ChatListViewModel): ViewModel
 }
