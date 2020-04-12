@@ -37,6 +37,7 @@
 
     <!-- Service detail -->
     <dimen name="service_image_height">250dp</dimen>
+    <dimen name="service_owner_image_height">56dp</dimen>
 
     <!-- User profile -->
     <dimen name="profile_card_radius">250dp</dimen>

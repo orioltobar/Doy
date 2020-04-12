@@ -147,13 +147,23 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/serviceOwnerImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profileImageCardView"
+        android:layout_width="@dimen/service_owner_image_height"
+        android:layout_height="@dimen/service_owner_image_height"
         android:layout_margin="@dimen/margin_medium"
         app:layout_anchor="@id/appBar"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"
+        app:cardCornerRadius="@dimen/profile_card_radius"
+        app:cardBackgroundColor="@color/colorAccent">
+
+        <ImageView
+            android:id="@+id/serviceOwnerImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
 
     <FrameLayout
         android:layout_width="match_parent"

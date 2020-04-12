@@ -53,6 +53,10 @@ class ServiceDetailFragment : BaseFragment() {
             Glide.with(toolbarImage)
                 .load(image)
                 .into(toolbarImage)
+            Glide.with(serviceOwnerImage)
+                .load(ownerImage)
+                .placeholder(R.drawable.ic_profile)
+                .into(serviceOwnerImage)
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
             setDate(date)
