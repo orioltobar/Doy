@@ -37,4 +37,8 @@ interface NetworkDataSource {
     ): Response<List<ServiceModel>, ErrorModel>
 
     suspend fun addService(service: ServiceModel): Response<Long, ErrorModel>
+
+    suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel>
+
+    suspend fun deleteAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel>
 }

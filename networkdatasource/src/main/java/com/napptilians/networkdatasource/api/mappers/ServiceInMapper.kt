@@ -20,9 +20,12 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from?.image ?: "",
             from?.day ?: "",
             from?.spots ?: 1,
+            from?.attendees ?: 0,
             from?.durationMin ?: 30,
             from?.hour ?: "",
-            from?.ownerId ?: ""
+            from?.ownerId ?: "",
+            from?.ownerImage ?: "",
+            null
         )
 
     fun map(from: ServiceApiModel): ServiceModel =
@@ -36,8 +39,11 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.hour ?: "",
             parseDate(from),
             from.spots ?: 1,
+            from.attendees ?: 0,
             from.durationMin ?: 30,
-            from.ownerId ?: ""
+            from.ownerId ?: "",
+            from.ownerImage ?: "",
+            from.assistance?.equals("1") ?: false
         )
 
     @SuppressLint("NewApi")

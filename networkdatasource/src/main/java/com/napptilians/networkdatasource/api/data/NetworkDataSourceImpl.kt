@@ -49,6 +49,18 @@ class NetworkDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> {
+        return safeApiCall {
+            serviceService.addAttendee(userUid, serviceId)
+        }
+    }
+
+    override suspend fun deleteAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> {
+        return safeApiCall {
+            serviceService.deleteAttendee(userUid, serviceId)
+        }
+    }
+
     override suspend fun addUser(name: String, email: String, uid: String, token: String):
             Response<Unit, ErrorModel> =
         safeApiCall {
