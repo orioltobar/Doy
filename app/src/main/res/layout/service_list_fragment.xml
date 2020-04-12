@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foreground="?attr/selectableItemBackground"
-    android:layout_marginTop="@dimen/margin_xlarge"
-    >
+    android:layout_marginTop="@dimen/margin_xlarge">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/startGuideline"
@@ -21,6 +20,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/margin_medium" />
+
+    <include layout="@layout/toolbar" />
 
     <TextView
         android:id="@+id/titleText"

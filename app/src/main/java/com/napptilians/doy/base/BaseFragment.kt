@@ -1,9 +1,6 @@
 package com.napptilians.doy.base
 
-import androidx.appcompat.widget.Toolbar
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.doy.R
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.di.ViewModelFactory
 import com.napptilians.features.Error
 import com.napptilians.features.Loading
@@ -12,9 +9,7 @@ import com.napptilians.features.UiStatus
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-abstract class BaseFragment : DaggerFragment(), ToolbarBehaviour {
-
-    override val toolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+abstract class BaseFragment : DaggerFragment() {
 
     @Inject
     lateinit var vmFactory: ViewModelFactory
