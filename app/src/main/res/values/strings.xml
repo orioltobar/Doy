@@ -17,7 +17,6 @@
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
-    <string name="generic_error">Looks like there was some sort of error</string>
 
     <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
@@ -81,5 +80,13 @@
     <string name="events_by_user">Events created by me</string>
     <string name="logout">Log out</string>
     <string name="update_profile">Update profile</string>
+
+    <!-- My events -->
+    <string name="your_events">Your events</string>
+    <string name="my_own_events">Events created by me</string>
+    <string name="tab_upcoming">Upcoming</string>
+    <string name="tab_past">Past</string>
+    <string name="loading_events">Loading events...</string>
+    <string name="no_events">It looks like you don\'t have events in this section.</string>
 
 </resources>

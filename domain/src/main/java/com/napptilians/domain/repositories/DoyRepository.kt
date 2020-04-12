@@ -3,8 +3,8 @@ package com.napptilians.domain.repositories
 import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.category.CategoryModel
+import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
 
@@ -48,4 +48,6 @@ interface DoyRepository {
         description: String? = null,
         image: String? = null
     ): Response<UserModel, ErrorModel>
+
+    suspend fun getMyServices(uid: String? = null): Response<List<ServiceModel>, ErrorModel>
 }

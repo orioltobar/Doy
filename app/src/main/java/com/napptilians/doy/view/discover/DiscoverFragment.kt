@@ -13,8 +13,8 @@ import com.napptilians.doy.view.customviews.DoyDialog
 import kotlinx.android.synthetic.main.discover_fragment.addServiceButton
 import kotlinx.android.synthetic.main.discover_fragment.categoryListButton
 import kotlinx.android.synthetic.main.discover_fragment.chatsButton
-import kotlinx.android.synthetic.main.discover_fragment.detailButton
 import kotlinx.android.synthetic.main.discover_fragment.discoverUserUid
+import kotlinx.android.synthetic.main.discover_fragment.eventsButton
 import kotlinx.android.synthetic.main.discover_fragment.loginFlowButton
 import kotlinx.android.synthetic.main.discover_fragment.popupButton
 import kotlinx.android.synthetic.main.discover_fragment.profileButton
@@ -59,6 +59,15 @@ class DiscoverFragment : BaseFragment() {
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToCategoryListFragment()
             findNavController().navigate(navigation)
         }
+
+        eventsButton.setOnClickListener {
+            firebaseAuth.currentUser?.let {
+                val direction =
+                    DiscoverFragmentDirections.actionMenuFavouritesListButtonToEventsFragment2(it.uid, false)
+                findNavController().navigate(direction)
+            }
+        }
+
         chatsButton.setOnClickListener {
             val direction =
                 DiscoverFragmentDirections.actionMenuFavouritesListButtonToChatFragment()
@@ -75,7 +84,8 @@ class DiscoverFragment : BaseFragment() {
             findNavController().navigate(navigation)
         }
         profileButton.setOnClickListener {
-            val direction = DiscoverFragmentDirections.actionMenuFavouritesListButtonToProfileFragment()
+            val direction =
+                DiscoverFragmentDirections.actionMenuFavouritesListButtonToProfileFragment()
             findNavController().navigate(direction)
         }
     }

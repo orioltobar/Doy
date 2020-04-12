@@ -62,7 +62,7 @@ class RegisterFragment : BaseFragment() {
         val errorString = error.message
             ?.takeIf { it.isNotEmpty() }
             ?.let { it }
-            ?: run { getString(R.string.generic_error) }
+            ?: run { getString(R.string.error_message) }
 
         Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
     }

@@ -24,8 +24,9 @@ class ServicesViewModel @Inject constructor(
         get() = _servicesDataStream
 
     fun execute(
-        categoryIds: List<Long>,
-        serviceId: Long?
+        categoryIds: List<Long> = emptyList(),
+        serviceId: Long? = null,
+        uid: String? = null
     ) {
         viewModelScope.launch {
             _servicesDataStream.value = emitLoadingState()

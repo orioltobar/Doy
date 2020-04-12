@@ -17,7 +17,7 @@ interface ServiceService {
 
     @GET("/getMyServices")
     suspend fun getMyServices(
-        @Query(UID) uid: Long
+        @Query(UID) uid: String? = null
     ): List<ServiceApiModel>
 
     @POST("/addService")
