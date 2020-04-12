@@ -107,4 +107,5 @@
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="no_chats">Encara no tens cap chat obert. \n\nApunta\'t a un event per iniciar un event</string>
+    <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un chat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
 </resources>
