@@ -68,6 +68,7 @@
         style="@style/App.Intro.Button"
         android:layout_marginTop="@dimen/margin_large"
         android:background="@drawable/empty_button_bg"
+        android:foreground="?attr/selectableItemBackground"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="@id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline"
