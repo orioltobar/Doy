@@ -6,11 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.napptilians.commons.Constants
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.error.Errors
+import com.napptilians.commons.error.RegisterErrors
 import com.napptilians.commons.valueOrNull
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.usecases.GetDeviceInfoUseCase
 import com.napptilians.domain.usecases.RegisterUseCase
-import com.napptilians.features.RegisterErrors
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -58,12 +59,12 @@ class RegisterViewModel @Inject constructor(
         email: String,
         password: String,
         repeatPassword: String
-    ): Pair<Boolean, RegisterErrors?> {
+    ): Pair<Boolean, Errors?> {
         // Expressed as when expression for improved readability.
         android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         return when {
-            name.isEmpty() ->{
-               false to RegisterErrors.EmptyName
+            name.isEmpty() -> {
+                false to RegisterErrors.EmptyName
             }
             !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
                 false to RegisterErrors.InvalidEmail
