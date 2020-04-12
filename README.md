@@ -1,10 +1,18 @@
-# hackovid20
+## DOY: The first app exclusively devoted to the creation and broadcast of live online events.
 
-The app is organized in modules following CLEAN architecture/SOLID principles:
+DOY is an app which gathers and centralizes events created by users and aimed at all sorts of people, no matter their age, condition or genre.
+
+In this platform, you will learn how to cook that dish you've always wanted, that dance you've never dared to start, or just have a conversation with some random person to get to know them better.
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+
+Download it from Google Play and start surfing events. Don't be shy and get in touch with your community.
+
+## Technical overview
+From a technical perspective, the app is organized in modules, following CLEAN architecture and SOLID principles, having the following structure:
 ```
 app -> presentation -> domain/commons <- data <- networkdatasource/diskdatasource
 ```
-
 
 ## License
 **GNU General Public License (GPL) 3.0**
