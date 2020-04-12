@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
 import com.napptilians.doy.extensions.decodeByteArrayFromBase64
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
@@ -30,13 +32,16 @@ import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.*
+import kotlinx.android.synthetic.main.toolbar.toolbar
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.Calendar
 
 @ExperimentalCoroutinesApi
-class AddServiceFragment : BaseFragment() {
+class AddServiceFragment : BaseFragment(), ToolbarBehaviour {
+
+    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
 
     private val viewModel: AddServiceViewModel by viewModels { vmFactory }
 
@@ -89,6 +94,7 @@ class AddServiceFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+        genericToolbar?.gone()
         Glide.with(serviceImageView)
             .load(viewModel.service.image?.decodeByteArrayFromBase64())
             .into(serviceImageView)

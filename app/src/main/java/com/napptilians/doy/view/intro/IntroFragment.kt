@@ -4,16 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.behaviours.ToolbarBehaviour
+import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.view.customviews.DoyDialog
 import kotlinx.android.synthetic.main.intro_fragment.continueGoogleButton
 import kotlinx.android.synthetic.main.intro_fragment.signInButton
 import kotlinx.android.synthetic.main.intro_fragment.signUpButton
+import kotlinx.android.synthetic.main.toolbar.toolbar
 
-class IntroFragment : BaseFragment() {
+class IntroFragment : BaseFragment(), ToolbarBehaviour {
+
+    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +50,11 @@ class IntroFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        genericToolbar?.gone()
     }
 
     override fun onError(error: ErrorModel) {
