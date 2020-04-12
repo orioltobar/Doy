@@ -1,6 +1,9 @@
 import buildSrc.Versions
-
+plugins {
+    id "org.jlleitschuh.gradle.ktlint" version "9.2.1"
+}
 apply plugin: 'java-library'
+apply plugin: "org.jlleitschuh.gradle.ktlint-idea"
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 
@@ -14,6 +17,7 @@ dependencies {
 
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines_version}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines_version}"
 
     // Testing
     testApi "junit:junit:${Versions.junit_version}"

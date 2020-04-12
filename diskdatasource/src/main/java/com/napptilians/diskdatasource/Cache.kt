@@ -18,9 +18,9 @@ object Cache {
      */
     fun <T> checkTimestampCache(timestamp: Long, model: T): Response<T, ErrorModel> = model?.let {
         if (Date().time - timestamp < TimeUnit.MINUTES.toMillis(Constants.CACHE_TIME_MINUTES)) {
-            Success(it)
+            Success(it as T)
         } else {
-            Failure(ErrorModel(""))
+            Failure(ErrorModel("cache error"))
         }
-    } ?: run { Failure(ErrorModel("")) }
+    } ?: run { Failure(ErrorModel("cache error")) }
 }

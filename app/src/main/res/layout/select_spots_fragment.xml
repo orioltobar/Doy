@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        style="@style/App.AddService"
+        android:paddingStart="@dimen/margin_xlarge"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingEnd="@dimen/margin_xlarge"
+        android:paddingBottom="@dimen/margin_large"
+        android:text="@string/how_many_spots" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/spotsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/saveButton"
+        style="@style/App.PrimaryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/save" />
+
+</LinearLayout>

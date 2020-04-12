@@ -27,7 +27,7 @@ class MovieDataBaseTestImpl {
     private lateinit var movieDbMapper: MovieDbMapper
 
     private val dbDataSource by lazy {
-        ExampleDataBaseImpl(
+        DbDataBaseImpl(
             exampleDao,
             movieDbMapper
         )

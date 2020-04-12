@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_small"
+    android:elevation="@dimen/cardview_default_elevation"
+    android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/serviceImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/service_image_bg"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="118dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="118dp"
+        tools:src="@drawable/ic_logo_colour_green" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/margin_small"
+        app:layout_constraintBottom_toBottomOf="@id/serviceImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/serviceImage"
+        app:layout_constraintTop_toTopOf="@id/serviceImage"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/serviceNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/grayStrong"
+            android:textSize="@dimen/text_size_l"
+            tools:text="¡Mi gato me ignora! ¿Hablamos?" />
+
+        <TextView
+            android:id="@+id/serviceDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:drawableStart="@drawable/ic_calendar"
+            android:drawablePadding="@dimen/margin_small"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/grayStrong"
+            android:textSize="@dimen/text_size_m"
+            tools:text="Mañana a las 20h" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/serviceMaxSpotsText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_profile"
+                android:drawablePadding="@dimen/margin_small"
+                android:fontFamily="@font/raleway_medium"
+                android:textColor="@color/grayStrong"
+                android:textSize="@dimen/text_size_m"
+                tools:text="Máx. 5" />
+
+            <TextView
+                android:id="@+id/serviceDurationText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_clock"
+                android:drawablePadding="@dimen/margin_small"
+                android:fontFamily="@font/raleway_medium"
+                android:textColor="@color/grayStrong"
+                android:textSize="@dimen/text_size_m"
+                tools:text="30 min" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

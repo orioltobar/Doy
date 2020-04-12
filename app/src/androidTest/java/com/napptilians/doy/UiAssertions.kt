@@ -37,7 +37,7 @@ interface UiAssertions {
         Espresso.onView(ViewMatchers.withId(viewId))
             .check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())))
     }
-    
+
     /**
      * Function that will allow us to check that a certain item from a RecyclerView has a
      * certain text.

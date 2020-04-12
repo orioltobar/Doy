@@ -1,10 +1,15 @@
 import buildSrc.Versions
+plugins {
+    id "org.jlleitschuh.gradle.ktlint" version "9.2.1"
+}
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: "org.jlleitschuh.gradle.ktlint-idea"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -16,11 +21,27 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.napptilians.doy.di.TestRunner"
+        // Add only alternative resources of the supported locales
+        resConfigs "es", "ca", "en"
+        // Add only non-scalable alternative dimensional resources (others will be created custom)
+        resConfigs "nodpi"
+    }
+
+    signingConfigs {
+        // Add signing configuration for release variant in order to generate signed apk correctly
+        release {
+            storeFile file("../certs/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -30,6 +51,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -38,6 +63,16 @@ dependencies {
     implementation project(':diskdatasource')
     implementation project(':networkdatasource')
     implementation project(':presentation')
+
+    // Material
+    implementation "com.google.android.material:material:${Versions.material_design}"
+
+    // Firebase SDK
+    implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
+    implementation "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
+    implementation "com.google.firebase:firebase-database:${Versions.firebase_database}"
+    implementation "com.google.firebase:firebase-core:${Versions.firebase_core_version}"
+    implementation "com.google.firebase:firebase-messaging:${Versions.firebase_messaging_version}"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
@@ -81,4 +116,5 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:${Versions.navigation_version}"
     androidTestImplementation "androidx.test:rules:${Versions.androidx_core_version}"
     debugImplementation "androidx.fragment:fragment-testing:${Versions.fragment_test_version}"
+    implementation "androidx.recyclerview:recyclerview:${Versions.androidx_recyclerview_version}"
 }

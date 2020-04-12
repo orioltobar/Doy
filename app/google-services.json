@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "991934542653",
+    "firebase_url": "https://hackovid20.firebaseio.com",
+    "project_id": "hackovid20",
+    "storage_bucket": "hackovid20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991934542653:android:49307658b67c9aaf32cb54",
+        "android_client_info": {
+          "package_name": "com.napptilians.doy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991934542653-rjo879l1qo6jq7fpt5b3460f9b1604i7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.napptilians.doy",
+            "certificate_hash": "c3ce1ed1b2244850de7f7bba76a11d9869d945bb"
+          }
+        },
+        {
+          "client_id": "991934542653-62t07nmpu1bmhfk1b2f6jf0fr9h3aqkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs3nVSJiYfrSxZw7BdIwIta_ogiGcR75k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991934542653-62t07nmpu1bmhfk1b2f6jf0fr9h3aqkv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

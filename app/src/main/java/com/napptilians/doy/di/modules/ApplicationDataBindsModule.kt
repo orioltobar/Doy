@@ -1,11 +1,13 @@
 package com.napptilians.doy.di.modules
 
 import com.napptilians.data.datasources.DbDataSource
+import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
-import com.napptilians.data.repositories.ExampleRepositoryImpl
-import com.napptilians.diskdatasource.data.ExampleDataBaseImpl
-import com.napptilians.domain.repositories.ExampleRepository
-import com.napptilians.networkdatasource.api.data.ExampleDataSourceImpl
+import com.napptilians.data.repositories.DoyRepositoryImpl
+import com.napptilians.diskdatasource.data.DbDataBaseImpl
+import com.napptilians.domain.repositories.DoyRepository
+import com.napptilians.networkdatasource.api.data.FirebaseDataSourceImpl
+import com.napptilians.networkdatasource.api.data.NetworkDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -18,15 +20,19 @@ interface ApplicationDataBindsModule {
 
     @Binds
     @Singleton
-    fun bindsMovieRepository(repository: ExampleRepositoryImpl): ExampleRepository
+    fun bindsMovieRepository(repository: DoyRepositoryImpl): DoyRepository
 
     @Binds
     @Singleton
-    fun bindsMovieDataSource(dataSource: ExampleDataSourceImpl): NetworkDataSource
+    fun bindsNetworkDataSource(dataSource: NetworkDataSourceImpl): NetworkDataSource
 
     @Binds
     @Singleton
-    fun provideMovieDataBaseDataSource(dataSource: ExampleDataBaseImpl): DbDataSource
+    fun provideMovieDataBaseDataSource(dataSource: DbDataBaseImpl): DbDataSource
+
+    @Binds
+    @Singleton
+    fun provideFirebaseDataSource(firebaseDataSource: FirebaseDataSourceImpl): FirebaseDataSource
 
     @Module
     companion object {

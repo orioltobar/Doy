@@ -2,20 +2,24 @@ package com.napptilians.networkdatasource.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
 import com.napptilians.commons.Constants.RETROFIT_TIMEOUT
+import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
+import com.napptilians.networkdatasource.api.data.CategoryService
 import com.napptilians.networkdatasource.api.data.MovieService
+import com.napptilians.networkdatasource.api.data.ServiceService
+import com.napptilians.networkdatasource.api.data.UserService
 import com.napptilians.networkdatasource.interceptors.UrlParamInterceptor
 import com.napptilians.networkdatasource.providers.NetworkProvider
 import dagger.Module
 import dagger.Provides
+import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Named
-import javax.inject.Singleton
+import java.util.Locale
 
 @Module
 object NetworkModule {
@@ -69,6 +73,10 @@ object NetworkModule {
     ): NetworkProvider = object : NetworkProvider {
         override val valueToBeProvided: String
             get() = apiKey
+
+        override val language: String
+            // TODO: In the future, we should use Locale.getDefault().language
+            get() = "ca"
     }
 }
 
@@ -78,4 +86,16 @@ object NetworkServicesModule {
     @Provides
     @Singleton
     fun provideMovieService(retrofit: Retrofit) = retrofit.create(MovieService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCategoryListService(retrofit: Retrofit): CategoryService = retrofit.create(CategoryService::class.java)
+
+    @Provides
+    @Singleton
+    fun proviceServiceService(retrofit: Retrofit): ServiceService = retrofit.create(ServiceService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserService(retrofit: Retrofit): UserService = retrofit.create(UserService::class.java)
 }

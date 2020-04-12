@@ -1,0 +1,214 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/service_image_height"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/toolbarImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_medium"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/gray"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_medium">
+
+                <TextView
+                    android:id="@+id/serviceDetailTitle"
+                    style="@style/App.ServiceDetail.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_xxlarge"
+                    tools:text="¡Mi gato me ignora! ¿Hablamos?" />
+
+                <TextView
+                    android:id="@+id/serviceDetailDescription"
+                    style="@style/App.ServiceDetail"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_xlarge"
+                    android:lineSpacingMultiplier="1.25"
+                    tools:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/App.ServiceDetail.Data"
+                        android:drawableStart="@drawable/ic_calendar"
+                        android:drawablePadding="@dimen/margin_medium"
+                        android:text="@string/when" />
+
+                    <TextView
+                        android:id="@+id/serviceDetailDate"
+                        style="@style/App.ServiceDetail.Response"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        tools:text="19:30" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/App.ServiceDetail.Data"
+                        android:drawableStart="@drawable/ic_clock"
+                        android:drawablePadding="@dimen/margin_medium"
+                        android:text="@string/duration" />
+
+                    <TextView
+                        android:id="@+id/serviceDetailDuration"
+                        style="@style/App.ServiceDetail.Response"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        tools:text="30 minutos" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/App.ServiceDetail.Data"
+                        android:drawableStart="@drawable/ic_profile"
+                        android:drawablePadding="@dimen/margin_medium"
+                        android:text="@string/spots" />
+
+                    <TextView
+                        android:id="@+id/serviceDetailSpots"
+                        style="@style/App.ServiceDetail.Response"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        tools:text="1" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/serviceDetailAttendees"
+                    style="@style/App.ServiceDetail.Response"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_xlargex"
+                    tools:text="@string/spots_reserved" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profileImageCardView"
+        android:layout_width="@dimen/service_owner_image_height"
+        android:layout_height="@dimen/service_owner_image_height"
+        android:layout_margin="@dimen/margin_medium"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|end"
+        app:cardCornerRadius="@dimen/profile_card_radius"
+        app:cardBackgroundColor="@color/white">
+
+        <ImageView
+            android:id="@+id/serviceOwnerImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/confirmAssistanceButton"
+            style="@style/App.PrimaryButton"
+            android:text="@string/confirm_assistance" />
+
+        <LinearLayout
+            android:id="@+id/cancelAssistanceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/App.ServiceDetail.Data"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/assist_to_event_yes" />
+
+            <TextView
+                android:id="@+id/cancelAssistanceButton"
+                style="@style/App.ServiceDetail.Data"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="@string/assist_to_event_cancel"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
