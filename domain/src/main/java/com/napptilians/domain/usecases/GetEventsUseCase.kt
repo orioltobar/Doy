@@ -39,13 +39,15 @@ class GetEventsUseCase @Inject constructor(
                         }
                     }
                 }
-                Success(mapOf("upcoming" to upcomingEvents, "past" to pastEvents))
+                Success(mapOf(UPCOMING to upcomingEvents, PAST to pastEvents))
             }
         }
     }
 
     companion object {
         private const val TIMEZONE = "Europe/Madrid"
+        const val UPCOMING = "upcoming"
+        const val PAST = "past"
     }
 }
 

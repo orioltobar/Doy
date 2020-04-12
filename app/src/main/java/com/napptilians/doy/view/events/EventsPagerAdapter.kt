@@ -1,39 +1,31 @@
 package com.napptilians.doy.view.events
 
-import android.content.Context
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
-import com.napptilians.domain.models.service.ServiceModel
-import com.napptilians.doy.view.servicelist.ServiceListAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class EventsPagerAdapter(val context: Context) : PagerAdapter() {
+@ExperimentalCoroutinesApi
+class EventsPagerAdapter(private val fragmentManager: FragmentManager) :
+    FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    private val eventsMap = mapOf<String, List<ServiceModel>>()
-    private lateinit var eventsList: RecyclerView
-    private lateinit var eventsAdapter: ServiceListAdapter
-    private lateinit var layoutManager: LinearLayoutManager
+    private val fragmentList = mutableListOf<Fragment>()
+    private val fragmentTitleList = mutableListOf<String>()
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
+    override fun getItem(position: Int): Fragment {
+        return fragmentList[position]
     }
 
-    override fun getCount(): Int = eventsMap.keys.size
-
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        return container.addView(initView())
+    override fun getCount(): Int {
+        return fragmentList.size
     }
 
-    private fun initView(): View {
-        eventsAdapter = ServiceListAdapter()
-        eventsList = RecyclerView(context)
-        layoutManager = LinearLayoutManager(context)
-        layoutManager.recycleChildrenOnDetach = true
-        eventsList.layoutManager = layoutManager
-        eventsList.adapter = eventsAdapter
-        return eventsList
+    fun addFragment(fragment: Fragment, title: String?) {
+        fragmentList.add(fragment)
+        fragmentTitleList.add(title!!)
     }
 
+    override fun getPageTitle(position: Int): CharSequence? {
+        return fragmentTitleList[position]
+    }
 }

@@ -60,7 +60,7 @@ class CategoryListFragment : BaseFragment() {
             categoryList.gone()
             loadingProgress.gone()
             loadingText.text = resources.getString(R.string.no_categories)
-            loadingText.text = resources.getString(R.string.generic_error)
+            loadingText.text = "${resources.getString(R.string.error_title)}\n${resources.getString(R.string.error_message)}"
             loadingText.visible()
         }
     }

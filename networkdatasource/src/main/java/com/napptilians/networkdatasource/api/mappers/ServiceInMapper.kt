@@ -57,7 +57,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
     }
 
     companion object {
-        private const val DATE_FORMAT = "yyyy-dd-MM HH:mm:ss z"
+        private const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z"
         private const val TAG = "ServiceInMapper"
     }
 }

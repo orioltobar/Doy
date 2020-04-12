@@ -70,7 +70,7 @@ class ServiceListFragment : BaseFragment() {
     override fun onError(error: ErrorModel) {
         serviceList.gone()
         loadingProgress.gone()
-        loadingText.text = resources.getString(R.string.generic_error)
+        loadingText.text = resources.getString(R.string.error_message)
         loadingText.visible()
     }
 

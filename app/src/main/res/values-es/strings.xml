@@ -79,5 +79,7 @@
     <string name="your_events">Tus eventos</string>
     <string name="tab_upcoming">Próximos</string>
     <string name="tab_past">Pasados</string>
+    <string name="loading_events">Cargando eventos...</string>
+    <string name="no_events">Parece que no tienes ningún evento en esta sección.</string>
 
 </resources>
