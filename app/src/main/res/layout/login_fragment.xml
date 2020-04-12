@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar" />
+
     <ProgressBar
         android:id="@+id/loginFragmentProgressView"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -38,10 +40,11 @@
                 android:id="@+id/compoundLogoImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.7"
+                android:alpha="0.9"
                 android:background="@drawable/image_bg_small"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_doy_compound_logo"
+                android:padding="@dimen/margin_xlarge"
                 app:layout_constraintBottom_toTopOf="@id/innerContainerLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
