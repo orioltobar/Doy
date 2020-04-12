@@ -89,7 +89,7 @@ class RecoverPasswordFragment : BaseFragment() {
             setHintTextAppearance(R.style.ErrorTheme)
             setErrorTextAppearance(R.style.ErrorTheme)
             error = getString(messageIdRes)
-            setErrorIconDrawable(R.drawable.ic_error)
+            setErrorIconDrawable(R.drawable.ic_error_sad)
         }
     }
 

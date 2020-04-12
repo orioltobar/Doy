@@ -34,6 +34,29 @@
             app:layout_constraintStart_toStartOf="@id/chatListItemPhotoShape"
             app:layout_constraintTop_toTopOf="@id/chatListItemPhotoShape" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/chatListItemPhotoCardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/profile_card_radius"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/chatListItemPhotoShape"
+            app:layout_constraintEnd_toEndOf="@+id/chatListItemPhotoShape"
+            app:layout_constraintStart_toStartOf="@+id/chatListItemPhotoShape"
+            app:layout_constraintTop_toTopOf="@+id/chatListItemPhotoShape">
+
+            <ImageView
+                android:id="@+id/chatListItemPhotoView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:focusable="false"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
