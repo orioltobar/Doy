@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.valueOrNull
 import com.napptilians.domain.models.user.UserModel
@@ -26,10 +27,10 @@ class ProfileViewModel @Inject constructor(
 
     private val userUid: String get() = firebaseAuth.currentUser?.uid ?: ""
 
-    private var email: String = ""
-    private var name: String = ""
-    private var description: String = ""
-    private var image: String = ""
+    private var resultEmail: String = ""
+    private var resultName: String = ""
+    private var resultDescription: String = ""
+    private var resultImage: String = ""
 
     private val _userDataStream = MutableLiveData<UiStatus<UserModel, ErrorModel>>()
     val userDataStream: LiveData<UiStatus<UserModel, ErrorModel>> get() = _userDataStream
@@ -49,6 +50,12 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             _updateUserDataStream.value = emitLoadingState()
             val request = updateUserUseCase(userUid, name, token, description, image)
+            if (request is Success) {
+                resultEmail = request.result.email
+                resultName = request.result.name
+                resultDescription = request.result.description
+                resultImage = request.result.image
+            }
             _updateUserDataStream.value = processModel(request)
         }
     }
@@ -62,13 +69,13 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun getUserEmail(): String = email
+    fun getUserEmail(): String = resultEmail
 
-    fun getUserName(): String = name
+    fun getUserName(): String = resultName
 
-    fun getUserDescription(): String = description
+    fun getUserDescription(): String = resultDescription
 
-    fun getUserImage(): String = image
+    fun getUserImage(): String = resultImage
 
     private fun getUser(userUid: String) {
         viewModelScope.launch {
@@ -82,10 +89,10 @@ class ProfileViewModel @Inject constructor(
 
             // Check if push token is the same.
             getUserRequest.valueOrNull()?.let { user ->
-                email = user.email
-                name = user.name
-                description = user.description
-                image = user.image
+                resultEmail = user.email
+                resultName = user.name
+                resultDescription = user.description
+                resultImage = user.image
                 if (user.pushToken != deviceToken) {
                     refreshPushToken(userUid, deviceToken)
                 }

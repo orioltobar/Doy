@@ -134,7 +134,8 @@ class ProfileFragment : BaseFragment() {
             profileImageCardView.gone()
         }
         if (isEditMode && !isEditingImage) {
-            switchEditMode()
+            switchEditMode(user)
+        } else {
             readModeView?.apply {
                 updateFields(user)
                 profileInfoFrameLayout.removeAllViews()
@@ -179,7 +180,7 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun switchEditMode() {
+    private fun switchEditMode(user: UserModel? = null) {
         context?.let {
             if (!isEditMode) {
                 profileTitle.text = getString(R.string.edit_profile)
@@ -199,6 +200,7 @@ class ProfileFragment : BaseFragment() {
                 profileInfoLogOutText.visible()
                 profileInfoSaveChangesButton.gone()
                 readModeView?.apply {
+                    user?.let { updateFields(it) }
                     profileInfoFrameLayout.removeAllViews()
                     profileInfoFrameLayout.addView(this)
                     isEditMode = false

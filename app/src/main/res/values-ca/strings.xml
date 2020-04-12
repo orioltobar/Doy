@@ -91,9 +91,6 @@
     <string name="logout">Tancar sessió</string>
     <string name="update_profile">Actualitzar perfil</string>
 
-    <!-- Chat -->
-    <string name="chat">Chat</string>
-    <string name="no_chats">Encara no tens cap chat obert. \n\nApunta\'t a un event per iniciar un event</string>
     <!-- My events -->
     <string name="your_events">Els teus esdeveniments</string>
     <string name="my_own_events">Events created by me</string>
@@ -102,4 +99,7 @@
     <string name="loading_events">Carregant esdeveniments...</string>
     <string name="no_events">Sembla que no tens cap esdeveniment en aquesta secció.</string>
 
+    <!-- Chat -->
+    <string name="chat">Chat</string>
+    <string name="no_chats">Encara no tens cap chat obert. \n\nApunta\'t a un event per iniciar un event</string>
 </resources>
