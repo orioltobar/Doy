@@ -6,6 +6,7 @@ import android.view.Window
 import androidx.annotation.DrawableRes
 import com.napptilians.doy.R
 import com.napptilians.doy.extensions.visible
+import kotlinx.android.synthetic.main.generic_popup.closeButton
 import kotlinx.android.synthetic.main.generic_popup.popupFooterImage
 import kotlinx.android.synthetic.main.generic_popup.popupFooterMessage
 import kotlinx.android.synthetic.main.generic_popup.popupIcon
@@ -22,6 +23,7 @@ open class DoyDialog(
         this.setContentView(R.layout.generic_popup)
         this.setCancelable(true)
         this.setCanceledOnTouchOutside(true)
+        closeButton.setOnClickListener { dismiss() }
     }
 
     fun setPopupIcon(@DrawableRes drawableResId: Int) {
