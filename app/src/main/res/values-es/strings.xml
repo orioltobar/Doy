@@ -25,6 +25,10 @@
     <string name="account_created">¡Cuenta creada!</string>
     <string name="welcome">Bienvenido a la comunidad de DOY. A partir de ahora ya puedes unirte a los eventos que más te interesen. ¡Es muy fácil! Cuando llegue el día y la hora del evento únicamente tendrás que entrar en esta sección Chats para iniciar la videollamada.</string>
     <string name="start_enjoying">Empieza a disfrutar de formar parte de la comunidad DOY.</string>
+    <string name="password_too_short">La contraseña debe tener mínimo 6 caracteres.</string>
+    <string name="passwords_dont_match">Las contraseñas no coinciden.</string>
+    <string name="invalid_email">¡Uy! Este e-mail no es válido.</string>
+    <string name="empty_name">Necesitamos tu nombre para registrarte</string>
 
     <!-- Category list -->
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>

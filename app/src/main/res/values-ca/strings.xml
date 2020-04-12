@@ -70,6 +70,10 @@
     <string name="account_created">¡Compte creat!</string>
     <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. ¡És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Chats per iniciar la videotrucada.</string>
     <string name="start_enjoying">Comença a gauidr de formar part de la comunitat DOY.</string>
+    <string name="password_too_short">La contrasenya ha de tenir mínim 6 caracters.</string>
+    <string name="passwords_dont_match">Les contrasenyes no coincideixen.</string>
+    <string name="invalid_email">¡Uy! Aquest e-mail no es vàlid.</string>
+    <string name="empty_name">Necessitem el teu nom per a registrarte</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>
