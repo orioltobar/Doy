@@ -67,14 +67,19 @@ class LoginFragment : BaseFragment() {
     override fun onError(error: ErrorModel) {
         enableLoginButton()
         loginFragmentProgressView.gone()
-        when (error.errorCause) {
-            LoginErrors.InvalidEmail -> {
+        when  {
+            error.errorCause == LoginErrors.InvalidEmail -> {
                 setErrorFields(loginFragmentEmailField, R.string.invalid_email)
                 resetField(loginFragmentPasswordField)
             }
-            LoginErrors.InvalidEmail -> {
+            error.errorCause == LoginErrors.EmptyPassword -> {
                 resetField(loginFragmentEmailField)
                 setErrorFields(loginFragmentPasswordField, R.string.empty_password)
+            }
+            error.errorCause == null && error.errorMessage!= null -> {
+                Toast.makeText(activity, error.errorMessage, Toast.LENGTH_LONG)
+                    .show()
+                firebaseAuth.signOut()
             }
             else -> {
                 Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_LONG)
