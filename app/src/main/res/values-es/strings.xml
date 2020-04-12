@@ -56,8 +56,16 @@
     <string name="when">¿Cuándo?</string>
     <string name="duration">Duración:</string>
     <string name="spots">Plazas:</string>
-    <string name="spots_reserved">1 persona apuntada</string>
+    <string name="spot_reserved">%1d persona apuntada</string>
+    <string name="spots_reserved">%1d personas apuntadas</string>
     <string name="confirm_assistance">Asistiré</string>
+    <string name="add_attendee_success">¡Te has apuntado correctamente!</string>
+    <string name="add_attendee_success_message">El evento se acaba de añadir a la sección <b>Chat</b> para que puedas resolver cualquier duda antes del evento.\n\nRecuerda ser puntual, y si finalmente no vas a poder asistir, cancelarlo con antelación.</string>
+    <string name="assist_to_event_yes">¡Assistirás a este evento!</string>
+    <string name="assist_to_event_cancel">No quiero asistir</string>
+    <string name="confirm_assist_to_event_cancel">¿Estás seguro de que no quieres asistir al evento?</string>
+    <string name="confirm_assist_to_event_cancel_yes">Estoy seguro, no quiero asistir</string>
+    <string name="your_service">Este evento es tuyo. ¡Gracias por ayudar!</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>

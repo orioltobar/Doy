@@ -17,10 +17,16 @@ data class ServiceApiModel(
     val day: String? = null,
     @SerializedName("spots")
     val spots: Int? = null,
+    @SerializedName("attendees")
+    val attendees: Int? = null,
     @SerializedName("duration")
     val durationMin: Int? = null,
     @SerializedName("hour")
     val hour: String? = null,
     @SerializedName("owner_id")
-    val ownerId: String? = null
+    val ownerId: String? = null,
+    @SerializedName("owner_image")
+    val ownerImage: String? = null,
+    @SerializedName("assistance")
+    val assistance: String? = null
 )

@@ -3,6 +3,7 @@ package com.napptilians.features.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.GetServicesUseCase
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class ServicesViewModel @Inject constructor(
-    private val getServicesUseCase: GetServicesUseCase
+    private val getServicesUseCase: GetServicesUseCase,
+    private val firebaseAuth: FirebaseAuth
 ) : BaseViewModel<ServiceModel>() {
 
     private val _servicesDataStream = MutableLiveData<UiStatus<List<ServiceModel>, ErrorModel>>()
@@ -23,12 +25,11 @@ class ServicesViewModel @Inject constructor(
 
     fun execute(
         categoryIds: List<Long>,
-        serviceId: Long?,
-        uid: Long?
+        serviceId: Long?
     ) {
         viewModelScope.launch {
             _servicesDataStream.value = emitLoadingState()
-            val request = getServicesUseCase.execute(categoryIds, serviceId, uid)
+            val request = getServicesUseCase.execute(categoryIds, serviceId, firebaseAuth.currentUser?.uid)
             _servicesDataStream.value = processModel(request)
         }
     }

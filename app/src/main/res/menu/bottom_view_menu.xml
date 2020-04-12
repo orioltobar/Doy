@@ -10,7 +10,8 @@
         android:icon="@drawable/ic_calendar" />
 
     <item
-        android:id="@+id/menuAdd"
+        android:id="@+id/addServiceFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_create" />
 
     <item

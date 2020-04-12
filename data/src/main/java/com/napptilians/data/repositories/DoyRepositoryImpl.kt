@@ -37,6 +37,12 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun addService(service: ServiceModel): Response<Long, ErrorModel> =
         networkDataSource.addService(service)
 
+    override suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> =
+        networkDataSource.addAttendee(userUid, serviceId)
+
+    override suspend fun deleteAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel> =
+        networkDataSource.deleteAttendee(userUid, serviceId)
+
     override suspend fun login(
         email: String,
         password: String
@@ -75,7 +81,7 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun getServices(
         categoryIds: List<Long>,
         serviceId: Long?,
-        uid: Long?
+        uid: String?
     ): Response<List<ServiceModel>, ErrorModel> {
         return networkDataSource.getServices(categoryIds, serviceId, uid)
     }

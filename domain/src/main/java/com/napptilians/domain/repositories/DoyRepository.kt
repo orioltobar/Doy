@@ -18,6 +18,10 @@ interface DoyRepository {
 
     suspend fun addService(service: ServiceModel): Response<Long, ErrorModel>
 
+    suspend fun addAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel>
+
+    suspend fun deleteAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel>
+
     suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
 
     suspend fun register(
@@ -32,7 +36,7 @@ interface DoyRepository {
     suspend fun getServices(
         categoryIds: List<Long> = emptyList(),
         serviceId: Long? = null,
-        uid: Long? = null
+        uid: String? = null
     ): Response<List<ServiceModel>, ErrorModel>
 
     suspend fun getUser(userUid: String): Response<UserModel, ErrorModel>
