@@ -84,7 +84,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email"
+                    android:id="@+id/loginFragmentEmailField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
@@ -94,7 +94,7 @@
                     app:layout_constraintTop_toBottomOf="@id/loginText">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/emailEditText"
+                        android:id="@+id/loginFragmentEmailEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -104,19 +104,19 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/password"
+                    android:id="@+id/loginFragmentPasswordField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     app:layout_constraintStart_toStartOf="@id/startGuideline"
-                    app:layout_constraintTop_toBottomOf="@id/email"
+                    app:layout_constraintTop_toBottomOf="@id/loginFragmentEmailField"
                     app:passwordToggleDrawable="@drawable/password_selector"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/green">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/passwordEditText"
+                        android:id="@+id/loginFragmentPasswordEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword" />
@@ -133,7 +133,7 @@
                     android:textColor="@color/green"
                     android:textSize="@dimen/text_size_s"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
-                    app:layout_constraintTop_toBottomOf="@+id/password" />
+                    app:layout_constraintTop_toBottomOf="@+id/loginFragmentPasswordField" />
 
                 <Button
                     android:id="@+id/signInButton"

@@ -15,7 +15,7 @@ import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.view.customviews.DoyDialog
-import com.napptilians.features.RegisterErrors
+import com.napptilians.commons.error.RegisterErrors
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.register_fragment.registerFragmentCreateButton
@@ -85,7 +85,7 @@ class RegisterFragment : BaseFragment() {
 
     override fun onError(error: ErrorModel) {
         enableRegisterButton()
-        registerFragmentProgressView.visibility = View.GONE
+        registerFragmentProgressView.gone()
         when (error.errorCause) {
             RegisterErrors.EmptyName -> {
                 setErrorFields(registerFragmentNameField, R.string.empty_name)
