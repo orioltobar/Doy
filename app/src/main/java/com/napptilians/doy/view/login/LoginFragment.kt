@@ -167,7 +167,7 @@ class LoginFragment : BaseFragment() {
 
     private fun processNewValue(auth: AuthResult) {
         loginFragmentProgressView.gone()
-        val direction = LoginFragmentDirections.actionLoginFragmentToMenuFavouritesListButton()
+        val direction = LoginFragmentDirections.actionLoginFragmentToCategoryListFragment2()
         findNavController().navigate(direction)
     }
 

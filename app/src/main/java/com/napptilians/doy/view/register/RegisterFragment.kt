@@ -115,7 +115,7 @@ class RegisterFragment : BaseFragment() {
                 show()
                 setOnDismissListener {
                     val direction =
-                        RegisterFragmentDirections.actionRegisterFragmentToMenuFavouritesListButton()
+                        RegisterFragmentDirections.actionRegisterFragmentToCategoryListFragment()
                     findNavController().navigate(direction)
                 }
             }
