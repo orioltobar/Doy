@@ -30,6 +30,7 @@
     <string name="empty_name">Necesitamos tu nombre para registrarte</string>
     <string name="firebase_invalid_user">Este usuario no existe en nuestra base de datos</string>
     <string name="firebase_invalid_credentials">Parece que las credenciales son erróneas. Inténtalo otra vez.</string>
+    <string name="firebase_user_already_exists">Este nombre de usuario no está disponible. Por favor, elige otro.</string>
     <string name="forgot_password">¿Has olvidado tu contraseña?</string>
     <string name="forgot_password_no_problem">¡No hay problema, nos pasa a todos!</string>
     <string name="forgot_password_message">Por favor, introduce la dirección de e-mail que usaste al registrarte y te enviaremos un enlace para restablecer tu contraseña.</string>

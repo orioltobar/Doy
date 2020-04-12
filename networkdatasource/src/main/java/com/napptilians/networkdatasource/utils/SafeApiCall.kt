@@ -2,6 +2,7 @@ package com.napptilians.networkdatasource.utils
 
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.napptilians.commons.Failure
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
@@ -26,6 +27,8 @@ suspend fun <T> safeApiCall(
         Failure(ErrorModel(null, FirebaseErrors.InvalidUser))
     } catch (exception: FirebaseAuthInvalidCredentialsException) {
         Failure(ErrorModel(null, FirebaseErrors.InvalidCredentials))
+    } catch (exception: FirebaseAuthUserCollisionException) {
+        Failure(ErrorModel(null, FirebaseErrors.UserAlreadyExists))
     } catch (exception: Exception) {
         Failure(ErrorModel(exception.message ?: ""))
     }

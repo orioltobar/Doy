@@ -29,11 +29,11 @@
     <string name="empty_name">Necessitem el teu nom per a registrarte</string>
     <string name="firebase_invalid_user">Aquest usuari no existeix a la nostra base de dades</string>
     <string name="firebase_invalid_credentials">Sembla que les credencials son errònies. Torna a provar.</string>
+    <string name="firebase_user_already_exists">Aquest nom d\'usuari no està disponible. Si us plau, escull un altre.</string>
     <string name="forgot_password">Has oblidat la teva contrasenya?</string>
     <string name="forgot_password_no_problem">No hi ha cap problema, ens passa a tots!</string>
     <string name="forgot_password_message">Sisplau, introdueix la direcció d\'e-mail que vas utilitzar al registrar-te i t\'enviarem un enllaç per restableixer la teva contrasenya.</string>
     <string name="send">Enviar</string>
-
 
     <!-- Category list -->
     <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
@@ -80,16 +80,6 @@
     <string name="confirm_assist_to_event_cancel">¿Estàs segur de què no vols assistir a l\'event?</string>
     <string name="confirm_assist_to_event_cancel_yes">Estic segur, no vull assistir</string>
     <string name="your_service">Aquest event és teu. Gràcies per ajudar!</string>
-
-    <!-- Register & Login -->
-    <string name="account_created">¡Compte creat!</string>
-    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. ¡És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Chats per iniciar la videotrucada.</string>
-    <string name="start_enjoying">Comença a gauidr de formar part de la comunitat DOY.</string>
-    <string name="password_too_short">La contrasenya ha de tenir mínim 6 caracters.</string>
-    <string name="passwords_dont_match">Les contrasenyes no coincideixen.</string>
-    <string name="invalid_email">¡Uy! Aquest e-mail no es vàlid.</string>
-    <string name="empty_name">Necessitem el teu nom per a registrarte</string>
-    <string name="empty_password">La contrasenya no pot estar buida</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>

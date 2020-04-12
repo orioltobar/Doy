@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.error.FirebaseErrors
 import com.napptilians.commons.error.RegisterErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -20,9 +21,6 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.RegisterViewModel
-import kotlinx.android.synthetic.main.login_fragment.loginFragmentEmailEditText
-import kotlinx.android.synthetic.main.login_fragment.loginFragmentPasswordEditText
-import kotlinx.android.synthetic.main.login_fragment.signInButton
 import kotlinx.android.synthetic.main.register_fragment.registerFragmentCreateButton
 import kotlinx.android.synthetic.main.register_fragment.registerFragmentEmailEditText
 import kotlinx.android.synthetic.main.register_fragment.registerFragmentEmailField
@@ -65,9 +63,9 @@ class RegisterFragment : BaseFragment() {
 
     private fun checkEmptyFields(): Boolean {
         return registerFragmentNameEditText.text?.isEmpty() == false
-            && registerFragmentEmailEditText.text?.isEmpty() == false
-            && registerFragmentPasswordEditText.text?.isEmpty() == false
-            && registerFragmentRepeatPasswordEditText.text?.isEmpty() == false
+                && registerFragmentEmailEditText.text?.isEmpty() == false
+                && registerFragmentPasswordEditText.text?.isEmpty() == false
+                && registerFragmentRepeatPasswordEditText.text?.isEmpty() == false
 
     }
 
@@ -152,6 +150,27 @@ class RegisterFragment : BaseFragment() {
                 resetField(registerFragmentEmailField)
                 setErrorFields(registerFragmentPasswordField, R.string.passwords_dont_match)
                 setErrorFields(registerFragmentRepeatPasswordField, R.string.passwords_dont_match)
+            }
+            FirebaseErrors.InvalidUser -> {
+                Toast.makeText(
+                    activity,
+                    getString(R.string.firebase_invalid_user),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            FirebaseErrors.InvalidCredentials -> {
+                Toast.makeText(
+                    activity,
+                    getString(R.string.firebase_invalid_credentials),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            FirebaseErrors.UserAlreadyExists -> {
+                Toast.makeText(
+                    activity,
+                    getString(R.string.firebase_user_already_exists),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             else -> {
                 Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_LONG)
