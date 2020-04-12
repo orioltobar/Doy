@@ -33,7 +33,7 @@ interface NetworkDataSource {
     suspend fun getServices(
         categoryIds: List<Long> = emptyList(),
         serviceId: Long? = null,
-        uid: Long? = null
+        uid: String? = null
     ): Response<List<ServiceModel>, ErrorModel>
 
     suspend fun addService(service: ServiceModel): Response<Long, ErrorModel>

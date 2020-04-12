@@ -14,5 +14,6 @@ data class ServiceModel(
     val date: ZonedDateTime? = null,
     var spots: Int? = null,
     var durationMin: Int? = null,
-    var ownerId: String? = null
+    var ownerId: String? = null,
+    val assistance: Boolean = false
 ): Serializable

@@ -51,6 +51,13 @@ class ServiceDetailFragment : BaseFragment() {
             setDate(date)
             serviceDetailDuration.text = "$durationMin min"
             serviceDetailSpots.text = "${spots ?: 0}"
+            if (assistance) {
+                confirmAssistanceButton.invisible()
+                cancelAssistanceView.visible()
+            } else {
+                confirmAssistanceButton.visible()
+                cancelAssistanceView.gone()
+            }
         }
     }
 

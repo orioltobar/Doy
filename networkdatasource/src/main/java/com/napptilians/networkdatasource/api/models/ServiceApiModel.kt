@@ -22,5 +22,7 @@ data class ServiceApiModel(
     @SerializedName("hour")
     val hour: String? = null,
     @SerializedName("owner_id")
-    val ownerId: String? = null
+    val ownerId: String? = null,
+    @SerializedName("assistance")
+    val assistance: String? = null
 )

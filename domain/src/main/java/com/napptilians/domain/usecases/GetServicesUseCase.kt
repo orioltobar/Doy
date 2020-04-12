@@ -13,6 +13,6 @@ class GetServicesUseCase @Inject constructor(
 
     suspend fun execute(categoryIds: List<Long>,
                         serviceId: Long?,
-                        uid: Long?) =
+                        uid: String?) =
         withContext(ioDispatcher) { doyRepository.getServices(categoryIds, serviceId, uid) }
 }
