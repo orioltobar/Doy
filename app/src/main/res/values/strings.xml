@@ -13,6 +13,7 @@
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
     <string name="password_forgot">Forgot password?</string>
+    <string name="recover_password">Check your email account to recover your password!</string>
     <string name="no_account">Don\'t you have an account?</string>
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
