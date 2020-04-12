@@ -8,12 +8,6 @@ In this platform, you will learn how to cook that dish you've always wanted, tha
 
 Download it from Google Play and start surfing events. Don't be shy and get in touch with your community.
 
-## Technical overview
-From a technical perspective, the app is organized in modules, following CLEAN architecture and SOLID principles, having the following structure:
-```
-app -> presentation -> domain/commons <- data <- networkdatasource/diskdatasource
-```
-
 ## License
 **GNU General Public License (GPL) 3.0**
 
