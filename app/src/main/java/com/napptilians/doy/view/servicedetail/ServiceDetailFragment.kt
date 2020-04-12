@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -22,9 +24,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class ServiceDetailFragment : BaseFragment() {
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     private val viewModel: ServiceDetailViewModel by viewModels { vmFactory }
     private val args: ServiceDetailFragmentArgs by navArgs()
@@ -51,12 +57,20 @@ class ServiceDetailFragment : BaseFragment() {
             setDate(date)
             serviceDetailDuration.text = "$durationMin min"
             serviceDetailSpots.text = "${spots ?: 0}"
-            if (assistance) {
-                confirmAssistanceButton.invisible()
-                cancelAssistanceView.visible()
-            } else {
-                confirmAssistanceButton.visible()
+            if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
+                confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
+                context?.let {
+                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG).show()
+                }
+            } else {
+                if (assistance) {
+                    confirmAssistanceButton.invisible()
+                    cancelAssistanceView.visible()
+                } else {
+                    confirmAssistanceButton.visible()
+                    cancelAssistanceView.gone()
+                }
             }
         }
     }
