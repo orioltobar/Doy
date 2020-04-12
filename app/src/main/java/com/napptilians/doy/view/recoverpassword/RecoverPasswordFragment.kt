@@ -21,9 +21,7 @@ import kotlinx.android.synthetic.main.recover_password_fragment.loginFragmentPro
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverEmailEditText
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverEmailInput
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverPasswordButton
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class RecoverPasswordFragment : BaseFragment() {
 
     private val viewModel: RecoverPasswordViewModel by viewModels { vmFactory }

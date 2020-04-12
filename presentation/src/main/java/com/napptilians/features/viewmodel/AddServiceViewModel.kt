@@ -10,11 +10,9 @@ import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.AddServiceUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class AddServiceViewModel @Inject constructor(
     private val addServiceUseCase: AddServiceUseCase,
     private val firebaseAuth: FirebaseAuth

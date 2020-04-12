@@ -174,10 +174,15 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun defaultView() {
-        context?.let {
-            profileInfoFrameLayout.removeAllViews()
-            profileInfoFrameLayout.addView(readModeView)
+        try {
+            context?.let {
+                profileInfoFrameLayout.removeAllViews()
+                profileInfoFrameLayout.addView(readModeView)
+            }
+        } catch (e: Exception) {
+            println("ERROR")
         }
+
     }
 
     private fun switchEditMode(user: UserModel? = null) {

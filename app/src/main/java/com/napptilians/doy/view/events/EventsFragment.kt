@@ -23,10 +23,8 @@ import kotlinx.android.synthetic.main.events_fragment.eventsErrorText
 import kotlinx.android.synthetic.main.events_fragment.eventsTabLayout
 import kotlinx.android.synthetic.main.events_fragment.eventsViewPager
 import kotlinx.android.synthetic.main.events_fragment.titleText
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class EventsFragment : BaseFragment() {
 
     private val viewModel: EventsViewModel by viewModels { vmFactory }

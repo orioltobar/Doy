@@ -18,10 +18,8 @@ import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import kotlinx.android.synthetic.main.select_spots_fragment.saveButton
 import kotlinx.android.synthetic.main.select_spots_fragment.spotsList
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class SelectSpotsFragment : BaseFragment() {
 
     private val viewModel: SelectSpotsViewModel by viewModels { vmFactory }

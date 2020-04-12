@@ -9,11 +9,9 @@ import com.napptilians.domain.models.movie.MovieModel
 import com.napptilians.domain.models.service.SpotsModel
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class SelectSpotsViewModel @Inject constructor() : BaseViewModel<MovieModel>() {
 
     private val _spotsDataStream = MutableLiveData<UiStatus<List<SpotsModel>, ErrorModel>>()

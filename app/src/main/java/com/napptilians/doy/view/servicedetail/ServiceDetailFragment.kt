@@ -20,14 +20,23 @@ import com.napptilians.doy.view.customviews.CancelAssistDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
-import kotlinx.android.synthetic.main.service_detail_fragment.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceButton
+import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceView
+import kotlinx.android.synthetic.main.service_detail_fragment.confirmAssistanceButton
+import kotlinx.android.synthetic.main.service_detail_fragment.progressBar
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailAttendees
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDate
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDescription
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDuration
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailSpots
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailTitle
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceOwnerImage
+import kotlinx.android.synthetic.main.service_detail_fragment.toolbarImage
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class ServiceDetailFragment : BaseFragment() {
 
     @Inject
@@ -67,7 +76,8 @@ class ServiceDetailFragment : BaseFragment() {
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
                 context?.let {
-                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG).show()
+                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG)
+                        .show()
                 }
             } else {
                 if (assistance) {

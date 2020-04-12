@@ -16,11 +16,10 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.SelectDurationViewModel
-import kotlinx.android.synthetic.main.select_duration_fragment.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.android.synthetic.main.select_duration_fragment.durationList
+import kotlinx.android.synthetic.main.select_duration_fragment.saveButton
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class SelectDurationFragment : BaseFragment() {
 
     private val viewModel: SelectDurationViewModel by viewModels { vmFactory }
@@ -40,7 +39,12 @@ class SelectDurationFragment : BaseFragment() {
         setupListeners()
         viewModel.execute()
         viewModel.durationsDataStream.observe(viewLifecycleOwner,
-            Observer<UiStatus<List<DurationModel>, ErrorModel>> { handleUiStates(it, ::processNewValue) }
+            Observer<UiStatus<List<DurationModel>, ErrorModel>> {
+                handleUiStates(
+                    it,
+                    ::processNewValue
+                )
+            }
         )
     }
 

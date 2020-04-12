@@ -29,13 +29,18 @@ import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.features.viewmodel.AddServiceViewModel
-import kotlinx.android.synthetic.main.add_service_fragment.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.android.synthetic.main.add_service_fragment.createEventButton
+import kotlinx.android.synthetic.main.add_service_fragment.progressBar
+import kotlinx.android.synthetic.main.add_service_fragment.selectCategoryEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectDayEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectDurationEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectSpotsEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectTimeEditText
+import kotlinx.android.synthetic.main.add_service_fragment.serviceImageView
+import kotlinx.android.synthetic.main.add_service_fragment.uploadImageBox
 import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.Calendar
+import java.util.*
 
-@ExperimentalCoroutinesApi
 class AddServiceFragment : BaseFragment() {
 
     private val viewModel: AddServiceViewModel by viewModels { vmFactory }

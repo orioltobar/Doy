@@ -11,11 +11,9 @@ import com.napptilians.domain.usecases.RecoverPasswordUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import com.napptilians.features.processResponse
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class RecoverPasswordViewModel @Inject constructor(
     private val recoverPasswordUseCase: RecoverPasswordUseCase
 ) : BaseViewModel<RecoverPasswordViewModel>() {

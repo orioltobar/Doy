@@ -21,10 +21,8 @@ import kotlinx.android.synthetic.main.service_list_fragment.loadingProgress
 import kotlinx.android.synthetic.main.service_list_fragment.loadingText
 import kotlinx.android.synthetic.main.service_list_fragment.serviceList
 import kotlinx.android.synthetic.main.service_list_fragment.titleText
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class ServiceListFragment : BaseFragment() {
 
     private val viewModel: ServicesViewModel by viewModels { vmFactory }

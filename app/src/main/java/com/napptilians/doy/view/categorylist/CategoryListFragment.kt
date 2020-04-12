@@ -18,11 +18,13 @@ import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.CategoriesViewModel
-import kotlinx.android.synthetic.main.category_list_fragment.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.android.synthetic.main.category_list_fragment.categoryList
+import kotlinx.android.synthetic.main.category_list_fragment.loadingProgress
+import kotlinx.android.synthetic.main.category_list_fragment.loadingText
+import kotlinx.android.synthetic.main.category_list_fragment.saveButton
+import kotlinx.android.synthetic.main.category_list_fragment.titleText
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class CategoryListFragment : BaseFragment() {
 
     private val viewModel: CategoriesViewModel by viewModels { vmFactory }

@@ -9,11 +9,9 @@ import com.napptilians.domain.usecases.GetEventsUseCase
 import com.napptilians.domain.usecases.GetMyServicesUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class EventsViewModel @Inject constructor(
     private val getEventsUseCase: GetEventsUseCase,
     private val getMyServicesUseCase: GetMyServicesUseCase

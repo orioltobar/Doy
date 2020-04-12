@@ -13,9 +13,7 @@ import com.napptilians.doy.view.servicelist.ServiceListAdapter
 import kotlinx.android.synthetic.main.event_page.view.eventsList
 import kotlinx.android.synthetic.main.event_page.view.eventsLoadingProgress
 import kotlinx.android.synthetic.main.event_page.view.eventsLoadingText
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class EventPage @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

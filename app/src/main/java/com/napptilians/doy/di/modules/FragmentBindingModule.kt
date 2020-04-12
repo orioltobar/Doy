@@ -18,9 +18,7 @@ import com.napptilians.doy.view.splash.SplashFragment
 import com.napptilians.doy.view.user.ProfileFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 @Module
 abstract class FragmentBindingModule {
 
