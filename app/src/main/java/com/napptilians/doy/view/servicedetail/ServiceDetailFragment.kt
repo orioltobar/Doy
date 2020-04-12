@@ -62,6 +62,7 @@ class ServiceDetailFragment : BaseFragment() {
             setDate(date)
             serviceDetailDuration.text = "$durationMin min"
             serviceDetailSpots.text = "${spots ?: 0}"
+            setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
@@ -77,6 +78,14 @@ class ServiceDetailFragment : BaseFragment() {
                     cancelAssistanceView.gone()
                 }
             }
+        }
+    }
+
+    private fun setAttendees(attendees: Int?) {
+        if (attendees == 1) {
+            serviceDetailAttendees.text = getString(R.string.spot_reserved, attendees ?: 0)
+        } else {
+            serviceDetailAttendees.text = getString(R.string.spots_reserved, attendees ?: 0)
         }
     }
 
@@ -121,12 +130,16 @@ class ServiceDetailFragment : BaseFragment() {
                 show()
             }
         }
+        args.service.attendees = args.service.attendees?.inc()
+        setAttendees(args.service.attendees)
         confirmAssistanceButton.invisible()
         cancelAssistanceView.visible()
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
         progressBar.gone()
+        args.service.attendees = args.service.attendees?.dec()
+        setAttendees(args.service.attendees)
         confirmAssistanceButton.visible()
         cancelAssistanceView.gone()
     }

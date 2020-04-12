@@ -140,6 +140,12 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/serviceDetailAttendees"
+                    style="@style/App.ServiceDetail.Response"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_xlargex"
+                    tools:text="@string/spots_reserved" />
 
             </LinearLayout>
 

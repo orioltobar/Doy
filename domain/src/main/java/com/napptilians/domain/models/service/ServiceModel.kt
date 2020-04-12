@@ -13,7 +13,7 @@ data class ServiceModel(
     var hour: String? = null,
     val date: ZonedDateTime? = null,
     var spots: Int? = null,
-    val attendees: Int? = null,
+    var attendees: Int? = null,
     var durationMin: Int? = null,
     var ownerId: String? = null,
     var ownerImage: String? = null,

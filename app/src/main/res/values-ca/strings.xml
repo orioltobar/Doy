@@ -55,7 +55,8 @@
     <string name="when">¿Quan?</string>
     <string name="duration">Duració:</string>
     <string name="spots">Places:</string>
-    <string name="spots_reserved">1 persona apuntada</string>
+    <string name="spot_reserved">%1d persona apuntada</string>
+    <string name="spots_reserved">%1d persones apuntades</string>
     <string name="confirm_assistance">Assistiré</string>
     <string name="add_attendee_success">T\'has apuntat correctament!</string>
     <string name="add_attendee_success_message">L\'esdeveniment s\'acaba d\'afegir a la secció <b>Xat</b> perquè puguis resoldre qualsevol dubte abans de l\'esdeveniment.\n\nRecorda ser puntual, i si finalment no vas a poder assistir-hi, cancel·lar-amb antelació.</string>

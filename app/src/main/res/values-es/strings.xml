@@ -56,7 +56,8 @@
     <string name="when">¿Cuándo?</string>
     <string name="duration">Duración:</string>
     <string name="spots">Plazas:</string>
-    <string name="spots_reserved">1 persona apuntada</string>
+    <string name="spot_reserved">%1d persona apuntada</string>
+    <string name="spots_reserved">%1d personas apuntadas</string>
     <string name="confirm_assistance">Asistiré</string>
     <string name="add_attendee_success">¡Te has apuntado correctamente!</string>
     <string name="add_attendee_success_message">El evento se acaba de añadir a la sección <b>Chat</b> para que puedas resolver cualquier duda antes del evento.\n\nRecuerda ser puntual, y si finalmente no vas a poder asistir, cancelarlo con antelación.</string>
