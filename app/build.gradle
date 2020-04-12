@@ -21,10 +21,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.napptilians.doy.di.TestRunner"
+        // Add only alternative resources of the supported locales
+        resConfigs "es", "ca", "en"
+        // Add only non-scalable alternative dimensional resources (others will be created custom)
+        resConfigs "nodpi"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
