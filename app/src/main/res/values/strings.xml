@@ -59,6 +59,8 @@
     <string name="confirm_assistance">Assist</string>
     <string name="add_attendee_success">You have signed up successfully!</string>
     <string name="add_attendee_success_message">The event has just been added to the <b>Chat</b> section so you can answer any questions before the event.\n\nRemember to be punctual, and if you finally will not be able to attend, cancel it in advance.</string>
+    <string name="assist_to_event_yes">You will assist to this event!</string>
+    <string name="assist_to_event_cancel">I don\'t want to assist anymore</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>

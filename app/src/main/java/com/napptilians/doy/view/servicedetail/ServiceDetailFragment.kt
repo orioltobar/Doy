@@ -12,6 +12,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
@@ -68,11 +69,11 @@ class ServiceDetailFragment : BaseFragment() {
             viewModel.execute(args.service.serviceId ?: -1L)
             viewModel.addAttendeeServiceDataStream.observe(
                 viewLifecycleOwner,
-                Observer { handleUiStates(it, ::processNewValue) })
+                Observer { handleUiStates(it, ::processConfirmAssistNewValue) })
         }
     }
 
-    private fun processNewValue(unit: Unit) {
+    private fun processConfirmAssistNewValue(unit: Unit) {
         progressBar.gone()
         activity?.let { activity ->
             DoyDialog(activity).apply {
@@ -82,6 +83,8 @@ class ServiceDetailFragment : BaseFragment() {
                 show()
             }
         }
+        confirmAssistanceButton.invisible()
+        cancelAssistanceView.visible()
     }
 
     override fun onError(error: ErrorModel) {

@@ -60,6 +60,8 @@
     <string name="confirm_assistance">Asistiré</string>
     <string name="add_attendee_success">¡Te has apuntado correctamente!</string>
     <string name="add_attendee_success_message">El evento se acaba de añadir a la sección <b>Chat</b> para que puedas resolver cualquier duda antes del evento.\n\nRecuerda ser puntual, y si finalmente no vas a poder asistir, cancelarlo con antelación.</string>
+    <string name="assist_to_event_yes">¡Assistirás a este evento!</string>
+    <string name="assist_to_event_cancel">No quiero asistir</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>

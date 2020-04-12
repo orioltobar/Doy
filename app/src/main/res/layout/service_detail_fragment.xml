@@ -168,6 +168,31 @@
             style="@style/App.PrimaryButton"
             android:text="@string/confirm_assistance" />
 
+        <LinearLayout
+            android:id="@+id/cancelAssistanceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/App.ServiceDetail.Data"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/assist_to_event_yes" />
+
+            <TextView
+                android:id="@+id/cancelAssistanceButton"
+                style="@style/App.ServiceDetail.Data"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="@string/assist_to_event_cancel"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
