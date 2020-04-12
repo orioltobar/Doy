@@ -81,6 +81,11 @@ class EventsFragment : BaseFragment() {
 
     private fun initViews() {
         titleText.visible()
+        if (args.onlyMyEvents) {
+            titleText.text = context?.resources?.getText(R.string.my_own_events)
+        } else {
+            titleText.text = context?.resources?.getText(R.string.your_events)
+        }
         eventAdapter = EventsPagerAdapter(childFragmentManager)
         eventAdapter.apply {
             addFragment(

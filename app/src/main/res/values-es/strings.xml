@@ -85,6 +85,7 @@
 
     <!-- My events -->
     <string name="your_events">Tus eventos</string>
+    <string name="my_own_events">Events created by me</string>
     <string name="tab_upcoming">Próximos</string>
     <string name="tab_past">Pasados</string>
     <string name="loading_events">Cargando eventos...</string>
