@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.service_item.view.serviceDurationText
 import kotlinx.android.synthetic.main.service_item.view.serviceImage
 import kotlinx.android.synthetic.main.service_item.view.serviceMaxSpotsText
 import kotlinx.android.synthetic.main.service_item.view.serviceNameText
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 
