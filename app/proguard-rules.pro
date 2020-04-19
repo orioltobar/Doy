@@ -47,10 +47,15 @@
 
 ### Custom models ###
 
-# Keep Data Source models (Application classes that will be serialized/deserialized over Gson)
+# Keep Data Source models that will be serialized / deserialized over Gson
 # Source: https://stackoverflow.com/a/23826357
 -keepclassmembers class com.napptilians.networkdatasource.api.models.** { *; }
 -keepclassmembers class com.napptilians.diskdatasource.models.** { *; }
+
+# Keep models used for Firebase Database that will be serialized / deserialized over
+# DataSnapshot.getValue() and DatabaseReference.setValue(obj)
+# Source: https://firebase.google.com/docs/database/android/start?hl=es#proguard
+-keepclassmembers class com.napptilians.domain.models.chat.ChatModel { *; }
 
 # Keep names of models that can be passed as arguments between fragments with Navigation Components
 # Source: https://developer.android.com/guide/navigation/navigation-pass-data#use_keepnames_rules
