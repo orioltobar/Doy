@@ -1,7 +1,7 @@
 package com.napptilians.domain.models.service
 
+import org.threeten.bp.ZonedDateTime
 import java.io.Serializable
-import java.time.ZonedDateTime
 
 data class ServiceModel(
     var serviceId: Long? = null,

@@ -5,8 +5,8 @@ import android.util.Log
 import com.napptilians.commons.Mapper
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.networkdatasource.api.models.ServiceApiModel
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiModel> {
@@ -51,10 +51,10 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
         return if (model.day == null || model.hour == null) {
             null
         } else {
-            val dateString = "${model.day} ${model.hour} ECT"
+            val dateString = "${model.day}T${model.hour}+01:00"
             try {
                 val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
-                ZonedDateTime.parse(dateString, formatter)
+                ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
             } catch (e: Exception) {
                 Log.d(TAG, "There was an error parsing: $dateString")
                 null
