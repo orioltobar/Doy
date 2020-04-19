@@ -39,6 +39,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_xxlarge"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -143,8 +144,8 @@
                 <TextView
                     android:id="@+id/serviceDetailAttendees"
                     style="@style/App.ServiceDetail.Response"
-                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_xlargex"
+                    android:layout_marginTop="@dimen/margin_small"
                     tools:text="@string/spots_reserved" />
 
             </LinearLayout>
@@ -158,11 +159,11 @@
         android:layout_width="@dimen/service_owner_image_size"
         android:layout_height="@dimen/service_owner_image_size"
         android:layout_margin="@dimen/margin_medium"
-        app:layout_anchor="@id/appBar"
-        app:layout_anchorGravity="bottom|end"
-        app:cardElevation="@dimen/service_owner_card_elevation"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/service_owner_card_radius"
-        app:cardBackgroundColor="@color/white">
+        app:cardElevation="@dimen/service_owner_card_elevation"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|end">
 
         <ImageView
             android:id="@+id/serviceOwnerImage"
@@ -189,6 +190,7 @@
             android:id="@+id/cancelAssistanceView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
