@@ -38,34 +38,8 @@
 -keepclassmembernames class kotlin.coroutines.SafeContinuation { volatile <fields>; }
 -dontwarn kotlinx.coroutines.flow.**inlined**
 -dontwarn kotlinx.coroutines.reactive.**inlined**
--dontwarn kotlinx.coroutines.reactive.**
--keep class kotlinx.coroutines.flow.** { *; }
 
-### AndroidX Databinding
-# Source: https://github.com/QuickPermissions/QuickPermissions/issues/1
--dontwarn android.databinding.**
--keep class android.databinding.** { *; }
-
-### AndroidX Lifecycle
-# Source: https://issuetracker.google.com/issues/62113696
-
-# Keep Lifecycle State and Event enums values
--keepclassmembers class android.arch.lifecycle.Lifecycle$State { *; }
--keepclassmembers class android.arch.lifecycle.Lifecycle$Event { *; }
-
-# Keep methods annotated with @OnLifecycleEvent even if they seem to be unused
-# (Mostly for LiveData.LifecycleBoundObserver.onStateChange(), but who knows)
--keepclassmembers class * {
-    @android.arch.lifecycle.OnLifecycleEvent *;
-}
--keep class * extends androidx.lifecycle.ViewModel {
-    <init>();
-}
--keep class * extends androidx.lifecycle.AndroidViewModel {
-    <init>(android.app.Application);
-}
-
-### Enable Crashlytics deobfuscated stack traces
+### Crashlytics (deobfuscated stack traces)
 # Source: https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=android
 -keepattributes Annotation                         ## Keep Crashlytics annotations
 -keepattributes SourceFile,LineNumberTable         ## Keep file names/line numbers
@@ -73,19 +47,19 @@
 
 ### Custom models
 
-# To keep Data Source models (Application classes that will be serialized/deserialized over Gson)
+# Keep Data Source models (Application classes that will be serialized/deserialized over Gson)
 # Source: https://stackoverflow.com/a/23826357
 -keepclassmembers class com.napptilians.networkdatasource.api.models.** { *; }
 -keepclassmembers class com.napptilians.diskdatasource.models.** { *; }
 
-# To keep names of models that can be passed as arguments between fragments
+# Keep names of models that can be passed as arguments between fragments with Navigation Components
 # Source: https://developer.android.com/guide/navigation/navigation-pass-data#use_keepnames_rules
 -keepnames class com.napptilians.domain.models.**.** implements java.io.Serializable
 
 ### GSON
 # Source: https://stackoverflow.com/a/23826357
 
-# For using GSON Annotations: @Expose, @SerializedName ...
+# Keep GSON Signature and Annotations: @Expose, @SerializedName ...
 -keepattributes Signature
 -keepattributes *Annotation*
 
