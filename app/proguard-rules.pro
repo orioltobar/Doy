@@ -1,7 +1,7 @@
 # Generic rules
 -dontskipnonpubliclibraryclasses
 -dontskipnonpubliclibraryclassmembers
--optimizationpasses 5
+-optimizationpasses 1
 -flattenpackagehierarchy
 -dontpreverify
 -repackageclasses ''
@@ -39,7 +39,6 @@
 -dontwarn kotlinx.coroutines.flow.**inlined**
 -dontwarn kotlinx.coroutines.reactive.**inlined**
 -dontwarn kotlinx.coroutines.reactive.**
--dontwarn kotlinx.**.**
 -keep class kotlinx.coroutines.flow.** { *; }
 
 # AndroidX Databinding
@@ -101,7 +100,7 @@
 
 # Enable Crashlytics deobfuscated stack traces
 # Source: https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=android
--keepattributes Annotation                       ## Keep Crashlytics annotations
+-keepattributes Annotation                         ## Keep Crashlytics annotations
 -keepattributes SourceFile,LineNumberTable         ## Keep file names/line numbers
 -keep public class * extends java.lang.Exception   ## Keep custom exceptions (opt)
 
@@ -115,34 +114,6 @@
 -keepclassmembers class com.napptilians.networkdatasource.api.models.** { *; }
 -keepclassmembers class com.napptilians.diskdatasource.models.** { *; }
 
-### RxJava, RxAndroid (https://gist.github.com/kosiara/487868792fbd3214f9c9)
--keep class rx.schedulers.Schedulers {
-    public static <methods>;
-}
--keep class rx.schedulers.ImmediateScheduler {
-    public <methods>;
-}
--keep class rx.schedulers.TestScheduler {
-    public <methods>;
-}
--keep class rx.schedulers.Schedulers {
-    public static ** test();
-}
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-    long producerIndex;
-    long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    long producerNode;
-    long consumerNode;
-}
--dontwarn sun.misc.Unsafe
-
--dontwarn org.reactivestreams.FlowAdapters
--dontwarn org.reactivestreams.**
--dontwarn java.util.concurrent.flow.**
--dontwarn java.util.concurrent.**
-
 ### Glide, Glide Okttp Module, Glide Transformations
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
@@ -150,29 +121,6 @@
   **[] $VALUES;
   public *;
 }
-
-### Viewpager indicator
--dontwarn com.viewpagerindicator.**
-
-# Gson uses generic type information stored in a class file when working with fields. Proguard
-# removes such information by default, so configure it to keep all of it.
--keepattributes Signature
-
-# For using GSON @Expose annotation
--keepattributes *Annotation*
-
-# Gson specific classes
--keep class sun.misc.Unsafe { *; }
-#-keep class com.google.gson.stream.** { *; }
-
-# Application classes that will be serialized/deserialized over Gson
-# -keep class com.google.gson.examples.android.model.** { *; }
-
-# Prevent proguard from stripping interface information from TypeAdapterFactory,
-# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
 
 ### Retrofit 2
 # Platform calls Class.forName on types which do not exist on Android to determine platform.
@@ -219,31 +167,8 @@
 # A resource is loaded with a relative path so the package of this class must be preserved.
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
-# If you do not use RxJava:
--dontwarn rx.**
-
-### Fabric
-# In order to provide the most meaningful crash reports
--keepattributes SourceFile,LineNumberTable
-# If you're using custom Eception
--keep public class * extends java.lang.Exception
-
--keep class com.crashlytics.** { *; }
--dontwarn com.crashlytics.**
-
-### Crash report
--renamesourcefileattribute SourceFile
--keepattributes SourceFile,LineNumberTable
-
-### Other
--dontwarn com.google.errorprone.annotations.*
-
 ### Android Architecture Components
-# Ref: https://issuetracker.google.com/issues/62113696
-# LifecycleObserver's empty constructor is considered to be unused by proguard
-#-keepclassmembers class * implements android.arch.lifecycle.LifecycleObserver {
-#    <init>(...);
-#}
+# Source: https://issuetracker.google.com/issues/62113696
 -keep class * implements android.arch.lifecycle.LifecycleObserver {
     <init>(...);
 }
@@ -262,30 +187,6 @@
     @android.arch.lifecycle.OnLifecycleEvent *;
 }
 
-## Databinding or library depends on databinding
--dontwarn android.databinding.**
--keep class android.databinding.** { *; }
-
-### Kotlin Coroutine
-# https://github.com/Kotlin/kotlinx.coroutines/blob/master/README.md
-# ServiceLoader support
--keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
--keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
--keepnames class kotlinx.coroutines.android.AndroidExceptionPreHandler {}
--keepnames class kotlinx.coroutines.android.AndroidDispatcherFactory {}
-# Most of volatile fields are updated with AFU and should not be mangled
--keepclassmembernames class kotlinx.** {
-    volatile <fields>;
-}
-# Same story for the standard library's SafeContinuation that also uses AtomicReferenceFieldUpdater
--keepclassmembernames class kotlin.coroutines.SafeContinuation {
-    volatile <fields>;
-}
-# https://github.com/Kotlin/kotlinx.atomicfu/issues/57
--dontwarn kotlinx.atomicfu.**
-
--dontwarn kotlinx.coroutines.flow.**
-
 ### Kotlin
 #https://stackoverflow.com/questions/33547643/how-to-use-kotlin-with-proguard
 #https://medium.com/@AthorNZ/kotlin-metadata-jackson-and-proguard-f64f51e5ed32
@@ -296,24 +197,6 @@
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
-
-### Google Play Billing
--keep class com.android.vending.billing.**
-
-### Adjust SDK, android.installreferrer
--keep public class com.adjust.sdk.** { *; }
--keep class com.google.android.gms.common.ConnectionResult {
-    int SUCCESS;
-}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {
-    com.google.android.gms.ads.identifier.AdvertisingIdClient$Info getAdvertisingIdInfo(android.content.Context);
-}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {
-    java.lang.String getId();
-    boolean isLimitAdTrackingEnabled();
-}
--keep public class com.android.installreferrer.** { *; }
-
 
 ### Nothing for Butterknife 8, Realm, RxJava2, RxBinding, RxRelay, Dagger2, OneSignal, Google Play Services, Firebase, Facebook SDK, Room DB,
 
