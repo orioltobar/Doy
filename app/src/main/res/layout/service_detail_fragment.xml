@@ -155,12 +155,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profileImageCardView"
-        android:layout_width="@dimen/service_owner_image_height"
-        android:layout_height="@dimen/service_owner_image_height"
+        android:layout_width="@dimen/service_owner_image_size"
+        android:layout_height="@dimen/service_owner_image_size"
         android:layout_margin="@dimen/margin_medium"
         app:layout_anchor="@id/appBar"
         app:layout_anchorGravity="bottom|end"
-        app:cardCornerRadius="@dimen/profile_card_radius"
+        app:cardCornerRadius="@dimen/service_owner_card_radius"
         app:cardBackgroundColor="@color/white">
 
         <ImageView
