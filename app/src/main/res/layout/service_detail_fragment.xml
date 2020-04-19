@@ -160,6 +160,7 @@
         android:layout_margin="@dimen/margin_medium"
         app:layout_anchor="@id/appBar"
         app:layout_anchorGravity="bottom|end"
+        app:cardElevation="@dimen/service_owner_card_elevation"
         app:cardCornerRadius="@dimen/service_owner_card_radius"
         app:cardBackgroundColor="@color/white">
 

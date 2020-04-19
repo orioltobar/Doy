@@ -41,6 +41,7 @@
     <dimen name="service_image_height">250dp</dimen>
     <dimen name="service_owner_image_size">56dp</dimen>
     <dimen name="service_owner_card_radius">28dp</dimen>
+    <dimen name="service_owner_card_elevation">4dp</dimen>
 
     <!-- User profile -->
     <dimen name="profile_image_size">116dp</dimen>
