@@ -58,12 +58,11 @@
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
     <string name="add_service_to_category">What category does your event belong to?</string>
-    <string name="adding_service">Creating event...</string>
     <string name="how_many_spots">How many people can join your event?</string>
     <string name="save">Save</string>
     <string name="person">person</string>
     <string name="persons">persons</string>
-    <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
+    <string name="how_long_duration">How long will your event take approximately?</string>
     <string name="hour">hour</string>
     <string name="hours">hours</string>
     <string name="add_service_success">Your event has been created!</string>

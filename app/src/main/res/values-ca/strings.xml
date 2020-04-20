@@ -23,13 +23,13 @@
     <string name="generic_error">En aquest moment no pot completar la teva petició.</string>
 
     <!-- Register & Login & Recover Password-->
-    <string name="account_created">¡Compte creat!</string>
-    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. ¡És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Chats per iniciar la videotrucada.</string>
-    <string name="start_enjoying">Comença a gauidr de formar part de la comunitat DOY.</string>
+    <string name="account_created">Compte creat!</string>
+    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Chats per iniciar la videotrucada.</string>
+    <string name="start_enjoying">Comença a gaudir de formar part de la comunitat DOY.</string>
     <string name="password_too_short">La contrasenya ha de tenir mínim 6 caracters.</string>
     <string name="passwords_dont_match">Les contrasenyes no coincideixen.</string>
-    <string name="invalid_email">¡Uy! Aquest e-mail no es vàlid.</string>
-    <string name="empty_name">Necessitem el teu nom per a registrarte</string>
+    <string name="invalid_email">Uy! Aquest e-mail no es vàlid.</string>
+    <string name="empty_name">Necessitem el teu nom per a registrar-te</string>
     <string name="firebase_invalid_user">Aquest usuari no existeix a la nostra base de dades</string>
     <string name="firebase_invalid_credentials">Sembla que les credencials son errònies. Torna a provar.</string>
     <string name="firebase_user_already_exists">Aquest nom d\'usuari no està disponible. Si us plau, escull un altre.</string>
@@ -39,12 +39,12 @@
     <string name="send">Enviar</string>
 
     <!-- Category list -->
-    <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
+    <string name="loading_categories">Estem carregant les teves categories. Només serà un segon!</string>
     <string name="no_categories">Encara no tenim categories disponibles</string>
 
     <!-- Service list -->
     <string name="loading_services">Si us plau, espera mentre carreguem els teus serveis</string>
-    <string name="no_services">Sembla que no hi ha serveis per aquesta categoria. ¡Comprova més tard!</string>
+    <string name="no_services">Sembla que no hi ha serveis per aquesta categoria. Comprova més tard!</string>
     <string name="max_spots">Max. %1$d</string>
 
     <!-- Add service -->
@@ -57,20 +57,19 @@
     <string name="select_spots">Seleccionar places disponibles</string>
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>
-    <string name="add_service_to_category">¿A quina categoria pertany el teu esdeveniment?</string>
-    <string name="adding_service">Creant esdeveniment...</string>
-    <string name="how_many_spots">Quant durarà aproximadament?</string>
+    <string name="add_service_to_category">A quina categoria pertany el teu esdeveniment?</string>
+    <string name="how_many_spots">Quanta gent es pot unir al teu esdeveniment?</string>
     <string name="save">Guardar</string>
     <string name="person">persona</string>
     <string name="persons">persones</string>
-    <string name="how_long_duration">Quanta gent es pot unir al teu esdeveniment?</string>
+    <string name="how_long_duration">Quant durarà aproximadament?</string>
     <string name="hour">hora</string>
     <string name="hours">hores</string>
     <string name="add_service_success">Has creat el teu esdeveniment!</string>
-    <string name="add_service_success_message">Recorda ser puntual y tenir-ho tot preparat amb antelació.</string>
+    <string name="add_service_success_message">Recorda ser puntual i tenir-ho tot preparat amb antelació.</string>
 
     <!-- Service detail -->
-    <string name="when">¿Quan?</string>
+    <string name="when">Quan?</string>
     <string name="duration">Duració:</string>
     <string name="spots">Places:</string>
     <string name="spot_reserved">%1d persona apuntada</string>
@@ -80,7 +79,7 @@
     <string name="add_attendee_success_message">L\'esdeveniment s\'acaba d\'afegir a la secció <b>Xat</b> perquè puguis resoldre qualsevol dubte abans de l\'esdeveniment.\n\nRecorda ser puntual, i si finalment no vas a poder assistir-hi, cancel·lar-amb antelació.</string>
     <string name="assist_to_event_yes">Assistiràs a aquest esdeveniment!</string>
     <string name="assist_to_event_cancel">No vull assistir</string>
-    <string name="confirm_assist_to_event_cancel">¿Estàs segur de què no vols assistir a l\'esdeveniment?</string>
+    <string name="confirm_assist_to_event_cancel">Estàs segur de què no vols assistir a l\'esdeveniment?</string>
     <string name="confirm_assist_to_event_cancel_yes">Estic segur, no vull assistir</string>
     <string name="your_service">Aquest esdeveniment és teu. Gràcies per ajudar!</string>
 
@@ -96,7 +95,7 @@
     <string name="profile">Perfil</string>
     <string name="edit_profile">Editar perfil</string>
     <string name="bio_default">Vols explicar alguna cosa sobre tu?</string>
-    <string name="events_by_user">Esdeveniment creats por mi</string>
+    <string name="events_by_user">Esdeveniment creats per mi</string>
     <string name="logout">Tancar sessió</string>
     <string name="update_profile">Actualitzar perfil</string>
 
