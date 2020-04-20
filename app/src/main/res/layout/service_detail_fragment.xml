@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -39,8 +40,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_xxlarge"
-        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -146,6 +145,7 @@
                     style="@style/App.ServiceDetail.Response"
                     android:layout_marginStart="@dimen/margin_xlargex"
                     android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_space_bottom"
                     tools:text="@string/spots_reserved" />
 
             </LinearLayout>
@@ -189,11 +189,18 @@
         <LinearLayout
             android:id="@+id/cancelAssistanceView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:background="@color/white"
-            android:gravity="center"
+            android:gravity="center_horizontal|bottom"
             android:orientation="vertical"
             android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_border_width"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:background="@color/light_gray" />
 
             <TextView
                 style="@style/App.ServiceDetail.Data"

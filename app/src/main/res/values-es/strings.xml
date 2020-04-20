@@ -77,7 +77,7 @@
     <string name="confirm_assistance">Asistiré</string>
     <string name="add_attendee_success">¡Te has apuntado correctamente!</string>
     <string name="add_attendee_success_message">El evento se acaba de añadir a la sección <b>Chat</b> para que puedas resolver cualquier duda antes del evento.\n\nRecuerda ser puntual, y si finalmente no vas a poder asistir, cancelarlo con antelación.</string>
-    <string name="assist_to_event_yes">¡Assistirás a este evento!</string>
+    <string name="assist_to_event_yes">¡Asistirás a este evento!</string>
     <string name="assist_to_event_cancel">No quiero asistir</string>
     <string name="confirm_assist_to_event_cancel">¿Estás seguro de que no quieres asistir al evento?</string>
     <string name="confirm_assist_to_event_cancel_yes">Estoy seguro, no quiero asistir</string>
