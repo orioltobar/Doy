@@ -9,8 +9,8 @@ import com.napptilians.commons.flatMap
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.repositories.DoyRepository
 import kotlinx.coroutines.withContext
-import java.time.Instant
-import java.time.ZoneId
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
 import javax.inject.Inject
 
 class GetMyServicesUseCase @Inject constructor(
