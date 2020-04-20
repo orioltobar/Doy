@@ -51,9 +51,9 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
         return if (model.day == null || model.hour == null) {
             null
         } else {
-            val dateString = "${model.day}T${model.hour}+01:00"
+            // Hardcoded to Spanish time
+            val dateString = "${model.day}T${model.hour}$TIMEZONE"
             try {
-                val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
                 ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
             } catch (e: Exception) {
                 Log.d(TAG, "There was an error parsing: $dateString")
@@ -63,8 +63,8 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
     }
 
     companion object {
-        private const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z"
         private const val TAG = "ServiceInMapper"
+        private const val TIMEZONE = "+01:00"
     }
 }
 
