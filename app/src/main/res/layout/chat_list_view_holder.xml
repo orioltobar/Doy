@@ -11,8 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatListItemPhotoContainer"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/chat_thumbnail_image_size"
+        android:layout_height="@dimen/chat_thumbnail_image_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,12 +36,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/chatListItemPhotoCardView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/chat_thumbnail_image_size"
+            android:layout_height="@dimen/chat_thumbnail_image_size"
             android:clickable="false"
             android:focusable="false"
             android:visibility="gone"
-            app:cardCornerRadius="@dimen/profile_card_radius"
+            app:cardCornerRadius="@dimen/chat_thumbnail_card_radius"
             app:cardBackgroundColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="@+id/chatListItemPhotoShape"
             app:layout_constraintEnd_toEndOf="@+id/chatListItemPhotoShape"
