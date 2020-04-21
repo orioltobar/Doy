@@ -164,7 +164,7 @@ class AddServiceFragment : BaseFragment(), ToolbarBehaviour {
             TimePickerDialog(
                 it,
                 TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                    selectedTime = "$hourOfDay:$minute"
+                    selectedTime = String.format("%02d:%02d", hourOfDay, minute)
                     updateServiceTime()
                 },
                 DEFAULT_SERVICE_DATE_HOUR,

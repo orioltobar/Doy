@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="viewModel"
             type="com.napptilians.features.viewmodel.AddServiceViewModel" />
@@ -25,19 +26,23 @@
         <TextView
             android:id="@+id/loginText"
             style="@style/App.AddService"
-            android:layout_marginTop="@dimen/margin_large"
-            android:padding="@dimen/margin_xlarge"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_large"
             android:text="@string/add_service" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/margin_xlarge">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_small"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -48,7 +53,8 @@
                     <LinearLayout
                         android:id="@+id/uploadImageBox"
                         style="@style/App.AddService.ImageBox"
-                        android:layout_margin="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_large"
                         android:padding="@dimen/margin_medium">
 
                         <TextView
@@ -56,6 +62,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/ic_add_picture"
                             android:drawablePadding="@dimen/margin_small"
+                            android:fontFamily="@font/raleway_semibold"
                             android:gravity="center_vertical"
                             android:text="@string/upload_image"
                             android:textColor="@color/colorPrimary"
@@ -78,8 +85,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_small"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -236,7 +241,6 @@
         <Button
             android:id="@+id/createEventButton"
             style="@style/App.PrimaryButton"
-            android:layout_marginTop="@dimen/margin_small"
             android:enabled="@{viewModel.isValidService}"
             android:text="@string/add_service" />
 

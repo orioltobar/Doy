@@ -20,6 +20,7 @@
     <string name="create">Crear</string>
     <string name="wrong_credentials">Credenciales erróneas</string>
     <string name="server_error">Ha ocurrido un error</string>
+    <string name="generic_error">En este momento no se puede completar tu petición.</string>
 
     <!-- Register & Login & Recover Password-->
     <string name="account_created">¡Cuenta creada!</string>
@@ -57,7 +58,6 @@
     <string name="select_duration">Seleccionar duración</string>
     <string name="description">Descripción</string>
     <string name="add_service_to_category">¿A qué categoría pertenece tu evento?</string>
-    <string name="adding_service">Creando evento...</string>
     <string name="how_many_spots">¿Cuánta gente se puede unir a tu evento?</string>
     <string name="save">Guardar</string>
     <string name="person">persona</string>
@@ -95,13 +95,13 @@
     <string name="profile">Perfil</string>
     <string name="edit_profile">Editar perfil</string>
     <string name="bio_default">¿Quieres contarnos algo sobre ti?</string>
-    <string name="events_by_user">Events creats per mi</string>
+    <string name="events_by_user">Eventos creados por mí</string>
     <string name="logout">Cerrar sesión</string>
-    <string name="update_profile">Actualitzar perfil</string>
+    <string name="update_profile">Actualizar perfil</string>
 
     <!-- My events -->
     <string name="your_events">Tus eventos</string>
-    <string name="my_own_events">Events created by me</string>
+    <string name="my_own_events">Eventos creados por mí</string>
     <string name="tab_upcoming">Próximos</string>
     <string name="tab_past">Pasados</string>
     <string name="loading_events">Cargando eventos...</string>
@@ -110,5 +110,5 @@
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="no_chats">Todavía no tienes ningún chat abierto. \n\nApúntate a un evento para iniciar un chat</string>
-    <string name="chat_in_progress">Estamos trabajando a toda velocitat para implementar un chat grupal con soporte de videollamadas, por el momento, escribe unos mensajes al organizador!</string>
+    <string name="chat_in_progress">Estamos trabajando a toda velocidad para implementar un chat grupal con soporte de videollamadas, por el momento, escribe unos mensajes al organizador!</string>
 </resources>

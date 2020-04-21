@@ -8,17 +8,15 @@
 
     <TextView
         style="@style/App.AddService"
-        android:paddingStart="@dimen/margin_xlarge"
-        android:paddingTop="@dimen/margin_large"
-        android:paddingEnd="@dimen/margin_xlarge"
-        android:paddingBottom="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
         android:text="@string/how_long_duration" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/durationList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_medium"
         android:layout_weight="1" />
 
     <Button

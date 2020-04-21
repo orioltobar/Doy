@@ -27,7 +27,7 @@
     <string name="start_enjoying">Start and enjoy being part of the DOY community</string>
     <string name="password_too_short">Password must have at least 6 characters.</string>
     <string name="passwords_dont_match">Passwords don\'t match.</string>
-    <string name="invalid_email">¡Oops! This e-mail isn\'t valid.</string>
+    <string name="invalid_email">Oops! This e-mail isn\'t valid.</string>
     <string name="empty_name">We need your name to log you in</string>
     <string name="firebase_invalid_user">This user does not exist in our records</string>
     <string name="firebase_invalid_credentials">Looks like credentials were incorrect. Try again.</string>
@@ -58,12 +58,11 @@
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
     <string name="add_service_to_category">What category does your event belong to?</string>
-    <string name="adding_service">Creating event...</string>
     <string name="how_many_spots">How many people can join your event?</string>
     <string name="save">Save</string>
     <string name="person">person</string>
     <string name="persons">persons</string>
-    <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
+    <string name="how_long_duration">How long will your event take approximately?</string>
     <string name="hour">hour</string>
     <string name="hours">hours</string>
     <string name="add_service_success">Your event has been created!</string>
