@@ -124,7 +124,9 @@
         android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_introFragment"
-            app:destination="@id/introFragment" />
+            app:destination="@id/introFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_categoryListFragment"
             app:destination="@id/categoryListFragment" />
@@ -135,7 +137,9 @@
         android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_introFragment"
-            app:destination="@id/introFragment" />
+            app:destination="@id/introFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profileFragment_to_eventsFragment"
             app:destination="@id/eventsFragment" />
