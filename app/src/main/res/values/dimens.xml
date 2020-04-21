@@ -12,6 +12,7 @@
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="margin_space_bottom">50dp</dimen>
     <dimen name="margin_login">40dp</dimen>
+    <dimen name="margin_button">22dp</dimen>
 
     <!-- Text sizes -->
     <dimen name="text_size_xs">10sp</dimen>
@@ -40,9 +41,16 @@
 
     <!-- Service detail -->
     <dimen name="service_image_height">250dp</dimen>
-    <dimen name="service_owner_image_height">56dp</dimen>
+    <dimen name="service_owner_image_size">56dp</dimen>
+    <dimen name="service_owner_card_radius">28dp</dimen>
+    <dimen name="service_owner_card_elevation">4dp</dimen>
 
     <!-- User profile -->
-    <dimen name="profile_card_radius">250dp</dimen>
+    <dimen name="profile_image_size">116dp</dimen>
+    <dimen name="profile_card_radius">58dp</dimen>
+
+    <!-- Chat -->
+    <dimen name="chat_thumbnail_image_size">48dp</dimen>
+    <dimen name="chat_thumbnail_card_radius">24dp</dimen>
 
 </resources>
