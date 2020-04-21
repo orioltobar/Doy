@@ -37,7 +37,9 @@
             app:destination="@id/recoverPasswordFragment" />
         <action
             android:id="@+id/action_loginFragment_to_categoryListFragment2"
-            app:destination="@id/categoryListFragment" />
+            app:destination="@id/categoryListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/recoverPasswordFragment"
@@ -52,7 +54,9 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_registerFragment_to_categoryListFragment"
-            app:destination="@id/categoryListFragment" />
+            app:destination="@id/categoryListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/introFragment"
@@ -125,11 +129,13 @@
         <action
             android:id="@+id/action_splashFragment_to_introFragment"
             app:destination="@id/introFragment"
-            app:popUpTo="@id/splashFragment"
+            app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_categoryListFragment"
-            app:destination="@id/categoryListFragment" />
+            app:destination="@id/categoryListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -138,7 +144,7 @@
         <action
             android:id="@+id/action_profileFragment_to_introFragment"
             app:destination="@id/introFragment"
-            app:popUpTo="@id/profileFragment"
+            app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profileFragment_to_eventsFragment"
