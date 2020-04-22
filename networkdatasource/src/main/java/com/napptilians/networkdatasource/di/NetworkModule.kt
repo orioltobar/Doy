@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.napptilians.commons.Constants.RETROFIT_TIMEOUT
 import com.napptilians.commons.Constants.STRING_TO_BE_PROVIDED
 import com.napptilians.networkdatasource.api.data.CategoryService
+import com.napptilians.networkdatasource.api.data.FirebaseService
 import com.napptilians.networkdatasource.api.data.MovieService
 import com.napptilians.networkdatasource.api.data.ServiceService
 import com.napptilians.networkdatasource.api.data.UserService
@@ -98,4 +99,8 @@ object NetworkServicesModule {
     @Provides
     @Singleton
     fun provideUserService(retrofit: Retrofit): UserService = retrofit.create(UserService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideFirebaseService(retrofit: Retrofit): FirebaseService = retrofit.create(FirebaseService::class.java)
 }
