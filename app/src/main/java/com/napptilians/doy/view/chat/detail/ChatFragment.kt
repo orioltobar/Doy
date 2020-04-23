@@ -136,7 +136,7 @@ class ChatFragment : BaseFragment() {
                 R.drawable.ic_notification,
                 message.senderName,
                 message.message,
-                message.senderId
+                user?.uid ?: ""
             ), "/topics/" + message.chatId)
 
         viewModel.sendNotificationDataStream.observe(

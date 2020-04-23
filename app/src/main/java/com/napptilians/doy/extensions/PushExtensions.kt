@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.SystemClock
 import androidx.core.app.NotificationCompat
+import com.napptilians.doy.MainActivity
 
 private const val CHANNEL_DEFAULT_ID = "Default"
 private const val CHANNEL_DEFAULT_NAME = "Default"
@@ -21,8 +22,8 @@ fun Context.createNotification(
     channelName: String = CHANNEL_DEFAULT_NAME
 ) {
     // Generate empty intent that should be launched when notification is clicked
-    val intent = Intent()
-    val pendingIntent = PendingIntent.getService(applicationContext, 0, intent, 0)
+    val intent = Intent(applicationContext, MainActivity::class.java).apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) }
+    val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
     // Generate notification
     val notification = NotificationCompat.Builder(applicationContext, channelId)

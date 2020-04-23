@@ -5,5 +5,5 @@ data class ChatNotificationModel(
     val icon: Int,
     val title: String,
     val body: String,
-    val sentToken: String
+    val senderUid: String
 )

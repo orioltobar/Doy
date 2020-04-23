@@ -15,6 +15,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.doy.R
@@ -84,6 +88,7 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
         }
 
         profileInfoLogOutText.setOnClickListener {
+            // TODO: Unsubscribe to user firebase chat topics
             viewModel.logout()
         }
 

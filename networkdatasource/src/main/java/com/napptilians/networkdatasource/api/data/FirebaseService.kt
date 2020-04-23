@@ -14,5 +14,5 @@ interface FirebaseService {
     @POST("fcm/send")
     suspend fun sendNotification(
         @Body sender: ChatSenderModel
-    ): Unit
+    )
 }

@@ -49,7 +49,7 @@ class PushNotificationService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         Log.d(TAG, "Push notification retrieved: $remoteMessage")
-        if (remoteMessage.data["sent"]?.equals(firebaseAuth.currentUser?.uid ?: "") == true) {
+        if (remoteMessage.data["senderUid"]?.equals(firebaseAuth.currentUser?.uid ?: "") == false) {
             showChatNotification(remoteMessage)
         }
     }

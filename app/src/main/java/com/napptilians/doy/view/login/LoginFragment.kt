@@ -171,6 +171,7 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
     }
 
     private fun processNewValue(auth: AuthResult) {
+        // TODO: Subscribe to user firebase chat topics
         loginFragmentProgressView.gone()
         val direction = LoginFragmentDirections.actionLoginFragmentToCategoryListFragment2()
         findNavController().navigate(direction)
