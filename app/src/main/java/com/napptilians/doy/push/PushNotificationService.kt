@@ -8,7 +8,7 @@ import com.napptilians.commons.AppDispatchers
 import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.usecases.GetDeviceInfoUseCase
 import com.napptilians.domain.usecases.SetDeviceInfoUseCase
-import com.napptilians.doy.extensions.showNotification
+import com.napptilians.doy.extensions.createNotification
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -61,7 +61,7 @@ class PushNotificationService : FirebaseMessagingService() {
         val icon = remoteMessage.data["icon"] ?: return
         val title = remoteMessage.data["title"] ?: return
         val body = remoteMessage.data["body"] ?: return
-        baseContext.showNotification(Integer.parseInt(icon), title, body)
+        baseContext.createNotification(Integer.parseInt(icon), title, body)
     }
 
     companion object {

@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 private const val CHANNEL_DEFAULT_ID = "Default"
 private const val CHANNEL_DEFAULT_NAME = "Default"
 
-fun Context.showNotification(
+fun Context.createNotification(
     icon: Int,
     title: String,
     body: String,
@@ -35,10 +35,10 @@ fun Context.showNotification(
         .build()
 
     // Notify the system about a new notification
-    sendNotification(notification, channelId, channelName)
+    showNotification(notification, channelId, channelName)
 }
 
-fun Context.sendNotification(
+fun Context.showNotification(
     notification: Notification,
     channelId: String,
     channelName: String,

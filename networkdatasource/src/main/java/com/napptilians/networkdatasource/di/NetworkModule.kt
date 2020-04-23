@@ -20,7 +20,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.Locale
 
 @Module
 object NetworkModule {
@@ -102,5 +101,11 @@ object NetworkServicesModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseService(retrofit: Retrofit): FirebaseService = retrofit.create(FirebaseService::class.java)
+    fun provideFirebaseService(gsonConverterFactory: GsonConverterFactory, okHttpBuilder: OkHttpClient.Builder): FirebaseService =
+        Retrofit.Builder()
+            .baseUrl("https://fcm.googleapis.com/")
+            .addConverterFactory(gsonConverterFactory)
+            .client(okHttpBuilder.build())
+            .build()
+            .create(FirebaseService::class.java)
 }

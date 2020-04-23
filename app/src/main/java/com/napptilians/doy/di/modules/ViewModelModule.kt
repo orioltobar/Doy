@@ -6,17 +6,18 @@ import com.napptilians.doy.di.ViewModelFactory
 import com.napptilians.doy.di.ViewModelKey
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import com.napptilians.features.viewmodel.CategoriesViewModel
-import com.napptilians.features.viewmodel.EventsViewModel
 import com.napptilians.features.viewmodel.ChatListViewModel
+import com.napptilians.features.viewmodel.ChatViewModel
+import com.napptilians.features.viewmodel.EventsViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import com.napptilians.features.viewmodel.ProfileViewModel
 import com.napptilians.features.viewmodel.RecoverPasswordViewModel
-import com.napptilians.features.viewmodel.ServicesViewModel
 import com.napptilians.features.viewmodel.RegisterViewModel
-import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import com.napptilians.features.viewmodel.SelectDurationViewModel
+import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
+import com.napptilians.features.viewmodel.ServicesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -94,4 +95,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChatListViewModel::class)
     internal abstract fun chatListViewModel(viewModel: ChatListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChatViewModel::class)
+    internal abstract fun chatViewModel(viewModel: ChatViewModel): ViewModel
 }

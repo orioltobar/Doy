@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -14,18 +16,22 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.chat.ChatModel
+import com.napptilians.domain.models.push.ChatNotificationModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
+import com.napptilians.features.viewmodel.ChatViewModel
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentHeaderTitle
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentSendButton
 import kotlinx.android.synthetic.main.chat_fragment.fireBaseChatMessages
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 
 // TODO: Re do this view after MVP.
+@ExperimentalCoroutinesApi
 class ChatFragment : BaseFragment() {
 
     private val auth: FirebaseAuth? get() = FirebaseAuth.getInstance()
@@ -39,6 +45,8 @@ class ChatFragment : BaseFragment() {
 
     @Inject
     lateinit var adapter: ChatAdapter
+
+    private val viewModel: ChatViewModel by viewModels { vmFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,6 +95,7 @@ class ChatFragment : BaseFragment() {
 
         val message = ChatModel(chatId, text, senderName, args.userId.toString())
         databaseReference?.child(MESSAGE_TABLE_NAME)?.child(chatId)?.push()?.setValue(message)
+        sendNotificationToReceivers(message)
         chatFragmentEditText.setText("")
     }
 
@@ -109,7 +118,6 @@ class ChatFragment : BaseFragment() {
             for (data in dataSnapshot.children) {
                 val messageData = data.getValue<ChatModel>(ChatModel::class.java)
                 val message = messageData?.let { it } ?: continue
-
                 toReturn.add(message)
             }
             toReturn.sortBy { message -> message.timeStamp }
@@ -121,8 +129,26 @@ class ChatFragment : BaseFragment() {
         }
     }
 
+    private fun sendNotificationToReceivers(message: ChatModel) {
+        viewModel.execute(
+            ChatNotificationModel(
+                message.senderName,
+                R.drawable.ic_notification,
+                message.senderName,
+                message.message,
+                message.senderId
+            ), "/topics/" + message.chatId)
+
+        viewModel.sendNotificationDataStream.observe(
+            viewLifecycleOwner,
+            Observer { handleUiStates(it, ::processSendNotification) })
+    }
+
+    private fun processSendNotification(unit: Unit) {
+
+    }
+
     companion object {
         private const val MESSAGE_TABLE_NAME = "messages"
     }
-
 }

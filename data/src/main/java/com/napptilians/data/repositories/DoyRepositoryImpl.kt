@@ -12,8 +12,11 @@ import com.napptilians.commons.singleSourceOfTruth
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
+import com.napptilians.data.datasources.NotificationDataSource
 import com.napptilians.domain.models.category.CategoryModel
 import com.napptilians.domain.models.device.DeviceModel
+import com.napptilians.domain.models.push.ChatNotificationModel
+import com.napptilians.domain.models.push.ChatSenderModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.repositories.DoyRepository
@@ -22,7 +25,8 @@ import javax.inject.Inject
 class DoyRepositoryImpl @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     private val dbDataSource: DbDataSource,
-    private val firebaseDataSource: FirebaseDataSource
+    private val firebaseDataSource: FirebaseDataSource,
+    private val notificationDataSource: NotificationDataSource
 ) : DoyRepository {
 
     override suspend fun getCategories(categoryIds: List<Long>): Response<List<CategoryModel>, ErrorModel> {
@@ -123,6 +127,10 @@ class DoyRepositoryImpl @Inject constructor(
         return networkDataSource.getMyServices(uid).map {
             it.sortedWith(comparator)
         }
+    }
+
+    override suspend fun sendNotification(notification: ChatNotificationModel, topic: String): Response<Unit, ErrorModel> {
+        return notificationDataSource.sendNotification(ChatSenderModel(notification, topic))
     }
 
     private val comparator: Comparator<ServiceModel>

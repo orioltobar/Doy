@@ -3,11 +3,13 @@ package com.napptilians.doy.di.modules
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
+import com.napptilians.data.datasources.NotificationDataSource
 import com.napptilians.data.repositories.DoyRepositoryImpl
 import com.napptilians.diskdatasource.data.DbDataBaseImpl
 import com.napptilians.domain.repositories.DoyRepository
 import com.napptilians.networkdatasource.api.data.FirebaseDataSourceImpl
 import com.napptilians.networkdatasource.api.data.NetworkDataSourceImpl
+import com.napptilians.networkdatasource.api.data.NotificationDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -33,6 +35,10 @@ interface ApplicationDataBindsModule {
     @Binds
     @Singleton
     fun provideFirebaseDataSource(firebaseDataSource: FirebaseDataSourceImpl): FirebaseDataSource
+
+    @Binds
+    @Singleton
+    fun provideNotificationDataSource(notificationDataSource: NotificationDataSourceImpl): NotificationDataSource
 
     @Module
     companion object {

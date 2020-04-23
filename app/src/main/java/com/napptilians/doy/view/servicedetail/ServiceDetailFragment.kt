@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -128,6 +129,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun processConfirmAssistNewValue(unit: Unit) {
+        FirebaseMessaging.getInstance().subscribeToTopic("${args.service.serviceId}")
         progressBar.gone()
         activity?.let { activity ->
             DoyDialog(activity).apply {
@@ -144,6 +146,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("${args.service.serviceId}")
         progressBar.gone()
         args.service.attendees = args.service.attendees?.dec()
         setAttendees(args.service.attendees)

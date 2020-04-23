@@ -22,10 +22,6 @@ object AppModule {
     fun provideBaseUrl(): String = "https://doy-proj.appspot.com/"
 
     @Provides
-    @BaseUrl
-    fun provideFirebaseBaseUrl(): String = "https://fcm.googleapis.com/"
-
-    @Provides
     @Singleton
     fun provideAppDispatchers(): AppDispatchers = object : AppDispatchers {
         override val main: CoroutineDispatcher = Dispatchers.Main

@@ -5,6 +5,7 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.category.CategoryModel
 import com.napptilians.domain.models.device.DeviceModel
+import com.napptilians.domain.models.push.ChatNotificationModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
 
@@ -52,4 +53,6 @@ interface DoyRepository {
     ): Response<UserModel, ErrorModel>
 
     suspend fun getMyServices(uid: String? = null): Response<List<ServiceModel>, ErrorModel>
+
+    suspend fun sendNotification(notification: ChatNotificationModel, topic: String): Response<Unit, ErrorModel>
 }
