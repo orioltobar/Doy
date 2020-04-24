@@ -11,13 +11,6 @@
     <string name="google_sign_in">Continuar con Google</string>
     <string name="email">E-mail</string>
     <string name="name">Nombre</string>
-    <string name="password">Contraseña</string>
-    <string name="repeat_password">Repetir contraseña</string>
-    <string name="password_forgot">¿Has olvidado la contraseña?</string>
-    <string name="recover_password">¡Comprueba tu cuenta de correo electrónico para recuperar tu contraseña!</string>
-    <string name="no_account">¿No tienes cuenta?</string>
-    <string name="existing_account">¿Ya tienes cuenta?</string>
-    <string name="create">Crear</string>
     <string name="wrong_credentials">Credenciales erróneas</string>
     <string name="server_error">Ha ocurrido un error</string>
 
@@ -36,6 +29,14 @@
     <string name="forgot_password_no_problem">¡No hay problema, nos pasa a todos!</string>
     <string name="forgot_password_message">Por favor, introduce la dirección de e-mail que usaste al registrarte y te enviaremos un enlace para restablecer tu contraseña.</string>
     <string name="send">Enviar</string>
+    <string name="password_recover_sent">Email enviado</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
+    <string name="password_forgot">¿Has olvidado la contraseña?</string>
+    <string name="recover_password">¡Comprueba tu cuenta de correo electrónico para recuperar tu contraseña!</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+    <string name="existing_account">¿Ya tienes cuenta?</string>
+    <string name="create">Crear</string>
 
     <!-- Category list -->
     <string name="loading_categories">Estamos cargando tus categorías. ¡Sólo será un segundo!</string>

@@ -82,9 +82,10 @@ class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_clap)
-                setPopupTitle(context.resources.getString(R.string.password_forgot))
+                setPopupTitle(context.resources.getString(R.string.password_recover_sent))
                 setPopupSubtitle(context.resources.getString(R.string.recover_password))
                 show()
+                setOnDismissListener { findNavController().popBackStack() }
             }
         }
     }

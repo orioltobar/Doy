@@ -10,18 +10,11 @@
     <string name="google_sign_in">Continue with Google</string>
     <string name="email">E-mail</string>
     <string name="name">Name</string>
-    <string name="password">Password</string>
-    <string name="repeat_password">Repeat password</string>
-    <string name="password_forgot">Forgot password?</string>
-    <string name="recover_password">Check your email account to recover your password!</string>
-    <string name="no_account">Don\'t you have an account?</string>
-    <string name="existing_account">Already registered?</string>
-    <string name="create">Create</string>
     <string name="wrong_credentials">Wrong credentials</string>
     <string name="server_error">An error has occurred</string>
     <string name="generic_error">Your request cannot be performed at this time.</string>
 
-    <!-- Register & Login & Recover pass-->
+    <!-- Register & Login & Recover password -->
     <string name="account_created">Account created!</string>
     <string name="welcome">Welcome to the DOY community. From now on, you can start joining the events you are more interested on. It is very easy! When the day and hour of the event come, you will just have to enter the Chats section to start the videocall.</string>
     <string name="start_enjoying">Start and enjoy being part of the DOY community</string>
@@ -36,6 +29,14 @@
     <string name="forgot_password_no_problem">There is no problem, it happens to all of us!</string>
     <string name="forgot_password_message">Please enter the email address you used when registering and we will send you a link to reset your password.</string>
     <string name="send">Send</string>
+    <string name="password_recover_sent">Email sent</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="password_forgot">Forgot password?</string>
+    <string name="recover_password">Check your email account to recover your password!</string>
+    <string name="no_account">Don\'t you have an account?</string>
+    <string name="existing_account">Already registered?</string>
+    <string name="create">Create</string>
 
     <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
