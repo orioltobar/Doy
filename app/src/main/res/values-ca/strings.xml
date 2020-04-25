@@ -11,13 +11,6 @@
     <string name="google_sign_in">Continuar amb Google</string>
     <string name="email">E-mail</string>
     <string name="name">Nom</string>
-    <string name="password">Contrasenya</string>
-    <string name="repeat_password">Repetir contrasenya</string>
-    <string name="password_forgot">Has oblidat la contrasenya?</string>
-    <string name="recover_password">Revisa el teu compte de correu electrònic per recuperar la teva contraseña!</string>
-    <string name="no_account">No tens compte?</string>
-    <string name="existing_account">Ja tens compte?</string>
-    <string name="create">Crear</string>
     <string name="wrong_credentials">Credencials errònies</string>
     <string name="server_error">Hi ha hagut un error</string>
     <string name="generic_error">En aquest moment no es pot completar la teva petició.</string>
@@ -37,6 +30,14 @@
     <string name="forgot_password_no_problem">No hi ha cap problema, ens passa a tots!</string>
     <string name="forgot_password_message">Sisplau, introdueix la direcció d\'e-mail que vas utilitzar al registrar-te i t\'enviarem un enllaç per restableixer la teva contrasenya.</string>
     <string name="send">Enviar</string>
+    <string name="password_recover_sent">Email enviat</string>
+    <string name="password">Contrasenya</string>
+    <string name="repeat_password">Repetir contrasenya</string>
+    <string name="password_forgot">Has oblidat la contrasenya?</string>
+    <string name="recover_password">Revisa el teu compte de correu electrònic per recuperar la teva contraseña!</string>
+    <string name="no_account">No tens compte?</string>
+    <string name="existing_account">Ja tens compte?</string>
+    <string name="create">Crear</string>
 
     <!-- Category list -->
     <string name="loading_categories">Estem carregant les teves categories. Només serà un segon!</string>
