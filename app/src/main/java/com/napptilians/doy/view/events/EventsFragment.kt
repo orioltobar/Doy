@@ -111,7 +111,7 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
     private fun initViews() {
         titleText.visible()
         if (args.onlyMyEvents) {
-            titleText.text = context?.resources?.getText(R.string.my_own_events)
+            titleText.text = context?.resources?.getText(R.string.events_by_user)
         } else {
             titleText.text = context?.resources?.getText(R.string.your_events)
         }
