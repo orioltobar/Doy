@@ -28,7 +28,7 @@ class MainActivity : BaseActivity() {
         val navHostFragment = NavHostFragment.findNavController(navFragment)
         navHostFragment.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.introFragment, R.id.splashFragment, R.id.loginFragment, R.id.registerFragment -> {
+                R.id.introFragment, R.id.splashFragment, R.id.loginFragment, R.id.registerFragment, R.id.recoverPasswordFragment -> {
                     navBottom.visibility = View.GONE
                 }
                 else -> {

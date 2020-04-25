@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/profileContainer"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
@@ -27,8 +27,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profileImageCardView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/profile_image_size"
+        android:layout_height="@dimen/profile_image_size"
         android:clickable="false"
         android:focusable="false"
         android:visibility="gone"
@@ -51,8 +51,8 @@
 
     <View
         android:id="@+id/profilePhotoPlaceHolder"
-        android:layout_width="116dp"
-        android:layout_height="116dp"
+        android:layout_width="@dimen/profile_image_size"
+        android:layout_height="@dimen/profile_image_size"
         android:layout_marginTop="@dimen/margin_medium"
         android:background="@drawable/bg_dashed_oval"
         app:layout_constraintEnd_toEndOf="@id/endGuideline"
@@ -83,6 +83,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_semibold"
+        android:paddingTop="@dimen/padding_medium"
+        android:paddingEnd="@dimen/padding_medium"
+        android:paddingBottom="@dimen/padding_medium"
         android:text="@string/logout"
         android:textColor="@color/red"
         android:textSize="@dimen/text_size_s"
@@ -121,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_end="@dimen/margin_medium" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/startGuideline"

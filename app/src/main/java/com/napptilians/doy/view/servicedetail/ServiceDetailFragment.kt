@@ -24,8 +24,8 @@ import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
 import kotlinx.android.synthetic.main.service_detail_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 import javax.inject.Inject
 

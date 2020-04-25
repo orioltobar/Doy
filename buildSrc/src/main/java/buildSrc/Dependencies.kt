@@ -30,6 +30,7 @@ object Versions {
     const val palette_version = "1.0.0"
     const val robolectric_version = "4.3.1"
     const val fragment_test_version = "1.2.2"
+    const val threetenapb_version = "1.2.3"
 
     // AndroidX
     const val androidx_appcompat_version = "1.0.2"
