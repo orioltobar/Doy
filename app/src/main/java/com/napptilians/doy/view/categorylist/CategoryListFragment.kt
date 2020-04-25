@@ -18,6 +18,7 @@ import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import kotlinx.android.synthetic.main.category_list_fragment.*
@@ -64,15 +65,15 @@ class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
             categoryList.gone()
             loadingProgress.gone()
             loadingText.text = resources.getString(R.string.no_categories)
-            loadingText.text = "${resources.getString(R.string.error_title)}\n${resources.getString(R.string.error_message)}"
             loadingText.visible()
         }
     }
 
     override fun onError(error: ErrorModel) {
         categoryList.gone()
-        loadingProgress.visible()
-        loadingText.visible()
+        loadingProgress.gone()
+        loadingText.gone()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {

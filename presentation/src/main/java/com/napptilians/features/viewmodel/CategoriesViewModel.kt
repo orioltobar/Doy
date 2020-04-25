@@ -8,9 +8,9 @@ import com.napptilians.domain.models.category.CategoryModel
 import com.napptilians.domain.usecases.GetCategoriesUseCase
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class CategoriesViewModel @Inject constructor(
