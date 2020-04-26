@@ -182,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:fontFamily="@font/raleway_semibold"
-                    android:text="@string/sign_in"
+                    android:text="@string/login"
                     android:textColor="@color/green" />
 
             </LinearLayout>

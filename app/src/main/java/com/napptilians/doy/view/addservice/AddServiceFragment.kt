@@ -31,12 +31,18 @@ import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.features.viewmodel.AddServiceViewModel
-import kotlinx.android.synthetic.main.add_service_fragment.*
-import kotlinx.android.synthetic.main.toolbar.toolbar
+import kotlinx.android.synthetic.main.add_service_fragment.createEventButton
+import kotlinx.android.synthetic.main.add_service_fragment.progressBar
+import kotlinx.android.synthetic.main.add_service_fragment.selectCategoryEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectDayEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectDurationEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectSpotsEditText
+import kotlinx.android.synthetic.main.add_service_fragment.selectTimeEditText
+import kotlinx.android.synthetic.main.add_service_fragment.serviceImageView
+import kotlinx.android.synthetic.main.add_service_fragment.uploadImageBox
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.Calendar
+import java.util.*
 
 @ExperimentalCoroutinesApi
 class AddServiceFragment : BaseFragment(), ToolbarBehaviour {
@@ -83,11 +89,13 @@ class AddServiceFragment : BaseFragment(), ToolbarBehaviour {
         getNavigationResult("selectedDuration")?.observe(
             viewLifecycleOwner,
             Observer<String> {
-                if (it.toInt() == 1) {
-                    selectDurationEditText.setText("$it ${context?.getString(R.string.hour)}")
-                } else {
-                    selectDurationEditText.setText("$it ${context?.getString(R.string.hours)}")
-                }
+                selectDurationEditText.setText(
+                    context?.resources?.getQuantityString(
+                        R.plurals.hours,
+                        it.toInt(),
+                        it.toInt()
+                    )
+                )
             }
         )
     }
