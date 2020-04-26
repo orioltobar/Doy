@@ -10,7 +10,7 @@
 
     <!-- Register -->
     <string name="account_created">¡Cuenta creada!</string>
-    <string name="welcome">Bienvenido a la comunidad de DOY. A partir de ahora ya puedes unirte a los eventos que más te interesen. ¡Es muy fácil! Cuando llegue el día y la hora del evento únicamente tendrás que entrar en esta sección Chats para iniciar la videollamada.</string>
+    <string name="welcome">Bienvenido a la comunidad de DOY. A partir de ahora ya puedes unirte a los eventos que más te interesen. ¡Es muy fácil! Cuando llegue el día y la hora del evento únicamente tendrás que entrar en la sección Chats para iniciar la videollamada.</string>
     <string name="start_enjoying">Empieza a disfrutar de formar parte de la comunidad DOY.</string>
     <string name="password_too_short">La contraseña debe tener al menos 6 caracteres.</string>
     <string name="passwords_dont_match">Las contraseñas no coinciden.</string>
@@ -58,7 +58,6 @@
     <string name="select_duration">Seleccionar duración</string>
     <string name="description">Descripción</string>
     <string name="add_service_to_category">¿A qué categoría pertenece tu evento?</string>
-    <string name="adding_service">Creando evento...</string>
     <string name="how_many_spots">¿Cuánta gente se puede unir a tu evento?</string>
     <string name="save">Guardar</string>
     <plurals name="people">
@@ -84,7 +83,7 @@
     <string name="confirm_assistance">Asistiré</string>
     <string name="add_attendee_success">¡Te has apuntado correctamente!</string>
     <string name="add_attendee_success_message">El evento se acaba de añadir a la sección <b>Chat</b> para que puedas resolver cualquier duda antes del evento.\n\nRecuerda ser puntual, y si finalmente no vas a poder asistir, cancelarlo con antelación.</string>
-    <string name="attend_event_yes">¡Assistirás a este evento!</string>
+    <string name="attend_event_yes">¡Asistirás a este evento!</string>
     <string name="attend_event_cancel">No quiero asistir</string>
     <string name="confirm_attend_event_cancel">¿Estás seguro de que no quieres asistir al evento?</string>
     <string name="confirm_attend_event_cancel_yes">Estoy seguro, no quiero asistir</string>
@@ -95,16 +94,16 @@
     <string name="wip_explanation">Estamos trabajando a toda velocidad para que puedas disfrutar de esta funcionalidad lo antes posible.</string>
 
     <!-- Generic Error Dialog -->
-    <string name="error_title">Ups! Algo ha ido mal</string>
+    <string name="error_title">¡Ups! Algo ha ido mal</string>
     <string name="error_message">Vuelve a intentarlo en unos segundos.</string>
 
     <!-- Profile -->
     <string name="profile">Perfil</string>
     <string name="edit_profile">Editar perfil</string>
     <string name="bio_default">¿Quieres contarnos algo sobre ti?</string>
-    <string name="events_by_user">Events creats per mi</string>
+    <string name="events_by_user">Eventos creados por mí</string>
     <string name="logout">Cerrar sesión</string>
-    <string name="update_profile">Actualitzar perfil</string>
+    <string name="update_profile">Actualizar perfil</string>
 
     <!-- My events -->
     <string name="your_events">Tus eventos</string>
@@ -116,5 +115,5 @@
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="no_chats">Todavía no tienes ningún chat abierto. \n\nApúntate a un evento para iniciar un chat</string>
-    <string name="chat_in_progress">Estamos trabajando a toda velocitat para implementar un chat grupal con soporte de videollamadas, por el momento, escribe unos mensajes al organizador!</string>
+    <string name="chat_in_progress">Estamos trabajando a toda velocidad para implementar un chat grupal con soporte de videollamadas. Por el momento, ¡escribe unos mensajes al organizador!</string>
 </resources>

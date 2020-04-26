@@ -10,11 +10,11 @@
 
     <!-- Register -->
     <string name="account_created">Compte creat!</string>
-    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. ¡És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Chats per iniciar la videotrucada.</string>
+    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Xats per iniciar la videotrucada.</string>
     <string name="start_enjoying">Comença a gaudir de formar part de la comunitat DOY.</string>
     <string name="password_too_short">La contrasenya ha de tenir almenys 6 caracters.</string>
     <string name="passwords_dont_match">Les contrasenyes no coincideixen.</string>
-    <string name="invalid_email">¡Uy! Aquest e-mail no es vàlid.</string>
+    <string name="invalid_email">Uy! Aquest e-mail no es vàlid.</string>
     <string name="empty_name">Necessitem el teu nom per a registrar-te</string>
     <string name="email">E-mail</string>
     <string name="name">Nom</string>
@@ -58,20 +58,19 @@
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>
     <string name="add_service_to_category">A quina categoria pertany el teu esdeveniment?</string>
-    <string name="adding_service">Creant esdeveniment...</string>
     <string name="how_many_spots">Quanta gent es pot unir al teu esdeveniment?</string>
     <string name="save">Guardar</string>
     <plurals name="people">
         <item quantity="one">%d persona</item>
         <item quantity="other">%d persones</item>
     </plurals>
-    <string name="how_long_duration">Quant durarà el teu esdeveniment?</string>
+    <string name="how_long_duration">Quant durarà aproximadament?</string>
     <plurals name="hours">
         <item quantity="one">%d hora</item>
         <item quantity="other">%d hores</item>
     </plurals>
     <string name="add_service_success">Has creat el teu esdeveniment!</string>
-    <string name="add_service_success_message">Recorda ser puntual y tenir-ho tot preparat amb antelació.</string>
+    <string name="add_service_success_message">Recorda ser puntual i tenir-ho tot preparat amb antelació.</string>
 
     <!-- Service detail -->
     <string name="when">Quan?</string>
@@ -85,7 +84,7 @@
     <string name="add_attendee_success">T\'has apuntat correctament!</string>
     <string name="add_attendee_success_message">L\'esdeveniment s\'acaba d\'afegir a la secció <b>Xat</b> perquè puguis resoldre qualsevol dubte abans de l\'esdeveniment.\n\nRecorda ser puntual, i si finalment no hi podràs assitir, cancel·la\'l amb antelació per tal que algú altre es pugui apuntar.</string>
     <string name="attend_event_yes">Assistiràs a aquest esdeveniment!</string>
-    <string name="attend_event_cancel">Ja no vull assistir</string>
+    <string name="attend_event_cancel">Ja no hi vull assistir</string>
     <string name="confirm_attend_event_cancel">Estàs segur de què no vols assistir a l\'esdeveniment?</string>
     <string name="confirm_attend_event_cancel_yes">Estic segur, no hi vull assistir</string>
     <string name="your_service">Tu ets el creador d\'aquest esdeveniment. Gràcies per ajudar!</string>
@@ -114,7 +113,7 @@
     <string name="no_events">Sembla que no tens cap esdeveniment en aquesta secció.</string>
 
     <!-- Chat -->
-    <string name="chat">Chat</string>
-    <string name="no_chats">Encara no tens cap chat obert. \n\nApunta\'t a un esdeveniment per iniciar un chat</string>
-    <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un chat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
+    <string name="chat">Xat</string>
+    <string name="no_chats">Encara no tens cap xat obert. \n\nApunta\'t a un esdeveniment per iniciar un xat</string>
+    <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un xat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
 </resources>

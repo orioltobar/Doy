@@ -14,7 +14,7 @@
     <string name="start_enjoying">Start and enjoy being part of the DOY community</string>
     <string name="password_too_short">Password must have at least 6 characters.</string>
     <string name="passwords_dont_match">Passwords don\'t match.</string>
-    <string name="invalid_email">¡Oops! This e-mail isn\'t valid.</string>
+    <string name="invalid_email">Oops! This e-mail isn\'t valid.</string>
     <string name="empty_name">We need your name to sign you up</string>
     <string name="email">E-mail</string>
     <string name="name">Name</string>
@@ -59,14 +59,13 @@
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
     <string name="add_service_to_category">What category does your event belong to?</string>
-    <string name="adding_service">Creating event...</string>
     <string name="how_many_spots">How many people can join your event?</string>
     <string name="save">Save</string>
     <plurals name="people">
         <item quantity="one">%d person</item>
         <item quantity="other">%d people</item>
     </plurals>
-    <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
+    <string name="how_long_duration">¿How long it will be approximately?</string>
     <plurals name="hours">
         <item quantity="one">%d hour</item>
         <item quantity="other">%d hours</item>
