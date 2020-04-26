@@ -28,7 +28,7 @@
     <View
         android:id="@+id/chatFragmentHeaderSeparator"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider_size"
         android:background="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,8 @@
         app:layout_constraintBottom_toTopOf="@id/chatFragmentTextContainer"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@id/start_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@id/chatFragmentHeader" />
+        app:layout_constraintTop_toBottomOf="@id/chatFragmentHeader"
+        tools:listitem="@layout/chat_message_view_holder" />
 
     <LinearLayout
         android:id="@+id/chatFragmentTextContainer"
@@ -67,7 +68,8 @@
                 android:id="@+id/chatFragmentEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter text to send..." />
+                android:hint="@string/send_message_hint" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
@@ -77,8 +79,8 @@
             android:layout_gravity="end"
             android:layout_weight="1"
             android:src="@android:drawable/ic_menu_send" />
-    </LinearLayout>
 
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/center_vertical_guideline"
