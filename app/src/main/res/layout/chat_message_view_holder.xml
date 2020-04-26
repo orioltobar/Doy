@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/chatMessageRootView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chatMessageRootView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/chatMessageBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_small"
         android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/bg_solid_rectangle">
+        android:background="@drawable/bg_solid_rectangle"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_small">
 
         <TextView
             android:id="@+id/chatMessageViewHolderSenderName"
@@ -23,38 +22,30 @@
             android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="@font/raleway_bold"
             android:textSize="@dimen/text_size_s"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Sende Name" />
 
         <TextView
             android:id="@+id/chatMessageViewHolderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_medium"
             android:fontFamily="@font/raleway_medium"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chatMessageViewHolderSenderName"
             tools:text="Message" />
 
         <TextView
             android:id="@+id/chatMessageViewHolderTimestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin_xsmall"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_small"
-            android:fontFamily="@font/raleway_thin"
+            android:fontFamily="@font/raleway_medium"
             android:textSize="@dimen/text_size_xs"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/chatMessageViewHolderText"
-            app:layout_constraintTop_toBottomOf="@id/chatMessageViewHolderText"
             tools:text="23:58" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </LinearLayout>
