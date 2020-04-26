@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -24,12 +22,8 @@ import kotlinx.android.synthetic.main.chat_fragment.chatFragmentSendButton
 import kotlinx.android.synthetic.main.chat_fragment.fireBaseChatMessages
 import javax.inject.Inject
 
-
 // TODO: Re do this view after MVP.
 class ChatFragment : BaseFragment() {
-
-    private val auth: FirebaseAuth? get() = FirebaseAuth.getInstance()
-    private val user: FirebaseUser? get() = FirebaseAuth.getInstance().currentUser
 
     private var databaseReference: DatabaseReference? = null
 
@@ -67,6 +61,7 @@ class ChatFragment : BaseFragment() {
         databaseReference?.child(MESSAGE_TABLE_NAME)?.child(chatId)
             ?.addValueEventListener(firebaseListener)
 
+        adapter.setUserId(args.userId.toString())
         fireBaseChatMessages.adapter = adapter
 
         chatFragmentSendButton.setOnClickListener {
@@ -91,7 +86,7 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun refreshRecycler(messages: List<ChatModel>) {
-        adapter.updateItems(messages)
+        adapter.updateItems(messages.filter { it.message.isNotEmpty() })
         adapter.notifyDataSetChanged()
         fireBaseChatMessages?.scrollToPosition(messages.size - 1)
     }
@@ -124,5 +119,4 @@ class ChatFragment : BaseFragment() {
     companion object {
         private const val MESSAGE_TABLE_NAME = "messages"
     }
-
 }
