@@ -53,6 +53,7 @@
     <dimen name="profile_card_radius">58dp</dimen>
 
     <!-- Chat -->
+    <dimen name="chat_placeholder_image_size">24dp</dimen>
     <dimen name="chat_thumbnail_image_size">48dp</dimen>
     <dimen name="chat_thumbnail_card_radius">24dp</dimen>
     <dimen name="chat_send_button_size">48dp</dimen>
