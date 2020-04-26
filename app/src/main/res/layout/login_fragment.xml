@@ -146,7 +146,6 @@
                 <Button
                     android:id="@+id/signInButton"
                     style="@style/App.Intro.Button"
-                    android:layout_height="56dp"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_xxlarge"
                     android:layout_marginEnd="@dimen/margin_small"
