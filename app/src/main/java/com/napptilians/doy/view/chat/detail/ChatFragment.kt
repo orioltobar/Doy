@@ -78,8 +78,8 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         databaseReference?.removeEventListener(firebaseListener)
+        super.onDestroy()
     }
 
     private fun sendData(text: String) {

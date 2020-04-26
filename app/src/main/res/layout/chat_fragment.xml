@@ -75,8 +75,8 @@
             android:textSize="@dimen/text_size_m" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/chat_send_button_size"
+            android:layout_height="@dimen/chat_send_button_size"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,13 +117,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="@dimen/margin_medium" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end_vertical_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="20dp" />
+        app:layout_constraintGuide_end="@dimen/margin_medium" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
