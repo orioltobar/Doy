@@ -206,7 +206,7 @@
                 style="@style/App.ServiceDetail.Data"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/assist_to_event_yes" />
+                android:text="@string/attend_event_yes" />
 
             <TextView
                 android:id="@+id/cancelAssistanceButton"
@@ -214,7 +214,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="@dimen/padding_small"
-                android:text="@string/assist_to_event_cancel"
+                android:text="@string/attend_event_cancel"
                 android:textColor="@color/red" />
 
         </LinearLayout>
