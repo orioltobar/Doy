@@ -20,12 +20,15 @@
         android:id="@+id/chatListRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_medium"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@id/chatListTitle" />
+        app:layout_constraintTop_toBottomOf="@id/chatListTitle"
+        tools:itemCount="2"
+        tools:listitem="@layout/chat_list_view_holder" />
 
     <TextView
         android:id="@+id/chatListNoChatMessage"

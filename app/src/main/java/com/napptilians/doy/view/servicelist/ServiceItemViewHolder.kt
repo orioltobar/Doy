@@ -1,6 +1,5 @@
 package com.napptilians.doy.view.servicelist
 
-
 import android.util.TypedValue
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -18,7 +17,7 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 
-class ServiceItemViewHolder(private val parent: ViewGroup, private val isPastService: Boolean) :
+class ServiceItemViewHolder(parent: ViewGroup, private val isPastService: Boolean) :
     BaseViewHolder<ServiceModel>(parent, R.layout.service_item) {
 
     override fun update(model: ServiceModel) {
@@ -27,11 +26,6 @@ class ServiceItemViewHolder(private val parent: ViewGroup, private val isPastSer
                 itemView.setBackgroundResource(0)
             } else {
                 val outValue = TypedValue()
-                parent.context.theme.resolveAttribute(
-                    R.attr.selectableItemBackground,
-                    outValue,
-                    true
-                )
                 itemView.setBackgroundResource(outValue.resourceId)
             }
             setImage(this)

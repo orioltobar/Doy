@@ -61,7 +61,7 @@ class EventTabFragment(
     private fun initViews(isPastService: Boolean) {
         val layoutManager = LinearLayoutManager(context)
         eventsList.layoutManager = layoutManager
-        eventsAdapter= ServiceListAdapter().apply { isPastService }
+        eventsAdapter = ServiceListAdapter().apply { isPastService }
         eventsAdapter.setOnClickListener {
             onEventClicked(it)
         }
