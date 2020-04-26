@@ -6,6 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/green</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="App" parent="@android:style/Widget" />
@@ -102,10 +108,6 @@
         <item name="android:fontFamily">@font/raleway_medium</item>
         <item name="android:gravity">bottom</item>
         <item name="android:layout_gravity">bottom</item>
-    </style>
-
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="ErrorTheme" parent="@android:style/TextAppearance">
