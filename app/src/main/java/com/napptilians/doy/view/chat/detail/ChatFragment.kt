@@ -65,7 +65,7 @@ class ChatFragment : BaseFragment() {
         fireBaseChatMessages.adapter = adapter
 
         chatFragmentSendButton.setOnClickListener {
-            if (chatFragmentEditText.text.isNotEmpty()) {
+            if (chatFragmentEditText.text?.isNotEmpty() == true) {
                 sendData(chatFragmentEditText.text.toString())
             }
         }

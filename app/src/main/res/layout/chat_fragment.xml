@@ -55,24 +55,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:paddingTop="@dimen/margin_small"
+        android:paddingBottom="@dimen/margin_small"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@id/start_vertical_guideline">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordWrapper"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/chatFragmentEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8">
-
-            <EditText
-                android:id="@+id/chatFragmentEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/send_message_hint" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="8"
+            android:background="@drawable/bg_round_corners"
+            android:fontFamily="@font/raleway_medium"
+            android:hint="@string/send_message_hint"
+            android:padding="@dimen/padding_medium"
+            android:textSize="@dimen/text_size_m" />
 
         <ImageView
             android:id="@+id/chatFragmentSendButton"
