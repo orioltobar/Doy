@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -68,6 +69,11 @@ class ChatFragment : BaseFragment() {
             if (chatFragmentEditText.text?.isNotEmpty() == true) {
                 sendData(chatFragmentEditText.text.toString())
             }
+        }
+
+        chatFragmentSendButton.isEnabled = false
+        chatFragmentEditText.addTextChangedListener {
+            chatFragmentSendButton.isEnabled = it?.toString()?.isNotBlank() == true
         }
     }
 
