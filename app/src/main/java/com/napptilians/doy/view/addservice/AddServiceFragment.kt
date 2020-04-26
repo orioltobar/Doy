@@ -30,6 +30,7 @@ import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.createEventButton
 import kotlinx.android.synthetic.main.add_service_fragment.progressBar
@@ -208,6 +209,7 @@ class AddServiceFragment : BaseFragment(), ToolbarBehaviour {
 
     override fun onError(error: ErrorModel) {
         progressBar.gone()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -58,10 +58,10 @@ class IntroFragment : BaseFragment(), ToolbarBehaviour {
     }
 
     override fun onError(error: ErrorModel) {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        // Do nothing
     }
 
     override fun onLoading() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        // Do nothing
     }
 }

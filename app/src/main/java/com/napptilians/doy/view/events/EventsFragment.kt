@@ -20,6 +20,7 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.EventsViewModel
 import kotlinx.android.synthetic.main.events_fragment.eventsErrorText
@@ -66,10 +67,8 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
     ): View? = inflater.inflate(R.layout.events_fragment, container, false)
 
     override fun onError(error: ErrorModel) {
-        eventsErrorText.text =
-            "${resources.getString(R.string.error_title)}\n${resources.getString(R.string.error_message)}"
-        eventsErrorText.visible()
         eventsViewPager.gone()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {}
@@ -99,7 +98,6 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
     }
 
     private fun processNewValue(model: Map<String, List<ServiceModel>>) {
-        eventsErrorText.gone()
         eventsViewPager.visible()
         (eventAdapter.getItem(0) as EventTabFragment).setItems(model[UPCOMING] ?: listOf())
         (eventAdapter.getItem(1) as EventTabFragment).apply {

@@ -17,6 +17,7 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ServicesViewModel
 import kotlinx.android.synthetic.main.service_list_fragment.loadingProgress
@@ -75,8 +76,8 @@ class ServiceListFragment : BaseFragment(), ToolbarBehaviour {
     override fun onError(error: ErrorModel) {
         serviceList.gone()
         loadingProgress.gone()
-        loadingText.text = resources.getString(R.string.error_message)
-        loadingText.visible()
+        loadingText.gone()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {

@@ -3,9 +3,7 @@ package com.napptilians.doy.view.customviews
 import android.content.Context
 import com.napptilians.doy.R
 
-class DoyErrorDialog(
-    context: Context
-) : DoyDialog(context) {
+class DoyErrorDialog(context: Context) : DoyDialog(context) {
 
     init {
         setPopupIcon(R.drawable.ic_error_sad)
