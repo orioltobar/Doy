@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xlargex"
             android:background="@drawable/filled_button_bg"
-            android:text="@string/login" />
+            android:text="@string/create_account" />
 
         <Button
             android:id="@+id/signInButton"
@@ -55,7 +55,7 @@
             android:layout_marginTop="@dimen/margin_large"
             android:background="@drawable/empty_button_bg"
             android:foreground="?attr/selectableItemBackground"
-            android:text="@string/create_account" />
+            android:text="@string/login" />
 
         <Space
             android:layout_width="wrap_content"
