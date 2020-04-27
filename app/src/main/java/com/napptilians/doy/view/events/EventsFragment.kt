@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -23,11 +22,9 @@ import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.EventsViewModel
-import kotlinx.android.synthetic.main.events_fragment.eventsErrorText
 import kotlinx.android.synthetic.main.events_fragment.eventsTabLayout
 import kotlinx.android.synthetic.main.events_fragment.eventsViewPager
 import kotlinx.android.synthetic.main.events_fragment.titleText
-import kotlinx.android.synthetic.main.toolbar.toolbar
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
@@ -42,23 +39,6 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (args.onlyMyEvents) {
-
-            val callback = object : OnBackPressedCallback(true /* enabled by default */) {
-                override fun handleOnBackPressed() {
-                    // Handle the back button event
-                    val navigation =
-                        EventsFragmentDirections.actionEventsFragmentToCategoryListFragment()
-                    findNavController().navigate(navigation)
-                }
-            }
-            requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-            // The callback can be enabled or disabled here or in handleOnBackPressed()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
