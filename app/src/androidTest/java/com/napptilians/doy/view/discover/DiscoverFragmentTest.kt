@@ -34,7 +34,7 @@ class DiscoverFragmentTest : UiAssertions {
         with(activityRule.activity) {
             checkViewIsDisplayed(R.id.discoverFragmentProgressBar)
             val text =
-                activityRule.activity.resources.getText(R.string.under_construction).toString()
+                activityRule.activity.resources.getText(R.string.wip).toString()
             checkTextIsDisplayed(text)
         }
     }

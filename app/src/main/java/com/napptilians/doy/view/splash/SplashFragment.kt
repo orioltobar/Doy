@@ -35,10 +35,10 @@ class SplashFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-
+        // Do nothing
     }
 
     override fun onLoading() {
-
+        // Do nothing
     }
 }

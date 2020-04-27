@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_large"
         android:fontFamily="@font/raleway_bold"
-        android:text="@string/confirm_assist_to_event_cancel"
+        android:text="@string/confirm_attend_event_cancel"
         android:textColor="@color/grayStrong"
         android:textSize="@dimen/text_size_l" />
 
@@ -19,7 +19,7 @@
         android:id="@+id/cancelAssistanceButton"
         style="@style/App.ServiceDetail.Data"
         android:padding="@dimen/padding_small"
-        android:text="@string/confirm_assist_to_event_cancel_yes"
+        android:text="@string/confirm_attend_event_cancel_yes"
         android:textColor="@color/red" />
 
 </LinearLayout>

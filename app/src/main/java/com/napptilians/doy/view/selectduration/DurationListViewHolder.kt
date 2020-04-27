@@ -12,12 +12,11 @@ class DurationListViewHolder(private val parent: ViewGroup) :
     BaseViewHolder<DurationModel>(parent, R.layout.duration_item) {
 
     override fun update(model: DurationModel) {
-        itemView.durationText.text = model.numberOfHours.toString()
-        if (model.numberOfHours == 1) {
-            itemView.durationText.append(" " + parent.context.getString(R.string.hour))
-        } else {
-            itemView.durationText.append(" " + parent.context.getString(R.string.hours))
-        }
+        itemView.durationText.text = parent.context.resources.getQuantityString(
+            R.plurals.hours,
+            model.numberOfHours,
+            model.numberOfHours
+        )
         if (model.isSelected) {
             itemView.tickImageView.visible()
             itemView.durationText.alpha = 1f

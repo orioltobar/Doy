@@ -90,11 +90,11 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun setAttendees(attendees: Int?) {
-        if (attendees == 1) {
-            serviceDetailAttendees.text = getString(R.string.spot_reserved, attendees ?: 0)
-        } else {
-            serviceDetailAttendees.text = getString(R.string.spots_reserved, attendees ?: 0)
-        }
+        serviceDetailAttendees.text = context?.resources?.getQuantityString(
+            R.plurals.spots_reserved,
+            attendees ?: 0,
+            attendees ?: 0
+        )
     }
 
     private fun setDate(date: ZonedDateTime?) {

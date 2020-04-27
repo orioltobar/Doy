@@ -14,6 +14,9 @@
     <dimen name="margin_login">40dp</dimen>
     <dimen name="margin_button">22dp</dimen>
 
+    <!-- Divider -->
+    <dimen name="divider_size">1dp</dimen>
+
     <!-- Text sizes -->
     <dimen name="text_size_xs">10sp</dimen>
     <dimen name="text_size_s">12sp</dimen>
@@ -50,7 +53,9 @@
     <dimen name="profile_card_radius">58dp</dimen>
 
     <!-- Chat -->
+    <dimen name="chat_placeholder_image_size">24dp</dimen>
     <dimen name="chat_thumbnail_image_size">48dp</dimen>
     <dimen name="chat_thumbnail_card_radius">24dp</dimen>
+    <dimen name="chat_send_button_size">48dp</dimen>
 
 </resources>
