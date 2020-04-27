@@ -6,7 +6,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profileNameEditMode"
-        style="@style/App.AddService.Input"
+        style="@style/App.Input"
         android:hint="@string/name"
         android:textColorHint="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,7 +15,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileNameEditText"
-            style="@style/App.AddService.Input"
+            style="@style/App.Input.Edit"
             android:clickable="true"
             android:focusable="true" />
 
@@ -23,7 +23,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profileDescriptionEditMode"
-        style="@style/App.AddService.Input"
+        style="@style/App.Input"
         android:layout_marginTop="@dimen/margin_xlarge"
         android:hint="@string/description"
         android:textColorHint="@color/green"
@@ -33,7 +33,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileDescriptionEditText"
-            style="@style/App.AddService.Input"
+            style="@style/App.Input.Edit"
             android:clickable="true"
             android:focusable="true"
             android:inputType="text" />
@@ -42,7 +42,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profileEmailEditMode"
-        style="@style/App.AddService.Input"
+        style="@style/App.Input"
         android:layout_marginTop="@dimen/margin_xlarge"
         android:hint="@string/email"
         android:textColorHint="@color/green"
@@ -52,7 +52,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileEmailEditModeEditText"
-            style="@style/App.AddService.Input"
+            style="@style/App.Input.Edit"
             android:clickable="false"
             android:focusable="false"
             android:inputType="text"

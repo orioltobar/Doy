@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -153,7 +154,7 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
     private fun resetField(view: TextInputLayout) {
         view.apply {
             helperText = ""
-            setHintTextAppearance(0)
+            setHintTextAppearance(R.style.App_Input_Hint)
             setErrorTextAppearance(0)
             error = ""
             setErrorIconDrawable(0)

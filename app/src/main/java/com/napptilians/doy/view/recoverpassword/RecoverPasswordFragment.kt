@@ -103,7 +103,7 @@ class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
     private fun resetField(view: TextInputLayout) {
         view.apply {
             helperText = ""
-            setHintTextAppearance(0)
+            setHintTextAppearance(R.style.App_Input_Hint)
             setErrorTextAppearance(0)
             error = ""
             setErrorIconDrawable(0)
