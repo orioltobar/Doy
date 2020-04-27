@@ -61,9 +61,9 @@
             android:id="@+id/innerContainerLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/margin_large"
             android:background="@android:color/white"
             android:orientation="vertical"
+            android:padding="@dimen/margin_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/compoundLogoBackground">
 
@@ -120,8 +120,11 @@
                 android:id="@+id/recoverPassText"
                 style="@style/App.Intro"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_small"
                 android:fontFamily="@font/raleway_bold"
+                android:paddingTop="@dimen/padding_small"
+                android:paddingEnd="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_medium"
                 android:text="@string/password_forgot"
                 android:textColor="@color/green"
                 android:textSize="@dimen/text_size_s" />
@@ -131,7 +134,7 @@
                 style="@style/App.Intro.Button"
                 android:layout_width="match_parent"
                 android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_xlargex"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:background="@drawable/filled_button_bg"
                 android:text="@string/login" />
@@ -145,7 +148,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_large"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -162,7 +164,10 @@
                     style="@style/App.Intro"
                     android:layout_width="wrap_content"
                     android:fontFamily="@font/raleway_semibold"
-                    android:paddingStart="@dimen/margin_small"
+                    android:paddingStart="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_medium"
+                    android:paddingEnd="@dimen/padding_small"
+                    android:paddingBottom="@dimen/padding_medium"
                     android:text="@string/create_account"
                     android:textColor="@color/green" />
 
