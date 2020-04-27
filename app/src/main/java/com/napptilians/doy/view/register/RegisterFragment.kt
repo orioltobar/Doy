@@ -1,5 +1,7 @@
 package com.napptilians.doy.view.register
 
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -190,7 +193,12 @@ class RegisterFragment : BaseFragment(), ToolbarBehaviour {
             setHintTextAppearance(R.style.ErrorTheme)
             setErrorTextAppearance(R.style.ErrorTheme)
             error = getString(messageIdRes)
-            setErrorIconDrawable(R.drawable.ic_error)
+            if (endIconMode == TextInputLayout.END_ICON_PASSWORD_TOGGLE) {
+                setEndIconTintMode(PorterDuff.Mode.SRC_IN)
+                setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
+            } else {
+                setErrorIconDrawable(R.drawable.ic_error)
+            }
         }
     }
 
@@ -200,7 +208,12 @@ class RegisterFragment : BaseFragment(), ToolbarBehaviour {
             setHintTextAppearance(R.style.App_Input_Hint)
             setErrorTextAppearance(0)
             error = ""
-            setErrorIconDrawable(0)
+            if (endIconMode == TextInputLayout.END_ICON_PASSWORD_TOGGLE) {
+                setEndIconTintMode(PorterDuff.Mode.SRC_IN)
+                setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorPrimary)))
+            } else {
+                setErrorIconDrawable(0)
+            }
         }
     }
 

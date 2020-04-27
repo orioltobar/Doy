@@ -1,5 +1,7 @@
 package com.napptilians.doy.view.login
 
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -147,7 +149,12 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
             setHintTextAppearance(R.style.ErrorTheme)
             setErrorTextAppearance(R.style.ErrorTheme)
             error = getString(messageIdRes)
-            setErrorIconDrawable(R.drawable.ic_error)
+            if (endIconMode == TextInputLayout.END_ICON_PASSWORD_TOGGLE) {
+                setEndIconTintMode(PorterDuff.Mode.SRC_IN)
+                setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
+            } else {
+                setErrorIconDrawable(R.drawable.ic_error)
+            }
         }
     }
 
@@ -158,6 +165,12 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
             setErrorTextAppearance(0)
             error = ""
             setErrorIconDrawable(0)
+            if (endIconMode == TextInputLayout.END_ICON_PASSWORD_TOGGLE) {
+                setEndIconTintMode(PorterDuff.Mode.SRC_IN)
+                setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorPrimary)))
+            } else {
+                setErrorIconDrawable(0)
+            }
         }
     }
 
@@ -172,6 +185,8 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
     }
 
     private fun sendData() {
+        resetField(loginFragmentEmailField)
+        resetField(loginFragmentPasswordField)
         disableLoginButton()
         val email = loginFragmentEmailEditText.text.toString().replace(" ", "")
         val password = loginFragmentPasswordEditText.text.toString()
