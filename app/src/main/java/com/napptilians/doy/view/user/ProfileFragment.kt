@@ -56,13 +56,8 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     private val viewModel: ProfileViewModel by viewModels { vmFactory }
 
-    private val editModeView: ProfileEditView? by lazy {
-        context?.let { ProfileEditView(it) }
-    }
-
-    private val readModeView: ProfileReadView? by lazy {
-        context?.let { ProfileReadView(it, onMyEventsClicked = { navigateToMyEvents() }) }
-    }
+    private var editModeView: ProfileEditView? = null
+    private var readModeView: ProfileReadView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -159,7 +154,6 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
         profileFragmentProgressView.gone()
         val errorString = error.message
             ?.takeIf { it.isNotEmpty() }
-            ?.let { it }
             ?: run { getString(R.string.error_message) }
 
         Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
@@ -185,7 +179,8 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     private fun defaultView() {
         context?.let {
-            profileInfoFrameLayout.removeAllViews()
+            readModeView = ProfileReadView(it, onMyEventsClicked = { navigateToMyEvents() })
+            editModeView = ProfileEditView(it)
             profileInfoFrameLayout.addView(readModeView)
         }
     }
