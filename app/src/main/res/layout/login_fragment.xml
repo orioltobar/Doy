@@ -55,7 +55,7 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.7">
+        app:layout_constraintHeight_percent="0.70">
 
         <LinearLayout
             android:id="@+id/innerContainerLayout"

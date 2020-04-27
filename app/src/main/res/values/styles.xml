@@ -38,7 +38,7 @@
         <item name="android:textSize">@dimen/text_size_m</item>
         <item name="android:textColorHint">@color/hintGray</item>
         <item name="android:fontFamily">@font/raleway_medium</item>
-        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:layout_marginBottom">@dimen/margin_xsmall</item>
         <item name="android:imeOptions">actionDone</item>
     </style>
 
