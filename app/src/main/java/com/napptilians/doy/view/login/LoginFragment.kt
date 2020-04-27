@@ -65,7 +65,6 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -101,9 +100,7 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
             viewLifecycleOwner,
             Observer<UiStatus<AuthResult, ErrorModel>> {
                 handleUiStates(it) { auth ->
-                    processNewValue(
-                        auth
-                    )
+                    processNewValue(auth)
                 }
             }
         )
@@ -126,8 +123,7 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
                     activity,
                     getString(R.string.firebase_invalid_user),
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
                 firebaseAuth.signOut()
             }
             FirebaseErrors.InvalidCredentials -> {
@@ -135,13 +131,11 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
                     activity,
                     getString(R.string.firebase_invalid_credentials),
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
                 firebaseAuth.signOut()
             }
             else -> {
-                Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_LONG).show()
             }
         }
     }
