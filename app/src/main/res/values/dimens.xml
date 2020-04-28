@@ -64,5 +64,6 @@
     <dimen name="chat_thumbnail_image_size">48dp</dimen>
     <dimen name="chat_thumbnail_card_radius">24dp</dimen>
     <dimen name="chat_send_button_size">48dp</dimen>
+    <dimen name="chat_message_box_radius">6dp</dimen>
 
 </resources>

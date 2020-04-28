@@ -22,7 +22,7 @@ class ChatMessageViewHolder(private val parent: ViewGroup, private val userId: S
             itemView.chatMessageBox.background = ContextCompat.getDrawable(parent.context, R.drawable.bg_solid_rectangle)
             itemView.chatMessageRootView.gravity = Gravity.END
         } else {
-            itemView.chatMessageBox.setBackgroundColor(ContextCompat.getColor(parent.context, R.color.light_gray))
+            itemView.chatMessageBox.background = ContextCompat.getDrawable(parent.context, R.drawable.bg_gray_rectangle)
             itemView.chatMessageRootView.gravity = Gravity.START
         }
 
