@@ -21,7 +21,7 @@
             android:layout_marginStart="@dimen/margin_xsmall"
             android:layout_marginTop="@dimen/margin_xsmall"
             android:fontFamily="@font/raleway_bold"
-            android:textSize="@dimen/text_size_s"
+            android:textSize="@dimen/text_size_s_2"
             tools:text="Sende Name" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="@font/raleway_medium"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_s"
+            android:textSize="@dimen/text_size_s_2"
             tools:text="Message" />
 
         <TextView

@@ -18,7 +18,7 @@ import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.RecoverPasswordViewModel
-import kotlinx.android.synthetic.main.recover_password_fragment.loginFragmentProgressView
+import kotlinx.android.synthetic.main.recover_password_fragment.recoverPasswordProgressView
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverEmailEditText
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverEmailInput
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverPasswordButton
@@ -57,11 +57,11 @@ class RecoverPasswordFragment : BaseFragment() {
     }
 
     override fun onLoading() {
-        loginFragmentProgressView.visible()
+        recoverPasswordProgressView.visible()
     }
 
     override fun onError(error: ErrorModel) {
-        loginFragmentProgressView.gone()
+        recoverPasswordProgressView.gone()
         when (error.errorCause) {
             LoginErrors.InvalidEmail -> {
                 setErrorFields(recoverEmailInput, R.string.invalid_email)
@@ -73,7 +73,7 @@ class RecoverPasswordFragment : BaseFragment() {
     }
 
     private fun processResponse(response: Unit?) {
-        loginFragmentProgressView.gone()
+        recoverPasswordProgressView.gone()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_clap)
