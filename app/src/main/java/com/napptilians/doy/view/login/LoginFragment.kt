@@ -72,7 +72,6 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(false) { findNavController().popBackStack() }
         loginFragmentEmailEditText.addTextChangedListener(textWatcher)
         loginFragmentPasswordEditText.addTextChangedListener(textWatcher)
         signUpText.setOnClickListener {

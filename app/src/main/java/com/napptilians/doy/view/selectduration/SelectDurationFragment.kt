@@ -37,7 +37,6 @@ class SelectDurationFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
         setupListeners()
         viewModel.execute()
         viewModel.durationsDataStream.observe(viewLifecycleOwner,

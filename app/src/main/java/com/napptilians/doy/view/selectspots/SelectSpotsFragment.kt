@@ -38,7 +38,6 @@ class SelectSpotsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
         setupListeners()
         viewModel.execute()
         viewModel.spotsDataStream.observe(viewLifecycleOwner,

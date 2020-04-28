@@ -37,7 +37,6 @@ class RecoverPasswordFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
 
         // LiveData Observer
         viewModel.recoverDataStream.observe(

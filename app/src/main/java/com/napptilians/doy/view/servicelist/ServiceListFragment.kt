@@ -42,7 +42,6 @@ class ServiceListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
         initViews()
         viewModel.execute(listOf(args.categoryId), null)
         viewModel.servicesDataStream.observe(

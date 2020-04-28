@@ -8,16 +8,18 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
-import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.behaviours.ToolbarBehaviour
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), ToolbarBehaviour {
 
     override val layoutId: Int get() = R.layout.activity_main
+    override val genericToolbar: Toolbar? get() = toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Set main theme after splash.
@@ -41,7 +43,13 @@ class MainActivity : BaseActivity() {
             // Manage toolbar visibility
             when (destination.id) {
                 R.id.introFragment, R.id.addServiceFragment, R.id.chatListFragment, R.id.eventsFragment, R.id.profileFragment -> {
-                    toolbar?.gone()
+                    disableToolbar()
+                }
+                R.id.loginFragment -> {
+                    enableHomeAsUp(false) { navHostFragment.popBackStack() }
+                }
+                else -> {
+                    enableHomeAsUp(true) { navHostFragment.popBackStack() }
                 }
             }
         }

@@ -44,7 +44,6 @@ class ChatFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
 
         // TODO: In progress dialog
         activity?.let { activity ->
