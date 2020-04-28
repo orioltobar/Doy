@@ -28,9 +28,6 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        // Remove action bar
-        this.supportActionBar?.hide()
-
         val navHostFragment = NavHostFragment.findNavController(navFragment)
         navHostFragment.addOnDestinationChangedListener { _, destination, args ->
             // Manage navigation bar visibility
