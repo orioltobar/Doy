@@ -12,8 +12,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
-    <include layout="@layout/toolbar" />
-
     <ProgressBar
         android:id="@+id/registerFragmentProgressView"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"

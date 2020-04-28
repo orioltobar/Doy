@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
+import com.napptilians.doy.extensions.gone
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.toolbar
 
 class MainActivity : BaseActivity() {
 
@@ -27,12 +29,19 @@ class MainActivity : BaseActivity() {
 
         val navHostFragment = NavHostFragment.findNavController(navFragment)
         navHostFragment.addOnDestinationChangedListener { _, destination, _ ->
+            // Manage navigation bar visibility
             when (destination.id) {
                 R.id.introFragment, R.id.splashFragment, R.id.loginFragment, R.id.registerFragment, R.id.recoverPasswordFragment -> {
                     navBottom.visibility = View.GONE
                 }
                 else -> {
                     navBottom.visibility = View.VISIBLE
+                }
+            }
+            // Manage toolbar visibility
+            when (destination.id) {
+                R.id.introFragment, R.id.addServiceFragment, R.id.chatListFragment, R.id.eventsFragment, R.id.profileFragment -> {
+                    toolbar?.gone()
                 }
             }
         }

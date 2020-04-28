@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -22,7 +21,6 @@ import com.napptilians.commons.error.FirebaseErrors
 import com.napptilians.commons.error.LoginErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
@@ -37,9 +35,7 @@ import kotlinx.android.synthetic.main.login_fragment.signInButton
 import kotlinx.android.synthetic.main.login_fragment.signUpText
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class LoginFragment : BaseFragment() {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth

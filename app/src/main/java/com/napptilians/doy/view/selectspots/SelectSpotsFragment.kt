@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,6 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.service.SpotsModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
@@ -24,9 +22,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class SelectSpotsFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class SelectSpotsFragment : BaseFragment() {
 
     private val viewModel: SelectSpotsViewModel by viewModels { vmFactory }
     private var selectedSpots: Int = 0

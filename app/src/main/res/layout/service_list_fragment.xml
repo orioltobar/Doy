@@ -20,8 +20,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/margin_medium" />
 
-    <include layout="@layout/toolbar" />
-
     <TextView
         android:id="@+id/titleText"
         android:layout_width="0dp"
