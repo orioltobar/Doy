@@ -45,6 +45,9 @@
     <dimen name="category_max_height">100dp</dimen>
     <dimen name="category_max_width">160dp</dimen>
 
+    <!-- Service list -->
+    <dimen name="service_card_elevation">6dp</dimen>
+
     <!-- Service detail -->
     <dimen name="service_image_height">250dp</dimen>
     <dimen name="service_owner_image_size">56dp</dimen>
@@ -54,6 +57,7 @@
     <!-- User profile -->
     <dimen name="profile_image_size">116dp</dimen>
     <dimen name="profile_card_radius">58dp</dimen>
+    <dimen name="profile_card_elevation">6dp</dimen>
 
     <!-- Chat -->
     <dimen name="chat_placeholder_image_size">24dp</dimen>

@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="4dp"
+        app:cardElevation="@dimen/service_card_elevation"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
