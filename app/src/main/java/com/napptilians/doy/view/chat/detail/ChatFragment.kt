@@ -84,10 +84,13 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun refreshRecycler(messages: List<ChatModel>) {
-        adapter.updateItems(messages.filter { it.message.isNotEmpty() })
+        val nonEmptyMessages = messages.filter { it.message.isNotEmpty() }
+        adapter.updateItems(nonEmptyMessages)
         adapter.notifyDataSetChanged()
         // Apply smooth scroll in order to make it work: https://stackoverflow.com/a/37719465
-        fireBaseChatMessages?.smoothScrollToPosition(messages.size - 1)
+        if (nonEmptyMessages.isNotEmpty()) {
+            fireBaseChatMessages?.smoothScrollToPosition(nonEmptyMessages.size - 1)
+        }
     }
 
     override fun onError(error: ErrorModel) {
