@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/logoGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
     <include
         android:id="@+id/include"
         layout="@layout/toolbar" />
@@ -45,7 +52,7 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.20"
         app:layout_constraintStart_toStartOf="@id/compoundLogoBackground"
-        app:layout_constraintTop_toTopOf="@id/compoundLogoBackground"
+        app:layout_constraintBottom_toTopOf="@+id/logoGuideline"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.30" />
 
