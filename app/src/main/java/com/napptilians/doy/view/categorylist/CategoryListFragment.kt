@@ -13,7 +13,6 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.category.CategoryModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.doy.extensions.visible
@@ -91,8 +90,6 @@ class CategoryListFragment : BaseFragment() {
                     findNavController().popBackStack()
                 }
             }
-        } else {
-            (activity as? ToolbarBehaviour?)?.disableToolbar()
         }
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager
