@@ -17,6 +17,9 @@
     <!-- Divider -->
     <dimen name="divider_size">1dp</dimen>
 
+    <!-- Loading progress -->
+    <dimen name="loading_progress_size">30dp</dimen>
+
     <!-- Text sizes -->
     <dimen name="text_size_xs">10sp</dimen>
     <dimen name="text_size_s">12sp</dimen>
