@@ -2,6 +2,7 @@ package com.napptilians.doy
 
 import android.content.Context
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -12,7 +13,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
 import com.napptilians.doy.util.Notifications
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.navBottom
+import kotlinx.android.synthetic.main.activity_main.navFragment
 
 class MainActivity : BaseActivity() {
 
@@ -23,7 +25,14 @@ class MainActivity : BaseActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        Notifications.createChannel(this, Notifications.NOTIFICATIONS_CHANNEL_ID, "Recordatori ", "recorda les sessions")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Notifications.createChannel(
+                this,
+                Notifications.NOTIFICATIONS_CHANNEL_ID,
+                "Recordatori ",
+                "recorda les sessions"
+            )
+        }
         // Remove action bar
         this.supportActionBar?.hide()
 
