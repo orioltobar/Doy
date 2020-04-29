@@ -11,66 +11,74 @@
         android:scaleType="centerCrop"
         android:src="@drawable/image_bg" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_xlarge">
+        android:fillViewport="true">
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/logoImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_doy_logo" />
-
-        <TextView
-            android:id="@+id/titleText"
-            style="@style/App.Intro"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/join_community"
-            android:textSize="@dimen/text_size_xl" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_xlarge">
 
-        <Button
-            android:id="@+id/signUpButton"
-            style="@style/App.Intro.Button"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/margin_xlargex"
-            android:background="@drawable/filled_button_bg"
-            android:text="@string/create_account" />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/signInButton"
-            style="@style/App.Intro.Button"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/margin_large"
-            android:background="@drawable/empty_button_bg"
-            android:foreground="?attr/selectableItemBackground"
-            android:text="@string/login" />
+            <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_doy_logo" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="2" />
+            <TextView
+                android:id="@+id/titleText"
+                style="@style/App.Intro"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/join_community"
+                android:textSize="@dimen/text_size_xl" />
 
-        <Button
-            android:id="@+id/continueGoogleButton"
-            style="@style/App.Intro.Button"
-            android:layout_width="match_parent"
-            android:background="@drawable/google_button_bg"
-            android:drawableStart="@drawable/ic_google"
-            android:fontFamily="@font/raleway_bold"
-            android:paddingStart="@dimen/margin_large"
-            android:paddingEnd="@dimen/margin_large"
-            android:text="@string/google_sign_in"
-            android:textColor="@color/gray" />
+            <Button
+                android:id="@+id/signUpButton"
+                style="@style/App.Intro.Button"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_xlargex"
+                android:background="@drawable/filled_button_bg"
+                android:text="@string/create_account" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/signInButton"
+                style="@style/App.Intro.Button"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/empty_button_bg"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/login" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:minHeight="@dimen/margin_xlarge" />
+
+            <Button
+                android:id="@+id/continueGoogleButton"
+                style="@style/App.Intro.Button"
+                android:layout_width="match_parent"
+                android:background="@drawable/google_button_bg"
+                android:drawableStart="@drawable/ic_google"
+                android:fontFamily="@font/raleway_bold"
+                android:paddingStart="@dimen/margin_large"
+                android:paddingEnd="@dimen/margin_large"
+                android:text="@string/google_sign_in"
+                android:textColor="@color/gray" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
