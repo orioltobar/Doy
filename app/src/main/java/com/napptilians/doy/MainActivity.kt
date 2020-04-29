@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
+import com.napptilians.doy.util.Notifications
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -22,6 +23,7 @@ class MainActivity : BaseActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
+        Notifications.createChannel(this, Notifications.NOTIFICATIONS_CHANNEL_ID, "Recordatori ", "recorda les sessions")
         // Remove action bar
         this.supportActionBar?.hide()
 

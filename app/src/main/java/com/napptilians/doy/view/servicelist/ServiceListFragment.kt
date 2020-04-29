@@ -1,5 +1,7 @@
 package com.napptilians.doy.view.servicelist
 
+import android.app.AlarmManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ServicesViewModel
@@ -95,6 +98,13 @@ class ServiceListFragment : BaseFragment(), ToolbarBehaviour {
         serviceList.layoutManager = layoutManager
         servicesAdapter = ServiceListAdapter()
         servicesAdapter.setOnClickListener {
+            context?.let { cont ->
+
+                val am = cont.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                val pendingIntent =
+                    Notifications.preparePendingIntent(cont, it.name, it.description, 1)
+                am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis().plus(1000*10), pendingIntent)
+            }
             val navigation =
                 ServiceListFragmentDirections.actionServiceListFragmentToServiceDetailFragment(it)
             findNavController().navigate(navigation)

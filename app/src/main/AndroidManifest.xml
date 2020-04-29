@@ -53,6 +53,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <receiver android:name=".receiver.AlarmReceiver"/>
     </application>
 
 </manifest>
