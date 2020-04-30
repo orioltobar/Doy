@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,6 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.category.CategoryModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.doy.extensions.visible
@@ -26,9 +24,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class CategoryListFragment : BaseFragment() {
 
     private val viewModel: CategoriesViewModel by viewModels { vmFactory }
     private val args: CategoryListFragmentArgs by navArgs()
@@ -84,7 +80,6 @@ class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
 
     private fun initViews() {
         if (args.isAddingService) {
-            enableHomeAsUp(true) { findNavController().popBackStack() }
             titleText.visible()
             with(saveButton) {
                 visible()
@@ -95,9 +90,6 @@ class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
                     findNavController().popBackStack()
                 }
             }
-            // TODO: Also show toolbar for back button
-        } else {
-            genericToolbar?.gone()
         }
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager

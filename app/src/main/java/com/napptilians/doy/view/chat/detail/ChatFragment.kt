@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -20,7 +21,6 @@ import com.napptilians.domain.models.chat.ChatModel
 import com.napptilians.domain.models.push.ChatNotificationModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ChatViewModel
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
@@ -57,16 +57,6 @@ class ChatFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO: In progress dialog
-        activity?.let { activity ->
-            DoyDialog(activity).apply {
-                setPopupIcon(R.drawable.ic_rocket)
-                setPopupTitle(context.resources.getString(R.string.wip))
-                setPopupSubtitle(context.resources.getString(R.string.chat_in_progress))
-                show()
-            }
-        }
-
         chatFragmentHeaderTitle.text = args.serviceTitle
 
         val chatId = args.serviceId.toString()
@@ -77,6 +67,8 @@ class ChatFragment : BaseFragment() {
 
         adapter.setUserId(args.userId.toString())
         fireBaseChatMessages.adapter = adapter
+        // Show bottom messages first: https://stackoverflow.com/a/27069845
+        (fireBaseChatMessages?.layoutManager as? LinearLayoutManager)?.stackFromEnd = true
 
         chatFragmentSendButton.setOnClickListener {
             if (chatFragmentEditText.text?.isNotEmpty() == true) {
@@ -106,9 +98,13 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun refreshRecycler(messages: List<ChatModel>) {
-        adapter.updateItems(messages.filter { it.message.isNotEmpty() })
+        val nonEmptyMessages = messages.filter { it.message.isNotEmpty() }
+        adapter.updateItems(nonEmptyMessages)
         adapter.notifyDataSetChanged()
-        fireBaseChatMessages?.scrollToPosition(messages.size - 1)
+        // Apply smooth scroll in order to make it work: https://stackoverflow.com/a/37719465
+        if (nonEmptyMessages.isNotEmpty()) {
+            fireBaseChatMessages?.smoothScrollToPosition(nonEmptyMessages.size - 1)
+        }
     }
 
     override fun onError(error: ErrorModel) {

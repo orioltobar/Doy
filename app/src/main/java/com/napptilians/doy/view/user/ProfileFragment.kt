@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -23,7 +22,6 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.clickable
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.gone
@@ -43,12 +41,9 @@ import kotlinx.android.synthetic.main.profile_fragment.profileInfoLogOutText
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoSaveChangesButton
 import kotlinx.android.synthetic.main.profile_fragment.profilePhotoPlaceHolder
 import kotlinx.android.synthetic.main.profile_fragment.profileTitle
-import kotlinx.android.synthetic.main.toolbar.toolbar
 import javax.inject.Inject
 
-class ProfileFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class ProfileFragment : BaseFragment() {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -60,13 +55,8 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     private val viewModel: ProfileViewModel by viewModels { vmFactory }
 
-    private val editModeView: ProfileEditView? by lazy {
-        context?.let { ProfileEditView(it) }
-    }
-
-    private val readModeView: ProfileReadView? by lazy {
-        context?.let { ProfileReadView(it, onMyEventsClicked = { navigateToMyEvents() }) }
-    }
+    private var editModeView: ProfileEditView? = null
+    private var readModeView: ProfileReadView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -123,11 +113,6 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        genericToolbar?.gone()
-    }
-
     private fun openGallery() {
         activity?.let {
             val galleryIntent =
@@ -164,7 +149,6 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
         profileFragmentProgressView.gone()
         val errorString = error.message
             ?.takeIf { it.isNotEmpty() }
-            ?.let { it }
             ?: run { getString(R.string.error_message) }
 
         Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
@@ -190,7 +174,8 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     private fun defaultView() {
         context?.let {
-            profileInfoFrameLayout.removeAllViews()
+            readModeView = ProfileReadView(it, onMyEventsClicked = { navigateToMyEvents() })
+            editModeView = ProfileEditView(it)
             profileInfoFrameLayout.addView(readModeView)
         }
     }

@@ -1,5 +1,7 @@
 package com.napptilians.doy.view.login
 
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,7 +21,6 @@ import com.napptilians.commons.error.FirebaseErrors
 import com.napptilians.commons.error.LoginErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
@@ -34,9 +35,7 @@ import kotlinx.android.synthetic.main.login_fragment.signInButton
 import kotlinx.android.synthetic.main.login_fragment.signUpText
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class LoginFragment : BaseFragment() {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -65,7 +64,6 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,7 +72,6 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(false) { findNavController().popBackStack() }
         loginFragmentEmailEditText.addTextChangedListener(textWatcher)
         loginFragmentPasswordEditText.addTextChangedListener(textWatcher)
         signUpText.setOnClickListener {
@@ -101,9 +98,7 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
             viewLifecycleOwner,
             Observer<UiStatus<AuthResult, ErrorModel>> {
                 handleUiStates(it) { auth ->
-                    processNewValue(
-                        auth
-                    )
+                    processNewValue(auth)
                 }
             }
         )
@@ -126,8 +121,7 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
                     activity,
                     getString(R.string.firebase_invalid_user),
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
                 firebaseAuth.signOut()
             }
             FirebaseErrors.InvalidCredentials -> {
@@ -135,13 +129,11 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
                     activity,
                     getString(R.string.firebase_invalid_credentials),
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
                 firebaseAuth.signOut()
             }
             else -> {
-                Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -152,17 +144,28 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
             setHintTextAppearance(R.style.ErrorTheme)
             setErrorTextAppearance(R.style.ErrorTheme)
             error = getString(messageIdRes)
-            setErrorIconDrawable(R.drawable.ic_error)
+            if (endIconMode == TextInputLayout.END_ICON_PASSWORD_TOGGLE) {
+                setEndIconTintMode(PorterDuff.Mode.SRC_IN)
+                setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red)))
+            } else {
+                setErrorIconDrawable(R.drawable.ic_error)
+            }
         }
     }
 
     private fun resetField(view: TextInputLayout) {
         view.apply {
             helperText = ""
-            setHintTextAppearance(0)
+            setHintTextAppearance(R.style.App_Input_Hint)
             setErrorTextAppearance(0)
             error = ""
             setErrorIconDrawable(0)
+            if (endIconMode == TextInputLayout.END_ICON_PASSWORD_TOGGLE) {
+                setEndIconTintMode(PorterDuff.Mode.SRC_IN)
+                setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorPrimary)))
+            } else {
+                setErrorIconDrawable(0)
+            }
         }
     }
 
@@ -178,6 +181,8 @@ class LoginFragment : BaseFragment(), ToolbarBehaviour {
     }
 
     private fun sendData() {
+        resetField(loginFragmentEmailField)
+        resetField(loginFragmentPasswordField)
         disableLoginButton()
         val email = loginFragmentEmailEditText.text.toString().replace(" ", "")
         val password = loginFragmentPasswordEditText.text.toString()
