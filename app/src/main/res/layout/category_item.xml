@@ -14,7 +14,7 @@
         android:id="@+id/categoryImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/category_item_bg"
+        android:background="@drawable/bg_category_item"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/category_container"

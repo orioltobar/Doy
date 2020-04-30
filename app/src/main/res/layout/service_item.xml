@@ -25,7 +25,7 @@
                 android:id="@+id/serviceImage"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/service_image_bg"
+                android:background="@drawable/bg_service_image"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_logo_colour_green" />

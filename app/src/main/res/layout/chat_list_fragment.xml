@@ -85,5 +85,4 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/margin_large" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

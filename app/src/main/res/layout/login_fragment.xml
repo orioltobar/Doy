@@ -110,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
-                app:passwordToggleDrawable="@drawable/password_selector"
+                app:passwordToggleDrawable="@drawable/ic_password_selector"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/green">
 
@@ -143,7 +143,7 @@
                 android:layout_marginStart="@dimen/margin_small"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_small"
-                android:background="@drawable/filled_button_bg"
+                android:background="@drawable/bg_filled_button"
                 android:text="@string/login" />
 
             <Space
