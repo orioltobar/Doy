@@ -1,6 +1,7 @@
 package com.napptilians.doy.view.servicedetail
 
 import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -52,6 +53,8 @@ class ServiceDetailFragment : BaseFragment() {
 
     private val viewModel: ServiceDetailViewModel by viewModels { vmFactory }
     private val args: ServiceDetailFragmentArgs by navArgs()
+    private lateinit var am: AlarmManager
+    private var pendingIntent: PendingIntent? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -157,27 +160,7 @@ class ServiceDetailFragment : BaseFragment() {
         setAttendees(args.service.attendees)
         confirmAssistanceButton.invisible()
         cancelAssistanceView.visible()
-
-        context?.let {
-            val am = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val title = serviceDetailTitle.text.toString()
-            val subtitle = getString(
-                R.string.event_reminder_subtitle,
-                5
-            )
-            val pendingIntent =
-                Notifications.preparePendingIntent(
-                    it,
-                    args.service.serviceId?.toInt() ?: 0,
-                    title,
-                    subtitle
-                )
-            am.set(
-                AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis().plus(1000 * 20),
-                pendingIntent
-            )
-        }
+        scheduleNotification()
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
@@ -186,9 +169,7 @@ class ServiceDetailFragment : BaseFragment() {
         setAttendees(args.service.attendees)
         confirmAssistanceButton.visible()
         cancelAssistanceView.gone()
-        context?.let {
-            Notifications.cancelNotification(it, args.service.serviceId?.toInt() ?: 0)
-        }
+        cancelNotification()
     }
 
     override fun onError(error: ErrorModel) {
@@ -200,7 +181,42 @@ class ServiceDetailFragment : BaseFragment() {
         progressBar.visible()
     }
 
+    private fun scheduleNotification() {
+        context?.let {
+            am = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val title = serviceDetailTitle.text.toString()
+            val subtitle = getString(
+                R.string.event_reminder_subtitle,
+                MINUTES
+            )
+            val serviceId = args.service.serviceId ?: -1L
+            pendingIntent =
+                Notifications.preparePendingIntent(
+                    it,
+                    args.service.serviceId?.toInt() ?: 0,
+                    title,
+                    subtitle,
+                    serviceId
+                )
+            args.service.date?.let { date ->
+                am.set(
+                    AlarmManager.RTC_WAKEUP,
+//                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
+                    System.currentTimeMillis().plus(1000*5),
+                    pendingIntent
+                )
+            }
+        }
+    }
+
+    private fun cancelNotification() {
+        pendingIntent?.let {
+            am.cancel(pendingIntent)
+        }
+    }
+
     companion object {
         private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
+        private const val MINUTES = 5
     }
 }

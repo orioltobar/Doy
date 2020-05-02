@@ -15,9 +15,9 @@ class AlarmReceiver : BroadcastReceiver() {
             val requestCode = bundle?.getInt(Notifications.REQUEST_CODE_KEY) ?: 0
             val title = bundle?.getString(Notifications.TITLE_KEY) ?: ""
             val subtitle = bundle?.getString(Notifications.SUBTITLE_KEY) ?: ""
-            //val service = bundle?.getSerializable(Notifications.SERVICE_KEY)  as ServiceModel
+            val serviceId = bundle?.getLong(Notifications.SERVICE_ID_KEY) ?: 0L
             context?.let {
-                Notifications.launchNotification(context, requestCode, title, subtitle)
+                Notifications.launchNotification(context, requestCode, title, subtitle, serviceId)
             }
         } catch (e: Exception) {
             Log.d(TAG, e.toString())

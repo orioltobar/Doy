@@ -1,6 +1,7 @@
 package com.napptilians.doy.util
 
 import android.annotation.TargetApi
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,6 +10,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import com.napptilians.doy.R
 import com.napptilians.doy.receiver.AlarmReceiver
@@ -19,7 +21,7 @@ object Notifications {
     const val REQUEST_CODE_KEY = "requestCode"
     const val TITLE_KEY = "title"
     const val SUBTITLE_KEY = "subtitle"
-    const val SERVICE_KEY = "service"
+    const val SERVICE_ID_KEY = "serviceId"
 
     @TargetApi(Build.VERSION_CODES.O)
     fun createChannel(
@@ -42,14 +44,14 @@ object Notifications {
         context: Context,
         requestCode: Int,
         title: String?,
-        subtitle: String?
-        //serviceModel: ServiceModel?
+        subtitle: String?,
+        serviceId: Long?
     ): PendingIntent {
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra(REQUEST_CODE_KEY, requestCode)
             putExtra(TITLE_KEY, title)
             putExtra(SUBTITLE_KEY, subtitle)
-            //putExtra(SERVICE_KEY, serviceModel)
+            putExtra(SERVICE_ID_KEY, serviceId)
         }
         return PendingIntent.getBroadcast(
             context,
@@ -59,11 +61,11 @@ object Notifications {
         )
     }
 
-    fun launchNotification(context: Context, requestCode: Int, title: String, subtitle: String) {
+    fun launchNotification(context: Context, requestCode: Int, title: String, subtitle: String, serviceId: Long) {
         val pendingIntent = NavDeepLinkBuilder(context)
             .setGraph(R.navigation.nav_graph)
             .setDestination(R.id.chatListFragment)
-            //.setArguments(bundleOf(SERVICE_KEY to serviceModel))
+            .setArguments(bundleOf(SERVICE_ID_KEY to serviceId))
             .createPendingIntent()
 
         val notification = NotificationCompat.Builder(context, NOTIFICATIONS_CHANNEL_ID)
@@ -75,6 +77,7 @@ object Notifications {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .setPriority(Notification.VISIBILITY_PRIVATE)
             .build()
         with(NotificationManagerCompat.from(context)) {
             // requestCode is a unique int for each notification that you must define
