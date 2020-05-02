@@ -122,7 +122,6 @@
     <!-- Notifications -->
     <string name="event_reminder_channel_name">Event reminders</string>
     <string name="event_reminder_channel_description">Notifications related to events</string>
-    <string name="event_reminder_title">An event is coming up!</string>
     <string name="event_reminder_subtitle">Your event will start in %1$d minutes. Click here to join and have a good time!</string>
 
 </resources>

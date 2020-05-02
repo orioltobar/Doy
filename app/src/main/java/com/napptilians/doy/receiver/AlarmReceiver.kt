@@ -25,6 +25,6 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        const val TAG = "AlarmReceiver"
+        private const val TAG = "AlarmReceiver"
     }
 }

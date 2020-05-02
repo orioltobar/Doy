@@ -72,7 +72,6 @@ object Notifications {
             .setSmallIcon(R.drawable.ic_doy_logo_green)
             .setContentTitle(title)
             .setStyle(NotificationCompat.BigTextStyle().bigText(subtitle))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             // Set the intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

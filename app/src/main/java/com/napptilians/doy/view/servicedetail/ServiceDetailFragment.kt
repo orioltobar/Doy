@@ -52,7 +52,7 @@ class ServiceDetailFragment : BaseFragment() {
 
     private val viewModel: ServiceDetailViewModel by viewModels { vmFactory }
     private val args: ServiceDetailFragmentArgs by navArgs()
-    private lateinit var am: AlarmManager
+    private lateinit var alarmManager: AlarmManager
     private var pendingIntent: PendingIntent? = null
 
     override fun onCreateView(
@@ -181,7 +181,7 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun scheduleNotification() {
         context?.let {
-            am = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val title = serviceDetailTitle.text.toString()
             val subtitle = getString(
                 R.string.event_reminder_subtitle,
@@ -197,10 +197,9 @@ class ServiceDetailFragment : BaseFragment() {
                     serviceId
                 )
             args.service.date?.let { date ->
-                am.set(
+                alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-//                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
-                    System.currentTimeMillis().plus(1000*5),
+                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
                     pendingIntent
                 )
             }
@@ -209,7 +208,7 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun cancelNotification() {
         pendingIntent?.let {
-            am.cancel(pendingIntent)
+            alarmManager.cancel(pendingIntent)
         }
     }
 
