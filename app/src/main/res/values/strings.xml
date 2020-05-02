@@ -81,7 +81,7 @@
         <item quantity="one">%d reserved spot</item>
         <item quantity="other">%d reserved spots</item>
     </plurals>
-    <string name="confirm_assistance">Assist</string>
+    <string name="confirm_assistance">Attend</string>
     <string name="add_attendee_success">You have signed up successfully!</string>
     <string name="add_attendee_success_message">The event has just been added to the <b>Chat</b> section so you can answer any questions before the event.\n\nRemember to be punctual, and if you finally will not be able to attend, cancel it in advance.</string>
     <string name="attend_event_yes">You will attend this event!</string>
@@ -118,5 +118,11 @@
     <string name="no_chats">You don\'t have any open chat. \n\n Join an event to open a new chat.</string>
     <string name="chat_in_progress">We are working at full capacity to implement a group chat with video call support, at the moment, try to write a message to the host of the event!</string>
     <string name="send_message_hint">Write a message</string>
+
+    <!-- Notifications -->
+    <string name="event_reminder_channel_name">Event reminders</string>
+    <string name="event_reminder_channel_description">Notifications related to events</string>
+    <string name="event_reminder_title">An event is coming up!</string>
+    <string name="event_reminder_subtitle">Your event will start in %1$d minutes. Click here to join and have a good time!</string>
 
 </resources>

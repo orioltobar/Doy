@@ -9,13 +9,17 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.napptilians.doy.MainActivity
+import androidx.navigation.NavDeepLinkBuilder
 import com.napptilians.doy.R
 import com.napptilians.doy.receiver.AlarmReceiver
 
 object Notifications {
 
     const val NOTIFICATIONS_CHANNEL_ID = "com.napptilians.doy.notifications"
+    const val REQUEST_CODE_KEY = "requestCode"
+    const val TITLE_KEY = "title"
+    const val SUBTITLE_KEY = "subtitle"
+    const val SERVICE_KEY = "service"
 
     @TargetApi(Build.VERSION_CODES.O)
     fun createChannel(
@@ -34,39 +38,18 @@ object Notifications {
         notificationManager.createNotificationChannel(channel)
     }
 
-    fun launchNotification(context: Context, title: String, subtitle: String, requestCode: Int) {
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent =
-            PendingIntent.getActivity(context, requestCode, intent, 0)
-
-        val notification = NotificationCompat.Builder(context, NOTIFICATIONS_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_logo_colour_green)
-            .setContentTitle(title)
-            .setContentText(subtitle)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            // Set the intent that will fire when the user taps the notification
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .build()
-        with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(requestCode, notification)
-        }
-    }
-
     fun preparePendingIntent(
         context: Context,
+        requestCode: Int,
         title: String?,
-        subtitle: String?,
-        requestCode: Int
+        subtitle: String?
+        //serviceModel: ServiceModel?
     ): PendingIntent {
-        val intent = Intent(context, AlarmReceiver::class.java)
-        intent.apply {
-            putExtra("requestCode", requestCode)
-            putExtra("title", title)
-            putExtra("subtitle", subtitle)
+        val intent = Intent(context, AlarmReceiver::class.java).apply {
+            putExtra(REQUEST_CODE_KEY, requestCode)
+            putExtra(TITLE_KEY, title)
+            putExtra(SUBTITLE_KEY, subtitle)
+            //putExtra(SERVICE_KEY, serviceModel)
         }
         return PendingIntent.getBroadcast(
             context,
@@ -74,5 +57,34 @@ object Notifications {
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
+    }
+
+    fun launchNotification(context: Context, requestCode: Int, title: String, subtitle: String) {
+        val pendingIntent = NavDeepLinkBuilder(context)
+            .setGraph(R.navigation.nav_graph)
+            .setDestination(R.id.chatListFragment)
+            //.setArguments(bundleOf(SERVICE_KEY to serviceModel))
+            .createPendingIntent()
+
+        val notification = NotificationCompat.Builder(context, NOTIFICATIONS_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_doy_logo_green)
+            .setContentTitle(title)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(subtitle))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            // Set the intent that will fire when the user taps the notification
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .build()
+        with(NotificationManagerCompat.from(context)) {
+            // requestCode is a unique int for each notification that you must define
+            notify(requestCode, notification)
+        }
+    }
+
+    fun cancelNotification(context: Context, requestCode: Int) {
+        with(NotificationManagerCompat.from(context)) {
+            cancel(requestCode)
+        }
     }
 }

@@ -118,4 +118,9 @@
     <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un xat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
     <string name="send_message_hint">Escriu un missatge</string>
 
+    <!-- Notifications -->
+    <string name="event_reminder_channel_name">Recordatoris d\'esdedeveniments</string>
+    <string name="event_reminder_channel_description">Notificacions relacionades amb esdeveniments</string>
+    <string name="event_reminder_subtitle">El teu esdeveniment començarà en %1$d minuts. Clica aquí per unir-te i passar-ho bé!</string>
+
 </resources>

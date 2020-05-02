@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -98,13 +99,6 @@ class ServiceListFragment : BaseFragment(), ToolbarBehaviour {
         serviceList.layoutManager = layoutManager
         servicesAdapter = ServiceListAdapter()
         servicesAdapter.setOnClickListener {
-            context?.let { cont ->
-
-                val am = cont.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                val pendingIntent =
-                    Notifications.preparePendingIntent(cont, it.name, it.description, 1)
-                am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis().plus(1000*10), pendingIntent)
-            }
             val navigation =
                 ServiceListFragmentDirections.actionServiceListFragmentToServiceDetailFragment(it)
             findNavController().navigate(navigation)

@@ -1,20 +1,23 @@
 package com.napptilians.doy
 
+import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
+import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
 import kotlinx.android.synthetic.main.activity_main.navBottom
 import kotlinx.android.synthetic.main.activity_main.navFragment
+
 
 class MainActivity : BaseActivity() {
 
@@ -25,14 +28,8 @@ class MainActivity : BaseActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Notifications.createChannel(
-                this,
-                Notifications.NOTIFICATIONS_CHANNEL_ID,
-                "Recordatori ",
-                "recorda les sessions"
-            )
-        }
+        initNotifications()
+
         // Remove action bar
         this.supportActionBar?.hide()
 
@@ -40,14 +37,31 @@ class MainActivity : BaseActivity() {
         navHostFragment.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.introFragment, R.id.splashFragment, R.id.loginFragment, R.id.registerFragment, R.id.recoverPasswordFragment -> {
-                    navBottom.visibility = View.GONE
+                    navBottom.gone()
                 }
                 else -> {
-                    navBottom.visibility = View.VISIBLE
+                    navBottom.visible()
                 }
             }
         }
         NavigationUI.setupWithNavController(navBottom, navHostFragment)
+    }
+
+    private fun initNotifications() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Notifications.NOTIFICATIONS_CHANNEL_ID.isNotEmpty()) {
+                val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                val channel = manager.getNotificationChannel(Notifications.NOTIFICATIONS_CHANNEL_ID)
+                if (channel?.importance != NotificationManager.IMPORTANCE_NONE) {
+                    Notifications.createChannel(
+                        this,
+                        Notifications.NOTIFICATIONS_CHANNEL_ID,
+                        getString(R.string.event_reminder_channel_name),
+                        getString(R.string.event_reminder_channel_description)
+                    )
+                }
+            }
+        }
     }
 
     /**

@@ -4,24 +4,27 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.util.Notifications
 
 class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        var requestCode = 0
-        var title = ""
-        var subtitle = ""
         try {
             val bundle = intent?.extras
-            requestCode = bundle?.getInt("requestCode") ?: 0
-            title = bundle?.getString("title") ?: ""
-            subtitle = bundle?.getString("subtitle") ?: ""
+            val requestCode = bundle?.getInt(Notifications.REQUEST_CODE_KEY) ?: 0
+            val title = bundle?.getString(Notifications.TITLE_KEY) ?: ""
+            val subtitle = bundle?.getString(Notifications.SUBTITLE_KEY) ?: ""
+            //val service = bundle?.getSerializable(Notifications.SERVICE_KEY)  as ServiceModel
+            context?.let {
+                Notifications.launchNotification(context, requestCode, title, subtitle)
+            }
         } catch (e: Exception) {
-            Log.e("AlarmReceiver", e.toString())
+            Log.d(TAG, e.toString())
         }
-        context?.let {
-            Notifications.launchNotification(context, title, subtitle, requestCode)
-        }
+    }
+
+    companion object {
+        const val TAG = "AlarmReceiver"
     }
 }
