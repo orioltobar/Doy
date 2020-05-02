@@ -18,20 +18,21 @@
             android:id="@+id/chatMessageViewHolderSenderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_xsmall"
+            android:layout_marginTop="@dimen/margin_xsmall"
             android:fontFamily="@font/raleway_bold"
-            android:textSize="@dimen/text_size_s"
+            android:textSize="@dimen/text_size_s_2"
             tools:text="Sende Name" />
 
         <TextView
             android:id="@+id/chatMessageViewHolderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_xsmall"
             android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="@font/raleway_medium"
             android:textColor="@color/black"
+            android:textSize="@dimen/text_size_s_2"
             tools:text="Message" />
 
         <TextView
@@ -40,8 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/margin_xsmall"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
             android:fontFamily="@font/raleway_medium"
             android:textSize="@dimen/text_size_xs"
             tools:text="23:58" />

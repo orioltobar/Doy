@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavDeepLinkBuilder
@@ -17,7 +16,6 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
@@ -32,9 +30,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class ServiceListFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class ServiceListFragment : BaseFragment() {
 
     private val viewModel: ServicesViewModel by viewModels { vmFactory }
     private val args: ServiceListFragmentArgs by navArgs()
@@ -50,7 +46,6 @@ class ServiceListFragment : BaseFragment(), ToolbarBehaviour {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
         initViews()
         viewModel.execute(listOf(args.categoryId), null)
         viewModel.servicesDataStream.observe(

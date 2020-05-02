@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,23 +12,20 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.error.LoginErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.RecoverPasswordViewModel
-import kotlinx.android.synthetic.main.recover_password_fragment.loginFragmentProgressView
+import kotlinx.android.synthetic.main.recover_password_fragment.recoverPasswordProgressView
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverEmailEditText
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverEmailInput
 import kotlinx.android.synthetic.main.recover_password_fragment.recoverPasswordButton
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class RecoverPasswordFragment : BaseFragment() {
 
     private val viewModel: RecoverPasswordViewModel by viewModels { vmFactory }
 
@@ -41,7 +37,6 @@ class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
 
         // LiveData Observer
         viewModel.recoverDataStream.observe(
@@ -62,11 +57,11 @@ class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
     }
 
     override fun onLoading() {
-        loginFragmentProgressView.visible()
+        recoverPasswordProgressView.visible()
     }
 
     override fun onError(error: ErrorModel) {
-        loginFragmentProgressView.gone()
+        recoverPasswordProgressView.gone()
         when (error.errorCause) {
             LoginErrors.InvalidEmail -> {
                 setErrorFields(recoverEmailInput, R.string.invalid_email)
@@ -78,7 +73,7 @@ class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
     }
 
     private fun processResponse(response: Unit?) {
-        loginFragmentProgressView.gone()
+        recoverPasswordProgressView.gone()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_clap)
@@ -103,7 +98,7 @@ class RecoverPasswordFragment : BaseFragment(), ToolbarBehaviour {
     private fun resetField(view: TextInputLayout) {
         view.apply {
             helperText = ""
-            setHintTextAppearance(0)
+            setHintTextAppearance(R.style.App_Input_Hint)
             setErrorTextAppearance(0)
             error = ""
             setErrorIconDrawable(0)

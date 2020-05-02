@@ -17,9 +17,13 @@
     <!-- Divider -->
     <dimen name="divider_size">1dp</dimen>
 
+    <!-- Loading progress -->
+    <dimen name="loading_progress_size">30dp</dimen>
+
     <!-- Text sizes -->
     <dimen name="text_size_xs">10sp</dimen>
     <dimen name="text_size_s">12sp</dimen>
+    <dimen name="text_size_s_2">13sp</dimen>
     <dimen name="text_size_m">14sp</dimen>
     <dimen name="text_size_m_2">16sp</dimen>
     <dimen name="text_size_l">22sp</dimen>
@@ -42,6 +46,9 @@
     <dimen name="category_max_height">100dp</dimen>
     <dimen name="category_max_width">160dp</dimen>
 
+    <!-- Service list -->
+    <dimen name="service_card_elevation">6dp</dimen>
+
     <!-- Service detail -->
     <dimen name="service_image_height">250dp</dimen>
     <dimen name="service_owner_image_size">56dp</dimen>
@@ -51,11 +58,13 @@
     <!-- User profile -->
     <dimen name="profile_image_size">116dp</dimen>
     <dimen name="profile_card_radius">58dp</dimen>
+    <dimen name="profile_card_elevation">6dp</dimen>
 
     <!-- Chat -->
     <dimen name="chat_placeholder_image_size">24dp</dimen>
     <dimen name="chat_thumbnail_image_size">48dp</dimen>
     <dimen name="chat_thumbnail_card_radius">24dp</dimen>
     <dimen name="chat_send_button_size">48dp</dimen>
+    <dimen name="chat_message_box_radius">6dp</dimen>
 
 </resources>

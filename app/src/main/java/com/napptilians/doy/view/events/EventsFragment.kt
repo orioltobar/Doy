@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,7 +15,6 @@ import com.napptilians.domain.usecases.GetEventsUseCase.Companion.PAST
 import com.napptilians.domain.usecases.GetEventsUseCase.Companion.UPCOMING
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyErrorDialog
@@ -29,12 +27,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class EventsFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class EventsFragment : BaseFragment() {
 
     private val viewModel: EventsViewModel by viewModels { vmFactory }
     private val args: EventsFragmentArgs by navArgs()
+
     private lateinit var eventAdapter: EventsPagerAdapter
 
     @Inject
@@ -70,11 +67,6 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
                     ::processNewValue
                 )
             })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        genericToolbar?.gone()
     }
 
     private fun processNewValue(model: Map<String, List<ServiceModel>>) {
