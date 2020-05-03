@@ -1,48 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Doy</string>
-    <string name="menu_section_1">Section 1</string>
-    <string name="menu_section_2">Section 2</string>
-    <string name="under_construction">Under construction</string>
+
+    <!-- Intro -->
     <string name="join_community">Join the DOY community</string>
-    <string name="sign_up">Create account</string>
-    <string name="sign_in">Log in</string>
     <string name="create_account">Create account</string>
+    <string name="login">Log in</string>
     <string name="google_sign_in">Continue with Google</string>
+
+    <!-- Register -->
+    <string name="account_created">Account created!</string>
+    <string name="welcome">Welcome to the DOY community. From now on, you can start joining the events you are more interested in. It is very easy! When the time of the event comes, you will just have to enter the Chats section to start the video chat.</string>
+    <string name="start_enjoying">Start and enjoy being part of the DOY community</string>
+    <string name="password_too_short">Password must have at least 6 characters.</string>
+    <string name="passwords_dont_match">Passwords don\'t match.</string>
+    <string name="invalid_email">Oops! This e-mail isn\'t valid.</string>
+    <string name="empty_name">We need your name to sign you up</string>
     <string name="email">E-mail</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
-    <string name="password_forgot">Forgot password?</string>
-    <string name="recover_password">Check your email account to recover your password!</string>
-    <string name="no_account">Don\'t you have an account?</string>
     <string name="existing_account">Already registered?</string>
     <string name="create">Create</string>
-    <string name="wrong_credentials">Wrong credentials</string>
-    <string name="server_error">An error has occurred</string>
-    <string name="generic_error">Your request cannot be performed at this time.</string>
 
-    <!-- Register & Login & Recover pass-->
-    <string name="account_created">Account created!</string>
-    <string name="welcome">Welcome to the DOY community. From now on, you can start joining the events you are more interested on. It is very easy! When the day and hour of the event come, you will just have to enter the Chats section to start the videocall.</string>
-    <string name="start_enjoying">Start and enjoy being part of the DOY community</string>
-    <string name="password_too_short">Password must have at least 6 characters.</string>
-    <string name="passwords_dont_match">Passwords don\'t match.</string>
-    <string name="invalid_email">¡Oops! This e-mail isn\'t valid.</string>
-    <string name="empty_name">We need your name to log you in</string>
+    <!-- Login -->
+    <string name="password_forgot">Forgot password?</string>
     <string name="firebase_invalid_user">This user does not exist in our records</string>
     <string name="firebase_invalid_credentials">Looks like credentials were incorrect. Try again.</string>
     <string name="firebase_user_already_exists">This username is not available. Please choose a different one.</string>
-    <string name="forgot_password">Have you forgotten your password?</string>
-    <string name="forgot_password_no_problem">There is no problem, it happens to all of us!</string>
-    <string name="forgot_password_message">Please enter the email address you used when registering and we will send you a link to reset your password.</string>
-    <string name="send">Send</string>
+    <string name="no_account">Don\'t you have an account?</string>
+
+    <!-- Recover password -->
+    <string name="recover_password_title">Have you forgotten your password?</string>
+    <string name="recover_password_no_problem">No problem, it happens to all of us!</string>
+    <string name="recover_password_message">Please enter the email address you used to register and we will send you a link to reset your password.</string>
+    <string name="recover_password_send">Send</string>
+    <string name="recover_password_email_sent">Email sent</string>
+    <string name="recover_password_email_reminder">Check your email account to recover your password!</string>
 
     <!-- Category list -->
     <string name="loading_categories">We\'re loading your categories. It\'ll only be a second!</string>
     <string name="no_categories">There are no categories available yet.</string>
 
     <!-- Service list -->
-    <string name="loading_services">Si us plau, espera mentre carreguem els teus serveis</string>
+    <string name="loading_services">Please wait while we load the list of services</string>
     <string name="no_services">It looks like there are no services for this category. ¡Check later!</string>
     <string name="max_spots">Max. %1$d</string>
     <string name="service_duration" translatable="false">%1$d min.</string>
@@ -58,14 +59,19 @@
     <string name="select_duration">Select duration</string>
     <string name="description">Description</string>
     <string name="add_service_to_category">What category does your event belong to?</string>
-    <string name="adding_service">Creating event...</string>
     <string name="how_many_spots">How many people can join your event?</string>
     <string name="save">Save</string>
-    <string name="person">person</string>
-    <string name="persons">persons</string>
-    <string name="how_long_duration">¿Cuánta gente se puede unir a tu evento?</string>
-    <string name="hour">hour</string>
-    <string name="hours">hours</string>
+    <plurals name="people">
+        <item quantity="one">%d person</item>
+        <item quantity="other">%d people</item>
+    </plurals>
+    <string name="how_long_duration">¿How long it will be approximately?</string>
+    <string name="minutes">%d minutes</string>
+    <string name="hours_and_minutes">%1$d hours and %2$d minutes</string>
+    <plurals name="hours">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
     <string name="add_service_success">Your event has been created!</string>
     <string name="add_service_success_message">Remember to be punctual and have everything prepared in advance.</string>
 
@@ -73,15 +79,17 @@
     <string name="when">When?</string>
     <string name="duration">Duration:</string>
     <string name="spots">Spots:</string>
-    <string name="spot_reserved">%1d reserved spot</string>
-    <string name="spots_reserved">%1d reserved spots</string>
+    <plurals name="spots_reserved">
+        <item quantity="one">%d reserved spot</item>
+        <item quantity="other">%d reserved spots</item>
+    </plurals>
     <string name="confirm_assistance">Assist</string>
     <string name="add_attendee_success">You have signed up successfully!</string>
     <string name="add_attendee_success_message">The event has just been added to the <b>Chat</b> section so you can answer any questions before the event.\n\nRemember to be punctual, and if you finally will not be able to attend, cancel it in advance.</string>
-    <string name="assist_to_event_yes">You will assist to this event!</string>
-    <string name="assist_to_event_cancel">I don\'t want to assist anymore</string>
-    <string name="confirm_assist_to_event_cancel">Are you sure you don\'t want to assist to the event?</string>
-    <string name="confirm_assist_to_event_cancel_yes">I am sure, I don\'t want to assist</string>
+    <string name="attend_event_yes">You will attend this event!</string>
+    <string name="attend_event_cancel">I don\'t want to attend anymore</string>
+    <string name="confirm_attend_event_cancel">Are you sure you don\'t want to attend the event?</string>
+    <string name="confirm_attend_event_cancel_yes">I am sure, I don\'t want to attend</string>
     <string name="your_service">This is your event. Thanks for helping!</string>
 
     <!-- Generic Dialog -->
@@ -102,14 +110,15 @@
 
     <!-- My events -->
     <string name="your_events">Your events</string>
-    <string name="my_own_events">Events created by me</string>
     <string name="tab_upcoming">Upcoming</string>
     <string name="tab_past">Past</string>
     <string name="loading_events">Loading events...</string>
-    <string name="no_events">It looks like you don\'t have events in this section.</string>
+    <string name="no_events">It looks like you don\'t have any events in this section.</string>
 
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="no_chats">You don\'t have any open chat. \n\n Join an event to open a new chat.</string>
     <string name="chat_in_progress">We are working at full capacity to implement a group chat with video call support, at the moment, try to write a message to the host of the event!</string>
+    <string name="send_message_hint">Write a message</string>
+
 </resources>
