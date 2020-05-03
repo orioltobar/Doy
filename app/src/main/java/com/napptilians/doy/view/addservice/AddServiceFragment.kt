@@ -1,8 +1,11 @@
 package com.napptilians.doy.view.addservice
 
 import android.app.Activity
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -27,6 +30,7 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.AddServiceViewModel
@@ -51,6 +55,9 @@ class AddServiceFragment : BaseFragment() {
     private val serviceDateFormat = SimpleDateFormat(SERVICE_DATE_FORMAT, Locale.getDefault())
     private var selectedCalendarDay: Calendar? = null
     private var selectedTime: String? = null
+
+    private lateinit var alarmManager: AlarmManager
+    private var pendingIntent: PendingIntent? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -196,6 +203,7 @@ class AddServiceFragment : BaseFragment() {
                 setOnDismissListener { findNavController().popBackStack() }
             }
         }
+        scheduleNotification(serviceId)
     }
 
     override fun onLoading() {
@@ -224,9 +232,36 @@ class AddServiceFragment : BaseFragment() {
         }
     }
 
+    private fun scheduleNotification(serviceId: Long) {
+        context?.let {
+            alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val title = viewModel.service.name ?: ""
+            val subtitle = getString(
+                R.string.event_reminder_subtitle,
+                MINUTES
+            )
+            pendingIntent =
+                Notifications.preparePendingIntent(
+                    it,
+                    serviceId.toInt(),
+                    title,
+                    subtitle,
+                    serviceId
+                )
+            viewModel.service.date?.let { date ->
+                alarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
+                    pendingIntent
+                )
+            }
+        }
+    }
+
     companion object {
         private const val GALLERY_REQUEST_CODE = 100
         private const val SERVICE_DATE_FORMAT = "yyyy-MM-dd"
+        private const val MINUTES = 5
         private val calendar = Calendar.getInstance()
         private val DEFAULT_SERVICE_DATE_YEAR = calendar.get(Calendar.YEAR)
         private val DEFAULT_SERVICE_DATE_MONTH = calendar.get(Calendar.MONTH)
