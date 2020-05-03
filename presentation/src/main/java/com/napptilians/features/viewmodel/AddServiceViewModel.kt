@@ -1,5 +1,6 @@
 package com.napptilians.features.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,8 @@ import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -50,6 +53,7 @@ class AddServiceViewModel @Inject constructor(
             addSource(serviceDate) {
                 service.hour = serviceDate.value
                 isValidService.value = isFormValid(service)
+                service.date = parseDate(service)
             }
             addSource(serviceDescription) {
                 service.description = serviceDescription.value
@@ -75,7 +79,7 @@ class AddServiceViewModel @Inject constructor(
                 && service.durationMin != null
                 && !service.name.isNullOrBlank()
                 && !service.day.isNullOrBlank()
-                && !service.description.isNullOrBlank()
+//                && !service.description.isNullOrBlank()
 
     fun execute() {
         viewModelScope.launch {
@@ -84,5 +88,25 @@ class AddServiceViewModel @Inject constructor(
             val request = addServiceUseCase.execute(service)
             _addServiceDataStream.value = processModel(request)
         }
+    }
+
+    private fun parseDate(model: ServiceModel): ZonedDateTime? {
+        return if (model.day == null || model.hour == null) {
+            null
+        } else {
+            // Hardcoded to Spanish time
+            val dateString = "${model.day}T${model.hour}$TIMEZONE"
+            try {
+                ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+            } catch (e: Exception) {
+                Log.d(TAG, "There was an error parsing: $dateString")
+                null
+            }
+        }
+    }
+
+    companion object {
+        private const val TAG = "AddServiceViewModel"
+        private const val TIMEZONE = "+01:00"
     }
 }

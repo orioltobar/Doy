@@ -30,7 +30,7 @@ class GetMyServicesUseCase @Inject constructor(
             request.flatMap { serviceList ->
                 serviceList.map { service ->
                     service.date?.let {
-                        if (service.date >= Instant.now().atZone(ZoneId.of(TIMEZONE))) {
+                        if (it >= Instant.now().atZone(ZoneId.of(TIMEZONE))) {
                             myUpcomingEvents.add(service)
                         } else {
                             myPastEvents.add(service)

@@ -1,12 +1,15 @@
 package com.napptilians.doy
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +17,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
+import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.util.Notifications
+import kotlinx.android.synthetic.main.activity_main.navBottom
+import kotlinx.android.synthetic.main.activity_main.navFragment
+
 import com.napptilians.doy.behaviours.ToolbarBehaviour
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
@@ -28,15 +37,17 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
+        initNotifications()
+
         val navHostFragment = NavHostFragment.findNavController(navFragment)
         navHostFragment.addOnDestinationChangedListener { _, destination, args ->
             // Manage navigation bar visibility
             when (destination.id) {
                 R.id.introFragment, R.id.splashFragment, R.id.loginFragment, R.id.registerFragment, R.id.recoverPasswordFragment -> {
-                    navBottom.visibility = View.GONE
+                    navBottom.gone()
                 }
                 else -> {
-                    navBottom.visibility = View.VISIBLE
+                    navBottom.visible()
                 }
             }
             // Manage toolbar visibility, make on post to wait for the view to be ready
@@ -63,6 +74,24 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
             }
         }
         NavigationUI.setupWithNavController(navBottom, navHostFragment)
+    }
+
+    private fun initNotifications() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Notifications.NOTIFICATIONS_CHANNEL_ID.isNotEmpty()) {
+                val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                val channel = manager.getNotificationChannel(Notifications.NOTIFICATIONS_CHANNEL_ID)
+                if (channel?.importance != NotificationManager.IMPORTANCE_NONE) {
+                    Notifications.createChannel(
+                        this,
+                        Notifications.NOTIFICATIONS_CHANNEL_ID,
+                        getString(R.string.event_reminder_channel_name),
+                        getString(R.string.event_reminder_channel_description),
+                        NotificationManager.IMPORTANCE_HIGH
+                    )
+                }
+            }
+        }
     }
 
     /**

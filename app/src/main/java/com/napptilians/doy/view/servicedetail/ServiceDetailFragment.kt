@@ -1,5 +1,8 @@
 package com.napptilians.doy.view.servicedetail
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,15 +20,28 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.CancelAssistDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
-import kotlinx.android.synthetic.main.service_detail_fragment.*
+import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceButton
+import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceView
+import kotlinx.android.synthetic.main.service_detail_fragment.confirmAssistanceButton
+import kotlinx.android.synthetic.main.service_detail_fragment.progressBar
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailAttendees
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDate
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDescription
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDuration
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailSpots
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailTitle
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceOwnerImage
+import kotlinx.android.synthetic.main.service_detail_fragment.toolbar
+import kotlinx.android.synthetic.main.service_detail_fragment.toolbarImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -36,6 +52,8 @@ class ServiceDetailFragment : BaseFragment() {
 
     private val viewModel: ServiceDetailViewModel by viewModels { vmFactory }
     private val args: ServiceDetailFragmentArgs by navArgs()
+    private lateinit var alarmManager: AlarmManager
+    private var pendingIntent: PendingIntent? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,7 +90,8 @@ class ServiceDetailFragment : BaseFragment() {
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
                 context?.let {
-                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG).show()
+                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG)
+                        .show()
                 }
             } else {
                 if (assistance) {
@@ -139,6 +158,7 @@ class ServiceDetailFragment : BaseFragment() {
         setAttendees(args.service.attendees)
         confirmAssistanceButton.invisible()
         cancelAssistanceView.visible()
+        scheduleNotification()
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
@@ -147,6 +167,7 @@ class ServiceDetailFragment : BaseFragment() {
         setAttendees(args.service.attendees)
         confirmAssistanceButton.visible()
         cancelAssistanceView.gone()
+        cancelNotification()
     }
 
     override fun onError(error: ErrorModel) {
@@ -158,7 +179,41 @@ class ServiceDetailFragment : BaseFragment() {
         progressBar.visible()
     }
 
+    private fun scheduleNotification() {
+        context?.let {
+            alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val title = serviceDetailTitle.text.toString()
+            val subtitle = getString(
+                R.string.event_reminder_subtitle,
+                MINUTES
+            )
+            val serviceId = args.service.serviceId ?: -1L
+            pendingIntent =
+                Notifications.preparePendingIntent(
+                    it,
+                    args.service.serviceId?.toInt() ?: 0,
+                    title,
+                    subtitle,
+                    serviceId
+                )
+            args.service.date?.let { date ->
+                alarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
+                    pendingIntent
+                )
+            }
+        }
+    }
+
+    private fun cancelNotification() {
+        pendingIntent?.let {
+            alarmManager.cancel(pendingIntent)
+        }
+    }
+
     companion object {
         private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
+        private const val MINUTES = 5
     }
 }

@@ -11,7 +11,7 @@ data class ServiceModel(
     var image: String? = null,
     var day: String? = null,
     var hour: String? = null,
-    val date: ZonedDateTime? = null,
+    var date: ZonedDateTime? = null,
     var spots: Int? = null,
     var attendees: Int? = null,
     var durationMin: Int? = null,
