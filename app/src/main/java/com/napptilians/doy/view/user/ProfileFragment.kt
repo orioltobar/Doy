@@ -6,9 +6,11 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -18,6 +20,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.clickable
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.gone
@@ -28,7 +31,6 @@ import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ProfileViewModel
-import kotlinx.android.synthetic.main.profile_fragment.profileEditMode
 import kotlinx.android.synthetic.main.profile_fragment.profileFragmentProgressView
 import kotlinx.android.synthetic.main.profile_fragment.profileImageCardView
 import kotlinx.android.synthetic.main.profile_fragment.profileImageView
@@ -39,10 +41,15 @@ import kotlinx.android.synthetic.main.profile_fragment.profilePhotoPlaceHolder
 import kotlinx.android.synthetic.main.profile_fragment.profileTitle
 import javax.inject.Inject
 
-class ProfileFragment : BaseFragment() {
+class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
+
+    override val genericToolbar: Toolbar?
+        get() = activity?.findViewById(R.id.toolbar)
+
+    private var editAction: MenuItem? = null
 
     // TODO: Re-do the logic after MVP
 
@@ -63,12 +70,16 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        genericToolbar?.inflateMenu(R.menu.profile_menu)
+        editAction = genericToolbar?.menu?.findItem(R.id.menuEdit)
+
+        editAction?.setOnMenuItemClickListener {
+            switchEditMode()
+            return@setOnMenuItemClickListener false
+        }
         // Show read view as default.
         defaultView()
 
-        profileEditMode.setOnClickListener {
-            switchEditMode()
-        }
         profilePhotoPlaceHolder.setOnClickListener {
             openGallery()
         }
@@ -178,6 +189,8 @@ class ProfileFragment : BaseFragment() {
     private fun switchEditMode(user: UserModel? = null) {
         context?.let {
             if (!isEditMode) {
+                editAction?.isVisible = false
+                enableHomeAsUp { switchEditMode() }
                 profileTitle.text = getString(R.string.edit_profile)
                 profileInfoLogOutText.gone()
                 profileInfoSaveChangesButton.visible()
@@ -191,6 +204,8 @@ class ProfileFragment : BaseFragment() {
                 }
 
             } else {
+                editAction?.isVisible = true
+                genericToolbar?.navigationIcon = null
                 profileTitle.text = getString(R.string.profile)
                 profileInfoLogOutText.visible()
                 profileInfoSaveChangesButton.gone()

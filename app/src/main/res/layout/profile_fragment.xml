@@ -7,23 +7,15 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_marginTop="@dimen/margin_medium"
         android:id="@+id/profileTitle"
         style="@style/App.Intro"
         android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/profile"
         android:textColor="@color/grayStrong"
         android:textSize="@dimen/text_size_xl"
         app:layout_constraintStart_toStartOf="@id/startGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline" />
-
-    <ImageView
-        android:id="@+id/profileEditMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_edit"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
         app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
     <androidx.cardview.widget.CardView
