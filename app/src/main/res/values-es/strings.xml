@@ -120,4 +120,9 @@
     <string name="chat_in_progress">Estamos trabajando a toda velocidad para implementar un chat grupal con soporte de videollamadas. Por el momento, ¡escribe unos mensajes al organizador!</string>
     <string name="send_message_hint">Escribe un mensaje</string>
 
+    <!-- Notifications -->
+    <string name="event_reminder_channel_name">Recordatorios de eventos</string>
+    <string name="event_reminder_channel_description">Notificaciones relacionadas con eventos</string>
+    <string name="event_reminder_subtitle">Tu evento empezará en 12$d minutos. ¡Haz click aquí para unirte y pasarlo bien!</string>
+
 </resources>

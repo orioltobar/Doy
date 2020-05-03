@@ -46,7 +46,6 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.assistance?.equals("1") ?: false
         )
 
-    @SuppressLint("NewApi")
     private fun parseDate(model: ServiceApiModel): ZonedDateTime? {
         return if (model.day == null || model.hour == null) {
             null
