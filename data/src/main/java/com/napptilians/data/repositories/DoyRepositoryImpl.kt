@@ -13,10 +13,12 @@ import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
 import com.napptilians.domain.models.category.CategoryModel
+import com.napptilians.domain.models.chat.ChatModel
 import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.repositories.DoyRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class DoyRepositoryImpl @Inject constructor(
@@ -124,6 +126,14 @@ class DoyRepositoryImpl @Inject constructor(
             it.sortedWith(comparator)
         }
     }
+
+    override suspend fun sendChatMessage(
+        chatId: String,
+        message: ChatModel
+    ): Response<Unit, ErrorModel> = firebaseDataSource.sendChatMessage(chatId, message)
+
+    override fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
+        firebaseDataSource.getChatMessages(chatId)
 
     private val comparator: Comparator<ServiceModel>
         get() = compareBy({ it.date }, { it.name })
