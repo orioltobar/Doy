@@ -94,45 +94,16 @@ class AddServiceFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer<String> {
                 selectDurationEditText.setText(
-                    buildDurationString(it.toInt())
+                    context?.resources?.getQuantityString(
+                        R.plurals.hours,
+                        it.toInt(),
+                        it.toInt()
+                    )
                 )
             }
         )
     }
 
-    private fun buildDurationString(numberOfMinutes: Int): String {
-        val hours = numberOfMinutes / 60
-        val minutes = numberOfMinutes % 60
-        return when {
-            hours == 0 -> {
-                context?.resources?.getString(R.string.minutes, minutes).toString()
-            }
-            numberOfMinutes == 60 -> {
-                context?.resources?.getQuantityString(
-                    R.plurals.hours,
-                    hours,
-                    hours
-                ).toString()
-            }
-            hours < 2 -> {
-                context?.resources?.getString(R.string.hours_and_minutes, hours, minutes).toString()
-            }
-            hours == 2 && minutes == 0 -> {
-                context?.resources?.getQuantityString(
-                    R.plurals.hours,
-                    hours,
-                    hours
-                ).toString()
-            }
-            else -> {
-                "+ " + context?.resources?.getQuantityString(
-                    R.plurals.hours,
-                    hours,
-                    hours
-                )
-            }
-        }
-    }
     override fun onResume() {
         super.onResume()
         Glide.with(serviceImageView)

@@ -83,7 +83,7 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
             setDate(date)
-            serviceDetailDuration.text = buildDurationString(durationMin ?: 0)
+            serviceDetailDuration.text = "$durationMin min"
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
@@ -120,40 +120,6 @@ class ServiceDetailFragment : BaseFragment() {
                 Locale(Locale.getDefault().language, Locale.getDefault().country)
             )
             serviceDetailDate.text = formatterUserFriendly.format(date).capitalize()
-        }
-    }
-
-    private fun buildDurationString(numberOfMinutes: Int): String {
-        val hours = numberOfMinutes / 60
-        val minutes = numberOfMinutes % 60
-        return when {
-            hours == 0 -> {
-                context?.resources?.getString(R.string.minutes, minutes).toString()
-            }
-            numberOfMinutes == 60 -> {
-                context?.resources?.getQuantityString(
-                    R.plurals.hours,
-                    hours,
-                    hours
-                ).toString()
-            }
-            hours < 2 -> {
-                context?.resources?.getString(R.string.hours_and_minutes, hours, minutes).toString()
-            }
-            hours == 2 && minutes == 0 -> {
-                context?.resources?.getQuantityString(
-                    R.plurals.hours,
-                    hours,
-                    hours
-                ).toString()
-            }
-            else -> {
-                "+ " + context?.resources?.getQuantityString(
-                    R.plurals.hours,
-                    hours,
-                    hours
-                )
-            }
         }
     }
 

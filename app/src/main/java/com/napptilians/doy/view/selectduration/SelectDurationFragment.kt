@@ -65,7 +65,7 @@ class SelectDurationFragment : BaseFragment() {
                     durationModel.isSelected = false
                     durationListAdapter.notifyItemChanged(index)
                 } else if (durationModel == clickedCategory && !durationModel.isSelected) {
-                    selectedDurationHours = durationModel.numberOfMinutes
+                    selectedDurationHours = durationModel.numberOfHours
                     durationModel.isSelected = true
                     durationListAdapter.notifyItemChanged(index)
                 }
