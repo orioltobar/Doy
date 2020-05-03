@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_marginTop="@dimen/margin_medium"
         android:id="@+id/profileTitle"
         style="@style/App.Intro"
         android:layout_width="wrap_content"

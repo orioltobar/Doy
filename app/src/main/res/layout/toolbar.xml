@@ -8,6 +8,7 @@
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:titleTextAppearance="@style/App.Toolbar">
+    app:titleTextAppearance="@style/App.Toolbar"
+    app:menu="@menu/toolbar_menu">
 
 </androidx.appcompat.widget.Toolbar>
