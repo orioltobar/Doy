@@ -69,9 +69,11 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        genericToolbar?.inflateMenu(R.menu.profile_menu)
-        editAction = genericToolbar?.menu?.findItem(R.id.menuEdit)
+        genericToolbar?.let {
+            it.menu.clear()
+            it.inflateMenu(R.menu.profile_menu)
+            editAction = it.menu.findItem(R.id.menuEdit)
+        }
 
         editAction?.setOnMenuItemClickListener {
             switchEditMode()
