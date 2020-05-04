@@ -16,7 +16,7 @@ import com.napptilians.domain.usecases.GetEventsUseCase.Companion.UPCOMING
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
-import com.napptilians.doy.extensions.marginDp
+import com.napptilians.doy.extensions.marginPx
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
@@ -57,10 +57,10 @@ class EventsFragment : BaseFragment() {
         initViews()
         if (args.onlyMyEvents) {
             viewModel.getMyServices(uid = firebaseAuth.currentUser?.uid)
-            titleText.marginDp(top = MY_SERVICES_TITLE_MARGIN_TOP_DP)
+            titleText.marginPx(top = resources.getDimension(R.dimen.margin_xxlarge).toInt())
         } else {
             viewModel.getServices(uid = firebaseAuth.currentUser?.uid)
-            titleText.marginDp(top = SERVICES_TITLE_MARGIN_TOP_DP)
+            titleText.marginPx(top = resources.getDimension(R.dimen.margin_xlarge).toInt())
         }
         viewModel.eventsDataStream.observe(
             viewLifecycleOwner,
@@ -108,10 +108,5 @@ class EventsFragment : BaseFragment() {
         val navigation =
             EventsFragmentDirections.actionEventsFragmentToServiceDetailFragment2(service)
         findNavController().navigate(navigation)
-    }
-
-    companion object {
-        private const val MY_SERVICES_TITLE_MARGIN_TOP_DP = 64f
-        private const val SERVICES_TITLE_MARGIN_TOP_DP = 32f
     }
 }
