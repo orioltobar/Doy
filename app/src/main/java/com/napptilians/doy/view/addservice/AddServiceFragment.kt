@@ -73,11 +73,11 @@ class AddServiceFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSharedObservers()
+        initObservers()
         setupListeners()
     }
 
-    private fun setupSharedObservers() {
+    private fun initObservers() {
         getNavigationResult("selectCategoryId")?.observe(
             viewLifecycleOwner,
             Observer<String> { viewModel.service.categoryId = it.toLong() }
@@ -102,6 +102,9 @@ class AddServiceFragment : BaseFragment() {
                 )
             }
         )
+        viewModel.addServiceDataStream.observe(
+            viewLifecycleOwner,
+            Observer { handleUiStates(it, ::processNewValue) })
     }
 
     override fun onResume() {
@@ -187,9 +190,6 @@ class AddServiceFragment : BaseFragment() {
 
     private fun createEvent() {
         viewModel.execute()
-        viewModel.addServiceDataStream.observe(
-            viewLifecycleOwner,
-            Observer { handleUiStates(it, ::processNewValue) })
     }
 
     private fun processNewValue(serviceId: Long) {
