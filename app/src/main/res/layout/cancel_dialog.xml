@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
+    android:orientation="vertical"
     android:padding="@dimen/margin_large">
 
     <TextView
+        android:id="@+id/cancelDialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_large"
         android:fontFamily="@font/raleway_bold"
-        android:text="@string/confirm_attend_event_cancel"
+        tools:text="@string/confirm_attend_event_cancel"
         android:textColor="@color/grayStrong"
         android:textSize="@dimen/text_size_l" />
 
     <TextView
-        android:id="@+id/cancelAssistanceButton"
+        android:id="@+id/cancelDialogButton"
         style="@style/App.ServiceDetail.Data"
         android:padding="@dimen/padding_small"
-        android:text="@string/confirm_attend_event_cancel_yes"
+        tools:text="@string/confirm_attend_event_cancel_yes"
         android:textColor="@color/red" />
 
 </LinearLayout>

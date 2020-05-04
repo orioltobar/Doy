@@ -88,6 +88,7 @@
     <string name="confirm_attend_event_cancel">¿Estás seguro de que no quieres asistir al evento?</string>
     <string name="confirm_attend_event_cancel_yes">Estoy seguro, no quiero asistir</string>
     <string name="your_service">Este evento es tuyo. ¡Gracias por ayudar!</string>
+    <string name="menu_delete">Eliminar evento</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>

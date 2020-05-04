@@ -1,7 +1,5 @@
 package com.napptilians.doy
 
-import android.app.Notification
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Rect
@@ -17,14 +15,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
+import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
 import kotlinx.android.synthetic.main.activity_main.navBottom
 import kotlinx.android.synthetic.main.activity_main.navFragment
-
-import com.napptilians.doy.behaviours.ToolbarBehaviour
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
 
 class MainActivity : BaseActivity(), ToolbarBehaviour {
@@ -54,7 +50,7 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
             Handler(Looper.getMainLooper()).post {
                 when (destination.id) {
                     R.id.introFragment, R.id.eventsFragment, R.id.addServiceFragment,
-                    R.id.chatListFragment, R.id.profileFragment, R.id.serviceDetailFragment -> {
+                    R.id.chatListFragment, R.id.profileFragment-> {
                         disableToolbar()
                     }
                     R.id.categoryListFragment -> {
@@ -64,7 +60,7 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
                             disableToolbar()
                         }
                     }
-                    R.id.loginFragment -> {
+                    R.id.loginFragment, R.id.serviceDetailFragment -> {
                         enableHomeAsUp(false) { navHostFragment.popBackStack() }
                     }
                     else -> {

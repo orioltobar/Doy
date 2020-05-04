@@ -194,7 +194,7 @@
             android:background="@color/white"
             android:gravity="center_horizontal|bottom"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <View
                 android:layout_width="match_parent"

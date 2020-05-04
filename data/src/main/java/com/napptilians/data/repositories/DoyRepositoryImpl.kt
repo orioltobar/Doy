@@ -125,6 +125,9 @@ class DoyRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteService(serviceId: Long?): Response<Unit, ErrorModel> =
+        networkDataSource.deleteService(serviceId)
+
     private val comparator: Comparator<ServiceModel>
         get() = compareBy({ it.date }, { it.name })
 }

@@ -21,7 +21,7 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
-import com.napptilians.doy.view.customviews.CancelAssistDialog
+import com.napptilians.doy.view.customviews.CancelDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
@@ -46,6 +46,9 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class ServiceDetailFragment : BaseFragment() {
+//
+//    override val genericToolbar: Toolbar?
+//        get() = activity?.findViewById(R.id.toolbar)
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -63,6 +66,10 @@ class ServiceDetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //genericToolbar?.inflateMenu(R.menu.service_detail_menu)
+
+        //toolbar.inflateMenu(R.menu.service_detail_menu)
         context?.let {
             toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white)
         }
@@ -132,7 +139,11 @@ class ServiceDetailFragment : BaseFragment() {
         }
         cancelAssistanceButton.setOnClickListener {
             context?.let { context ->
-                CancelAssistDialog(context) { performCancelAssist() }.show()
+                CancelDialog(context) { performCancelAssist() }.apply {
+                    setTitle(context.getString(R.string.confirm_attend_event_cancel))
+                    setButtonText(context.getString(R.string.confirm_attend_event_cancel_yes))
+                    show()
+                }
             }
         }
     }
@@ -209,6 +220,15 @@ class ServiceDetailFragment : BaseFragment() {
     private fun cancelNotification() {
         pendingIntent?.let {
             alarmManager.cancel(pendingIntent)
+        }
+    }
+
+    private fun performDeleteService() {
+        args.service.serviceId?.let { serviceId ->
+            viewModel.executeDeleteService(serviceId)
+            viewModel.deleteServiceDataStream.observe(
+                viewLifecycleOwner,
+                Observer { handleUiStates(it, ::processCancelAssistNewValue) })
         }
     }
 

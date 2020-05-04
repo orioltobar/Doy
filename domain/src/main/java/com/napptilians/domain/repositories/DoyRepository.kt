@@ -52,4 +52,6 @@ interface DoyRepository {
     ): Response<UserModel, ErrorModel>
 
     suspend fun getMyServices(uid: String? = null): Response<List<ServiceModel>, ErrorModel>
+
+    suspend fun deleteService(serviceId: Long? = null): Response<Unit, ErrorModel>
 }

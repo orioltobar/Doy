@@ -103,4 +103,10 @@ class NetworkDataSourceImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteService(serviceId: Long?): Response<Unit, ErrorModel> {
+        return safeApiCall {
+            serviceService.deleteService(serviceId)
+        }
+    }
 }
