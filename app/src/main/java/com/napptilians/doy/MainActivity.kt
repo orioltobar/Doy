@@ -1,7 +1,5 @@
 package com.napptilians.doy
 
-import android.app.Notification
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Rect
@@ -17,14 +15,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.napptilians.doy.base.BaseActivity
+import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
 import kotlinx.android.synthetic.main.activity_main.navBottom
 import kotlinx.android.synthetic.main.activity_main.navFragment
-
-import com.napptilians.doy.behaviours.ToolbarBehaviour
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
 
 class MainActivity : BaseActivity(), ToolbarBehaviour {

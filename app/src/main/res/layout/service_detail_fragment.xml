@@ -146,7 +146,7 @@
                     android:layout_marginStart="@dimen/margin_xlargex"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_space_bottom"
-                    tools:text="@string/spots_reserved" />
+                    tools:text="@string/select_spots" />
 
             </LinearLayout>
 
