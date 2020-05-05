@@ -117,7 +117,7 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
-                serviceDetailAttendees.marginPx(bottom = resources.getDimension(R.dimen.margin_medium).toInt())
+                serviceDetailAttendees.marginPx(bottom = 0)
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
                 context?.let {
