@@ -8,23 +8,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.invisible
+import com.napptilians.doy.extensions.marginPx
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.CancelAssistDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
+import kotlinx.android.synthetic.main.service_detail_fragment.appBar
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceButton
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceView
 import kotlinx.android.synthetic.main.service_detail_fragment.confirmAssistanceButton
@@ -86,6 +92,16 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun initViews() {
+        // Disable scroll of App Bar only: https://stackoverflow.com/a/40750707
+        (appBar.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+            behavior = AppBarLayout.Behavior().apply {
+                setDragCallback(object : DragCallback() {
+                    override fun canDrag(@NonNull appBarLayout: AppBarLayout): Boolean = false
+                })
+            }
+        }
+
+        // Init views that require service detail data
         with(args.service) {
             Glide.with(toolbarImage)
                 .load(image)
@@ -101,6 +117,7 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
+                serviceDetailAttendees.marginPx(bottom = resources.getDimension(R.dimen.margin_medium).toInt())
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
                 context?.let {
@@ -108,8 +125,9 @@ class ServiceDetailFragment : BaseFragment() {
                         .show()
                 }
             } else {
+                serviceDetailAttendees.marginPx(bottom = resources.getDimension(R.dimen.margin_space_bottom).toInt())
                 if (assistance) {
-                    confirmAssistanceButton.invisible()
+                    confirmAssistanceButton.gone()
                     cancelAssistanceView.visible()
                 } else {
                     confirmAssistanceButton.visible()
@@ -153,7 +171,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun processConfirmAssistNewValue(unit: Unit) {
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_thumb_up)
@@ -170,7 +188,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
-        progressBar.gone()
+        progressBar.invisible()
         args.service.attendees = args.service.attendees?.dec()
         setAttendees(args.service.attendees)
         confirmAssistanceButton.visible()
@@ -179,7 +197,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { DoyErrorDialog(it).show() }
     }
 

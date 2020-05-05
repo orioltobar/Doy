@@ -10,7 +10,7 @@
     <dimen name="margin_xxlarge">64dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
-    <dimen name="margin_space_bottom">50dp</dimen>
+    <dimen name="margin_space_bottom">54dp</dimen>
     <dimen name="margin_login">40dp</dimen>
     <dimen name="margin_button">22dp</dimen>
 
