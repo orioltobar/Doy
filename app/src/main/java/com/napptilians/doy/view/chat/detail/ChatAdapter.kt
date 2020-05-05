@@ -21,7 +21,9 @@ class ChatAdapter @Inject constructor() :
     }
 
     fun updateItem(message: ChatModel) {
-        chatMessages.add(message)
+        chatMessages.takeIf { !it.contains(message) }?.let {
+            chatMessages.add(message)
+        }
         chatMessages.filter { it.message.isNotEmpty() }
         updateItems(chatMessages)
     }
