@@ -39,22 +39,43 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
         navHostFragment.addOnDestinationChangedListener { _, destination, args ->
             // Manage navigation bar visibility
             when (destination.id) {
-                R.id.introFragment, R.id.splashFragment, R.id.loginFragment, R.id.registerFragment, R.id.recoverPasswordFragment -> {
-                    navBottom.gone()
+                R.id.addServiceFragment, R.id.chatListFragment, R.id.profileFragment -> {
+                    navBottom.visible()
+                }
+                R.id.categoryListFragment -> {
+                    if (args?.get("isAddingService") == true) {
+                        navBottom.gone()
+                    } else {
+                        navBottom.visible()
+                    }
+                }
+                R.id.eventsFragment -> {
+                    if (args?.get("onlyMyEvents") == true) {
+                        navBottom.gone()
+                    } else {
+                        navBottom.visible()
+                    }
                 }
                 else -> {
-                    navBottom.visible()
+                    navBottom.gone()
                 }
             }
             // Manage toolbar visibility, make on post to wait for the view to be ready
             Handler(Looper.getMainLooper()).post {
                 when (destination.id) {
-                    R.id.introFragment, R.id.eventsFragment, R.id.addServiceFragment,
+                    R.id.introFragment, R.id.addServiceFragment,
                     R.id.chatListFragment, R.id.serviceDetailFragment -> {
                         disableToolbar()
                     }
                     R.id.categoryListFragment -> {
                         if (args?.get("isAddingService") == true) {
+                            enableHomeAsUp(true) { navHostFragment.popBackStack() }
+                        } else {
+                            disableToolbar()
+                        }
+                    }
+                    R.id.eventsFragment -> {
+                        if (args?.get("onlyMyEvents") == true) {
                             enableHomeAsUp(true) { navHostFragment.popBackStack() }
                         } else {
                             disableToolbar()
