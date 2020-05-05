@@ -104,6 +104,7 @@
     <string name="events_by_user">Esdeveniment creats per mi</string>
     <string name="logout">Tancar sessió</string>
     <string name="update_profile">Actualitzar perfil</string>
+    <string name="menu_edit">Editar</string>
 
     <!-- My events -->
     <string name="your_events">Els teus esdeveniments</string>

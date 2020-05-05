@@ -50,7 +50,7 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
             Handler(Looper.getMainLooper()).post {
                 when (destination.id) {
                     R.id.introFragment, R.id.eventsFragment, R.id.addServiceFragment,
-                    R.id.chatListFragment, R.id.profileFragment, R.id.serviceDetailFragment -> {
+                    R.id.chatListFragment, R.id.serviceDetailFragment -> {
                         disableToolbar()
                     }
                     R.id.categoryListFragment -> {
