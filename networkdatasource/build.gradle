@@ -18,9 +18,9 @@ dependencies {
     implementation project(':commons')
 
     // Firebase SDK
+    implementation "com.google.firebase:firebase-firestore-ktx:${Versions.firestore_ktx}"
     implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
     implementation "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
-    implementation "com.google.firebase:firebase-database:${Versions.firebase_database}"
 
     // Dagger
     implementation "com.google.dagger:dagger:${Versions.dagger_version}"
