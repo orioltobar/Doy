@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/padding_medium"
         android:paddingBottom="@dimen/padding_medium"
-         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
-        app:layout_constraintStart_toStartOf="@id/start_vertical_guideline">
+        app:layout_constraintStart_toStartOf="@id/start_vertical_guideline"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/chatFragmentHeaderTitle"
