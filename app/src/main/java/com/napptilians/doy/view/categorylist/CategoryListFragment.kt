@@ -83,8 +83,6 @@ class CategoryListFragment : BaseFragment() {
         if (args.isAddingService) {
             titleText.visible()
             with(saveButton) {
-                visible()
-                isEnabled = false
                 setOnClickListener {
                     setNavigationResult(selectedCategoryId.toString(), "selectCategoryId")
                     setNavigationResult(selectedCategoryName, "selectCategoryName")
@@ -105,7 +103,7 @@ class CategoryListFragment : BaseFragment() {
         categoriesAdapter = CategoryListAdapter().apply { isAddingService = args.isAddingService }
         categoriesAdapter.setOnClickListener { clickedCategory ->
             if (args.isAddingService) {
-                saveButton.isEnabled = true
+                saveButton.visible()
                 categoriesAdapter.getItems().forEachIndexed { index, categoryModel ->
                     if (categoryModel != clickedCategory && categoryModel.isSelected) {
                         categoryModel.isSelected = false
@@ -115,6 +113,7 @@ class CategoryListFragment : BaseFragment() {
                         selectedCategoryName = categoryModel.name
                         categoryModel.isSelected = true
                         categoriesAdapter.notifyItemChanged(index)
+                        categoryList.scrollToPosition(index)
                     }
                 }
             } else {

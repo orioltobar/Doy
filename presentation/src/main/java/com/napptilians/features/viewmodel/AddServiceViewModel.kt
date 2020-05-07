@@ -79,7 +79,8 @@ class AddServiceViewModel @Inject constructor(
                 && service.durationMin != null
                 && !service.name.isNullOrBlank()
                 && !service.day.isNullOrBlank()
-//                && !service.description.isNullOrBlank()
+                && !service.hour.isNullOrBlank()
+                && !service.description.isNullOrBlank()
 
     fun execute() {
         viewModelScope.launch {
