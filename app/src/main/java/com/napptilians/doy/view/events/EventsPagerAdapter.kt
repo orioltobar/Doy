@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class EventsPagerAdapter(private val fragmentManager: FragmentManager) :
+class EventsPagerAdapter(fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val fragmentList = mutableListOf<Fragment>()
