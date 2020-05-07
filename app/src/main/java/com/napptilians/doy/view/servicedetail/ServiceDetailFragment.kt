@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
@@ -33,6 +35,7 @@ import com.napptilians.features.viewmodel.ServiceDetailViewModel
 import kotlinx.android.synthetic.main.service_detail_fragment.appBar
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceButton
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceView
+import kotlinx.android.synthetic.main.service_detail_fragment.collapsingToolbar
 import kotlinx.android.synthetic.main.service_detail_fragment.confirmAssistanceButton
 import kotlinx.android.synthetic.main.service_detail_fragment.progressBar
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailAttendees
@@ -77,9 +80,9 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun initToolbar() {
         context?.let {
-            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white)
+            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+            toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
         }
-        toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     private fun initObservers() {
@@ -156,6 +159,15 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun setupListeners() {
+        appBar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            context?.let {
+                if (collapsingToolbar.height + verticalOffset < 2 * ViewCompat.getMinimumHeight(collapsingToolbar)) {
+                    toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_no_shadow)
+                } else {
+                    toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                }
+            }
+        })
         confirmAssistanceButton.setOnClickListener {
             viewModel.executeAdd(args.service.serviceId ?: -1L)
         }
