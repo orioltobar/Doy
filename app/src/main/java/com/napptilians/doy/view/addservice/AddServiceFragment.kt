@@ -24,7 +24,6 @@ import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
 import com.napptilians.doy.extensions.decodeByteArrayFromBase64
-import com.napptilians.doy.extensions.dpToPx
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.getNavigationResult
 import com.napptilians.doy.extensions.gone
@@ -35,15 +34,12 @@ import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.AddServiceViewModel
-import kotlinx.android.synthetic.main.add_service_fragment.addServiceScrollView
 import kotlinx.android.synthetic.main.add_service_fragment.createEventButton
 import kotlinx.android.synthetic.main.add_service_fragment.progressBar
 import kotlinx.android.synthetic.main.add_service_fragment.selectCategoryEditText
 import kotlinx.android.synthetic.main.add_service_fragment.selectDayEditText
 import kotlinx.android.synthetic.main.add_service_fragment.selectDurationEditText
-import kotlinx.android.synthetic.main.add_service_fragment.selectDurationView
 import kotlinx.android.synthetic.main.add_service_fragment.selectSpotsEditText
-import kotlinx.android.synthetic.main.add_service_fragment.selectSpotsView
 import kotlinx.android.synthetic.main.add_service_fragment.selectTimeEditText
 import kotlinx.android.synthetic.main.add_service_fragment.serviceImageView
 import kotlinx.android.synthetic.main.add_service_fragment.uploadImageBox
