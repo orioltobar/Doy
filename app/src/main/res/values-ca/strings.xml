@@ -65,6 +65,8 @@
         <item quantity="other">%d persones</item>
     </plurals>
     <string name="how_long_duration">Quant durarà aproximadament?</string>
+    <string name="minutes">%1$d minuts</string>
+    <string name="hours_and_minutes">%1$d hora i %2$d minuts</string>
     <plurals name="hours">
         <item quantity="one">%d hora</item>
         <item quantity="other">%d hores</item>
