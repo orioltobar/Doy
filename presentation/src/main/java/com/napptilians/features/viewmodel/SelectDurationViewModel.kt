@@ -23,7 +23,7 @@ class SelectDurationViewModel @Inject constructor() : BaseViewModel<MovieModel>(
     fun execute() {
         viewModelScope.launch {
             _durationsDataStream.value = emitLoadingState()
-            val durationList = (MIN_MINUTES..MAX_MINUTES step 15).toList().map {
+            val durationList = (MIN_MINUTES..MAX_MINUTES step STEP_MINUTES).toList().map {
                 DurationModel(
                     it
                 )
@@ -34,6 +34,7 @@ class SelectDurationViewModel @Inject constructor() : BaseViewModel<MovieModel>(
 
     companion object {
         private const val MIN_MINUTES = 15
+        private const val STEP_MINUTES = 15
         private const val MAX_MINUTES = 180
     }
 }

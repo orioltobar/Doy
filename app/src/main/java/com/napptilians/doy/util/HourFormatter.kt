@@ -2,7 +2,6 @@ package com.napptilians.doy.util
 
 import android.content.Context
 import com.napptilians.doy.R
-import java.util.regex.Pattern
 
 class HourFormatter {
 
@@ -21,7 +20,13 @@ class HourFormatter {
                 ).toString()
             }
             else -> {
-                context?.resources?.getString(R.string.hours_and_minutes, hours, minutes).toString()
+                val hourString = context?.resources?.getQuantityString(
+                    R.plurals.hours,
+                    hours,
+                    hours
+                )
+                context?.resources?.getString(R.string.hours_and_minutes, hourString, minutes)
+                    .toString()
             }
         }
     }
