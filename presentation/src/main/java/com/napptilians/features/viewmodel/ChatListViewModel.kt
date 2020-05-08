@@ -7,24 +7,25 @@ import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.Success
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.service.ServiceModel
-import com.napptilians.domain.usecases.GetServicesUseCase
+import com.napptilians.domain.usecases.GetChatsUseCase
 import com.napptilians.domain.usecases.GetUserUseCase
 import com.napptilians.features.Error
 import com.napptilians.features.NewValue
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import kotlinx.coroutines.launch
-
 import javax.inject.Inject
 
 class ChatListViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val servicesUseCase: GetServicesUseCase,
+    private val chatsUseCase: GetChatsUseCase,
     private val getUserUseCase: GetUserUseCase
 ) : BaseViewModel<ServiceModel>() {
 
-    private val _chatListDataStream = MutableLiveData<UiStatus<List<ServiceModel>, ErrorModel>>()
-    val chatListDataStream: LiveData<UiStatus<List<ServiceModel>, ErrorModel>> get() = _chatListDataStream
+    private val _chatListDataStream =
+        MutableLiveData<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>>()
+    val chatListDataStream: LiveData<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>>
+        get() = _chatListDataStream
 
     // TODO: Fix userDataStream
     private val _userDataStream = MutableLiveData<UiStatus<Pair<Long, Long>, ErrorModel>>()
@@ -34,7 +35,7 @@ class ChatListViewModel @Inject constructor(
         viewModelScope.launch {
             firebaseAuth.currentUser?.let {
                 _chatListDataStream.value = emitLoadingState()
-                val request = servicesUseCase.execute(emptyList(), null, it.uid)
+                val request = chatsUseCase.execute(emptyList(), null, it.uid, false)
                 _chatListDataStream.value = processModel(request)
             }
         }
@@ -57,7 +58,10 @@ class ChatListViewModel @Inject constructor(
 //    }
 
     // TODO: Remove after MVP.
-    suspend fun retrieveChatParameters(serviceId: Long, serviceOwnerUid: String): UiStatus<List<Pair<Long, String>>, ErrorModel> {
+    suspend fun retrieveChatParameters(
+        serviceId: Long,
+        serviceOwnerUid: String
+    ): UiStatus<List<Pair<Long, String>>, ErrorModel> {
         val targetUserRequest = getUserUseCase(serviceOwnerUid)
         val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
         return if (targetUserRequest is Success && currentUserRequest is Success) {
