@@ -28,6 +28,13 @@ interface ToolbarBehaviour {
     }
 
     fun disableToolbar() {
-        genericToolbar?.gone()
+        genericToolbar?.run {
+            menu.clear()
+            gone()
+        }
+    }
+
+    fun enableToolbar() {
+        genericToolbar?.visible()
     }
 }

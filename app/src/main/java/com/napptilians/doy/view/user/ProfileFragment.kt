@@ -73,6 +73,7 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
             it.menu.clear()
             it.inflateMenu(R.menu.profile_menu)
             editAction = it.menu.findItem(R.id.menuEdit)
+            it.navigationIcon = null
         }
 
         editAction?.setOnMenuItemClickListener {
