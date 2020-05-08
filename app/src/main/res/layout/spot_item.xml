@@ -4,7 +4,7 @@
     android:id="@+id/spot_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_medium"
+    android:padding="@dimen/padding_medium"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
