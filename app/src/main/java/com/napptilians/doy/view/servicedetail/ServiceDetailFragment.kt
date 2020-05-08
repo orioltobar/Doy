@@ -3,7 +3,6 @@ package com.napptilians.doy.view.servicedetail
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,8 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
@@ -178,13 +179,13 @@ class ServiceDetailFragment : BaseFragment() {
                         val opacity = MAX_ALPHA * currentHeight / startCollapsingHeight
                         val alpha = ((MAX_ALPHA - opacity) * ALPHA_OFFSET).toInt()
                         toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
-                            toolbar?.navigationIcon?.setColorFilter(
-                                ColorUtils.setAlphaComponent(
-                                    ContextCompat.getColor(it, R.color.white),
-                                    alpha
-                                ),
-                                PorterDuff.Mode.SRC_ATOP
-                            )
+                        toolbar?.navigationIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            ColorUtils.setAlphaComponent(
+                                ContextCompat.getColor(it, R.color.white),
+                                alpha
+                            ),
+                            BlendModeCompat.SRC_ATOP
+                        )
                     }
                     else -> {
                         // Between middle and expanded
