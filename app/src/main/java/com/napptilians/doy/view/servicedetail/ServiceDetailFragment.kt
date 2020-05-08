@@ -3,6 +3,7 @@ package com.napptilians.doy.view.servicedetail
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -160,11 +163,32 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun setupListeners() {
         appBar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val currentHeight = collapsingToolbar.height + verticalOffset
+            val collapsedHeight = ViewCompat.getMinimumHeight(collapsingToolbar)
+            val startCollapsingHeight = 2 * collapsedHeight
             context?.let {
-                if (collapsingToolbar.height + verticalOffset < 2 * ViewCompat.getMinimumHeight(collapsingToolbar)) {
-                    toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_no_shadow)
-                } else {
-                    toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                when {
+                    currentHeight == collapsedHeight -> {
+                        // Collapsed
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_no_shadow)
+                    }
+                    currentHeight < startCollapsingHeight -> {
+                        // Between collapsed and middle
+                        val opacity = MAX_ALPHA * currentHeight / startCollapsingHeight
+                        val alpha = ((MAX_ALPHA - opacity) * ALPHA_OFFSET).toInt()
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                            toolbar?.navigationIcon?.setColorFilter(
+                                ColorUtils.setAlphaComponent(
+                                    ContextCompat.getColor(it, R.color.white),
+                                    alpha
+                                ),
+                                PorterDuff.Mode.SRC_ATOP
+                            )
+                    }
+                    else -> {
+                        // Between middle and expanded
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                    }
                 }
             }
         })
@@ -253,5 +277,7 @@ class ServiceDetailFragment : BaseFragment() {
     companion object {
         private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
         private const val MINUTES = 5
+        private const val MAX_ALPHA = 255
+        private const val ALPHA_OFFSET = 0.85
     }
 }
