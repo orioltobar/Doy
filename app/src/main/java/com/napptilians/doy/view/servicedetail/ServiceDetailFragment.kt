@@ -66,16 +66,26 @@ class ServiceDetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
+        initObservers()
+        initViews()
+        setupListeners()
+    }
 
-        //genericToolbar?.inflateMenu(R.menu.service_detail_menu)
-
-        //toolbar.inflateMenu(R.menu.service_detail_menu)
+    private fun initToolbar() {
         context?.let {
             toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white)
         }
         toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
-        initViews()
-        setupListeners()
+    }
+
+    private fun initObservers() {
+        viewModel.addAttendeeServiceDataStream.observe(
+            viewLifecycleOwner,
+            Observer { handleUiStates(it, ::processConfirmAssistNewValue) })
+        viewModel.deleteAttendeeServiceDataStream.observe(
+            viewLifecycleOwner,
+            Observer { handleUiStates(it, ::processCancelAssistNewValue) })
     }
 
     private fun initViews() {
@@ -133,9 +143,6 @@ class ServiceDetailFragment : BaseFragment() {
     private fun setupListeners() {
         confirmAssistanceButton.setOnClickListener {
             viewModel.executeAdd(args.service.serviceId ?: -1L)
-            viewModel.addAttendeeServiceDataStream.observe(
-                viewLifecycleOwner,
-                Observer { handleUiStates(it, ::processConfirmAssistNewValue) })
         }
         cancelAssistanceButton.setOnClickListener {
             context?.let { context ->
@@ -150,9 +157,6 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun performCancelAssist() {
         viewModel.executeDelete(args.service.serviceId ?: -1L)
-        viewModel.deleteAttendeeServiceDataStream.observe(
-            viewLifecycleOwner,
-            Observer { handleUiStates(it, ::processCancelAssistNewValue) })
     }
 
     private fun processConfirmAssistNewValue(unit: Unit) {

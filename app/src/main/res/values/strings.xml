@@ -106,6 +106,7 @@
     <string name="events_by_user">Events created by me</string>
     <string name="logout">Log out</string>
     <string name="update_profile">Update profile</string>
+    <string name="menu_edit">Edit</string>
 
     <!-- My events -->
     <string name="your_events">Your events</string>

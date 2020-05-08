@@ -10,11 +10,21 @@ class ChatAdapter @Inject constructor() :
 
     private var userId: String = ""
 
+    private val chatMessages: MutableList<ChatModel> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatMessageViewHolder {
         return ChatMessageViewHolder(parent, userId)
     }
 
     fun setUserId(userId: String) {
         this.userId = userId
+    }
+
+    fun updateItem(message: ChatModel) {
+        chatMessages.takeIf { !it.contains(message) }?.let {
+            chatMessages.add(message)
+        }
+        chatMessages.filter { it.message.isNotEmpty() }
+        updateItems(chatMessages)
     }
 }

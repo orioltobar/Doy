@@ -105,6 +105,7 @@
     <string name="events_by_user">Eventos creados por mí</string>
     <string name="logout">Cerrar sesión</string>
     <string name="update_profile">Actualizar perfil</string>
+    <string name="menu_edit">Editar</string>
 
     <!-- My events -->
     <string name="your_events">Tus eventos</string>
