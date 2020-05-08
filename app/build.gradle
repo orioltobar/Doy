@@ -68,9 +68,9 @@ dependencies {
     implementation "com.google.android.material:material:${Versions.material_design}"
 
     // Firebase SDK
+    implementation "com.google.firebase:firebase-firestore-ktx:${Versions.firestore_ktx}"
     implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
     implementation "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
-    implementation "com.google.firebase:firebase-database:${Versions.firebase_database}"
     implementation "com.google.firebase:firebase-core:${Versions.firebase_core_version}"
     implementation "com.google.firebase:firebase-messaging:${Versions.firebase_messaging_version}"
 
