@@ -114,7 +114,8 @@ class ServiceDetailFragment : BaseFragment() {
                 .into(toolbarImage)
             Glide.with(serviceOwnerImage)
                 .load(ownerImage)
-                .placeholder(R.drawable.ic_profile)
+                .placeholder(R.drawable.ic_service_owner_placeholder)
+                .circleCrop()
                 .into(serviceOwnerImage)
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
@@ -168,7 +169,7 @@ class ServiceDetailFragment : BaseFragment() {
             val startCollapsingHeight = 2 * collapsedHeight
             context?.let {
                 when {
-                    currentHeight == collapsedHeight -> {
+                    currentHeight <= collapsedHeight -> {
                         // Collapsed
                         toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_no_shadow)
                     }

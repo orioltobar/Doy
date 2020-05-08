@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll">
 
             <ImageView
                 android:id="@+id/toolbarImage"
@@ -56,8 +56,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginTop="@dimen/margin_medium"
+            android:orientation="vertical"
             android:padding="@dimen/margin_medium">
 
             <TextView
@@ -148,24 +148,17 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileImageCardView"
-        android:layout_width="@dimen/service_owner_image_size"
-        android:layout_height="@dimen/service_owner_image_size"
-        android:layout_margin="@dimen/margin_medium"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/service_owner_card_radius"
-        app:cardElevation="@dimen/service_owner_card_elevation"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/serviceOwnerImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="@dimen/service_owner_image_size"
         app:layout_anchor="@id/appBar"
-        app:layout_anchorGravity="bottom|end">
-
-        <ImageView
-            android:id="@+id/serviceOwnerImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_anchorGravity="bottom|end"
+        app:maxImageSize="@dimen/service_owner_image_size"
+        app:useCompatPadding="true" />
 
     <FrameLayout
         android:layout_width="match_parent"
