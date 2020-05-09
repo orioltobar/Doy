@@ -91,6 +91,7 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
+        chatFragmentProgressView.gone()
         activity?.let { DoyErrorDialog(it).show() }
     }
 

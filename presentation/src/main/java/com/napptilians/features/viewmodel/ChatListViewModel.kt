@@ -13,6 +13,7 @@ import com.napptilians.features.Error
 import com.napptilians.features.NewValue
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
+import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 import javax.inject.Inject
@@ -26,9 +27,8 @@ class ChatListViewModel @Inject constructor(
     private val _chatListDataStream = MutableLiveData<UiStatus<List<ServiceModel>, ErrorModel>>()
     val chatListDataStream: LiveData<UiStatus<List<ServiceModel>, ErrorModel>> get() = _chatListDataStream
 
-    // TODO: Fix userDataStream
-    private val _userDataStream = MutableLiveData<UiStatus<Pair<Long, Long>, ErrorModel>>()
-    val userDataStream: LiveData<UiStatus<Pair<Long, Long>, ErrorModel>> get() = _userDataStream
+    private val _userDataStream = SingleLiveEvent<UiStatus<List<Pair<Long, String>>, ErrorModel>>()
+    val userDataStream: LiveData<UiStatus<List<Pair<Long, String>>, ErrorModel>> get() = _userDataStream
 
     init {
         viewModelScope.launch {
@@ -40,32 +40,18 @@ class ChatListViewModel @Inject constructor(
         }
     }
 
-    // TODO: Check how to cancel observer after view is destroyed, to avoid re send the
-    // TODO: last value of live data after fragment is recreated.
-//    fun getTargetUser(uid: String) {
-//        viewModelScope.launch {
-//            //            _userDataStream.value = emitLoadingState()
-//            val targetUserRequest = getUserUseCase(uid)
-//            val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
-//            if (targetUserRequest is Success && currentUserRequest is Success) {
-//                val idPair = Pair(currentUserRequest.result.id, targetUserRequest.result.id)
-//                _userDataStream.value = NewValue(idPair)
-//            } else {
-//                _userDataStream.value = Error(ErrorModel(""))
-//            }
-//        }
-//    }
-
-    // TODO: Remove after MVP.
-    suspend fun retrieveChatParameters(serviceId: Long, serviceOwnerUid: String): UiStatus<List<Pair<Long, String>>, ErrorModel> {
-        val targetUserRequest = getUserUseCase(serviceOwnerUid)
-        val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
-        return if (targetUserRequest is Success && currentUserRequest is Success) {
-            val senderInfo = Pair(currentUserRequest.result.id, currentUserRequest.result.name)
-            val serviceInfo = Pair(serviceId, targetUserRequest.result.id.toString())
-            NewValue(listOf(senderInfo, serviceInfo))
-        } else {
-            Error(ErrorModel(""))
+    fun getTargetUser(serviceId: Long, serviceOwnerUid: String) {
+        viewModelScope.launch {
+            _userDataStream.setValue(emitLoadingState())
+            val targetUserRequest = getUserUseCase(serviceOwnerUid)
+            val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
+            if (targetUserRequest is Success && currentUserRequest is Success) {
+                val senderInfo = Pair(currentUserRequest.result.id, currentUserRequest.result.name)
+                val serviceInfo = Pair(serviceId, targetUserRequest.result.id.toString())
+                _userDataStream.setValue(NewValue(listOf(senderInfo, serviceInfo)))
+            } else {
+                _userDataStream.setValue(Error(ErrorModel("")))
+            }
         }
     }
 }

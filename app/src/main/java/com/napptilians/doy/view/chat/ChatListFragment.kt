@@ -14,35 +14,21 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyErrorDialog
-import com.napptilians.features.NewValue
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ChatListViewModel
 import kotlinx.android.synthetic.main.chat_list_fragment.chatListNoChatMessage
 import kotlinx.android.synthetic.main.chat_list_fragment.chatListProgressView
 import kotlinx.android.synthetic.main.chat_list_fragment.chatListRecyclerView
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// TODO: Re do this view after MVP.
 class ChatListFragment : BaseFragment() {
-
-    // TODO: WORKAROUND FOR NAVIGATION TO CHAT VIEW. THIS IS NOT MEANT TO BE HERE!!!
-    private val job = SupervisorJob()
-
-    private val errorHandler = CoroutineExceptionHandler { _, _ -> }
-
-    private val coroutineScope: CoroutineScope =
-        CoroutineScope(job + Dispatchers.Main + errorHandler)
 
     @Inject
     lateinit var adapter: ChatListAdapter
 
     private val viewModel: ChatListViewModel by viewModels { vmFactory }
+
+    private var serviceSelectedName: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,16 +42,21 @@ class ChatListFragment : BaseFragment() {
         chatListRecyclerView.adapter = adapter
 
         adapter.setOnClickListener { serviceModel ->
-            coroutineScope.launch {
-                val values = viewModel.retrieveChatParameters(
-                    serviceModel.serviceId ?: -1L,
-                    serviceModel.ownerId ?: ""
-                )
-                if (values is NewValue) {
-                    processTargetUser(values.result, serviceModel.name ?: "")
-                }
-            }
+            serviceSelectedName = serviceModel.name ?: ""
+
+            viewModel.getTargetUser(
+                serviceModel.serviceId ?: -1L,
+                serviceModel.ownerId ?: ""
+            )
         }
+
+        // SingleLiveEvent Observer
+        viewModel.userDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<List<Pair<Long, String>>, ErrorModel>> { status ->
+                handleUiStates(status) { processTargetUser(it) }
+            }
+        )
 
         // LiveData Observer
         viewModel.chatListDataStream.observe(
@@ -76,12 +67,8 @@ class ChatListFragment : BaseFragment() {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        coroutineScope.cancel()
-    }
-
     override fun onError(error: ErrorModel) {
+        chatListProgressView.gone()
         activity?.let { DoyErrorDialog(it).show() }
     }
 
@@ -97,13 +84,13 @@ class ChatListFragment : BaseFragment() {
         } ?: run { chatListNoChatMessage.visible() }
     }
 
-    private fun processTargetUser(chatUsersInfo: List<Pair<Long, String>>, serviceTitle: String) {
+    private fun processTargetUser(chatUsersInfo: List<Pair<Long, String>>) {
         chatUsersInfo.takeIf { it.size >= 2 }?.let {
             val direction = ChatListFragmentDirections.actionChatListFragmentToChatFragment(
                 it[0].first,  // current user Id
                 it[1].first,  // service Id
                 it[0].second, // sender name
-                serviceTitle  // event name
+                serviceSelectedName  // event name
             )
             findNavController().navigate(direction)
         }
