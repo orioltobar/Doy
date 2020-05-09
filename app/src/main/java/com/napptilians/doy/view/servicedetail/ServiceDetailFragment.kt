@@ -105,6 +105,8 @@ class ServiceDetailFragment : BaseFragment() {
     private fun initViews() {
         // Disable scroll of App Bar only: https://stackoverflow.com/a/40750707
         (appBar.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+            val heightDp = resources.displayMetrics.heightPixels * APP_BAR_PERCENTAGE_HEIGHT
+            height = heightDp.toInt()
             behavior = AppBarLayout.Behavior().apply {
                 setDragCallback(object : DragCallback() {
                     override fun canDrag(@NonNull appBarLayout: AppBarLayout): Boolean = false
@@ -285,5 +287,6 @@ class ServiceDetailFragment : BaseFragment() {
         private const val MINUTES = 5
         private const val MAX_ALPHA = 255
         private const val ALPHA_OFFSET = 0.85
+        private const val APP_BAR_PERCENTAGE_HEIGHT = 0.35
     }
 }
