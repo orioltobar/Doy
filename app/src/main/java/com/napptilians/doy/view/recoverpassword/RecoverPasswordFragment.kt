@@ -14,7 +14,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.error.LoginErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
@@ -87,19 +87,21 @@ class RecoverPasswordFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        recoverPasswordProgressView.gone()
+        recoverPasswordProgressView.invisible()
         when (error.errorCause) {
             LoginErrors.InvalidEmail -> {
                 setErrorFields(recoverEmailInput, R.string.invalid_email)
             }
             else -> {
+                resetField(recoverEmailInput)
                 activity?.let { DoyErrorDialog(it).show() }
             }
         }
     }
 
     private fun processResponse(response: Unit?) {
-        recoverPasswordProgressView.gone()
+        resetField(recoverEmailInput)
+        recoverPasswordProgressView.invisible()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_clap)
