@@ -3,6 +3,7 @@ package com.napptilians.doy.view.user
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.napptilians.doy.R
 import kotlinx.android.synthetic.main.profile_fragment_edit_mode.view.profileDescriptionEditText
@@ -17,6 +18,13 @@ class ProfileEditView @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.profile_fragment_edit_mode, this, true)
+        profileDescriptionEditText.setOnFocusChangeListener { _, _ ->
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(
+                InputMethodManager.SHOW_FORCED,
+                InputMethodManager.HIDE_IMPLICIT_ONLY
+            )
+        }
     }
 
     fun setUserMail(mail: String) {
@@ -29,6 +37,10 @@ class ProfileEditView @JvmOverloads constructor(
 
     fun setUserDescription(description: String) {
         profileDescriptionEditText.setText(description)
+    }
+
+    fun setFocusOnUserDescription() {
+        profileDescriptionEditText.requestFocus()
     }
 
     fun getUserName(): String = profileNameEditText.text.toString()
