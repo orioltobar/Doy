@@ -87,9 +87,7 @@ class AddServiceFragment : BaseFragment() {
         )
         getNavigationResult("selectCategoryName")?.observe(
             viewLifecycleOwner,
-            Observer<String> {
-                selectCategoryEditText.setText(it)
-            }
+            Observer<String> { selectCategoryEditText.setText(it) }
         )
         getNavigationResult("selectedDuration")?.observe(
             viewLifecycleOwner,
@@ -100,9 +98,7 @@ class AddServiceFragment : BaseFragment() {
         )
         getNavigationResult("selectedSpots")?.observe(
             viewLifecycleOwner,
-            Observer<String> {
-                selectSpotsEditText.setText(it)
-            }
+            Observer<String> { selectSpotsEditText.setText(it) }
         )
         viewModel.addServiceDataStream.observe(
             viewLifecycleOwner,
