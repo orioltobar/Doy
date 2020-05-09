@@ -62,7 +62,8 @@ class FirebaseDataSourceImpl @Inject constructor(
         try {
             firestore
                 .collection(FIRESTORE_CHAT_TABLE)
-                .document(chatId).collection(FIRESTORE_CHAT_MESSAGE)
+                .document(chatId)
+                .collection(FIRESTORE_CHAT_MESSAGE)
                 .add(message)
                 .await()
             Success(Unit)
