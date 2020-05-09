@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -28,8 +29,6 @@ class ChatListFragment : BaseFragment() {
 
     private val viewModel: ChatListViewModel by viewModels { vmFactory }
 
-    private var serviceSelectedName: String = ""
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,18 +41,16 @@ class ChatListFragment : BaseFragment() {
         chatListRecyclerView.adapter = adapter
 
         adapter.setOnClickListener { serviceModel ->
-            serviceSelectedName = serviceModel.name ?: ""
-
-            viewModel.getTargetUser(
+            viewModel.getChatInformation(
                 serviceModel.serviceId ?: -1L,
-                serviceModel.ownerId ?: ""
+                serviceModel.name ?: ""
             )
         }
 
         // SingleLiveEvent Observer
         viewModel.userDataStream.observe(
             viewLifecycleOwner,
-            Observer<UiStatus<List<Pair<Long, String>>, ErrorModel>> { status ->
+            Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
                 handleUiStates(status) { processTargetUser(it) }
             }
         )
@@ -84,15 +81,10 @@ class ChatListFragment : BaseFragment() {
         } ?: run { chatListNoChatMessage.visible() }
     }
 
-    private fun processTargetUser(chatUsersInfo: List<Pair<Long, String>>) {
-        chatUsersInfo.takeIf { it.size >= 2 }?.let {
-            val direction = ChatListFragmentDirections.actionChatListFragmentToChatFragment(
-                it[0].first,  // current user Id
-                it[1].first,  // service Id
-                it[0].second, // sender name
-                serviceSelectedName  // event name
-            )
-            findNavController().navigate(direction)
-        }
+    private fun processTargetUser(requestModel: ChatRequestModel) {
+        val direction = ChatListFragmentDirections.actionChatListFragmentToChatFragment(
+            requestModel
+        )
+        findNavController().navigate(direction)
     }
 }

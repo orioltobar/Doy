@@ -42,10 +42,10 @@ class ChatFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        chatFragmentHeaderTitle.text = args.serviceTitle
+        chatFragmentHeaderTitle.text = args.request.serviceName
 
-        val chatId = args.serviceId.toString()
-        adapter.setUserId(args.userId.toString())
+        val chatId = args.request.serviceId.toString()
+        adapter.setUserId(args.request.currentUserId.toString())
         fireBaseChatMessages.adapter = adapter
         // Show bottom messages first: https://stackoverflow.com/a/27069845
         (fireBaseChatMessages?.layoutManager as? LinearLayoutManager)?.stackFromEnd = true
@@ -68,9 +68,9 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun sendData(text: String) {
-        val senderId = args.userId.toString()
-        val senderName = args.senderName
-        val chatId = args.serviceId.toString()
+        val senderId = args.request.currentUserId.toString()
+        val senderName = args.request.senderName
+        val chatId = args.request.serviceId.toString()
 
         viewModel.sendMessageToChat(chatId, senderId, senderName, text)
         chatFragmentEditText.setText("")

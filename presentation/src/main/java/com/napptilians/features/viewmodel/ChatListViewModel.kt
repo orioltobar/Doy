@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.napptilians.commons.Success
+import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.GetServicesUseCase
 import com.napptilians.domain.usecases.GetUserUseCase
@@ -15,7 +16,6 @@ import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.launch
-
 import javax.inject.Inject
 
 class ChatListViewModel @Inject constructor(
@@ -27,8 +27,8 @@ class ChatListViewModel @Inject constructor(
     private val _chatListDataStream = MutableLiveData<UiStatus<List<ServiceModel>, ErrorModel>>()
     val chatListDataStream: LiveData<UiStatus<List<ServiceModel>, ErrorModel>> get() = _chatListDataStream
 
-    private val _userDataStream = SingleLiveEvent<UiStatus<List<Pair<Long, String>>, ErrorModel>>()
-    val userDataStream: LiveData<UiStatus<List<Pair<Long, String>>, ErrorModel>> get() = _userDataStream
+    private val _userDataStream = SingleLiveEvent<UiStatus<ChatRequestModel, ErrorModel>>()
+    val userDataStream: LiveData<UiStatus<ChatRequestModel, ErrorModel>> get() = _userDataStream
 
     init {
         viewModelScope.launch {
@@ -40,18 +40,24 @@ class ChatListViewModel @Inject constructor(
         }
     }
 
-    fun getTargetUser(serviceId: Long, serviceOwnerUid: String) {
+    fun getChatInformation(serviceId: Long, serviceName: String) {
         viewModelScope.launch {
             _userDataStream.setValue(emitLoadingState())
-            val targetUserRequest = getUserUseCase(serviceOwnerUid)
             val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
-            if (targetUserRequest is Success && currentUserRequest is Success) {
-                val senderInfo = Pair(currentUserRequest.result.id, currentUserRequest.result.name)
-                val serviceInfo = Pair(serviceId, targetUserRequest.result.id.toString())
-                _userDataStream.setValue(NewValue(listOf(senderInfo, serviceInfo)))
-            } else {
-                _userDataStream.setValue(Error(ErrorModel("")))
-            }
+            currentUserRequest.either(
+                onSuccess = { userModel ->
+                    val requestModel = ChatRequestModel(
+                        userModel.id,
+                        serviceId,
+                        userModel.name,
+                        serviceName
+                    )
+                    _userDataStream.setValue(NewValue(requestModel))
+                },
+                onFailure = {
+                    _userDataStream.setValue(Error(ErrorModel("")))
+                }
+            )
         }
     }
 }
