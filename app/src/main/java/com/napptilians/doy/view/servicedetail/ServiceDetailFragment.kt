@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
@@ -116,7 +117,7 @@ class ServiceDetailFragment : BaseFragment() {
             Glide.with(serviceOwnerImage)
                 .load(ownerImage)
                 .placeholder(R.drawable.ic_service_owner_placeholder)
-                .circleCrop()
+                .transform(CircleCrop())
                 .into(serviceOwnerImage)
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
