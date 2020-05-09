@@ -32,6 +32,7 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.marginPx
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.util.HourFormatter
 import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.CancelAssistDialog
 import com.napptilians.doy.view.customviews.DoyDialog
@@ -68,6 +69,8 @@ class ServiceDetailFragment : BaseFragment() {
     private val args: ServiceDetailFragmentArgs by navArgs()
     private lateinit var alarmManager: AlarmManager
     private var pendingIntent: PendingIntent? = null
+
+    private val formatter = HourFormatter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -122,7 +125,7 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
             setDate(date)
-            serviceDetailDuration.text = "$durationMin min"
+            serviceDetailDuration.text = formatter.formatHour(context, durationMin ?: 0)
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {

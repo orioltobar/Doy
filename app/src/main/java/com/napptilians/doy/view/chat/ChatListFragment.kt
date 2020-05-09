@@ -69,7 +69,7 @@ class ChatListFragment : BaseFragment() {
 
         // LiveData Observer
         viewModel.chatListDataStream.observe(
-            this,
+            viewLifecycleOwner,
             Observer<UiStatus<List<ServiceModel>, ErrorModel>> {
                 handleUiStates(it, ::processNewValue)
             }

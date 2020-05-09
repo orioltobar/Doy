@@ -30,6 +30,7 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.util.HourFormatter
 import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
@@ -58,6 +59,8 @@ class AddServiceFragment : BaseFragment() {
 
     private lateinit var alarmManager: AlarmManager
     private var pendingIntent: PendingIntent? = null
+
+    private val formatter = HourFormatter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,13 +94,8 @@ class AddServiceFragment : BaseFragment() {
         getNavigationResult("selectedDuration")?.observe(
             viewLifecycleOwner,
             Observer<String> {
-                selectDurationEditText.setText(
-                    context?.resources?.getQuantityString(
-                        R.plurals.hours,
-                        it.toInt(),
-                        it.toInt()
-                    )
-                )
+                selectDurationEditText.setText(formatter.formatHour(context, it.toInt()))
+                viewModel.updateDuration(it.toInt())
             }
         )
         getNavigationResult("selectedSpots")?.observe(
@@ -116,7 +114,6 @@ class AddServiceFragment : BaseFragment() {
         Glide.with(serviceImageView)
             .load(viewModel.service.image?.decodeByteArrayFromBase64())
             .into(serviceImageView)
-
     }
 
     private fun setupListeners() {

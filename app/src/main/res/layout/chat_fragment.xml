@@ -12,7 +12,8 @@
         android:paddingTop="@dimen/padding_medium"
         android:paddingBottom="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
-        app:layout_constraintStart_toStartOf="@id/start_vertical_guideline">
+        app:layout_constraintStart_toStartOf="@id/start_vertical_guideline"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/chatFragmentHeaderTitle"
@@ -107,6 +108,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/chatFragmentProgressView"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_medium"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/gray"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/center_vertical_guideline"

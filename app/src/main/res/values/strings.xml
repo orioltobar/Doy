@@ -65,7 +65,9 @@
         <item quantity="one">%d person</item>
         <item quantity="other">%d people</item>
     </plurals>
-    <string name="how_long_duration">¿How long it will be approximately?</string>
+    <string name="how_long_duration">How long will it be approximately?</string>
+    <string name="minutes">%1$d minutes</string>
+    <string name="hours_and_minutes">%1$s and %2$d minutes</string>
     <plurals name="hours">
         <item quantity="one">%d hour</item>
         <item quantity="other">%d hours</item>
