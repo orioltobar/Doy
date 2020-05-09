@@ -1,6 +1,8 @@
 package com.napptilians.doy.view.recoverpassword
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,10 +52,34 @@ class RecoverPasswordFragment : BaseFragment() {
             }
         )
 
-        recoverPasswordButton.setOnClickListener {
-            val textField = recoverEmailEditText.text.toString()
-            viewModel.execute(textField)
+        recoverPasswordButton.apply {
+            isEnabled = false
+            alpha = 0.2f
+            setOnClickListener {
+                val textField = recoverEmailEditText.text.toString()
+                viewModel.execute(textField)
+            }
         }
+
+        recoverEmailEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.isEmpty() == false) {
+                    recoverPasswordButton.apply {
+                        isEnabled = true
+                        alpha = 1f
+                    }
+                } else {
+                    recoverPasswordButton.apply {
+                        isEnabled = false
+                        alpha = 0.2f
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     override fun onLoading() {
