@@ -19,8 +19,9 @@ class ProfileEditView @JvmOverloads constructor(
     init {
         LayoutInflater.from(context).inflate(R.layout.profile_fragment_edit_mode, this, true)
         profileDescriptionEditText.setOnFocusChangeListener { _, _ ->
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.toggleSoftInput(
+            val inputMethodManager =
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.toggleSoftInput(
                 InputMethodManager.SHOW_FORCED,
                 InputMethodManager.HIDE_IMPLICIT_ONLY
             )
