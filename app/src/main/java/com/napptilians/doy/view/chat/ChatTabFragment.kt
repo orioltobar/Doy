@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.chat_tab_fragment.chatsLoadingText
 import javax.inject.Inject
 
 class ChatTabFragment(
-    private val isPastChat: Boolean = false,
     private val onChatClicked: (ServiceModel) -> Unit = {}
 ) : BaseFragment() {
 

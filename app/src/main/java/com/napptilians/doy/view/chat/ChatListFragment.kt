@@ -75,7 +75,7 @@ class ChatListFragment : BaseFragment() {
                 getString(R.string.tab_upcoming)
             )
             addFragment(
-                ChatTabFragment(false) { navigateToChat(it) },
+                ChatTabFragment { navigateToChat(it) },
                 getString(R.string.tab_past)
             )
         }
