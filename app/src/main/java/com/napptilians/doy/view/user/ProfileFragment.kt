@@ -183,7 +183,10 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     private fun defaultView() {
         context?.let {
-            readModeView = ProfileReadView(it, onMyEventsClicked = { navigateToMyEvents() })
+            readModeView = ProfileReadView(
+                it,
+                onAddDescriptionClicked = { switchEditMode() },
+                onMyEventsClicked = { navigateToMyEvents() })
             editModeView = ProfileEditView(it)
             profileInfoFrameLayout.addView(readModeView)
         }
@@ -200,7 +203,11 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
                 editModeView?.apply {
                     setUserMail(viewModel.getUserEmail())
                     setUserName(viewModel.getUserName())
-                    setUserDescription(viewModel.getUserDescription())
+                    if (viewModel.getUserDescription().isNotEmpty()) {
+                        setUserDescription(viewModel.getUserDescription())
+                    } else {
+                        setFocusOnUserDescription()
+                    }
                     profileInfoFrameLayout.removeAllViews()
                     profileInfoFrameLayout.addView(this)
                     isEditMode = true
