@@ -22,7 +22,6 @@ import com.napptilians.features.viewmodel.ChatListViewModel
 import kotlinx.android.synthetic.main.chat_list_fragment.chatListTitle
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsTabLayout
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsViewPager
-import kotlinx.android.synthetic.main.events_fragment.eventsViewPager
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,7 +81,7 @@ class ChatListFragment : BaseFragment() {
         }
         chatsViewPager.adapter = chatsAdapter
         chatsViewPager.offscreenPageLimit = 2
-        chatsTabLayout.setupWithViewPager(eventsViewPager)
+        chatsTabLayout.setupWithViewPager(chatsViewPager)
     }
 
     override fun onDestroy() {
@@ -96,18 +95,16 @@ class ChatListFragment : BaseFragment() {
     }
 
     override fun onLoading() {
-        //chatListProgressView.visible()
     }
 
     private fun processNewValue(model: Map<String, List<ServiceModel>>) {
-        //chatListProgressView.gone()
         chatsViewPager.visible()
         (chatsAdapter.getItem(0) as ChatTabFragment).setItems(
             model[GetChatsUseCase.UPCOMING] ?: listOf()
         )
         (chatsAdapter.getItem(1) as ChatTabFragment).apply {
             setItems(model[GetChatsUseCase.PAST] ?: listOf())
-            setAlphaToPastEvents(0.4f)
+            setAlphaToPastChats(0.4f)
         }
     }
 

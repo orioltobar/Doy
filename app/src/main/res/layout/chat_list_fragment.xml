@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/chatListProgressView"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_medium"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/gray"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
     <TextView
         android:id="@+id/chatListTitle"
         style="@style/App.Intro"
@@ -32,19 +22,7 @@
         android:id="@+id/chatsTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_upcoming" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_past" />
-
-    </com.google.android.material.tabs.TabLayout>
+        app:tabTextColor="@color/tab_selector" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/chatsViewPager"

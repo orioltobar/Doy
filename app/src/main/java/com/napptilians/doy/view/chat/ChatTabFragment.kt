@@ -49,7 +49,7 @@ class ChatTabFragment(
         }
     }
 
-    fun setAlphaToPastEvents(alpha: Float) {
+    fun setAlphaToPastChats(alpha: Float) {
         chatsList.alpha = alpha
     }
 
