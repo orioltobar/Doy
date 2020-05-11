@@ -1,6 +1,5 @@
 package com.napptilians.domain.usecases
 
-import android.annotation.SuppressLint
 import com.napptilians.commons.AppDispatchers
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
@@ -13,7 +12,7 @@ import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import javax.inject.Inject
 
-class GetEventsUseCase @Inject constructor(
+class GetChatsUseCase @Inject constructor(
     appDispatchers: AppDispatchers,
     private val doyRepository: DoyRepository
 ) {
@@ -22,12 +21,13 @@ class GetEventsUseCase @Inject constructor(
     suspend fun execute(
         categoryIds: List<Long> = emptyList(),
         serviceId: Long? = null,
-        uid: String? = null
+        uid: String? = null,
+        ascending: Boolean = true
     ): Response<Map<String, List<ServiceModel>>, ErrorModel> {
         val upcomingEvents = mutableListOf<ServiceModel>()
         val pastEvents = mutableListOf<ServiceModel>()
         return withContext(ioDispatcher) {
-            val request = doyRepository.getServices(categoryIds, serviceId, uid)
+            val request = doyRepository.getServices(categoryIds, serviceId, uid, ascending)
             request.flatMap { serviceList ->
                 serviceList.map { service ->
                     service.date?.let {

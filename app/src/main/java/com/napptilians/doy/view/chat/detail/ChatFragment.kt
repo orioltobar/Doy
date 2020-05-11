@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
@@ -92,7 +93,11 @@ class ChatFragment : BaseFragment() {
 
     override fun onError(error: ErrorModel) {
         chatFragmentProgressView.gone()
-        activity?.let { DoyErrorDialog(it).show() }
+        activity?.let {
+            val dialog = DoyErrorDialog(it)
+            dialog.show()
+            dialog.setOnDismissListener { findNavController().popBackStack() }
+        }
     }
 
     override fun onLoading() {

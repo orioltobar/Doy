@@ -33,7 +33,7 @@ class EventsFragment : BaseFragment() {
     private val viewModel: EventsViewModel by viewModels { vmFactory }
     private val args: EventsFragmentArgs by navArgs()
 
-    private lateinit var eventAdapter: EventsPagerAdapter
+    private lateinit var eventAdapter: PagerAdapter
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -43,14 +43,6 @@ class EventsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.events_fragment, container, false)
-
-    override fun onError(error: ErrorModel) {
-        eventsViewPager.gone()
-        activity?.let { DoyErrorDialog(it).show() }
-    }
-
-    override fun onLoading() {}
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,6 +64,13 @@ class EventsFragment : BaseFragment() {
             })
     }
 
+    override fun onError(error: ErrorModel) {
+        eventsViewPager.gone()
+        activity?.let { DoyErrorDialog(it).show() }
+    }
+
+    override fun onLoading() {}
+
     private fun processNewValue(model: Map<String, List<ServiceModel>>) {
         eventsViewPager.visible()
         (eventAdapter.getItem(0) as EventTabFragment).setItems(model[UPCOMING] ?: listOf())
@@ -88,15 +87,15 @@ class EventsFragment : BaseFragment() {
         } else {
             titleText.text = context?.resources?.getText(R.string.your_events)
         }
-        eventAdapter = EventsPagerAdapter(childFragmentManager)
+        eventAdapter = PagerAdapter(childFragmentManager)
         eventAdapter.apply {
             addFragment(
                 EventTabFragment { navigateToServiceDetail(it) },
-                context?.resources?.getString(R.string.tab_upcoming)
+                context?.resources?.getString(R.string.tab_upcoming) ?: ""
             )
             addFragment(
                 EventTabFragment(false),
-                context?.resources?.getString(R.string.tab_past)
+                context?.resources?.getString(R.string.tab_past) ?: ""
             )
         }
         eventsViewPager.adapter = eventAdapter
