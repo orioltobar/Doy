@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.napptilians.commons.Success
 import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.chat.ChatRequestModel
@@ -63,20 +62,4 @@ class ChatListViewModel @Inject constructor(
             )
         }
     }
-
-//    // TODO: Remove after MVP.
-//    suspend fun retrieveChatParameters(
-//        serviceId: Long,
-//        serviceOwnerUid: String
-//    ): UiStatus<List<Pair<Long, String>>, ErrorModel> {
-//        val targetUserRequest = getUserUseCase(serviceOwnerUid)
-//        val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
-//        return if (targetUserRequest is Success && currentUserRequest is Success) {
-//            val senderInfo = Pair(currentUserRequest.result.id, currentUserRequest.result.name)
-//            val serviceInfo = Pair(serviceId, targetUserRequest.result.id.toString())
-//            NewValue(listOf(senderInfo, serviceInfo))
-//        } else {
-//            Error(ErrorModel(""))
-//        }
-//    }
 }

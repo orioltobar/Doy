@@ -17,10 +17,8 @@ import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.doy.view.events.PagerAdapter
-import com.napptilians.features.NewValue
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ChatListViewModel
-import kotlinx.android.synthetic.main.chat_list_fragment.chatListRecyclerView
 import kotlinx.android.synthetic.main.chat_list_fragment.chatListTitle
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsTabLayout
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsViewPager
@@ -45,23 +43,13 @@ class ChatListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
 
-//        chatListRecyclerView.adapter = adapter
-//
-//        adapter.setOnClickListener { serviceModel ->
-//            viewModel.getChatInformation(
-//                serviceModel.serviceId ?: -1L,
-//                serviceModel.name ?: ""
-//            )
-//        }
-//
-//        // SingleLiveEvent Observer
-//        viewModel.userDataStream.observe(
-//            viewLifecycleOwner,
-//            Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
-//                handleUiStates(status) { processTargetUser(it) }
-//            }
-//        )
-
+        // SingleLiveEvent Observer
+        viewModel.userDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
+                handleUiStates(status) { processTargetUser(it) }
+            }
+        )
 
         // LiveData Observer
         viewModel.chatListDataStream.observe(
@@ -93,7 +81,6 @@ class ChatListFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        chatListProgressView.gone()
         chatsViewPager.gone()
         activity?.let { DoyErrorDialog(it).show() }
     }
@@ -120,14 +107,9 @@ class ChatListFragment : BaseFragment() {
     }
 
     private fun navigateToChat(serviceModel: ServiceModel) {
-        coroutineScope.launch {
-            val values = viewModel.retrieveChatParameters(
-                serviceModel.serviceId ?: -1L,
-                serviceModel.ownerId ?: ""
-            )
-            if (values is NewValue) {
-                processTargetUser(values.result, serviceModel.name ?: "")
-            }
-        }
+        viewModel.getChatInformation(
+            serviceModel.serviceId ?: -1L,
+            serviceModel.name ?: ""
+        )
     }
 }

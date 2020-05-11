@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.error.FirebaseErrors
 import com.napptilians.domain.models.chat.ChatModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -93,10 +94,16 @@ class ChatFragment : BaseFragment() {
 
     override fun onError(error: ErrorModel) {
         chatFragmentProgressView.gone()
-        activity?.let {
-            val dialog = DoyErrorDialog(it)
-            dialog.show()
-            dialog.setOnDismissListener { findNavController().popBackStack() }
+        when (error.errorCause) {
+            FirebaseErrors.EmptyMessage -> {
+            }
+            else -> {
+                activity?.let {
+                    val dialog = DoyErrorDialog(it)
+                    dialog.show()
+                    dialog.setOnDismissListener { findNavController().popBackStack() }
+                }
+            }
         }
     }
 

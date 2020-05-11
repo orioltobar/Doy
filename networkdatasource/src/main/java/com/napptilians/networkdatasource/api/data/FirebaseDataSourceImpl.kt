@@ -81,13 +81,13 @@ class FirebaseDataSourceImpl @Inject constructor(
                 .addSnapshotListener { messageSnapshot, firebaseError ->
                     firebaseError?.let {
                         val error =
-                            Failure(ErrorModel(it.message, FirebaseErrors.ErrorSendingMessage))
+                            Failure(ErrorModel(it.message, FirebaseErrors.ErrorReceivingMessage))
                         offer(error)
                         return@addSnapshotListener
 
                     }
                     if (messageSnapshot == null || messageSnapshot.isEmpty) {
-                        val error = Failure(ErrorModel(null, FirebaseErrors.ErrorSendingMessage))
+                        val error = Failure(ErrorModel(null, FirebaseErrors.EmptyMessage))
                         offer(error)
                         return@addSnapshotListener
                     }
