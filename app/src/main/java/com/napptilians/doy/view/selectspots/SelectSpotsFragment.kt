@@ -14,6 +14,7 @@ import com.napptilians.domain.models.service.SpotsModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.setNavigationResult
+import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import kotlinx.android.synthetic.main.select_spots_fragment.saveButton
@@ -63,15 +64,17 @@ class SelectSpotsFragment : BaseFragment() {
         spotListAdapter = SpotListAdapter()
         spotsList.adapter = spotListAdapter
         spotListAdapter.setOnClickListener { clickedCategory ->
-            saveButton.isEnabled = true
+            saveButton.visible()
             spotListAdapter.getItems().forEachIndexed { index, spotsModel ->
-                if (spotsModel != clickedCategory && spotsModel.isSelected) {
+                if (spotsModel != clickedCategory && (spotsModel.isSelected || spotsModel.shouldBeSelected)) {
+                    spotsModel.shouldBeSelected = false
                     spotsModel.isSelected = false
                     spotListAdapter.notifyItemChanged(index)
                 } else if (spotsModel == clickedCategory && !spotsModel.isSelected) {
                     selectedSpots = spotsModel.numberOfSpots
                     spotsModel.isSelected = true
                     spotListAdapter.notifyItemChanged(index)
+                    spotsList.scrollToPosition(index)
                 }
             }
         }

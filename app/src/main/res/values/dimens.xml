@@ -10,7 +10,7 @@
     <dimen name="margin_xxlarge">64dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
-    <dimen name="margin_space_bottom">50dp</dimen>
+    <dimen name="margin_space_bottom">54dp</dimen>
     <dimen name="margin_login">40dp</dimen>
     <dimen name="margin_button">22dp</dimen>
 
@@ -47,7 +47,9 @@
     <dimen name="category_max_width">160dp</dimen>
 
     <!-- Service list -->
+    <dimen name="service_card_radius">4dp</dimen>
     <dimen name="service_card_elevation">6dp</dimen>
+    <dimen name="service_card_margin_horizontal">12dp</dimen>
 
     <!-- Service detail -->
     <dimen name="service_image_height">250dp</dimen>

@@ -23,7 +23,11 @@ class SpotListViewHolder(private val parent: ViewGroup) :
             itemView.spotText.alpha = 1f
         } else {
             itemView.tickImageView.gone()
-            itemView.spotText.alpha = 0.5f
+            if (model.shouldBeSelected) {
+                itemView.spotText.alpha = 1f
+            } else {
+                itemView.spotText.alpha = 0.5f
+            }
         }
     }
 }

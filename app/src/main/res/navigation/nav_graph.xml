@@ -64,7 +64,7 @@
             android:id="@+id/action_loginFragment_to_recoverPasswordFragment"
             app:destination="@id/recoverPasswordFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_categoryListFragment2"
+            android:id="@+id/action_loginFragment_to_categoryListFragment"
             app:destination="@id/categoryListFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
@@ -133,9 +133,6 @@
         <action
             android:id="@+id/action_eventsFragment_to_serviceDetailFragment2"
             app:destination="@id/serviceDetailFragment" />
-        <action
-            android:id="@+id/action_eventsFragment_to_categoryListFragment"
-            app:destination="@id/categoryListFragment" />
     </fragment>
 
     <fragment

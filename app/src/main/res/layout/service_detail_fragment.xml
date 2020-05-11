@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll">
 
             <ImageView
                 android:id="@+id/toolbarImage"
@@ -37,6 +37,16 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_medium"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/gray"
+        android:visibility="invisible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,133 +55,110 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xlarge"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            <TextView
+                android:id="@+id/serviceDetailTitle"
+                style="@style/App.ServiceDetail.Title"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_medium"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/gray"
-                android:visibility="gone" />
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_xxlarge"
+                tools:text="¡Mi gato me ignora! ¿Hablamos?" />
+
+            <TextView
+                android:id="@+id/serviceDetailDescription"
+                style="@style/App.ServiceDetail"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_xlarge"
+                android:lineSpacingMultiplier="1.25"
+                tools:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_medium">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/serviceDetailTitle"
-                    style="@style/App.ServiceDetail.Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_xxlarge"
-                    tools:text="¡Mi gato me ignora! ¿Hablamos?" />
+                    style="@style/App.ServiceDetail.Data"
+                    android:drawableStart="@drawable/ic_calendar"
+                    android:drawablePadding="@dimen/margin_medium"
+                    android:text="@string/when" />
 
                 <TextView
-                    android:id="@+id/serviceDetailDescription"
-                    style="@style/App.ServiceDetail"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_xlarge"
-                    android:lineSpacingMultiplier="1.25"
-                    tools:text="Los clientes elevan sus expectativas. La IA transforma el mercado. Los sistemas se optimizan de forma automática. Las consecuencias de la era post-digital parecen no tener… más información" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/App.ServiceDetail.Data"
-                        android:drawableStart="@drawable/ic_calendar"
-                        android:drawablePadding="@dimen/margin_medium"
-                        android:text="@string/when" />
-
-                    <TextView
-                        android:id="@+id/serviceDetailDate"
-                        style="@style/App.ServiceDetail.Response"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        tools:text="19:30" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/App.ServiceDetail.Data"
-                        android:drawableStart="@drawable/ic_clock"
-                        android:drawablePadding="@dimen/margin_medium"
-                        android:text="@string/duration" />
-
-                    <TextView
-                        android:id="@+id/serviceDetailDuration"
-                        style="@style/App.ServiceDetail.Response"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        tools:text="30 minutos" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/App.ServiceDetail.Data"
-                        android:drawableStart="@drawable/ic_profile"
-                        android:drawablePadding="@dimen/margin_medium"
-                        android:text="@string/spots" />
-
-                    <TextView
-                        android:id="@+id/serviceDetailSpots"
-                        style="@style/App.ServiceDetail.Response"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        tools:text="1" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/serviceDetailAttendees"
+                    android:id="@+id/serviceDetailDate"
                     style="@style/App.ServiceDetail.Response"
-                    android:layout_marginStart="@dimen/margin_xlargex"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_marginBottom="@dimen/margin_space_bottom"
-                    tools:text="@string/select_spots" />
+                    android:layout_marginStart="@dimen/margin_medium"
+                    tools:text="19:30" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/App.ServiceDetail.Data"
+                    android:drawableStart="@drawable/ic_clock"
+                    android:drawablePadding="@dimen/margin_medium"
+                    android:text="@string/duration" />
+
+                <TextView
+                    android:id="@+id/serviceDetailDuration"
+                    style="@style/App.ServiceDetail.Response"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    tools:text="30 minutos" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/App.ServiceDetail.Data"
+                    android:drawableStart="@drawable/ic_profile"
+                    android:drawablePadding="@dimen/margin_medium"
+                    android:text="@string/spots" />
+
+                <TextView
+                    android:id="@+id/serviceDetailSpots"
+                    style="@style/App.ServiceDetail.Response"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    tools:text="1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/serviceDetailAttendees"
+                style="@style/App.ServiceDetail.Response"
+                android:layout_marginStart="@dimen/margin_xlargex"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_space_bottom"
+                tools:text="@string/select_spots" />
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileImageCardView"
-        android:layout_width="@dimen/service_owner_image_size"
-        android:layout_height="@dimen/service_owner_image_size"
-        android:layout_margin="@dimen/margin_medium"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/service_owner_card_radius"
-        app:cardElevation="@dimen/service_owner_card_elevation"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/serviceOwnerImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="@dimen/service_owner_image_size"
         app:layout_anchor="@id/appBar"
-        app:layout_anchorGravity="bottom|end">
-
-        <ImageView
-            android:id="@+id/serviceOwnerImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_anchorGravity="bottom|end"
+        app:maxImageSize="@dimen/service_owner_image_size"
+        app:useCompatPadding="true" />
 
     <FrameLayout
         android:layout_width="match_parent"

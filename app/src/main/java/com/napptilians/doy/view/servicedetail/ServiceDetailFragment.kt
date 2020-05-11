@@ -8,17 +8,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
+import androidx.core.graphics.ColorUtils
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.invisible
+import com.napptilians.doy.extensions.marginPx
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.HourFormatter
 import com.napptilians.doy.util.Notifications
@@ -26,8 +38,10 @@ import com.napptilians.doy.view.customviews.CancelAssistDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
+import kotlinx.android.synthetic.main.service_detail_fragment.appBar
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceButton
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceView
+import kotlinx.android.synthetic.main.service_detail_fragment.collapsingToolbar
 import kotlinx.android.synthetic.main.service_detail_fragment.confirmAssistanceButton
 import kotlinx.android.synthetic.main.service_detail_fragment.progressBar
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailAttendees
@@ -74,9 +88,9 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun initToolbar() {
         context?.let {
-            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white)
+            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+            toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
         }
-        toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     private fun initObservers() {
@@ -89,13 +103,26 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun initViews() {
+        // Disable scroll of App Bar only: https://stackoverflow.com/a/40750707
+        (appBar.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+            val heightDp = resources.displayMetrics.heightPixels * APP_BAR_PERCENTAGE_HEIGHT
+            height = heightDp.toInt()
+            behavior = AppBarLayout.Behavior().apply {
+                setDragCallback(object : DragCallback() {
+                    override fun canDrag(@NonNull appBarLayout: AppBarLayout): Boolean = false
+                })
+            }
+        }
+
+        // Init views that require service detail data
         with(args.service) {
             Glide.with(toolbarImage)
                 .load(image)
                 .into(toolbarImage)
             Glide.with(serviceOwnerImage)
                 .load(ownerImage)
-                .placeholder(R.drawable.ic_profile)
+                .placeholder(R.drawable.ic_service_owner_placeholder)
+                .transform(CircleCrop())
                 .into(serviceOwnerImage)
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
@@ -104,6 +131,7 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
+                serviceDetailAttendees.marginPx(bottom = 0)
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
                 context?.let {
@@ -111,8 +139,9 @@ class ServiceDetailFragment : BaseFragment() {
                         .show()
                 }
             } else {
+                serviceDetailAttendees.marginPx(bottom = resources.getDimension(R.dimen.margin_space_bottom).toInt())
                 if (assistance) {
-                    confirmAssistanceButton.invisible()
+                    confirmAssistanceButton.gone()
                     cancelAssistanceView.visible()
                 } else {
                     confirmAssistanceButton.visible()
@@ -141,6 +170,36 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun setupListeners() {
+        appBar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val currentHeight = collapsingToolbar.height + verticalOffset
+            val collapsedHeight = ViewCompat.getMinimumHeight(collapsingToolbar)
+            val startCollapsingHeight = 2 * collapsedHeight
+            context?.let {
+                when {
+                    currentHeight <= collapsedHeight -> {
+                        // Collapsed
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_no_shadow)
+                    }
+                    currentHeight < startCollapsingHeight -> {
+                        // Between collapsed and middle
+                        val opacity = MAX_ALPHA * currentHeight / startCollapsingHeight
+                        val alpha = ((MAX_ALPHA - opacity) * ALPHA_OFFSET).toInt()
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                        toolbar?.navigationIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            ColorUtils.setAlphaComponent(
+                                ContextCompat.getColor(it, R.color.white),
+                                alpha
+                            ),
+                            BlendModeCompat.SRC_ATOP
+                        )
+                    }
+                    else -> {
+                        // Between middle and expanded
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                    }
+                }
+            }
+        })
         confirmAssistanceButton.setOnClickListener {
             viewModel.executeAdd(args.service.serviceId ?: -1L)
         }
@@ -156,7 +215,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun processConfirmAssistNewValue(unit: Unit) {
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_thumb_up)
@@ -173,7 +232,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
-        progressBar.gone()
+        progressBar.invisible()
         args.service.attendees = args.service.attendees?.dec()
         setAttendees(args.service.attendees)
         confirmAssistanceButton.visible()
@@ -182,7 +241,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { DoyErrorDialog(it).show() }
     }
 
@@ -226,5 +285,8 @@ class ServiceDetailFragment : BaseFragment() {
     companion object {
         private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
         private const val MINUTES = 5
+        private const val MAX_ALPHA = 255
+        private const val ALPHA_OFFSET = 0.85
+        private const val APP_BAR_PERCENTAGE_HEIGHT = 0.35
     }
 }
