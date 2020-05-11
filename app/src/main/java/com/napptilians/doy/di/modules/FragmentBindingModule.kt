@@ -3,6 +3,7 @@ package com.napptilians.doy.di.modules
 import com.napptilians.doy.view.addservice.AddServiceFragment
 import com.napptilians.doy.view.categorylist.CategoryListFragment
 import com.napptilians.doy.view.chat.ChatListFragment
+import com.napptilians.doy.view.chat.ChatTabFragment
 import com.napptilians.doy.view.chat.detail.ChatFragment
 import com.napptilians.doy.view.events.EventTabFragment
 import com.napptilians.doy.view.events.EventsFragment
@@ -71,4 +72,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindEventTabFragment(): EventTabFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindChatTabFragment(): ChatTabFragment
 }
