@@ -4,5 +4,6 @@ data class CategoryModel(
     val categoryId: Long,
     val pictureUrl: String,
     val name: String,
-    var isSelected: Boolean = false
+    var isSelected: Boolean = false,
+    var shouldBeSelected: Boolean = true
 )

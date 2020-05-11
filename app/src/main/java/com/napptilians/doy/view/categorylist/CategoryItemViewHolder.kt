@@ -29,7 +29,11 @@ class CategoryItemViewHolder constructor(parent: ViewGroup, private val isAdding
                 itemView.categoryImage.alpha = 1f
             } else {
                 itemView.tickImageView.gone()
-                itemView.categoryImage.alpha = 0.5f
+                if (model.shouldBeSelected) {
+                    itemView.categoryImage.alpha = 1f
+                } else {
+                    itemView.categoryImage.alpha = 0.5f
+                }
             }
         } else {
             itemView.tickImageView.gone()

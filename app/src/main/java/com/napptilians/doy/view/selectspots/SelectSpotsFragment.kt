@@ -66,7 +66,8 @@ class SelectSpotsFragment : BaseFragment() {
         spotListAdapter.setOnClickListener { clickedCategory ->
             saveButton.visible()
             spotListAdapter.getItems().forEachIndexed { index, spotsModel ->
-                if (spotsModel != clickedCategory && spotsModel.isSelected) {
+                if (spotsModel != clickedCategory && (spotsModel.isSelected || spotsModel.shouldBeSelected)) {
+                    spotsModel.shouldBeSelected = false
                     spotsModel.isSelected = false
                     spotListAdapter.notifyItemChanged(index)
                 } else if (spotsModel == clickedCategory && !spotsModel.isSelected) {

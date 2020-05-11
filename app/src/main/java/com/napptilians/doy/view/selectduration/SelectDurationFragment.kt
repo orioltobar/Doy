@@ -62,7 +62,8 @@ class SelectDurationFragment : BaseFragment() {
         durationListAdapter.setOnClickListener { clickedCategory ->
             saveButton.visible()
             durationListAdapter.getItems().forEachIndexed { index, durationModel ->
-                if (durationModel != clickedCategory && durationModel.isSelected) {
+                if (durationModel != clickedCategory && (durationModel.isSelected || durationModel.shouldBeSelected)) {
+                    durationModel.shouldBeSelected = false
                     durationModel.isSelected = false
                     durationListAdapter.notifyItemChanged(index)
                 } else if (durationModel == clickedCategory && !durationModel.isSelected) {

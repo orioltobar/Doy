@@ -96,7 +96,8 @@ class CategoryListFragment : BaseFragment() {
             if (args.isAddingService) {
                 saveButton.visible()
                 categoriesAdapter.getItems().forEachIndexed { index, categoryModel ->
-                    if (categoryModel != clickedCategory && categoryModel.isSelected) {
+                    if (categoryModel != clickedCategory && (categoryModel.isSelected || categoryModel.shouldBeSelected)) {
+                        categoryModel.shouldBeSelected = false
                         categoryModel.isSelected = false
                         categoriesAdapter.notifyItemChanged(index)
                     } else if (categoryModel == clickedCategory && !categoryModel.isSelected) {
