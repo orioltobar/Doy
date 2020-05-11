@@ -187,21 +187,8 @@
         android:label="ChatFragment"
         tools:layout="@layout/chat_fragment">
         <argument
-            android:name="userId"
-            android:defaultValue="-1L"
-            app:argType="long" />
-        <argument
-            android:name="serviceId"
-            android:defaultValue="-1L"
-            app:argType="long" />
-        <argument
-            android:name="senderName"
-            android:defaultValue='""'
-            app:argType="string" />
-        <argument
-            android:name="serviceTitle"
-            android:defaultValue='""'
-            app:argType="string" />
+            android:name="request"
+            app:argType="com.napptilians.domain.models.chat.ChatRequestModel" />
     </fragment>
 
     <fragment
