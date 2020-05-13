@@ -2,7 +2,7 @@ package com.napptilians.doy.view.chat
 
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.napptilians.domain.models.service.ServiceModel
+import com.napptilians.domain.models.chat.ChatListItemModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseViewHolder
 import com.napptilians.doy.extensions.gone
@@ -15,9 +15,9 @@ import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemPho
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.profilePhotoSmiley
 
 class ChatListViewHolder(viewGroup: ViewGroup) :
-    BaseViewHolder<ServiceModel>(viewGroup, R.layout.chat_list_view_holder) {
+    BaseViewHolder<ChatListItemModel>(viewGroup, R.layout.chat_list_view_holder) {
 
-    override fun update(model: ServiceModel) {
+    override fun update(model: ChatListItemModel) {
         // Event Name
         itemView.chatListItemEventName.text = model.name
 
@@ -26,8 +26,8 @@ class ChatListViewHolder(viewGroup: ViewGroup) :
 
         // Image
         val urlRegex = android.util.Patterns.WEB_URL
-        val isUrl = urlRegex.matcher(model.image ?: "").find()
-        model.image?.takeIf { isUrl }?.let {
+        val isUrl = urlRegex.matcher(model.imageUrl).find()
+        model.imageUrl.takeIf { isUrl }?.let {
             itemView.chatListItemPhotoCardView.visible()
             Glide.with(itemView.chatListItemPhotoShape)
                 .load(it)

@@ -95,7 +95,7 @@ class ChatFragment : BaseFragment() {
     override fun onError(error: ErrorModel) {
         chatFragmentProgressView.gone()
         when (error.errorCause) {
-            FirebaseErrors.EmptyMessage -> {
+            FirebaseErrors.EmptyChat -> {
             }
             else -> {
                 activity?.let {

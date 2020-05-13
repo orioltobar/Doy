@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.chat.ChatRequestModel
-import com.napptilians.domain.models.service.ServiceModel
+import com.napptilians.domain.models.chat.ChatListItemModel
 import com.napptilians.domain.usecases.GetChatsUseCase
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -54,7 +54,7 @@ class ChatListFragment : BaseFragment() {
         // LiveData Observer
         viewModel.chatListDataStream.observe(
             viewLifecycleOwner,
-            Observer<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>> {
+            Observer<UiStatus<Map<String, List<ChatListItemModel>>, ErrorModel>> {
                 handleUiStates(it, ::processNewValue)
             }
         )
@@ -88,7 +88,7 @@ class ChatListFragment : BaseFragment() {
     override fun onLoading() {
     }
 
-    private fun processNewValue(model: Map<String, List<ServiceModel>>) {
+    private fun processNewValue(model: Map<String, List<ChatListItemModel>>) {
         chatsViewPager.visible()
         (chatsAdapter.getItem(0) as ChatTabFragment).setItems(
             model[GetChatsUseCase.UPCOMING] ?: listOf()
@@ -106,10 +106,10 @@ class ChatListFragment : BaseFragment() {
         findNavController().navigate(direction)
     }
 
-    private fun navigateToChat(serviceModel: ServiceModel) {
+    private fun navigateToChat(chatUiModel: ChatListItemModel) {
         viewModel.getChatInformation(
-            serviceModel.serviceId ?: -1L,
-            serviceModel.name ?: ""
+            chatUiModel.id,
+            chatUiModel.name
         )
     }
 }
