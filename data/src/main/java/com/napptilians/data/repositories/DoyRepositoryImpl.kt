@@ -140,6 +140,9 @@ class DoyRepositoryImpl @Inject constructor(
     override fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
         firebaseDataSource.getChatMessages(chatId)
 
+    override suspend fun getLastChatMessage(chatId: String): Response<ChatModel, ErrorModel> =
+        firebaseDataSource.getLastChatMessage(chatId)
+
     private val comparatorAscending: Comparator<ServiceModel>
         get() = compareBy({ it.date }, { it.name })
 
