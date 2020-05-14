@@ -124,6 +124,6 @@
     <!-- Notifications -->
     <string name="event_reminder_channel_name">Recordatorios de eventos</string>
     <string name="event_reminder_channel_description">Notificaciones relacionadas con eventos</string>
-    <string name="event_reminder_subtitle">Tu evento empezará en 12$d minutos. ¡Haz click aquí para unirte y pasarlo bien!</string>
+    <string name="event_reminder_subtitle">Tu evento empezará en %1$d minutos. ¡Haz click aquí para unirte y pasarlo bien!</string>
 
 </resources>
