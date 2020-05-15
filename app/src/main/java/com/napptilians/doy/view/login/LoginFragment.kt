@@ -175,7 +175,7 @@ class LoginFragment : BaseFragment() {
 
     private fun processNewValue(auth: AuthResult) {
         loginFragmentProgressView.gone()
-        val direction = LoginFragmentDirections.actionLoginFragmentToCategoryListFragment2()
+        val direction = LoginFragmentDirections.actionLoginFragmentToCategoryListFragment()
         findNavController().navigate(direction)
     }
 

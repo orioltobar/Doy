@@ -7,14 +7,18 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.commons.error.FirebaseErrors
 import com.napptilians.domain.models.chat.ChatModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ChatViewModel
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
@@ -29,6 +33,7 @@ class ChatFragment : BaseFragment() {
     private val viewModel: ChatViewModel by viewModels { vmFactory }
 
     private val args: ChatFragmentArgs by navArgs()
+    private var chatRequestModel: ChatRequestModel? = null
 
     @Inject
     lateinit var adapter: ChatAdapter
@@ -41,11 +46,13 @@ class ChatFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        chatRequestModel = (arguments?.get(Notifications.CHAT_REQUEST_KEY) as? ChatRequestModel)
+        chatFragmentHeaderTitle.text = chatRequestModel?.serviceName ?: args.request.serviceName
 
-        chatFragmentHeaderTitle.text = args.serviceTitle
-
-        val chatId = args.serviceId.toString()
-        adapter.setUserId(args.userId.toString())
+        val chatId = chatRequestModel?.serviceId?.toString() ?: args.request.serviceId.toString()
+        adapter.setUserId(
+            chatRequestModel?.currentUserId?.toString() ?: args.request.currentUserId.toString()
+        )
         fireBaseChatMessages.adapter = adapter
         // Show bottom messages first: https://stackoverflow.com/a/27069845
         (fireBaseChatMessages?.layoutManager as? LinearLayoutManager)?.stackFromEnd = true
@@ -68,9 +75,10 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun sendData(text: String) {
-        val senderId = args.userId.toString()
-        val senderName = args.senderName
-        val chatId = args.serviceId.toString()
+        val senderId =
+            chatRequestModel?.currentUserId?.toString() ?: args.request.currentUserId.toString()
+        val senderName = chatRequestModel?.senderName ?: args.request.senderName
+        val chatId = chatRequestModel?.serviceId?.toString() ?: args.request.serviceId.toString()
 
         viewModel.sendMessageToChat(chatId, senderId, senderName, text)
         chatFragmentEditText.setText("")
@@ -91,7 +99,18 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        activity?.let { DoyErrorDialog(it).show() }
+        chatFragmentProgressView.gone()
+        when (error.errorCause) {
+            FirebaseErrors.EmptyMessage -> {
+            }
+            else -> {
+                activity?.let {
+                    val dialog = DoyErrorDialog(it)
+                    dialog.show()
+                    dialog.setOnDismissListener { findNavController().popBackStack() }
+                }
+            }
+        }
     }
 
     override fun onLoading() {

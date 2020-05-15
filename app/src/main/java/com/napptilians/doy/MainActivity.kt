@@ -75,14 +75,16 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
                         }
                     }
                     R.id.eventsFragment -> {
+                        disableToolbar()
                         if (args?.get("onlyMyEvents") == true) {
                             enableHomeAsUp(true) { navHostFragment.popBackStack() }
-                        } else {
-                            disableToolbar()
                         }
                     }
                     R.id.loginFragment, R.id.serviceDetailFragment -> {
                         enableHomeAsUp(false) { navHostFragment.popBackStack() }
+                    }
+                    R.id.profileFragment -> {
+                        enableToolbar()
                     }
                     else -> {
                         enableHomeAsUp(true) { navHostFragment.popBackStack() }

@@ -65,7 +65,9 @@
         <item quantity="one">%d person</item>
         <item quantity="other">%d people</item>
     </plurals>
-    <string name="how_long_duration">¿How long it will be approximately?</string>
+    <string name="how_long_duration">How long will it be approximately?</string>
+    <string name="minutes">%1$d minutes</string>
+    <string name="hours_and_minutes">%1$s and %2$d minutes</string>
     <plurals name="hours">
         <item quantity="one">%d hour</item>
         <item quantity="other">%d hours</item>
@@ -117,7 +119,7 @@
 
     <!-- Chat -->
     <string name="chat">Chat</string>
-    <string name="no_chats">You don\'t have any open chat. \n\n Join an event to open a new chat.</string>
+    <string name="no_chats">You don\'t have any open chat yet.\n\nJoin or create an event to open a new chat.</string>
     <string name="chat_in_progress">We are working at full capacity to implement a group chat with video call support, at the moment, try to write a message to the host of the event!</string>
     <string name="send_message_hint">Write a message</string>
 

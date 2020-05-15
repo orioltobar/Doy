@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="?attr/selectableItemBackground"
     android:elevation="@dimen/cardview_default_elevation"
-    android:maxHeight="@dimen/category_max_height"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    android:maxHeight="@dimen/category_max_height">
 
     <ImageView
         android:id="@+id/categoryImage"
@@ -22,6 +22,19 @@
         app:layout_constraintStart_toStartOf="@id/category_container"
         app:layout_constraintTop_toTopOf="@id/category_container"
         tools:src="@drawable/image_bg_small" />
+
+    <View
+        android:id="@+id/categoryOpacity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.2"
+        android:background="@drawable/bg_category_opacity"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/category_container"
+        app:layout_constraintEnd_toEndOf="@id/category_container"
+        app:layout_constraintStart_toStartOf="@id/category_container"
+        app:layout_constraintTop_toTopOf="@id/category_container"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/categoryText"
@@ -42,7 +55,7 @@
         android:id="@+id/tickImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_small"
+        android:padding="@dimen/padding_small"
         android:src="@drawable/ic_tickon_white"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

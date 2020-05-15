@@ -65,6 +65,8 @@
         <item quantity="other">%d personas</item>
     </plurals>
     <string name="how_long_duration">¿Cuánto durará aproximadamente?</string>
+    <string name="minutes">%1$d minutos</string>
+    <string name="hours_and_minutes">%1$s y %2$d minutos</string>
     <plurals name="hours">
         <item quantity="one">%d hora</item>
         <item quantity="other">%d horas</item>
@@ -123,6 +125,6 @@
     <!-- Notifications -->
     <string name="event_reminder_channel_name">Recordatorios de eventos</string>
     <string name="event_reminder_channel_description">Notificaciones relacionadas con eventos</string>
-    <string name="event_reminder_subtitle">Tu evento empezará en 12$d minutos. ¡Haz click aquí para unirte y pasarlo bien!</string>
+    <string name="event_reminder_subtitle">Tu evento empezará en %1$d minutos. ¡Haz click aquí para unirte y pasarlo bien!</string>
 
 </resources>

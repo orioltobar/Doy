@@ -1,6 +1,7 @@
 package com.napptilians.domain.models.service
 
 data class DurationModel(
-    val numberOfHours: Int,
-    var isSelected: Boolean = false
+    val numberOfMinutes: Int,
+    var isSelected: Boolean = false,
+    var shouldBeSelected: Boolean = true
 )

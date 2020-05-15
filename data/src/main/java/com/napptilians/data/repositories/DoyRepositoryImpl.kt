@@ -90,10 +90,15 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun getServices(
         categoryIds: List<Long>,
         serviceId: Long?,
-        uid: String?
+        uid: String?,
+        ascending: Boolean
     ): Response<List<ServiceModel>, ErrorModel> {
         return networkDataSource.getServices(categoryIds, serviceId, uid).map {
-            it.sortedWith(comparator)
+            if (ascending) {
+                it.sortedWith(comparatorAscending)
+            } else {
+                it.sortedWith(comparatorDescending)
+            }
         }
     }
 
@@ -123,7 +128,7 @@ class DoyRepositoryImpl @Inject constructor(
 
     override suspend fun getMyServices(uid: String?): Response<List<ServiceModel>, ErrorModel> {
         return networkDataSource.getMyServices(uid).map {
-            it.sortedWith(comparator)
+            it.sortedWith(comparatorAscending)
         }
     }
 
@@ -138,6 +143,10 @@ class DoyRepositoryImpl @Inject constructor(
     override suspend fun deleteService(serviceId: Long?): Response<Unit, ErrorModel> =
         networkDataSource.deleteService(serviceId)
 
-    private val comparator: Comparator<ServiceModel>
+    private val comparatorAscending: Comparator<ServiceModel>
         get() = compareBy({ it.date }, { it.name })
+
+    private val comparatorDescending: Comparator<ServiceModel>
+        get() = compareByDescending { it.date }
+
 }

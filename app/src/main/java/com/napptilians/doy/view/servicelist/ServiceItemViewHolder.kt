@@ -17,17 +17,11 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 
-class ServiceItemViewHolder(parent: ViewGroup, private val isPastService: Boolean) :
+class ServiceItemViewHolder(parent: ViewGroup) :
     BaseViewHolder<ServiceModel>(parent, R.layout.service_item) {
 
     override fun update(model: ServiceModel) {
         with(model) {
-            if (isPastService) {
-                itemView.setBackgroundResource(0)
-            } else {
-                val outValue = TypedValue()
-                itemView.setBackgroundResource(outValue.resourceId)
-            }
             setImage(this)
             setName(this)
             setDate(this)

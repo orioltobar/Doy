@@ -40,7 +40,8 @@ interface DoyRepository {
     suspend fun getServices(
         categoryIds: List<Long> = emptyList(),
         serviceId: Long? = null,
-        uid: String? = null
+        uid: String? = null,
+        ascending: Boolean = true
     ): Response<List<ServiceModel>, ErrorModel>
 
     suspend fun getUser(userUid: String): Response<UserModel, ErrorModel>
