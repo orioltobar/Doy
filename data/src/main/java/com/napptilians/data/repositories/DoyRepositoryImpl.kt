@@ -94,6 +94,13 @@ class DoyRepositoryImpl @Inject constructor(
         ascending: Boolean
     ): Response<List<ServiceModel>, ErrorModel> {
         return networkDataSource.getServices(categoryIds, serviceId, uid).map {
+            it.forEach { service ->
+                // Service is full when there are no available spots
+                // and the user is not one of the attendees or its owner
+                service.isFull = service.attendees ?: 0 == service.spots ?: 0
+                        && !service.assistance
+                        && service.ownerId?.equals(uid) == false
+            }
             if (ascending) {
                 it.sortedWith(comparatorAscending)
             } else {
@@ -141,7 +148,7 @@ class DoyRepositoryImpl @Inject constructor(
         firebaseDataSource.getChatMessages(chatId)
 
     private val comparatorAscending: Comparator<ServiceModel>
-        get() = compareBy({ it.date }, { it.name })
+        get() = compareBy({ it.isFull }, { it.date }, { it.name })
 
     private val comparatorDescending: Comparator<ServiceModel>
         get() = compareByDescending { it.date }

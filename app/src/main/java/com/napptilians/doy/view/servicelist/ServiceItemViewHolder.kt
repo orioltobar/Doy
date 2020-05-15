@@ -1,6 +1,5 @@
 package com.napptilians.doy.view.servicelist
 
-import android.util.TypedValue
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.napptilians.domain.models.service.ServiceModel
@@ -16,7 +15,6 @@ import kotlinx.android.synthetic.main.service_item.view.serviceNameText
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
-
 class ServiceItemViewHolder(parent: ViewGroup) :
     BaseViewHolder<ServiceModel>(parent, R.layout.service_item) {
 
@@ -27,6 +25,7 @@ class ServiceItemViewHolder(parent: ViewGroup) :
             setDate(this)
             setMaxSpots(this)
             setDuration(this)
+            setAlpha(this)
         }
     }
 
@@ -75,6 +74,14 @@ class ServiceItemViewHolder(parent: ViewGroup) :
         itemView.serviceDurationText.text =
             itemView.resources.getString(R.string.service_duration, model.durationMin)
         itemView.serviceDurationText.visible()
+    }
+
+    private fun setAlpha(model: ServiceModel) {
+        if (model.isFull) {
+            itemView.alpha = 0.4f
+        } else {
+            itemView.alpha = 1f
+        }
     }
 
     companion object {
