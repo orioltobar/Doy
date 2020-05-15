@@ -1,7 +1,6 @@
 package com.napptilians.doy.view.servicedetail
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -69,8 +68,6 @@ class ServiceDetailFragment : BaseFragment() {
 
     private val viewModel: ServiceDetailViewModel by viewModels { vmFactory }
     private val args: ServiceDetailFragmentArgs by navArgs()
-    private lateinit var alarmManager: AlarmManager
-    private var pendingIntent: PendingIntent? = null
 
     private val formatter = HourFormatter()
 
@@ -264,13 +261,13 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun scheduleNotification(requestModel: ChatRequestModel) {
         context?.let {
-            alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val title = serviceDetailTitle.text.toString()
             val subtitle = getString(
                 R.string.event_reminder_subtitle,
                 Notifications.MINUTES
             )
-            pendingIntent =
+            val pendingIntent =
                 Notifications.preparePendingIntent(
                     it,
                     args.service.serviceId?.toInt() ?: 0,
@@ -289,7 +286,21 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun cancelNotification() {
-        pendingIntent?.let {
+        context?.let {
+            val alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val title = serviceDetailTitle.text.toString()
+            val subtitle = getString(
+                R.string.event_reminder_subtitle,
+                Notifications.MINUTES
+            )
+            val pendingIntent =
+                Notifications.preparePendingIntent(
+                    it,
+                    args.service.serviceId?.toInt() ?: 0,
+                    title,
+                    subtitle,
+                    null
+                )
             alarmManager.cancel(pendingIntent)
         }
     }
