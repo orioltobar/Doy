@@ -3,6 +3,7 @@ package com.napptilians.doy.view.servicedetail
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -86,6 +87,14 @@ class ServiceDetailFragment : BaseFragment() {
         initObservers()
         initViews()
         setupListeners()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        (appBar?.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+            val heightDp = resources.displayMetrics.heightPixels * APP_BAR_PERCENTAGE_HEIGHT
+            height = heightDp.toInt()
+        }
     }
 
     private fun initToolbar() {

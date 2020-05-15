@@ -1,6 +1,5 @@
 package com.napptilians.networkdatasource.api.mappers
 
-import android.annotation.SuppressLint
 import android.util.Log
 import com.napptilians.commons.Mapper
 import com.napptilians.domain.models.service.ServiceModel
