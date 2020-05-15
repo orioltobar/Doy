@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
@@ -34,6 +35,7 @@ import com.napptilians.doy.util.HourFormatter
 import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
+import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.createEventButton
 import kotlinx.android.synthetic.main.add_service_fragment.progressBar
@@ -61,6 +63,8 @@ class AddServiceFragment : BaseFragment() {
     private var pendingIntent: PendingIntent? = null
 
     private val formatter = HourFormatter()
+
+    private var serviceId: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -103,6 +107,13 @@ class AddServiceFragment : BaseFragment() {
         viewModel.addServiceDataStream.observe(
             viewLifecycleOwner,
             Observer { handleUiStates(it, ::processNewValue) })
+        // SingleLiveEvent Observer
+        viewModel.userDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
+                handleUiStates(status) { scheduleNotification(it) }
+            }
+        )
     }
 
     override fun onResume() {
@@ -190,6 +201,11 @@ class AddServiceFragment : BaseFragment() {
     }
 
     private fun processNewValue(serviceId: Long) {
+        this.serviceId = serviceId
+        viewModel.executeGetChatInformation(
+            this.serviceId,
+            viewModel.service.name ?: ""
+        )
         progressBar.gone()
         activity?.let { activity ->
             DoyDialog(activity).apply {
@@ -200,7 +216,6 @@ class AddServiceFragment : BaseFragment() {
                 setOnDismissListener { findNavController().popBackStack() }
             }
         }
-        scheduleNotification(serviceId)
     }
 
     override fun onLoading() {
@@ -229,13 +244,13 @@ class AddServiceFragment : BaseFragment() {
         }
     }
 
-    private fun scheduleNotification(serviceId: Long) {
+    private fun scheduleNotification(chatRequestModel: ChatRequestModel) {
         context?.let {
             alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val title = viewModel.service.name ?: ""
             val subtitle = getString(
                 R.string.event_reminder_subtitle,
-                MINUTES
+                Notifications.MINUTES
             )
             pendingIntent =
                 Notifications.preparePendingIntent(
@@ -243,12 +258,12 @@ class AddServiceFragment : BaseFragment() {
                     serviceId.toInt(),
                     title,
                     subtitle,
-                    serviceId
+                    chatRequestModel
                 )
             viewModel.service.date?.let { date ->
                 alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
+                    date.toInstant().toEpochMilli().minus(1000 * 60 * Notifications.MINUTES),
                     pendingIntent
                 )
             }
@@ -258,7 +273,6 @@ class AddServiceFragment : BaseFragment() {
     companion object {
         private const val GALLERY_REQUEST_CODE = 100
         private const val SERVICE_DATE_FORMAT = "yyyy-MM-dd"
-        private const val MINUTES = 5
         private val calendar = Calendar.getInstance()
         private val DEFAULT_SERVICE_DATE_YEAR = calendar.get(Calendar.YEAR)
         private val DEFAULT_SERVICE_DATE_MONTH = calendar.get(Calendar.MONTH)

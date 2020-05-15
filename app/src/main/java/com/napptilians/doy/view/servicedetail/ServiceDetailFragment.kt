@@ -26,6 +26,7 @@ import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
@@ -37,6 +38,7 @@ import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.CancelAssistDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
+import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
 import kotlinx.android.synthetic.main.service_detail_fragment.appBar
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceButton
@@ -100,6 +102,13 @@ class ServiceDetailFragment : BaseFragment() {
         viewModel.deleteAttendeeServiceDataStream.observe(
             viewLifecycleOwner,
             Observer { handleUiStates(it, ::processCancelAssistNewValue) })
+        // SingleLiveEvent Observer
+        viewModel.userDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
+                handleUiStates(status) { scheduleNotification(it) }
+            }
+        )
     }
 
     private fun initViews() {
@@ -170,7 +179,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun setupListeners() {
-        appBar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        appBar.addOnOffsetChangedListener(OnOffsetChangedListener { _, verticalOffset ->
             val currentHeight = collapsingToolbar.height + verticalOffset
             val collapsedHeight = ViewCompat.getMinimumHeight(collapsingToolbar)
             val startCollapsingHeight = 2 * collapsedHeight
@@ -185,13 +194,14 @@ class ServiceDetailFragment : BaseFragment() {
                         val opacity = MAX_ALPHA * currentHeight / startCollapsingHeight
                         val alpha = ((MAX_ALPHA - opacity) * ALPHA_OFFSET).toInt()
                         toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
-                        toolbar?.navigationIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                            ColorUtils.setAlphaComponent(
-                                ContextCompat.getColor(it, R.color.white),
-                                alpha
-                            ),
-                            BlendModeCompat.SRC_ATOP
-                        )
+                        toolbar?.navigationIcon?.colorFilter =
+                            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                                ColorUtils.setAlphaComponent(
+                                    ContextCompat.getColor(it, R.color.white),
+                                    alpha
+                                ),
+                                BlendModeCompat.SRC_ATOP
+                            )
                     }
                     else -> {
                         // Between middle and expanded
@@ -215,7 +225,11 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun processConfirmAssistNewValue(unit: Unit) {
-        progressBar.invisible()
+        viewModel.executeGetChatInformation(
+            args.service.serviceId ?: -1L,
+            args.service.name ?: ""
+        )
+        progressBar.gone()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_thumb_up)
@@ -228,11 +242,10 @@ class ServiceDetailFragment : BaseFragment() {
         setAttendees(args.service.attendees)
         confirmAssistanceButton.invisible()
         cancelAssistanceView.visible()
-        scheduleNotification()
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
-        progressBar.invisible()
+        progressBar.gone()
         args.service.attendees = args.service.attendees?.dec()
         setAttendees(args.service.attendees)
         confirmAssistanceButton.visible()
@@ -249,27 +262,26 @@ class ServiceDetailFragment : BaseFragment() {
         progressBar.visible()
     }
 
-    private fun scheduleNotification() {
+    private fun scheduleNotification(requestModel: ChatRequestModel) {
         context?.let {
             alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val title = serviceDetailTitle.text.toString()
             val subtitle = getString(
                 R.string.event_reminder_subtitle,
-                MINUTES
+                Notifications.MINUTES
             )
-            val serviceId = args.service.serviceId ?: -1L
             pendingIntent =
                 Notifications.preparePendingIntent(
                     it,
                     args.service.serviceId?.toInt() ?: 0,
                     title,
                     subtitle,
-                    serviceId
+                    requestModel
                 )
             args.service.date?.let { date ->
                 alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
+                    date.toInstant().toEpochMilli().minus(1000 * 60 * Notifications.MINUTES),
                     pendingIntent
                 )
             }
@@ -284,7 +296,6 @@ class ServiceDetailFragment : BaseFragment() {
 
     companion object {
         private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
-        private const val MINUTES = 5
         private const val MAX_ALPHA = 255
         private const val ALPHA_OFFSET = 0.85
         private const val APP_BAR_PERCENTAGE_HEIGHT = 0.35

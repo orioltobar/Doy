@@ -102,6 +102,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
     implementation "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
 
+    implementation "org.apache.commons:commons-lang3:${Versions.apachecommons_version}"
+
     implementation "androidx.appcompat:appcompat:${Versions.androidx_version}"
     implementation "androidx.core:core-ktx:${Versions.androidx_core_version}"
     implementation "androidx.constraintlayout:constraintlayout:${Versions.androidx_constraintlayout_version}"
