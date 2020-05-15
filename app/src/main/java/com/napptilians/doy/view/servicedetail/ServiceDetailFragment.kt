@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -51,6 +50,7 @@ import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailAtten
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDate
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDescription
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDuration
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailOwner
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailSpots
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailTitle
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceOwnerImage
@@ -149,14 +149,12 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
+                serviceDetailOwner.visible()
                 serviceDetailAttendees.marginPx(bottom = 0)
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
-                context?.let {
-                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG)
-                        .show()
-                }
             } else {
+                serviceDetailOwner.gone()
                 serviceDetailAttendees.marginPx(bottom = resources.getDimension(R.dimen.margin_space_bottom).toInt())
                 if (assistance) {
                     confirmAssistanceButton.gone()
