@@ -59,12 +59,11 @@ class UrlParamInterceptorTest {
 
     @Test
     fun `URL is well formed when params are not empty`() {
-        every { networkProviderMock.valueToBeProvided } returns "test"
+        every { networkProviderMock.language } returns "en"
 
         baseUrlInterceptor.intercept(chain)
 
         verifySequence {
-            httpUrlBuilder.addQueryParameter(any(), "test")
             httpUrlBuilder.addQueryParameter(any(), "en")
             httpUrlBuilder.build()
         }
@@ -72,12 +71,11 @@ class UrlParamInterceptorTest {
 
     @Test
     fun `URL is well formed when params are empty`() {
-        every { networkProviderMock.valueToBeProvided } returns ""
+        every { networkProviderMock.language } returns ""
 
         baseUrlInterceptor.intercept(chain)
 
         verifySequence {
-            httpUrlBuilder.addQueryParameter(any(), "")
             httpUrlBuilder.addQueryParameter(any(), "")
             httpUrlBuilder.build()
         }
