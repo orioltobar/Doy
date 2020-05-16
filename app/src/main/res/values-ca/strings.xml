@@ -92,6 +92,8 @@
     <string name="your_service">Tu ets el creador d\'aquest esdeveniment. Gràcies per ajudar!</string>
     <string name="menu_delete">Eliminar esdeveniment</string>
     <string name="menu_edit_event">Editar esdeveniment</string>
+    <string name="confirm_delete_event_title">Estàs segur que vols eliminar l\'esdeveniment?</string>
+    <string name="delete_event_success">Esdeveniment eliminat correctament</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>

@@ -6,23 +6,27 @@ import android.view.Gravity
 import android.view.Window
 import android.widget.LinearLayout
 import com.napptilians.doy.R
-import kotlinx.android.synthetic.main.cancel_dialog.cancelDialogButton
-import kotlinx.android.synthetic.main.cancel_dialog.cancelDialogTitle
+import kotlinx.android.synthetic.main.confirmation_dialog.confirmDialogButton
+import kotlinx.android.synthetic.main.confirmation_dialog.confirmDialogTitle
 
-class CancelDialog(context: Context, onCancel: () -> Unit) : Dialog(context, R.style.Theme_Design_BottomSheetDialog) {
+class ConfirmationDialog(context: Context, onConfirm: () -> Unit) :
+    Dialog(context, R.style.Theme_Design_BottomSheetDialog) {
 
     init {
         super.onStart()
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        this.setContentView(R.layout.cancel_dialog)
+        this.setContentView(R.layout.confirmation_dialog)
         this.setCancelable(true)
         this.setCanceledOnTouchOutside(true)
-        cancelDialogButton.setOnClickListener {
-            onCancel.invoke()
+        confirmDialogButton.setOnClickListener {
+            onConfirm.invoke()
             dismiss()
         }
 
-        window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        window?.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         val attributes = window?.attributes?.apply {
             gravity = Gravity.BOTTOM
         }
@@ -30,10 +34,10 @@ class CancelDialog(context: Context, onCancel: () -> Unit) : Dialog(context, R.s
     }
 
     fun setTitle(title: String) {
-        cancelDialogTitle.text = title
+        confirmDialogTitle.text = title
     }
 
     fun setButtonText(buttonText: String) {
-        cancelDialogButton.text = buttonText
+        confirmDialogButton.text = buttonText
     }
 }
