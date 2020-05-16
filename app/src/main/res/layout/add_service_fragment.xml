@@ -22,13 +22,13 @@
             android:layout_height="@dimen/margin_medium"
             android:indeterminate="true"
             android:indeterminateTint="@color/gray"
-            android:visibility="gone" />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/loginText"
             style="@style/App.AddService"
             android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginEnd="@dimen/margin_medium"
             android:layout_marginBottom="@dimen/margin_large"
             android:text="@string/add_service" />
@@ -36,7 +36,7 @@
         <ScrollView
             android:id="@+id/addServiceScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
             <LinearLayout
