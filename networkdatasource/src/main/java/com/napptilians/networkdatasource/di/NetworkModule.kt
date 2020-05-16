@@ -71,12 +71,8 @@ object NetworkModule {
     fun provideNetworkProvider(
         @Named(STRING_TO_BE_PROVIDED) apiKey: String
     ): NetworkProvider = object : NetworkProvider {
-        override val valueToBeProvided: String
-            get() = apiKey
-
         override val language: String
-            // TODO: In the future, we should use Locale.getDefault().language
-            get() = "ca"
+            get() = Locale.getDefault().language
     }
 }
 

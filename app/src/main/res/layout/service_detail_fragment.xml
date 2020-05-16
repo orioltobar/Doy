@@ -61,10 +61,22 @@
             android:padding="@dimen/padding_medium">
 
             <TextView
+                android:id="@+id/serviceDetailOwner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/your_service"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_s"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
                 android:id="@+id/serviceDetailTitle"
                 style="@style/App.ServiceDetail.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
                 android:layout_marginEnd="@dimen/margin_xxlarge"
                 tools:text="¡Mi gato me ignora! ¿Hablamos?" />
 

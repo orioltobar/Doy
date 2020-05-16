@@ -90,7 +90,7 @@
     <string name="attend_event_cancel">I don\'t want to attend anymore</string>
     <string name="confirm_attend_event_cancel">Are you sure you don\'t want to attend the event?</string>
     <string name="confirm_attend_event_cancel_yes">I am sure, I don\'t want to attend</string>
-    <string name="your_service">This is your event. Thanks for helping!</string>
+    <string name="your_service">You are the creator of the event!</string>
 
     <!-- Generic Dialog -->
     <string name="wip">Work in progress</string>
