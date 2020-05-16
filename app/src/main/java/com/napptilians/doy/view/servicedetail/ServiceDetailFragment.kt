@@ -63,9 +63,6 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class ServiceDetailFragment : BaseFragment() {
-//
-//    override val genericToolbar: Toolbar?
-//        get() = activity?.findViewById(R.id.toolbar)
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -93,8 +90,25 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun initToolbar() {
         context?.let {
-            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
-            toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
+            toolbar?.apply {
+                navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                setNavigationOnClickListener { findNavController().popBackStack() }
+                menu.clear()
+                if (args.service.ownerId == firebaseAuth.currentUser?.uid) {
+
+                    inflateMenu(R.menu.service_detail_menu)
+//                    val item = menu.findItem(R.id.delete)
+//                    item.setActionView(R.layout.menu_delete)
+//                    item.actionView.setOnClickListener {
+//                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
+//
+//                    }
+                    toolbar.setOnMenuItemClickListener { item ->
+                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+            }
         }
     }
 
