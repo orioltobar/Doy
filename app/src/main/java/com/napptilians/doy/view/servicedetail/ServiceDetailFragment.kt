@@ -99,9 +99,9 @@ class ServiceDetailFragment : BaseFragment() {
             toolbar?.apply {
                 navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
                 setNavigationOnClickListener { findNavController().popBackStack() }
-                menu.clear()
                 if (args.service.ownerId == firebaseAuth.currentUser?.uid) {
-
+                    menu.clear()
+                    //overflowIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
                     inflateMenu(R.menu.service_detail_menu)
 //                    val item = menu.findItem(R.id.delete)
 //                    item.setActionView(R.layout.menu_delete)
@@ -363,15 +363,6 @@ class ServiceDetailFragment : BaseFragment() {
                     null
                 )
             alarmManager.cancel(pendingIntent)
-        }
-    }
-
-    private fun performDeleteService() {
-        args.service.serviceId?.let { serviceId ->
-            viewModel.executeDeleteService(serviceId)
-            viewModel.deleteServiceDataStream.observe(
-                viewLifecycleOwner,
-                Observer { handleUiStates(it, ::processCancelAssistNewValue) })
         }
     }
 
