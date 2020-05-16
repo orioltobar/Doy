@@ -1,13 +1,12 @@
 package com.napptilians.doy.view.servicedetail
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -50,6 +49,7 @@ import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailAtten
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDate
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDescription
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDuration
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailOwner
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailSpots
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailTitle
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceOwnerImage
@@ -69,8 +69,6 @@ class ServiceDetailFragment : BaseFragment() {
 
     private val viewModel: ServiceDetailViewModel by viewModels { vmFactory }
     private val args: ServiceDetailFragmentArgs by navArgs()
-    private lateinit var alarmManager: AlarmManager
-    private var pendingIntent: PendingIntent? = null
 
     private val formatter = HourFormatter()
 
@@ -86,6 +84,14 @@ class ServiceDetailFragment : BaseFragment() {
         initObservers()
         initViews()
         setupListeners()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        (appBar?.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+            val heightDp = resources.displayMetrics.heightPixels * APP_BAR_PERCENTAGE_HEIGHT
+            height = heightDp.toInt()
+        }
     }
 
     private fun initToolbar() {
@@ -178,14 +184,12 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
+                serviceDetailOwner.visible()
                 serviceDetailAttendees.marginPx(bottom = 0)
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
-                context?.let {
-                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG)
-                        .show()
-                }
             } else {
+                serviceDetailOwner.gone()
                 serviceDetailAttendees.marginPx(bottom = resources.getDimension(R.dimen.margin_space_bottom).toInt())
                 if (assistance) {
                     confirmAssistanceButton.gone()
@@ -318,13 +322,13 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun scheduleNotification(requestModel: ChatRequestModel) {
         context?.let {
-            alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val title = serviceDetailTitle.text.toString()
             val subtitle = getString(
                 R.string.event_reminder_subtitle,
                 Notifications.MINUTES
             )
-            pendingIntent =
+            val pendingIntent =
                 Notifications.preparePendingIntent(
                     it,
                     args.service.serviceId?.toInt() ?: 0,
@@ -343,7 +347,21 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun cancelNotification() {
-        pendingIntent?.let {
+        context?.let {
+            val alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val title = serviceDetailTitle.text.toString()
+            val subtitle = getString(
+                R.string.event_reminder_subtitle,
+                Notifications.MINUTES
+            )
+            val pendingIntent =
+                Notifications.preparePendingIntent(
+                    it,
+                    args.service.serviceId?.toInt() ?: 0,
+                    title,
+                    subtitle,
+                    null
+                )
             alarmManager.cancel(pendingIntent)
         }
     }

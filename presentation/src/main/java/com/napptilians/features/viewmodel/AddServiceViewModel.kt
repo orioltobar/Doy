@@ -19,6 +19,8 @@ import com.napptilians.features.base.BaseViewModel
 import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
@@ -58,12 +60,13 @@ class AddServiceViewModel @Inject constructor(
             }
             addSource(serviceDay) {
                 service.day = serviceDay.value
+                service.date = parseDate(service)
                 isValidService.value = isFormValid(service)
             }
             addSource(serviceDate) {
                 service.hour = serviceDate.value
-                isValidService.value = isFormValid(service)
                 service.date = parseDate(service)
+                isValidService.value = isFormValid(service)
             }
             addSource(serviceDescription) {
                 service.description = serviceDescription.value
@@ -89,6 +92,7 @@ class AddServiceViewModel @Inject constructor(
                 && !service.day.isNullOrBlank()
                 && !service.hour.isNullOrBlank()
                 && !service.description.isNullOrBlank()
+                && service.date?.isAfter(Instant.now().atZone(ZoneId.of(TIMEZONE_REGION))) == true
 
     fun execute() {
         viewModelScope.launch {
@@ -138,5 +142,6 @@ class AddServiceViewModel @Inject constructor(
     companion object {
         private const val TAG = "AddServiceViewModel"
         private const val TIMEZONE = "+01:00"
+        private const val TIMEZONE_REGION = "Europe/Madrid"
     }
 }

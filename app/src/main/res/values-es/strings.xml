@@ -89,7 +89,7 @@
     <string name="attend_event_cancel">No quiero asistir</string>
     <string name="confirm_attend_event_cancel">¿Estás seguro de que no quieres asistir al evento?</string>
     <string name="confirm_attend_event_cancel_yes">Estoy seguro, no quiero asistir</string>
-    <string name="your_service">Este evento es tuyo. ¡Gracias por ayudar!</string>
+    <string name="your_service">¡Eres el organizador del evento!</string>
     <string name="menu_delete">Eliminar evento</string>
     <string name="menu_edit_event">Editar evento</string>
     <string name="confirm_delete_event_title">¿Estás seguro de que quieres eliminar el evento?</string>

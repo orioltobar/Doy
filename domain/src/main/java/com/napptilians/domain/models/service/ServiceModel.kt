@@ -17,5 +17,6 @@ data class ServiceModel(
     var durationMin: Int? = null,
     var ownerId: String? = null,
     var ownerImage: String? = null,
-    val assistance: Boolean = false
+    val assistance: Boolean = false,
+    var isFull: Boolean = false
 ): Serializable

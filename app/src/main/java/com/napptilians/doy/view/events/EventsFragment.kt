@@ -94,7 +94,7 @@ class EventsFragment : BaseFragment() {
                 context?.resources?.getString(R.string.tab_upcoming) ?: ""
             )
             addFragment(
-                EventTabFragment(false),
+                EventTabFragment(),
                 context?.resources?.getString(R.string.tab_past) ?: ""
             )
         }

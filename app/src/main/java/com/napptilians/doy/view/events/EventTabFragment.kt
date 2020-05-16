@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.event_tab_fragment.eventsLoadingText
 import javax.inject.Inject
 
 class EventTabFragment(
-    private val isPastService: Boolean = false,
     private val onEventClicked: (ServiceModel) -> Unit = {}
 ) : BaseFragment() {
 

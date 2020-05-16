@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -27,7 +28,7 @@ import com.napptilians.doy.databinding.AddServiceFragmentBinding
 import com.napptilians.doy.extensions.decodeByteArrayFromBase64
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.getNavigationResult
-import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
@@ -142,7 +143,11 @@ class AddServiceFragment : BaseFragment() {
                 AddServiceFragmentDirections.actionAddServiceFragmentToSelectDurationFragment()
             findNavController().navigate(direction)
         }
-        createEventButton.setOnClickListener { createEvent() }
+        createEventButton.setOnClickListener {
+            if (!progressBar.isVisible) {
+                createEvent()
+            }
+        }
     }
 
     private fun openGallery() {
@@ -206,7 +211,7 @@ class AddServiceFragment : BaseFragment() {
             this.serviceId,
             viewModel.service.name ?: ""
         )
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_thumb_up)
@@ -223,7 +228,7 @@ class AddServiceFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { DoyErrorDialog(it).show() }
     }
 
