@@ -64,7 +64,7 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
             Handler(Looper.getMainLooper()).post {
                 when (destination.id) {
                     R.id.introFragment, R.id.addServiceFragment,
-                    R.id.chatListFragment -> {
+                    R.id.chatListFragment, R.id.serviceDetailFragment -> {
                         disableToolbar()
                     }
                     R.id.categoryListFragment -> {
@@ -80,7 +80,7 @@ class MainActivity : BaseActivity(), ToolbarBehaviour {
                             enableHomeAsUp(true) { navHostFragment.popBackStack() }
                         }
                     }
-                    R.id.loginFragment, R.id.serviceDetailFragment -> {
+                    R.id.loginFragment -> {
                         enableHomeAsUp(false) { navHostFragment.popBackStack() }
                     }
                     R.id.profileFragment -> {

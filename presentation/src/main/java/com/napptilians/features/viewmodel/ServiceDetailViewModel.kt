@@ -26,8 +26,7 @@ class ServiceDetailViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val addAttendeeUseCase: AddAttendeeUseCase,
     private val deleteAttendeeUseCase: DeleteAttendeeUseCase,
-    private val getUserUseCase: GetUserUseCase
-    private val deleteAttendeeUseCase: DeleteAttendeeUseCase,
+    private val getUserUseCase: GetUserUseCase,
     private val deleteServiceUseCase: DeleteServiceUseCase
 ) : BaseViewModel<ServiceModel>() {
 
