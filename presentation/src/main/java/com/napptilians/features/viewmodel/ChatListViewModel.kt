@@ -1,7 +1,6 @@
 package com.napptilians.features.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.Failure
@@ -9,8 +8,9 @@ import com.napptilians.commons.Response
 import com.napptilians.commons.Success
 import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.domain.models.chat.ChatListItemModel
+import com.napptilians.domain.models.chat.ChatModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.GetChatsUseCase
 import com.napptilians.domain.usecases.GetLastChatMessageUseCase
@@ -20,12 +20,9 @@ import com.napptilians.features.NewValue
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import com.napptilians.features.base.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
-import java.util.concurrent.ConcurrentLinkedDeque
 import javax.inject.Inject
 
 class ChatListViewModel @Inject constructor(
@@ -36,20 +33,25 @@ class ChatListViewModel @Inject constructor(
 ) : BaseViewModel<ChatListItemModel>() {
 
     private val _chatListDataStream =
-        MutableLiveData<UiStatus<Map<String, List<ChatListItemModel>>, ErrorModel>>()
+        SingleLiveEvent<UiStatus<Map<String, List<ChatListItemModel>>, ErrorModel>>()
     val chatListDataStream: LiveData<UiStatus<Map<String, List<ChatListItemModel>>, ErrorModel>>
         get() = _chatListDataStream
+
+    private val _chatUpdateDataStream =
+        SingleLiveEvent<UiStatus<ChatListItemModel, ErrorModel>>()
+    val chatUpdateDataStream: LiveData<UiStatus<ChatListItemModel, ErrorModel>>
+        get() = _chatUpdateDataStream
 
     private val _userDataStream = SingleLiveEvent<UiStatus<ChatRequestModel, ErrorModel>>()
     val userDataStream: LiveData<UiStatus<ChatRequestModel, ErrorModel>> get() = _userDataStream
 
-    init {
+    fun getChats() {
         viewModelScope.launch {
             firebaseAuth.currentUser?.let {
-                _chatListDataStream.value = emitLoadingState()
+                _chatListDataStream.setValue(emitLoadingState())
                 val request = chatsUseCase.execute(emptyList(), null, it.uid, false)
                 val result = processServicesResponse(request)
-                _chatListDataStream.value = processModel(result)
+                _chatListDataStream.setValue(processModel(result))
             }
         }
     }
@@ -82,23 +84,13 @@ class ChatListViewModel @Inject constructor(
                 val filteredResult: MutableMap<String, List<ChatListItemModel>> = mutableMapOf()
                 val mapOfEvents = request.result
                 for ((key, services) in mapOfEvents) {
-                    val chatUiList = ConcurrentLinkedDeque<ChatListItemModel>()
-                    services.map { service ->
-                        async(Dispatchers.IO) {
-                            val lastMessageRequest =
-                                lastChatMessageUseCase(service.serviceId.toString())
-                            chatUiList.add(
-                                ChatListItemModel(
-                                    service.serviceId ?: -1L,
-                                    service.name ?: "",
-                                    service.image ?: "",
-                                    (lastMessageRequest as? Success)?.result?.senderName ?: "",
-                                    (lastMessageRequest as? Success)?.result?.message ?: "",
-                                    "" // TODO: Add the hour of the message formatted.
-                                )
-                            )
+                    val chatUiList = mutableListOf<ChatListItemModel>()
+                    services.mapIndexed { index, service ->
+                        chatUiList.add(getChatListItemModel(service, null))
+                        viewModelScope.launch {
+                            initChatObserver(service)
                         }
-                    }.awaitAll()
+                    }
                     filteredResult[key] = chatUiList.toList()
                 }
                 Success(filteredResult)
@@ -106,4 +98,28 @@ class ChatListViewModel @Inject constructor(
                 Failure((request as Failure).error)
             }
         }
+
+    private suspend fun initChatObserver(service: ServiceModel) {
+        lastChatMessageUseCase(service.serviceId.toString())
+            .collect { newValue ->
+                if (newValue is Success) {
+                    val result = getChatListItemModel(service, newValue)
+                    _chatUpdateDataStream.setValue(NewValue(result))
+                }
+            }
+    }
+
+    private fun getChatListItemModel(
+        service: ServiceModel,
+        response: Response<ChatModel, ErrorModel>?
+    ) =
+        ChatListItemModel(
+            service.serviceId ?: -1L,
+            service.name ?: "",
+            service.image ?: "",
+            (response as? Success)?.result?.senderName ?: "",
+            (response as? Success)?.result?.message ?: "",
+            (response as? Success)?.result?.timeStamp.toString(),
+            ChatListItemModel.getCurrentStatus(service.date)
+        )
 }
