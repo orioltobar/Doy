@@ -98,24 +98,31 @@ class FirebaseDataSourceImpl @Inject constructor(
             awaitClose { subscription.remove() }
         }
 
-    override suspend fun getLastChatMessage(chatId: String): Response<ChatModel, ErrorModel> =
-        try {
-            val request = firestore
+    override fun getLastChatMessage(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
+        callbackFlow {
+            val subscription = firestore
                 .collection(FIRESTORE_CHAT_TABLE)
                 .document(chatId)
                 .collection(FIRESTORE_CHAT_MESSAGE)
                 .orderBy("timeStamp", Query.Direction.DESCENDING)
-                .get()
-                .await()
-            request.documents[0]?.let { data ->
-                Success(getChatModelFromSnapshot(data))
-            } ?: run { Failure(ErrorModel(null, FirebaseErrors.ErrorSendingMessage)) }
-        } catch (e: Exception) {
-            if (e is IndexOutOfBoundsException) {
-                Failure(ErrorModel(null, FirebaseErrors.EmptyChat))
-            } else {
-                Failure(ErrorModel(null, FirebaseErrors.ErrorSendingMessage))
-            }
+                .addSnapshotListener { snapshot, firebaseError ->
+                    firebaseError?.let {
+                        val error =
+                            Failure(ErrorModel(it.message, FirebaseErrors.ErrorReceivingMessage))
+                        offer(error)
+                        return@addSnapshotListener
+                    }
+                    if (snapshot == null || snapshot.isEmpty) {
+                        val error = Failure(ErrorModel(null, FirebaseErrors.EmptyChat))
+                        offer(error)
+                        return@addSnapshotListener
+                    }
+                    // Get last message only.
+                    snapshot.documents[0]?.let { data ->
+                        offer(Success(getChatModelFromSnapshot(data)))
+                    }
+                }
+            awaitClose { subscription.remove() }
         }
 
     private fun getChatModelFromSnapshot(data: DocumentSnapshot) = ChatModel(

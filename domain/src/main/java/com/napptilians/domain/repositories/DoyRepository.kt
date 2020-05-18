@@ -60,5 +60,5 @@ interface DoyRepository {
 
     fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>>
 
-    suspend fun getLastChatMessage(chatId: String): Response<ChatModel, ErrorModel>
+    fun getLastChatMessage(chatId: String): Flow<Response<ChatModel, ErrorModel>>
 }

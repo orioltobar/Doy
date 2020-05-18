@@ -10,7 +10,7 @@ interface FirebaseDataSource {
 
     suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
 
-    suspend fun register(email:String, password:String): Response<AuthResult, ErrorModel>
+    suspend fun register(email: String, password: String): Response<AuthResult, ErrorModel>
 
     suspend fun removeCurrentUser(): Response<Unit?, ErrorModel>
 
@@ -20,5 +20,5 @@ interface FirebaseDataSource {
 
     fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>>
 
-    suspend fun getLastChatMessage(chatId: String): Response<ChatModel, ErrorModel>
+    fun getLastChatMessage(chatId: String): Flow<Response<ChatModel, ErrorModel>>
 }
