@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.domain.models.chat.ChatListItemModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.domain.usecases.GetChatsUseCase
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -43,19 +43,25 @@ class ChatListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
 
-        // SingleLiveEvent Observer
+        viewModel.getChats()
+
+        // SingleLiveEvent Observers
         viewModel.userDataStream.observe(
             viewLifecycleOwner,
             Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
                 handleUiStates(status) { processTargetUser(it) }
             }
         )
-
-        // LiveData Observer
         viewModel.chatListDataStream.observe(
             viewLifecycleOwner,
             Observer<UiStatus<Map<String, List<ChatListItemModel>>, ErrorModel>> {
                 handleUiStates(it, ::processNewValue)
+            }
+        )
+        viewModel.chatUpdateDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatListItemModel, ErrorModel>> {
+                handleUiStates(it) { response -> processNewMessage(response) }
             }
         )
     }
@@ -96,6 +102,21 @@ class ChatListFragment : BaseFragment() {
         (chatsAdapter.getItem(1) as ChatTabFragment).apply {
             setItems(model[GetChatsUseCase.PAST] ?: listOf())
             setAlphaToPastChats(0.4f)
+        }
+    }
+
+    private fun processNewMessage(model: ChatListItemModel) {
+        when (model.status) {
+            ChatListItemModel.Status.Upcoming -> {
+                (chatsAdapter.getItem(0) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Past -> {
+                (chatsAdapter.getItem(1) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
         }
     }
 

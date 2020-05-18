@@ -48,6 +48,10 @@ class ChatTabFragment(
         }
     }
 
+    fun updateSingleItem(chat: ChatListItemModel) {
+        chatListAdapter.updateItem(chat)
+    }
+
     fun setAlphaToPastChats(alpha: Float) {
         chatsList.alpha = alpha
     }
