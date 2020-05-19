@@ -9,6 +9,7 @@ object Versions {
     const val firebase_database = "19.2.1"
     const val firebase_core_version = "17.4.0"
     const val firebase_messaging_version = "20.1.6"
+    const val play_services_auth_version = "18.0.0"
     const val google_services_version = "4.3.3"
     const val androidx_version = "1.1.0"
     const val androidx_core_version = "1.2.0"
