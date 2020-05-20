@@ -40,6 +40,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chatFragmentHeader" />
 
+    <LinearLayout
+        android:id="@+id/chatFragmentVideoChatContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/margin_medium"
+        android:paddingBottom="@dimen/margin_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatFragmentHeaderSeparator">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/event_started_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_m_2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:fontFamily="@font/raleway_semibold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_m"
+                android:text="@string/event_started_subtitle" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/chatFragmentVideoChatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:background="@drawable/bg_videochat"
+            android:drawableEnd="@drawable/ic_chat"
+            android:drawablePadding="@dimen/padding_small"
+            android:drawableTint="@color/green"
+            android:fontFamily="@font/raleway_semibold"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingEnd="@dimen/margin_large"
+            android:text="@string/chat_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+
+            android:textSize="@dimen/text_size_m" />
+
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fireBaseChatMessages"
         android:layout_width="0dp"
@@ -51,7 +112,7 @@
         app:layout_constraintBottom_toTopOf="@id/chatFragmentTextContainer"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@id/start_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@id/chatFragmentHeader"
+        app:layout_constraintTop_toBottomOf="@id/chatFragmentVideoChatContainer"
         tools:listitem="@layout/chat_message_view_holder" />
 
     <LinearLayout

@@ -121,6 +121,9 @@
     <string name="no_chats">You don\'t have any open chat yet.\n\nJoin or create an event to open a new chat.</string>
     <string name="chat_in_progress">We are working at full capacity to implement a group chat with video call support, at the moment, try to write a message to the host of the event!</string>
     <string name="send_message_hint">Write a message</string>
+    <string name="event_started_title">The event has started!</string>
+    <string name="event_started_subtitle">Sign into the videochat</string>
+    <string name="chat_button_text">Sign in</string>
 
     <!-- Notifications -->
     <string name="event_reminder_channel_name">Event reminders</string>
