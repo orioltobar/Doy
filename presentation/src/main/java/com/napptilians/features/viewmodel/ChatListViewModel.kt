@@ -3,6 +3,7 @@ package com.napptilians.features.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.napptilians.commons.DateFormatter
 import com.napptilians.commons.Failure
 import com.napptilians.commons.Response
 import com.napptilians.commons.Success
@@ -119,7 +120,7 @@ class ChatListViewModel @Inject constructor(
             service.image ?: "",
             (response as? Success)?.result?.senderName ?: "",
             (response as? Success)?.result?.message ?: "",
-            (response as? Success)?.result?.timeStamp.toString(),
+            (response as? Success)?.result?.timeStamp?.let { DateFormatter.format(it) } ?: "",
             ChatListItemModel.getCurrentStatus(service.date)
         )
 }
