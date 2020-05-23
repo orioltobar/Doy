@@ -112,11 +112,12 @@
     <string name="your_events">Els teus esdeveniments</string>
     <string name="tab_upcoming">Propers</string>
     <string name="tab_past">Passats</string>
-    <string name="loading_events">Carregant esdeveniments...</string>
+    <string name="loading_events">Carregant esdeveniments…</string>
     <string name="no_events">Sembla que no tens cap esdeveniment en aquesta secció.</string>
 
     <!-- Chat -->
     <string name="chat">Xat</string>
+    <string name="loading_chats">Carregant chats…</string>
     <string name="no_chats">Encara no tens cap xat obert. \n\nApunta\'t a un esdeveniment per iniciar un xat</string>
     <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un xat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
     <string name="send_message_hint">Escriu un missatge</string>

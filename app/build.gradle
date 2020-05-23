@@ -104,6 +104,8 @@ dependencies {
 
     implementation "org.apache.commons:commons-lang3:${Versions.apachecommons_version}"
 
+    implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }
+
     implementation "androidx.appcompat:appcompat:${Versions.androidx_version}"
     implementation "androidx.core:core-ktx:${Versions.androidx_core_version}"
     implementation "androidx.constraintlayout:constraintlayout:${Versions.androidx_constraintlayout_version}"

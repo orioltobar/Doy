@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.common.hash.Hashing
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.error.FirebaseErrors
 import com.napptilians.domain.models.chat.ChatModel
@@ -21,19 +22,25 @@ import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ChatViewModel
-import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
-import kotlinx.android.synthetic.main.chat_fragment.chatFragmentHeaderTitle
-import kotlinx.android.synthetic.main.chat_fragment.chatFragmentProgressView
-import kotlinx.android.synthetic.main.chat_fragment.chatFragmentSendButton
-import kotlinx.android.synthetic.main.chat_fragment.fireBaseChatMessages
+import kotlinx.android.synthetic.main.chat_fragment.*
+import org.jitsi.meet.sdk.JitsiMeet
+import org.jitsi.meet.sdk.JitsiMeetActivity
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
+import org.jitsi.meet.sdk.JitsiMeetUserInfo
+import java.net.URL
 import javax.inject.Inject
 
+@Suppress("UnstableApiUsage")
 class ChatFragment : BaseFragment() {
 
     private val viewModel: ChatViewModel by viewModels { vmFactory }
 
     private val args: ChatFragmentArgs by navArgs()
     private var chatRequestModel: ChatRequestModel? = null
+    private var currentUserId: Long = 0
+    private var serviceId: Long = 0
+    private var senderName: String = ""
+    private var serviceName: String = ""
 
     @Inject
     lateinit var adapter: ChatAdapter
@@ -47,12 +54,21 @@ class ChatFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chatRequestModel = (arguments?.get(Notifications.CHAT_REQUEST_KEY) as? ChatRequestModel)
-        chatFragmentHeaderTitle.text = chatRequestModel?.serviceName ?: args.request.serviceName
+        currentUserId = chatRequestModel?.currentUserId ?: args.request.currentUserId
+        serviceId = chatRequestModel?.serviceId ?: args.request.serviceId
+        senderName = chatRequestModel?.senderName ?: args.request.senderName
+        serviceName = chatRequestModel?.serviceName ?: args.request.serviceName
 
-        val chatId = chatRequestModel?.serviceId?.toString() ?: args.request.serviceId.toString()
-        adapter.setUserId(
-            chatRequestModel?.currentUserId?.toString() ?: args.request.currentUserId.toString()
-        )
+        chatFragmentHeaderTitle.text = serviceName
+
+        initVideoChatSettings()
+
+        chatFragmentVideoChatButton.setOnClickListener {
+            navigateToVideoChat()
+        }
+
+        val chatId = serviceId.toString()
+        adapter.setUserId(currentUserId.toString())
         fireBaseChatMessages.adapter = adapter
         // Show bottom messages first: https://stackoverflow.com/a/27069845
         (fireBaseChatMessages?.layoutManager as? LinearLayoutManager)?.stackFromEnd = true
@@ -75,10 +91,9 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun sendData(text: String) {
-        val senderId =
-            chatRequestModel?.currentUserId?.toString() ?: args.request.currentUserId.toString()
-        val senderName = chatRequestModel?.senderName ?: args.request.senderName
-        val chatId = chatRequestModel?.serviceId?.toString() ?: args.request.serviceId.toString()
+        val senderId = currentUserId.toString()
+        val senderName = senderName
+        val chatId = serviceId.toString()
 
         viewModel.sendMessageToChat(chatId, senderId, senderName, text)
         chatFragmentEditText.setText("")
@@ -98,6 +113,33 @@ class ChatFragment : BaseFragment() {
         }
     }
 
+    private fun initVideoChatSettings() {
+        val serverURL = URL(VIDEO_CHAT_URL)
+        val defaultOptions: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
+            .setServerURL(serverURL)
+            .build()
+        JitsiMeet.setDefaultConferenceOptions(defaultOptions)
+    }
+
+    private fun buildVideoChatRoom(service: String): String {
+        val hashableString = "$service ${service.reversed()}"
+        return Hashing.murmur3_32()
+            .newHasher()
+            .putString(hashableString, Charsets.UTF_8)
+            .hash().asInt().toString()
+    }
+
+    private fun navigateToVideoChat() {
+        val options = JitsiMeetConferenceOptions.Builder()
+            .setRoom(buildVideoChatRoom(serviceName))
+            .setUserInfo(JitsiMeetUserInfo(Bundle().apply {
+                putString(DISPLAY_NAME_KEY, senderName)
+            }))
+            .build()
+
+        JitsiMeetActivity.launch(context, options)
+    }
+
     override fun onError(error: ErrorModel) {
         chatFragmentProgressView.gone()
         when (error.errorCause) {
@@ -115,5 +157,10 @@ class ChatFragment : BaseFragment() {
 
     override fun onLoading() {
         chatFragmentProgressView.visible()
+    }
+
+    companion object {
+        private const val VIDEO_CHAT_URL = "https://meet.jit.si"
+        private const val DISPLAY_NAME_KEY = "displayName"
     }
 }
