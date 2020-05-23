@@ -27,6 +27,9 @@ import org.jitsi.meet.sdk.JitsiMeet
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
 import org.jitsi.meet.sdk.JitsiMeetUserInfo
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
+import org.threeten.bp.ZonedDateTime
 import java.net.URL
 import javax.inject.Inject
 
@@ -41,6 +44,7 @@ class ChatFragment : BaseFragment() {
     private var serviceId: Long = 0
     private var senderName: String = ""
     private var serviceName: String = ""
+    private lateinit var serviceStartDate: ZonedDateTime
 
     @Inject
     lateinit var adapter: ChatAdapter
@@ -58,6 +62,7 @@ class ChatFragment : BaseFragment() {
         serviceId = chatRequestModel?.serviceId ?: args.request.serviceId
         senderName = chatRequestModel?.senderName ?: args.request.senderName
         serviceName = chatRequestModel?.serviceName ?: args.request.serviceName
+        serviceStartDate = chatRequestModel?.serviceStartDate ?: args.request.serviceStartDate
 
         chatFragmentHeaderTitle.text = serviceName
 
@@ -84,6 +89,11 @@ class ChatFragment : BaseFragment() {
             chatFragmentSendButton.isEnabled = it?.toString()?.isNotBlank() == true
         }
 
+        if (checkCurrentDate()) {
+            chatFragmentVideoChatContainer.visible()
+        } else {
+            chatFragmentVideoChatContainer.gone()
+        }
         viewModel.getMessagesFromChat(chatId)
         viewModel.messageFlow.observe(viewLifecycleOwner, Observer { result ->
             handleUiStates(result, ::processResponse)
@@ -122,11 +132,13 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun buildVideoChatRoom(service: String): String {
-        val hashableString = "$service ${service.reversed()}"
-        return Hashing.murmur3_32()
+        val hashedString = Hashing.murmur3_32()
             .newHasher()
-            .putString(hashableString, Charsets.UTF_8)
+            .putString(service, Charsets.UTF_8)
             .hash().asInt().toString()
+
+        val appName = getString(R.string.app_name)
+        return "$appName - $service - $hashedString"
     }
 
     private fun navigateToVideoChat() {
@@ -138,6 +150,10 @@ class ChatFragment : BaseFragment() {
             .build()
 
         JitsiMeetActivity.launch(context, options)
+    }
+
+    private fun checkCurrentDate(): Boolean {
+        return ZonedDateTime.now().withZoneSameInstant(ZoneId.of("Europe/Madrid")) >= serviceStartDate.withZoneSameInstant(ZoneId.of("UTC"))
     }
 
     override fun onError(error: ErrorModel) {

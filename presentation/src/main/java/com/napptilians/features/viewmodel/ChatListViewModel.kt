@@ -16,6 +16,7 @@ import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
 import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.launch
+import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 class ChatListViewModel @Inject constructor(
@@ -42,7 +43,7 @@ class ChatListViewModel @Inject constructor(
         }
     }
 
-    fun getChatInformation(serviceId: Long, serviceName: String) {
+    fun getChatInformation(serviceId: Long, serviceName: String, serviceStartDate: ZonedDateTime) {
         viewModelScope.launch {
             _userDataStream.setValue(emitLoadingState())
             val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
@@ -52,7 +53,8 @@ class ChatListViewModel @Inject constructor(
                         userModel.id,
                         serviceId,
                         userModel.name,
-                        serviceName
+                        serviceName,
+                        serviceStartDate
                     )
                     _userDataStream.setValue(NewValue(requestModel))
                 },

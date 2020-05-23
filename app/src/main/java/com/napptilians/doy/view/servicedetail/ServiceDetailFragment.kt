@@ -231,7 +231,8 @@ class ServiceDetailFragment : BaseFragment() {
     private fun processConfirmAssistNewValue(unit: Unit) {
         viewModel.executeGetChatInformation(
             args.service.serviceId ?: -1L,
-            args.service.name ?: ""
+            args.service.name ?: "",
+            args.service.date ?: ZonedDateTime.now()
         )
         progressBar.gone()
         activity?.let { activity ->

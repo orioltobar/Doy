@@ -22,6 +22,7 @@ import com.napptilians.features.viewmodel.ChatListViewModel
 import kotlinx.android.synthetic.main.chat_list_fragment.chatListTitle
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsTabLayout
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsViewPager
+import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 class ChatListFragment : BaseFragment() {
@@ -109,7 +110,8 @@ class ChatListFragment : BaseFragment() {
     private fun navigateToChat(serviceModel: ServiceModel) {
         viewModel.getChatInformation(
             serviceModel.serviceId ?: -1L,
-            serviceModel.name ?: ""
+            serviceModel.name ?: "",
+            serviceModel.date ?: ZonedDateTime.now()
         )
     }
 }
