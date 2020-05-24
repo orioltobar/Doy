@@ -1,6 +1,7 @@
 package com.napptilians.diskdatasource.di
 
 import android.content.Context
+import com.napptilians.diskdatasource.dao.ChatDao
 import com.napptilians.diskdatasource.dao.DeviceDao
 import com.napptilians.diskdatasource.dao.ExampleDao
 import com.napptilians.diskdatasource.dao.UserDao
@@ -27,4 +28,8 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideUserDao(appDataBase: AppDataBase): UserDao = appDataBase.userDao()
+
+    @Provides
+    @Singleton
+    fun provideChatDao(appDataBase: AppDataBase): ChatDao = appDataBase.chatDao()
 }
