@@ -16,6 +16,6 @@ class GetLastChatMessageUseCase @Inject constructor(
 
     private val ioDispatcher = appDispatchers.io
 
-    operator fun invoke(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
+    operator fun invoke(chatId: String): Flow<Response<Pair<ChatModel, Int>, ErrorModel>> =
         doyRepository.getLastChatMessage(chatId).flowOn(ioDispatcher)
 }

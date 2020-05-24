@@ -98,7 +98,7 @@ class FirebaseDataSourceImpl @Inject constructor(
             awaitClose { subscription.remove() }
         }
 
-    override fun getLastChatMessage(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
+    override fun getLastChatMessage(chatId: String): Flow<Response<List<ChatModel>, ErrorModel>> =
         callbackFlow {
             val subscription = firestore
                 .collection(FIRESTORE_CHAT_TABLE)
@@ -117,10 +117,12 @@ class FirebaseDataSourceImpl @Inject constructor(
                         offer(error)
                         return@addSnapshotListener
                     }
-                    // Get last message only.
-                    snapshot.documents[0]?.let { data ->
-                        offer(Success(getChatModelFromSnapshot(data)))
-                    }
+                    snapshot.documents
+                        .takeIf { it.isNotEmpty() }
+                        ?.let {
+                            val list = it.map { snapshot -> getChatModelFromSnapshot(snapshot) }
+                            offer(Success(list))
+                        }
                 }
             awaitClose { subscription.remove() }
         }

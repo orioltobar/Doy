@@ -20,7 +20,9 @@ data class ChatListItemModel(
     val lastSenderName: String,
     val lastMessage: String,
     val lastMessageTime: String,
-    val status: Status
+    val status: Status,
+    val read: Boolean = false,
+    val unreadMessages: Int = 0
 ) {
 
     sealed class Status(label: String) {

@@ -86,7 +86,7 @@ class ChatListViewModel @Inject constructor(
                 val mapOfEvents = request.result
                 for ((key, services) in mapOfEvents) {
                     val chatUiList = mutableListOf<ChatListItemModel>()
-                    services.mapIndexed { index, service ->
+                    services.map { service ->
                         chatUiList.add(getChatListItemModel(service, null))
                         viewModelScope.launch {
                             initChatObserver(service)
@@ -112,15 +112,17 @@ class ChatListViewModel @Inject constructor(
 
     private fun getChatListItemModel(
         service: ServiceModel,
-        response: Response<ChatModel, ErrorModel>?
+        response: Response<Pair<ChatModel,Int>, ErrorModel>?
     ) =
         ChatListItemModel(
             service.serviceId ?: -1L,
             service.name ?: "",
             service.image ?: "",
-            (response as? Success)?.result?.senderName ?: "",
-            (response as? Success)?.result?.message ?: "",
-            (response as? Success)?.result?.timeStamp?.let { DateFormatter.format(it) } ?: "",
-            ChatListItemModel.getCurrentStatus(service.date)
+            (response as? Success)?.result?.first?.senderName ?: "",
+            (response as? Success)?.result?.first?.message ?: "",
+            (response as? Success)?.result?.first?.timeStamp?.let { DateFormatter.format(it) } ?: "",
+            ChatListItemModel.getCurrentStatus(service.date),
+            (response as? Success)?.result?.first?.read ?: false,
+            (response as? Success)?.result?.second ?: 0
         )
 }
