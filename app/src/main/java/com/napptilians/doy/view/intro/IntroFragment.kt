@@ -6,12 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
@@ -49,7 +52,7 @@ class IntroFragment : BaseFragment() {
             val direction = IntroFragmentDirections.actionIntroFragmentToLoginFragment()
             findNavController().navigate(direction)
         }
-        continueGoogleButton.setOnClickListener { signIn() }
+        continueGoogleButton.setOnClickListener { signInWithGoogle() }
     }
 
     override fun onError(error: ErrorModel) {
@@ -68,62 +71,64 @@ class IntroFragment : BaseFragment() {
         activity?.let { googleSignInClient = GoogleSignIn.getClient(it, googleSignInOptions) }
     }
 
-    private fun signIn() {
+    private fun signInWithGoogle() {
         val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_GOOGLE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 (task.getResult(ApiException::class.java))?.run {
-                    Log.d(TAG, "firebaseAuthWithGoogle: $id")
+                    Log.d(TAG, "Firebase Auth with Google: $id")
                     firebaseAuthWithGoogle(idToken ?: "")
                 }
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
+                // Google Sign In failed, display a message to the user
                 Log.w(TAG, "Google sign in failed", e)
-                // [START_EXCLUDE]
-                //updateUI(null)
-                // [END_EXCLUDE]
+                onGoogleSignInError("Google Sign In failed")
             }
         }
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        // [START_EXCLUDE silent]
-        //showProgressBar()
-        // [END_EXCLUDE]
+        // showProgressBar()
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
+                    Log.d(TAG, "Sign In with credentials: Success")
                     val user = firebaseAuth.currentUser
-                    //updateUI(user)
+                    onGoogleSignInSuccess(user)
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    // [START_EXCLUDE]
-                    //val view = binding.mainLayout
-                    // [END_EXCLUDE]
-                    //Snackbar.make(view, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
-                   // updateUI(null)
+                    // Sign in fail, display a message to the user
+                    Log.w(TAG, "Sign In with credentials: Failure", task.exception)
+                    onGoogleSignInError("Authentication Failed")
                 }
-
-                // [START_EXCLUDE]
-                //hideProgressBar()
-                // [END_EXCLUDE]
+                // hideProgressBar()
             }
+    }
+
+    private fun onGoogleSignInError(message: String) {
+        view?.let {
+            Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun onGoogleSignInSuccess(user: FirebaseUser?) {
+        user?.let {
+            // TODO: Save credentials and Log in
+            Toast.makeText(context, "Hello ${it.displayName}", Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object {
         private const val TAG = "IntroFragment"
-        private const val RC_SIGN_IN = 9001
+        private const val RC_GOOGLE_SIGN_IN = 9001
     }
 }
