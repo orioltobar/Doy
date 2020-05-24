@@ -45,7 +45,6 @@ class ServiceDetailViewModel @Inject constructor(
     val deleteServiceDataStream: LiveData<UiStatus<Unit, ErrorModel>>
         get() = _deleteServiceDataStream
 
-
     fun executeAdd(serviceId: Long) {
         viewModelScope.launch {
             _addAttendeeServiceDataStream.value = emitLoadingState()

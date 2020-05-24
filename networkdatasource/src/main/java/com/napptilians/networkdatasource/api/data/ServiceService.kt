@@ -39,7 +39,7 @@ interface ServiceService {
 
     @POST("/deleteService")
     suspend fun deleteService(
-        @Query(SERVICE_ID) serviceId: Long? = null
+        @Query(SERVICE_ID) serviceId: Long
     )
 
     companion object {

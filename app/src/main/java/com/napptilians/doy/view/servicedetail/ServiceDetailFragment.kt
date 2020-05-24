@@ -103,12 +103,6 @@ class ServiceDetailFragment : BaseFragment() {
                     menu.clear()
                     overflowIcon = it.getDrawable(R.drawable.ic_contextual_menu)
                     inflateMenu(R.menu.service_detail_menu)
-//                    val item = menu.findItem(R.id.delete)
-//                    item.setActionView(R.layout.menu_delete)
-//                    item.actionView.setOnClickListener {
-//                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
-//
-//                    }
                     toolbar.setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.delete -> {

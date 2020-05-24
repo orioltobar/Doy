@@ -44,5 +44,5 @@ interface NetworkDataSource {
 
     suspend fun getMyServices(uid: String? = null): Response<List<ServiceModel>, ErrorModel>
 
-    suspend fun deleteService(serviceId: Long? = null): Response<Unit, ErrorModel>
+    suspend fun deleteService(serviceId: Long): Response<Unit, ErrorModel>
 }
