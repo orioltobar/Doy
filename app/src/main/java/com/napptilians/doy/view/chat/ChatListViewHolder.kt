@@ -10,7 +10,9 @@ import com.napptilians.doy.extensions.visible
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemEventName
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemLastMessageDate
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemLastMessageText
+import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemLastMessageTextBold
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemMessageCounterContainer
+import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemMessageCounterText
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemPhotoCardView
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemPhotoShape
 import kotlinx.android.synthetic.main.chat_list_view_holder.view.chatListItemPhotoView
@@ -22,9 +24,6 @@ class ChatListViewHolder(viewGroup: ViewGroup) :
     override fun update(model: ChatListItemModel) {
         // Event Name
         itemView.chatListItemEventName.text = model.name
-
-        // TODO: Message counter
-        itemView.chatListItemMessageCounterContainer.gone()
 
         // Image
         val urlRegex = android.util.Patterns.WEB_URL
@@ -38,19 +37,49 @@ class ChatListViewHolder(viewGroup: ViewGroup) :
             itemView.profilePhotoSmiley.gone()
         } ?: run { itemView.profilePhotoSmiley.visible() }
 
+        // Sender and message container
         if (model.lastSenderName.isNotEmpty() && model.lastMessage.isNotEmpty()) {
             val senderAndMessage = "${model.lastSenderName}: ${model.lastMessage}"
-            itemView.chatListItemLastMessageText.text = senderAndMessage
-            itemView.chatListItemLastMessageText.visible()
+            if (model.read) {
+                itemView.chatListItemLastMessageText.text = senderAndMessage
+                itemView.chatListItemLastMessageTextBold.gone()
+                itemView.chatListItemLastMessageText.visible()
+            } else {
+                itemView.chatListItemLastMessageTextBold.text = senderAndMessage
+                itemView.chatListItemLastMessageText.gone()
+                itemView.chatListItemLastMessageTextBold.visible()
+            }
         } else {
+            itemView.chatListItemLastMessageTextBold.gone()
             itemView.chatListItemLastMessageText.gone()
         }
 
+        // Message timestamp
         model.lastMessageTime.takeIf { it.isNotEmpty() }?.let { date ->
             itemView.chatListItemLastMessageDate.text = date
             itemView.chatListItemLastMessageDate.visible()
         } ?: run {
             itemView.chatListItemLastMessageDate.gone()
+        }
+
+        // Unread messages
+        if (model.unreadMessages > 0) updateMessageCounter(model.unreadMessages)
+        else itemView.chatListItemMessageCounterContainer.gone()
+    }
+
+    private fun updateMessageCounter(messages: Int) {
+        when {
+            messages in 1..9 -> {
+                itemView.chatListItemMessageCounterText.text = messages.toString()
+                itemView.chatListItemMessageCounterContainer.visible()
+            }
+            messages >= 10 -> {
+                itemView.chatListItemMessageCounterText.text = "+9"
+                itemView.chatListItemMessageCounterContainer.visible()
+            }
+            else -> {
+                itemView.chatListItemMessageCounterContainer.gone()
+            }
         }
     }
 }

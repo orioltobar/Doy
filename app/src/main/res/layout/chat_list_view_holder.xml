@@ -103,10 +103,29 @@
                 android:textColor="@color/grayStrong"
                 android:textSize="@dimen/text_size_s"
                 android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@id/chatListItemLastMessageDate"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:text="David: ¡Qué hambre!" />
+
+            <TextView
+                android:id="@+id/chatListItemLastMessageTextBold"
+                style="@style/App.Intro"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:layout_marginEnd="2dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/raleway_bold"
+                android:gravity="start"
+                android:maxLines="1"
+                android:textColor="@color/grayStrong"
+                android:textSize="@dimen/text_size_s"
+                android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@id/chatListItemLastMessageDate"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="David: ¡Qué hambre!"
                 tools:visibility="visible" />
 
@@ -133,9 +152,11 @@
         android:id="@+id/chatListItemMessageCounterContainer"
         android:layout_width="17dp"
         android:layout_height="17dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <View
             android:id="@+id/chatListItemMessageShape"
@@ -147,6 +168,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/chatListItemMessageCounterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
