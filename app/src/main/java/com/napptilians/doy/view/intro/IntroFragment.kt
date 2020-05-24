@@ -16,7 +16,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.view.customviews.DoyDialog
 import kotlinx.android.synthetic.main.intro_fragment.continueGoogleButton
 import kotlinx.android.synthetic.main.intro_fragment.signInButton
 import kotlinx.android.synthetic.main.intro_fragment.signUpButton
@@ -50,18 +49,7 @@ class IntroFragment : BaseFragment() {
             val direction = IntroFragmentDirections.actionIntroFragmentToLoginFragment()
             findNavController().navigate(direction)
         }
-        continueGoogleButton.setOnClickListener {
-            // Authenticate with Google
-            signIn()
-//            activity?.let { activity ->
-//                DoyDialog(activity).apply {
-//                    setPopupIcon(R.drawable.ic_rocket)
-//                    setPopupTitle(context.resources.getString(R.string.wip))
-//                    setPopupSubtitle(context.resources.getString(R.string.wip_explanation))
-//                    show()
-//                }
-//            }
-        }
+        continueGoogleButton.setOnClickListener { signIn() }
     }
 
     override fun onError(error: ErrorModel) {
@@ -73,13 +61,11 @@ class IntroFragment : BaseFragment() {
     }
 
     private fun configureGoogleSignIn() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        activity?.let {
-            googleSignInClient = GoogleSignIn.getClient(it, gso)
-        }
+        activity?.let { googleSignInClient = GoogleSignIn.getClient(it, googleSignInOptions) }
     }
 
     private fun signIn() {
@@ -94,9 +80,10 @@ class IntroFragment : BaseFragment() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)!!
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
+                (task.getResult(ApiException::class.java))?.run {
+                    Log.d(TAG, "firebaseAuthWithGoogle: $id")
+                    firebaseAuthWithGoogle(idToken ?: "")
+                }
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)

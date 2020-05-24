@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "991934542653-k9mo1080eatdtm9j3vino93fh900o93j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.napptilians.doy",
+            "certificate_hash": "06775ec9ac0990a06c0990027c0f4b7c102f0b23"
+          }
+        },
+        {
           "client_id": "991934542653-rjo879l1qo6jq7fpt5b3460f9b1604i7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -36,7 +44,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "991934542653-62t07nmpu1bmhfk1b2f6jf0fr9h3aqkv.apps.googleusercontent.com",
+              "client_id": "991934542653-jfm7euf68dg77fjvqsps1udh1jqkaf08.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
