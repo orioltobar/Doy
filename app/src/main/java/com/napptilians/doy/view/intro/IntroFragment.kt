@@ -19,7 +19,10 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
+import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.visible
 import kotlinx.android.synthetic.main.intro_fragment.continueGoogleButton
+import kotlinx.android.synthetic.main.intro_fragment.introFragmentProgressView
 import kotlinx.android.synthetic.main.intro_fragment.signInButton
 import kotlinx.android.synthetic.main.intro_fragment.signUpButton
 import javax.inject.Inject
@@ -96,7 +99,7 @@ class IntroFragment : BaseFragment() {
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        // showProgressBar()
+        introFragmentProgressView.visible()
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
@@ -110,7 +113,7 @@ class IntroFragment : BaseFragment() {
                     Log.w(TAG, "Sign In with credentials: Failure", task.exception)
                     onGoogleSignInError("Authentication Failed")
                 }
-                // hideProgressBar()
+                introFragmentProgressView.gone()
             }
     }
 
