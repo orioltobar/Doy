@@ -1,5 +1,6 @@
 package com.napptilians.domain.repositories
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
@@ -25,6 +26,8 @@ interface DoyRepository {
     suspend fun deleteAttendee(userUid: String, serviceId: Long): Response<Unit, ErrorModel>
 
     suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
+
+    suspend fun loginWithGoogle(credential: AuthCredential, idToken: String): Response<String, ErrorModel>
 
     suspend fun register(
         name: String,

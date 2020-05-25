@@ -9,6 +9,7 @@ import com.napptilians.features.viewmodel.CategoriesViewModel
 import com.napptilians.features.viewmodel.EventsViewModel
 import com.napptilians.features.viewmodel.ChatListViewModel
 import com.napptilians.features.viewmodel.ChatViewModel
+import com.napptilians.features.viewmodel.IntroViewModel
 import com.napptilians.features.viewmodel.LoginViewModel
 import com.napptilians.features.viewmodel.MovieViewModel
 import com.napptilians.features.viewmodel.ProfileViewModel
@@ -34,6 +35,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MovieViewModel::class)
     internal abstract fun movieViewModel(viewModel: MovieViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(IntroViewModel::class)
+    internal abstract fun introViewModel(viewModel: IntroViewModel): ViewModel
 
     @Binds
     @IntoMap

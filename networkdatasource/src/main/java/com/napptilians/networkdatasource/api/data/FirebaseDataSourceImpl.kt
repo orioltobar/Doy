@@ -1,5 +1,6 @@
 package com.napptilians.networkdatasource.api.data
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,15 +25,20 @@ import javax.inject.Inject
 class FirebaseDataSourceImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore
-) :
-    FirebaseDataSource {
+) : FirebaseDataSource {
 
     override suspend fun login(
         email: String,
         password: String
     ): Response<AuthResult, ErrorModel> =
-        safeApiCall { firebaseAuth.signInWithEmailAndPassword(email, password).await() }
-            .map { it }
+        safeApiCall {
+            firebaseAuth.signInWithEmailAndPassword(email, password).await()
+        }.map { it }
+
+    override suspend fun loginWithGoogle(credential: AuthCredential): Response<AuthResult, ErrorModel> =
+        safeApiCall {
+            firebaseAuth.signInWithCredential(credential).await()
+        }.map { it }
 
     override suspend fun register(
         email: String,

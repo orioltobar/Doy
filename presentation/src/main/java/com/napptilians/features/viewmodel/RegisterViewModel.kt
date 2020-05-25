@@ -25,14 +25,6 @@ class RegisterViewModel @Inject constructor(
     private val _registerDataStream = MutableLiveData<UiStatus<Unit, ErrorModel>>()
     val registerDataStream: LiveData<UiStatus<Unit, ErrorModel>> get() = _registerDataStream
 
-    init {
-        viewModelScope.launch {
-            val deviceTokenRequest = getDeviceInfoUseCase.execute()
-            val deviceToken = deviceTokenRequest.valueOrNull()?.firebaseToken ?: ""
-            println("This is de devicetoken: $deviceToken")
-        }
-    }
-
     fun register(
         name: String,
         email: String,

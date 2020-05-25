@@ -1,5 +1,6 @@
 package com.napptilians.data.datasources
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
@@ -9,6 +10,8 @@ import kotlinx.coroutines.flow.Flow
 interface FirebaseDataSource {
 
     suspend fun login(email: String, password: String): Response<AuthResult, ErrorModel>
+
+    suspend fun loginWithGoogle(credential: AuthCredential): Response<AuthResult, ErrorModel>
 
     suspend fun register(email:String, password:String): Response<AuthResult, ErrorModel>
 
