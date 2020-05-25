@@ -59,4 +59,6 @@ interface DoyRepository {
     suspend fun sendChatMessage(chatId: String, message: ChatModel): Response<Unit, ErrorModel>
 
     fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>>
+
+    suspend fun deleteService(serviceId: Long): Response<Unit, ErrorModel>
 }
