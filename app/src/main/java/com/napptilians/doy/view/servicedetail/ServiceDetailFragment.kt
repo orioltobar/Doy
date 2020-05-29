@@ -34,7 +34,7 @@ import com.napptilians.doy.extensions.marginPx
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.HourFormatter
 import com.napptilians.doy.util.Notifications
-import com.napptilians.doy.view.customviews.CancelAssistDialog
+import com.napptilians.doy.view.customviews.ConfirmationDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
@@ -96,15 +96,41 @@ class ServiceDetailFragment : BaseFragment() {
 
     private fun initToolbar() {
         context?.let {
-            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
-            toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
+            toolbar?.apply {
+                navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                setNavigationOnClickListener { findNavController().popBackStack() }
+                if (args.service.ownerId == firebaseAuth.currentUser?.uid) {
+                    menu.clear()
+                    overflowIcon = it.getDrawable(R.drawable.ic_contextual_menu)
+                    inflateMenu(R.menu.service_detail_menu)
+                    toolbar.setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.delete -> {
+                                args.service.serviceId?.let { serviceId ->
+                                    context?.let { context ->
+                                        ConfirmationDialog(context) {
+                                            viewModel.executeDeleteService(serviceId)
+                                        }.apply {
+                                            setTitle(context.getString(R.string.confirm_delete_event_title))
+                                            setButtonText(context.getString(R.string.menu_delete))
+                                            show()
+                                        }
+                                    }
+                                }
+                                return@setOnMenuItemClickListener true
+                            }
+                            else -> return@setOnMenuItemClickListener true
+                        }
+                    }
+                }
+            }
         }
     }
 
     private fun initObservers() {
         viewModel.addAttendeeServiceDataStream.observe(
             viewLifecycleOwner,
-            Observer { handleUiStates(it, ::processConfirmAssistNewValue) })
+            Observer { handleUiStates(it, ::processConfirmAttendNewValue) })
         viewModel.deleteAttendeeServiceDataStream.observe(
             viewLifecycleOwner,
             Observer { handleUiStates(it, ::processCancelAssistNewValue) })
@@ -113,6 +139,12 @@ class ServiceDetailFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
                 handleUiStates(status) { scheduleNotification(it) }
+            }
+        )
+        viewModel.deleteServiceDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<Unit, ErrorModel>> { status ->
+                handleUiStates(status) { processDeleteEvent() }
             }
         )
     }
@@ -219,7 +251,11 @@ class ServiceDetailFragment : BaseFragment() {
         }
         cancelAssistanceButton.setOnClickListener {
             context?.let { context ->
-                CancelAssistDialog(context) { performCancelAssist() }.show()
+                ConfirmationDialog(context) { performCancelAssist() }.apply {
+                    setTitle(context.getString(R.string.confirm_attend_event_cancel))
+                    setButtonText(context.getString(R.string.confirm_attend_event_cancel_yes))
+                    show()
+                }
             }
         }
     }
@@ -228,15 +264,15 @@ class ServiceDetailFragment : BaseFragment() {
         viewModel.executeDelete(args.service.serviceId ?: -1L)
     }
 
-    private fun processConfirmAssistNewValue(unit: Unit) {
+    private fun processConfirmAttendNewValue(unit: Unit) {
         viewModel.executeGetChatInformation(
             args.service.serviceId ?: -1L,
             args.service.name ?: "",
             args.service.date ?: ZonedDateTime.now()
         )
         progressBar.gone()
-        activity?.let { activity ->
-            DoyDialog(activity).apply {
+        context?.let { context ->
+            DoyDialog(context).apply {
                 setPopupIcon(R.drawable.ic_thumb_up)
                 setPopupTitle(context.resources.getString(R.string.add_attendee_success))
                 setPopupSubtitle(context.resources.getString(R.string.add_attendee_success_message))
@@ -256,6 +292,18 @@ class ServiceDetailFragment : BaseFragment() {
         confirmAssistanceButton.visible()
         cancelAssistanceView.gone()
         cancelNotification()
+    }
+
+    private fun processDeleteEvent() {
+        context?.let { context ->
+            DoyDialog(context).apply {
+                setPopupIcon(R.drawable.ic_thumb_up)
+                setPopupTitle(context.resources.getString(R.string.delete_event_success))
+                setPopupSubtitle("")
+                show()
+                setOnDismissListener { findNavController().popBackStack() }
+            }
+        }
     }
 
     override fun onError(error: ErrorModel) {

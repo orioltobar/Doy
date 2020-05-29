@@ -147,6 +147,9 @@ class DoyRepositoryImpl @Inject constructor(
     override fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
         firebaseDataSource.getChatMessages(chatId)
 
+    override suspend fun deleteService(serviceId: Long): Response<Unit, ErrorModel> =
+        networkDataSource.deleteService(serviceId)
+
     private val comparatorAscending: Comparator<ServiceModel>
         get() = compareBy({ it.isFull }, { it.date }, { it.name })
 

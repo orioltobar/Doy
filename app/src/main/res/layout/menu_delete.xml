@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/deleteMenuItem"
+    android:layout_height="wrap_content"
+    android:drawableEnd="@drawable/ic_delete"
+    android:drawablePadding="@dimen/margin_large"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_large"
+    android:text="Eliminar evento"
+    android:textColor="#e54d52">
+
+</TextView>

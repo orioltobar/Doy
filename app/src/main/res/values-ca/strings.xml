@@ -90,6 +90,10 @@
     <string name="confirm_attend_event_cancel">Estàs segur de què no vols assistir a l\'esdeveniment?</string>
     <string name="confirm_attend_event_cancel_yes">Estic segur, no hi vull assistir</string>
     <string name="your_service">Ets l\'organitzador de l\'esdeveniment!</string>
+    <string name="menu_delete">Eliminar esdeveniment</string>
+    <string name="menu_edit_event">Editar esdeveniment</string>
+    <string name="confirm_delete_event_title">Estàs segur que vols eliminar l\'esdeveniment?</string>
+    <string name="delete_event_success">Esdeveniment eliminat correctament</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>

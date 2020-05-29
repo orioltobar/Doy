@@ -20,9 +20,9 @@ import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import org.threeten.bp.Instant
+import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
-import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -60,12 +60,12 @@ class AddServiceViewModel @Inject constructor(
             }
             addSource(serviceDay) {
                 service.day = serviceDay.value
-                service.date = parseDate(service)
+                service.date = buildDate(service.day, service.hour)
                 isValidService.value = isFormValid(service)
             }
             addSource(serviceDate) {
                 service.hour = serviceDate.value
-                service.date = parseDate(service)
+                service.date = buildDate(service.day, service.hour)
                 isValidService.value = isFormValid(service)
             }
             addSource(serviceDescription) {
@@ -92,7 +92,12 @@ class AddServiceViewModel @Inject constructor(
                 && !service.day.isNullOrBlank()
                 && !service.hour.isNullOrBlank()
                 && !service.description.isNullOrBlank()
-                && service.date?.isAfter(Instant.now().atZone(ZoneId.of(TIMEZONE_REGION))) == true
+                && isDateInTheFuture(service.date)
+
+    private fun isDateInTheFuture(date: ZonedDateTime?): Boolean {
+        val currentDate = Instant.now().atZone(ZoneId.systemDefault())
+        return date?.isAfter(currentDate) == true
+    }
 
     fun execute() {
         viewModelScope.launch {
@@ -129,14 +134,13 @@ class AddServiceViewModel @Inject constructor(
         }
     }
 
-    private fun parseDate(model: ServiceModel): ZonedDateTime? {
-        return if (model.day == null || model.hour == null) {
+    private fun buildDate(day: String?, hour: String?): ZonedDateTime? {
+        return if (day == null || hour == null) {
             null
         } else {
-            // Hardcoded to Spanish time
-            val dateString = "${model.day}T${model.hour}$TIMEZONE"
+            val dateString = "${day}T${hour}"
             try {
-                ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                LocalDateTime.parse(dateString).atZone(ZoneId.systemDefault())
             } catch (e: Exception) {
                 Log.d(TAG, "There was an error parsing: $dateString")
                 null
@@ -146,7 +150,5 @@ class AddServiceViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "AddServiceViewModel"
-        private const val TIMEZONE = "+01:00"
-        private const val TIMEZONE_REGION = "Europe/Madrid"
     }
 }
