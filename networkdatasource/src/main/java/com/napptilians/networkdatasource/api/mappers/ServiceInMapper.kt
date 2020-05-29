@@ -4,6 +4,7 @@ import android.util.Log
 import com.napptilians.commons.Mapper
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.networkdatasource.api.models.ServiceApiModel
+import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
@@ -53,6 +54,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             val dateString = "${model.day}T${model.hour}$TIMEZONE"
             try {
                 ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                    .toOffsetDateTime().atZoneSameInstant(ZoneId.systemDefault())
             } catch (e: Exception) {
                 Log.d(TAG, "There was an error parsing: $dateString")
                 null
@@ -62,7 +64,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
 
     companion object {
         private const val TAG = "ServiceInMapper"
-        private const val TIMEZONE = "+01:00"
+        private const val TIMEZONE = "Z"
     }
 }
 
