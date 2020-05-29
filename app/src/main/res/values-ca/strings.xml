@@ -115,6 +115,7 @@
     <!-- My events -->
     <string name="your_events">Els teus esdeveniments</string>
     <string name="tab_upcoming">Propers</string>
+    <string name="tab_active">Actius</string>
     <string name="tab_past">Passats</string>
     <string name="loading_events">Carregant esdeveniments…</string>
     <string name="no_events">Sembla que no tens cap esdeveniment en aquesta secció.</string>

@@ -116,6 +116,7 @@
     <!-- My events -->
     <string name="your_events">Your events</string>
     <string name="tab_upcoming">Upcoming</string>
+    <string name="tab_active">Active</string>
     <string name="tab_past">Past</string>
     <string name="loading_events">Loading events…</string>
     <string name="no_events">It looks like you don\'t have any events in this section.</string>

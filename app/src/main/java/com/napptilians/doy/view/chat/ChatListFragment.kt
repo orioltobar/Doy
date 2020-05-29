@@ -73,11 +73,15 @@ class ChatListFragment : BaseFragment() {
             )
             addFragment(
                 ChatTabFragment { navigateToChat(it) },
+                getString(R.string.tab_active)
+            )
+            addFragment(
+                ChatTabFragment { navigateToChat(it) },
                 getString(R.string.tab_past)
             )
         }
         chatsViewPager.adapter = chatsAdapter
-        chatsViewPager.offscreenPageLimit = 2
+        chatsViewPager.offscreenPageLimit = 3
         chatsTabLayout.setupWithViewPager(chatsViewPager)
     }
 
@@ -94,7 +98,10 @@ class ChatListFragment : BaseFragment() {
         (chatsAdapter.getItem(0) as ChatTabFragment).setItems(
             model[GetChatsUseCase.UPCOMING] ?: listOf()
         )
-        (chatsAdapter.getItem(1) as ChatTabFragment).apply {
+        (chatsAdapter.getItem(1) as ChatTabFragment).setItems(
+            model[GetChatsUseCase.ACTIVE] ?: listOf()
+        )
+        (chatsAdapter.getItem(2) as ChatTabFragment).apply {
             setItems(model[GetChatsUseCase.PAST] ?: listOf())
             setAlphaToPastChats(0.4f)
         }

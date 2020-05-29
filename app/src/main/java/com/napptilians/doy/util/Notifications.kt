@@ -25,7 +25,7 @@ object Notifications {
     const val TITLE_KEY = "title"
     const val SUBTITLE_KEY = "subtitle"
     const val CHAT_REQUEST_KEY = "chatRequest"
-    const val MINUTES = 5
+    const val MINUTES = 5L
 
     @TargetApi(Build.VERSION_CODES.O)
     fun createChannel(

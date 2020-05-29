@@ -27,7 +27,6 @@ import org.jitsi.meet.sdk.JitsiMeet
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
 import org.jitsi.meet.sdk.JitsiMeetUserInfo
-import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import java.net.URL
@@ -153,7 +152,10 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun checkCurrentDate(): Boolean {
-        return ZonedDateTime.now().withZoneSameInstant(ZoneId.of("Europe/Madrid")) >= serviceStartDate.withZoneSameInstant(ZoneId.of("UTC"))
+        val currentDate = ZonedDateTime.now().withZoneSameInstant(ZoneId.systemDefault())
+        val threshold = serviceStartDate.withZoneSameInstant(ZoneId.systemDefault())
+            .minusMinutes(Notifications.MINUTES)
+        return currentDate >= threshold
     }
 
     override fun onError(error: ErrorModel) {
