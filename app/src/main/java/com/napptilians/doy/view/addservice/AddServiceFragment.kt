@@ -211,7 +211,8 @@ class AddServiceFragment : BaseFragment() {
         viewModel.executeGetChatInformation(
             this.serviceId,
             viewModel.service.name ?: "",
-            viewModel.service.date ?: ZonedDateTime.now()
+            viewModel.service.date ?: ZonedDateTime.now(),
+            viewModel.service.durationMin ?: 0
         )
         progressBar.invisible()
         activity?.let { activity ->

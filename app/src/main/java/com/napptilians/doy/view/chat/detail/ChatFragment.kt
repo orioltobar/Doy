@@ -43,6 +43,7 @@ class ChatFragment : BaseFragment() {
     private var serviceId: Long = 0
     private var senderName: String = ""
     private var serviceName: String = ""
+    private var serviceDuration: Int = 0
     private lateinit var serviceStartDate: ZonedDateTime
 
     @Inject
@@ -62,10 +63,17 @@ class ChatFragment : BaseFragment() {
         senderName = chatRequestModel?.senderName ?: args.request.senderName
         serviceName = chatRequestModel?.serviceName ?: args.request.serviceName
         serviceStartDate = chatRequestModel?.serviceStartDate ?: args.request.serviceStartDate
+        serviceDuration = chatRequestModel?.serviceDuration ?: args.request.serviceDuration
 
         chatFragmentHeaderTitle.text = serviceName
 
         initVideoChatSettings()
+
+        if (checkCurrentDate()) {
+            chatFragmentVideoChatContainer.visible()
+        } else {
+            chatFragmentVideoChatContainer.gone()
+        }
 
         chatFragmentVideoChatButton.setOnClickListener {
             navigateToVideoChat()
@@ -88,11 +96,6 @@ class ChatFragment : BaseFragment() {
             chatFragmentSendButton.isEnabled = it?.toString()?.isNotBlank() == true
         }
 
-        if (checkCurrentDate()) {
-            chatFragmentVideoChatContainer.visible()
-        } else {
-            chatFragmentVideoChatContainer.gone()
-        }
         viewModel.getMessagesFromChat(chatId)
         viewModel.messageFlow.observe(viewLifecycleOwner, Observer { result ->
             handleUiStates(result, ::processResponse)
@@ -152,10 +155,12 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun checkCurrentDate(): Boolean {
-        val currentDate = ZonedDateTime.now().withZoneSameInstant(ZoneId.systemDefault())
-        val threshold = serviceStartDate.withZoneSameInstant(ZoneId.systemDefault())
-            .minusMinutes(Notifications.MINUTES)
-        return currentDate >= threshold
+        val zoneId = ZoneId.systemDefault()
+        val currentDate = ZonedDateTime.now().withZoneSameInstant(zoneId)
+        val startDate = serviceStartDate.withZoneSameInstant(zoneId)
+        val endDate = serviceStartDate.withZoneSameInstant(zoneId)
+            .plusMinutes(serviceDuration.toLong())
+        return currentDate in startDate..endDate
     }
 
     override fun onError(error: ErrorModel) {

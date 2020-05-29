@@ -67,7 +67,8 @@ class ServiceDetailViewModel @Inject constructor(
     fun executeGetChatInformation(
         serviceId: Long,
         serviceName: String,
-        serviceStartDate: ZonedDateTime
+        serviceStartDate: ZonedDateTime,
+        serviceDuration: Int
     ) {
         viewModelScope.launch {
             _userDataStream.setValue(emitLoadingState())
@@ -79,7 +80,8 @@ class ServiceDetailViewModel @Inject constructor(
                         serviceId,
                         userModel.name,
                         serviceName,
-                        serviceStartDate
+                        serviceStartDate,
+                        serviceDuration
                     )
                     _userDataStream.setValue(NewValue(requestModel))
                 },

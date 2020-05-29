@@ -8,5 +8,6 @@ data class ChatRequestModel(
     val serviceId: Long,
     val senderName: String,
     val serviceName: String,
-    val serviceStartDate: ZonedDateTime
+    val serviceStartDate: ZonedDateTime,
+    val serviceDuration: Int
 ): Serializable

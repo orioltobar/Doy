@@ -43,7 +43,12 @@ class ChatListViewModel @Inject constructor(
         }
     }
 
-    fun getChatInformation(serviceId: Long, serviceName: String, serviceStartDate: ZonedDateTime) {
+    fun getChatInformation(
+        serviceId: Long,
+        serviceName: String,
+        serviceStartDate: ZonedDateTime,
+        serviceDuration: Int
+    ) {
         viewModelScope.launch {
             _userDataStream.setValue(emitLoadingState())
             val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
@@ -54,7 +59,8 @@ class ChatListViewModel @Inject constructor(
                         serviceId,
                         userModel.name,
                         serviceName,
-                        serviceStartDate
+                        serviceStartDate,
+                        serviceDuration
                     )
                     _userDataStream.setValue(NewValue(requestModel))
                 },

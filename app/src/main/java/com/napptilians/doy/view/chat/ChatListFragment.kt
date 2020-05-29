@@ -118,7 +118,8 @@ class ChatListFragment : BaseFragment() {
         viewModel.getChatInformation(
             serviceModel.serviceId ?: -1L,
             serviceModel.name ?: "",
-            serviceModel.date ?: ZonedDateTime.now()
+            serviceModel.date ?: ZonedDateTime.now(),
+            serviceModel.durationMin ?: 0
         )
     }
 }

@@ -268,7 +268,8 @@ class ServiceDetailFragment : BaseFragment() {
         viewModel.executeGetChatInformation(
             args.service.serviceId ?: -1L,
             args.service.name ?: "",
-            args.service.date ?: ZonedDateTime.now()
+            args.service.date ?: ZonedDateTime.now(),
+            args.service.durationMin ?: 0
         )
         progressBar.gone()
         context?.let { context ->
