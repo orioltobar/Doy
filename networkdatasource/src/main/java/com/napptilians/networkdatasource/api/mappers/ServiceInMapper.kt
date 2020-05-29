@@ -19,10 +19,11 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from?.description ?: "",
             from?.image ?: "",
             from?.day ?: "",
+            from?.hour ?: "",
+            convertDateToUtc(from?.date),
             from?.spots ?: 1,
             from?.attendees ?: 0,
             from?.durationMin ?: 30,
-            from?.hour ?: "",
             from?.ownerId ?: "",
             from?.ownerImage ?: "",
             null
@@ -37,7 +38,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.image ?: "",
             from.day ?: "",
             from.hour ?: "",
-            parseDate(from),
+            parseDate(from.day, from.hour),
             from.spots ?: 1,
             from.attendees ?: 0,
             from.durationMin ?: 30,
@@ -46,12 +47,17 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.assistance?.equals("1") ?: false
         )
 
-    private fun parseDate(model: ServiceApiModel): ZonedDateTime? {
-        return if (model.day == null || model.hour == null) {
+    private fun convertDateToUtc(date: ZonedDateTime?): String? {
+        return date?.toOffsetDateTime()?.atZoneSameInstant(ZoneId.of(UTC_REGION))
+            ?.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+    }
+
+    private fun parseDate(day: String?, hour: String?): ZonedDateTime? {
+        return if (day == null || hour == null) {
             null
         } else {
-            // Hardcoded to Spanish time
-            val dateString = "${model.day}T${model.hour}$TIMEZONE"
+            // TODO: Use the date field directly once it's in the backend
+            val dateString = "${day}T$hour$TIMEZONE"
             try {
                 ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                     .toOffsetDateTime().atZoneSameInstant(ZoneId.systemDefault())
@@ -65,6 +71,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
     companion object {
         private const val TAG = "ServiceInMapper"
         private const val TIMEZONE = "Z"
+        private const val UTC_REGION = "Europe/London"
     }
 }
 
