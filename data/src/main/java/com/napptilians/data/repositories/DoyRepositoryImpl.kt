@@ -143,10 +143,12 @@ class DoyRepositoryImpl @Inject constructor(
     override fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
         flow {
             firebaseDataSource.getChatMessages(chatId).collect { response ->
-                response.flatMap { networkChat ->
+                response.valueOrNull()?.let { networkChat ->
                     dbDataSource.insertChatMessage(networkChat)
+                    val dbChat =
+                        dbDataSource.getChatMessage(networkChat.chatId, networkChat.timeStamp)
+                    emit(dbChat)
                 }
-                emit(response)
             }
         }
 
@@ -169,6 +171,9 @@ class DoyRepositoryImpl @Inject constructor(
                 }
             }
         }
+
+    override suspend fun updateMessageReadStatus(message: ChatModel) =
+        dbDataSource.updateMessageReadStatus(message)
 
     private val comparatorAscending: Comparator<ServiceModel>
         get() = compareBy({ it.date }, { it.name })

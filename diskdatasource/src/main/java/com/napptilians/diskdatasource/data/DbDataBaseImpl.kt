@@ -68,4 +68,16 @@ class DbDataBaseImpl @Inject constructor(
         Success(chatDao.getChatMessages(chatId).map {
             chatDbMapper.mapFromDb(it)
         })
+
+    override suspend fun getChatMessage(
+        chatId: String,
+        timeStamp: Long
+    ): Response<ChatModel, ErrorModel> =
+        chatDao.getChatMessage(chatId, timeStamp)?.let {
+            Success(chatDbMapper.mapFromDb(it))
+        } ?: run { Failure(ErrorModel("db error")) }
+
+
+    override suspend fun updateMessageReadStatus(message: ChatModel): Response<Unit, ErrorModel> =
+        Success(chatDao.updateMessageReadStatus(message.chatId, message.timeStamp, message.read))
 }

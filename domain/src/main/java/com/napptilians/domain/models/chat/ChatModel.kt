@@ -6,5 +6,5 @@ data class ChatModel(
     val senderName: String = "",
     val senderId: String = "",
     val timeStamp: Long = System.currentTimeMillis(),
-    val read: Boolean = false
+    var read: Boolean = false
 )

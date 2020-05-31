@@ -26,4 +26,8 @@ interface DbDataSource {
     suspend fun insertChatMessage(message: ChatModel): Response<Unit, ErrorModel>
 
     suspend fun getChatMessages(chatId: String): Response<List<ChatModel>, ErrorModel>
+
+    suspend fun getChatMessage(chatId: String, timeStamp: Long): Response<ChatModel, ErrorModel>
+
+    suspend fun updateMessageReadStatus(message: ChatModel): Response<Unit, ErrorModel>
 }
