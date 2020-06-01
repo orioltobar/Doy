@@ -78,7 +78,7 @@ class FirebaseDataSourceImpl @Inject constructor(
                 .collection(FIRESTORE_CHAT_TABLE)
                 .document(chatId)
                 .collection(FIRESTORE_CHAT_MESSAGE)
-                .orderBy("timeStamp", Query.Direction.ASCENDING)
+                .orderBy("timeStamp", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, firebaseError ->
                     firebaseError?.let {
                         val error =
