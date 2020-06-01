@@ -21,7 +21,11 @@ class DurationListViewHolder(private val parent: ViewGroup) :
             itemView.durationText.alpha = 1f
         } else {
             itemView.tickImageView.gone()
-            itemView.durationText.alpha = 0.5f
+            if (model.shouldBeSelected) {
+                itemView.durationText.alpha = 1f
+            } else {
+                itemView.durationText.alpha = 0.5f
+            }
         }
     }
 }

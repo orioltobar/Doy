@@ -14,6 +14,7 @@ import com.napptilians.domain.models.service.DurationModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.setNavigationResult
+import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.SelectDurationViewModel
 import kotlinx.android.synthetic.main.select_duration_fragment.*
@@ -59,15 +60,17 @@ class SelectDurationFragment : BaseFragment() {
         durationList.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
         durationListAdapter.updateItems(durations)
         durationListAdapter.setOnClickListener { clickedCategory ->
-            saveButton.isEnabled = true
+            saveButton.visible()
             durationListAdapter.getItems().forEachIndexed { index, durationModel ->
-                if (durationModel != clickedCategory && durationModel.isSelected) {
+                if (durationModel != clickedCategory && (durationModel.isSelected || durationModel.shouldBeSelected)) {
+                    durationModel.shouldBeSelected = false
                     durationModel.isSelected = false
                     durationListAdapter.notifyItemChanged(index)
                 } else if (durationModel == clickedCategory && !durationModel.isSelected) {
                     selectedDurationHours = durationModel.numberOfMinutes
                     durationModel.isSelected = true
                     durationListAdapter.notifyItemChanged(index)
+                    durationList.scrollToPosition(index)
                 }
             }
         }

@@ -6,13 +6,21 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.napptilians.commons.either
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.AddServiceUseCase
+import com.napptilians.domain.usecases.GetUserUseCase
+import com.napptilians.features.Error
+import com.napptilians.features.NewValue
 import com.napptilians.features.UiStatus
 import com.napptilians.features.base.BaseViewModel
+import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
@@ -20,12 +28,16 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 class AddServiceViewModel @Inject constructor(
     private val addServiceUseCase: AddServiceUseCase,
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val getUserUseCase: GetUserUseCase
 ) : BaseViewModel<AddServiceViewModel>() {
 
     private val _addServiceDataStream = MutableLiveData<UiStatus<Long, ErrorModel>>()
     val addServiceDataStream: LiveData<UiStatus<Long, ErrorModel>>
         get() = _addServiceDataStream
+
+    private val _userDataStream = SingleLiveEvent<UiStatus<ChatRequestModel, ErrorModel>>()
+    val userDataStream: LiveData<UiStatus<ChatRequestModel, ErrorModel>> get() = _userDataStream
 
     var service = ServiceModel()
     val serviceCategory = MutableLiveData("")
@@ -48,12 +60,13 @@ class AddServiceViewModel @Inject constructor(
             }
             addSource(serviceDay) {
                 service.day = serviceDay.value
+                service.date = parseDate(service)
                 isValidService.value = isFormValid(service)
             }
             addSource(serviceDate) {
                 service.hour = serviceDate.value
-                isValidService.value = isFormValid(service)
                 service.date = parseDate(service)
+                isValidService.value = isFormValid(service)
             }
             addSource(serviceDescription) {
                 service.description = serviceDescription.value
@@ -77,7 +90,9 @@ class AddServiceViewModel @Inject constructor(
                 && service.durationMin != null
                 && !service.name.isNullOrBlank()
                 && !service.day.isNullOrBlank()
-//                && !service.description.isNullOrBlank()
+                && !service.hour.isNullOrBlank()
+                && !service.description.isNullOrBlank()
+                && service.date?.isAfter(Instant.now().atZone(ZoneId.of(TIMEZONE_REGION))) == true
 
     fun execute() {
         viewModelScope.launch {
@@ -85,6 +100,27 @@ class AddServiceViewModel @Inject constructor(
             service.ownerId = firebaseAuth.currentUser?.uid ?: ""
             val request = addServiceUseCase.execute(service)
             _addServiceDataStream.value = processModel(request)
+        }
+    }
+
+    fun executeGetChatInformation(serviceId: Long, serviceName: String) {
+        viewModelScope.launch {
+            _userDataStream.setValue(emitLoadingState())
+            val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
+            currentUserRequest.either(
+                onSuccess = { userModel ->
+                    val requestModel = ChatRequestModel(
+                        userModel.id,
+                        serviceId,
+                        userModel.name,
+                        serviceName
+                    )
+                    _userDataStream.setValue(NewValue(requestModel))
+                },
+                onFailure = {
+                    _userDataStream.setValue(Error(ErrorModel("")))
+                }
+            )
         }
     }
 
@@ -106,5 +142,6 @@ class AddServiceViewModel @Inject constructor(
     companion object {
         private const val TAG = "AddServiceViewModel"
         private const val TIMEZONE = "+01:00"
+        private const val TIMEZONE_REGION = "Europe/Madrid"
     }
 }

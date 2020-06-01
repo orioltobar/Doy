@@ -4,7 +4,6 @@
         android:id="@+id/categoryListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_home" />
-
     <item
         android:id="@+id/eventsFragment"
         android:enabled="true"

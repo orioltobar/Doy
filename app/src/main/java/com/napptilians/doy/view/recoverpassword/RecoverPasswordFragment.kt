@@ -1,6 +1,8 @@
 package com.napptilians.doy.view.recoverpassword
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +14,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.error.LoginErrors
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
@@ -50,10 +52,34 @@ class RecoverPasswordFragment : BaseFragment() {
             }
         )
 
-        recoverPasswordButton.setOnClickListener {
-            val textField = recoverEmailEditText.text.toString()
-            viewModel.execute(textField)
+        recoverPasswordButton.apply {
+            isEnabled = false
+            alpha = 0.2f
+            setOnClickListener {
+                val textField = recoverEmailEditText.text.toString()
+                viewModel.execute(textField)
+            }
         }
+
+        recoverEmailEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.isEmpty() == false) {
+                    recoverPasswordButton.apply {
+                        isEnabled = true
+                        alpha = 1f
+                    }
+                } else {
+                    recoverPasswordButton.apply {
+                        isEnabled = false
+                        alpha = 0.2f
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     override fun onLoading() {
@@ -61,19 +87,21 @@ class RecoverPasswordFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        recoverPasswordProgressView.gone()
+        recoverPasswordProgressView.invisible()
         when (error.errorCause) {
             LoginErrors.InvalidEmail -> {
                 setErrorFields(recoverEmailInput, R.string.invalid_email)
             }
             else -> {
+                resetField(recoverEmailInput)
                 activity?.let { DoyErrorDialog(it).show() }
             }
         }
     }
 
     private fun processResponse(response: Unit?) {
-        recoverPasswordProgressView.gone()
+        resetField(recoverEmailInput)
+        recoverPasswordProgressView.invisible()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_clap)

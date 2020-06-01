@@ -14,19 +14,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.databinding.AddServiceFragmentBinding
 import com.napptilians.doy.extensions.decodeByteArrayFromBase64
 import com.napptilians.doy.extensions.encodeByteArrayToBase64
 import com.napptilians.doy.extensions.getNavigationResult
-import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.invisible
 import com.napptilians.doy.extensions.resize
 import com.napptilians.doy.extensions.toByteArray
 import com.napptilians.doy.extensions.visible
@@ -34,6 +36,7 @@ import com.napptilians.doy.util.HourFormatter
 import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
+import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.AddServiceViewModel
 import kotlinx.android.synthetic.main.add_service_fragment.createEventButton
 import kotlinx.android.synthetic.main.add_service_fragment.progressBar
@@ -62,6 +65,8 @@ class AddServiceFragment : BaseFragment() {
 
     private val formatter = HourFormatter()
 
+    private var serviceId: Long = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -89,10 +94,6 @@ class AddServiceFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer<String> { selectCategoryEditText.setText(it) }
         )
-        getNavigationResult("selectedSpots")?.observe(
-            viewLifecycleOwner,
-            Observer<String> { selectSpotsEditText.setText(it) }
-        )
         getNavigationResult("selectedDuration")?.observe(
             viewLifecycleOwner,
             Observer<String> {
@@ -100,9 +101,20 @@ class AddServiceFragment : BaseFragment() {
                 viewModel.updateDuration(it.toInt())
             }
         )
+        getNavigationResult("selectedSpots")?.observe(
+            viewLifecycleOwner,
+            Observer<String> { selectSpotsEditText.setText(it) }
+        )
         viewModel.addServiceDataStream.observe(
             viewLifecycleOwner,
             Observer { handleUiStates(it, ::processNewValue) })
+        // SingleLiveEvent Observer
+        viewModel.userDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
+                handleUiStates(status) { scheduleNotification(it) }
+            }
+        )
     }
 
     override fun onResume() {
@@ -131,7 +143,11 @@ class AddServiceFragment : BaseFragment() {
                 AddServiceFragmentDirections.actionAddServiceFragmentToSelectDurationFragment()
             findNavController().navigate(direction)
         }
-        createEventButton.setOnClickListener { createEvent() }
+        createEventButton.setOnClickListener {
+            if (!progressBar.isVisible) {
+                createEvent()
+            }
+        }
     }
 
     private fun openGallery() {
@@ -190,7 +206,12 @@ class AddServiceFragment : BaseFragment() {
     }
 
     private fun processNewValue(serviceId: Long) {
-        progressBar.gone()
+        this.serviceId = serviceId
+        viewModel.executeGetChatInformation(
+            this.serviceId,
+            viewModel.service.name ?: ""
+        )
+        progressBar.invisible()
         activity?.let { activity ->
             DoyDialog(activity).apply {
                 setPopupIcon(R.drawable.ic_thumb_up)
@@ -200,7 +221,6 @@ class AddServiceFragment : BaseFragment() {
                 setOnDismissListener { findNavController().popBackStack() }
             }
         }
-        scheduleNotification(serviceId)
     }
 
     override fun onLoading() {
@@ -208,7 +228,7 @@ class AddServiceFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { DoyErrorDialog(it).show() }
     }
 
@@ -229,13 +249,13 @@ class AddServiceFragment : BaseFragment() {
         }
     }
 
-    private fun scheduleNotification(serviceId: Long) {
+    private fun scheduleNotification(chatRequestModel: ChatRequestModel) {
         context?.let {
             alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val title = viewModel.service.name ?: ""
             val subtitle = getString(
                 R.string.event_reminder_subtitle,
-                MINUTES
+                Notifications.MINUTES
             )
             pendingIntent =
                 Notifications.preparePendingIntent(
@@ -243,12 +263,12 @@ class AddServiceFragment : BaseFragment() {
                     serviceId.toInt(),
                     title,
                     subtitle,
-                    serviceId
+                    chatRequestModel
                 )
             viewModel.service.date?.let { date ->
                 alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
+                    date.toInstant().toEpochMilli().minus(1000 * 60 * Notifications.MINUTES),
                     pendingIntent
                 )
             }
@@ -258,7 +278,6 @@ class AddServiceFragment : BaseFragment() {
     companion object {
         private const val GALLERY_REQUEST_CODE = 100
         private const val SERVICE_DATE_FORMAT = "yyyy-MM-dd"
-        private const val MINUTES = 5
         private val calendar = Calendar.getInstance()
         private val DEFAULT_SERVICE_DATE_YEAR = calendar.get(Calendar.YEAR)
         private val DEFAULT_SERVICE_DATE_MONTH = calendar.get(Calendar.MONTH)

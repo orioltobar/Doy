@@ -89,7 +89,11 @@
     <string name="attend_event_cancel">No quiero asistir</string>
     <string name="confirm_attend_event_cancel">¿Estás seguro de que no quieres asistir al evento?</string>
     <string name="confirm_attend_event_cancel_yes">Estoy seguro, no quiero asistir</string>
-    <string name="your_service">Este evento es tuyo. ¡Gracias por ayudar!</string>
+    <string name="your_service">¡Eres el organizador del evento!</string>
+    <string name="menu_delete">Eliminar evento</string>
+    <string name="menu_edit_event">Editar evento</string>
+    <string name="confirm_delete_event_title">¿Estás seguro de que quieres eliminar el evento?</string>
+    <string name="delete_event_success">Evento eliminado correctamente</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcción…</string>
@@ -124,6 +128,6 @@
     <!-- Notifications -->
     <string name="event_reminder_channel_name">Recordatorios de eventos</string>
     <string name="event_reminder_channel_description">Notificaciones relacionadas con eventos</string>
-    <string name="event_reminder_subtitle">Tu evento empezará en 12$d minutos. ¡Haz click aquí para unirte y pasarlo bien!</string>
+    <string name="event_reminder_subtitle">Tu evento empezará en %1$d minutos. ¡Haz click aquí para unirte y pasarlo bien!</string>
 
 </resources>

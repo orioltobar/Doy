@@ -8,12 +8,15 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.doy.R
 import com.napptilians.doy.receiver.AlarmReceiver
+import org.apache.commons.lang3.SerializationUtils
 
 object Notifications {
 
@@ -21,7 +24,8 @@ object Notifications {
     const val REQUEST_CODE_KEY = "requestCode"
     const val TITLE_KEY = "title"
     const val SUBTITLE_KEY = "subtitle"
-    const val SERVICE_ID_KEY = "serviceId"
+    const val CHAT_REQUEST_KEY = "chatRequest"
+    const val MINUTES = 5
 
     @TargetApi(Build.VERSION_CODES.O)
     fun createChannel(
@@ -45,13 +49,13 @@ object Notifications {
         requestCode: Int,
         title: String?,
         subtitle: String?,
-        serviceId: Long?
+        chatRequestModel: ChatRequestModel?
     ): PendingIntent {
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra(REQUEST_CODE_KEY, requestCode)
             putExtra(TITLE_KEY, title)
             putExtra(SUBTITLE_KEY, subtitle)
-            putExtra(SERVICE_ID_KEY, serviceId)
+            putExtra(CHAT_REQUEST_KEY, SerializationUtils.serialize(chatRequestModel))
         }
         return PendingIntent.getBroadcast(
             context,
@@ -61,13 +65,21 @@ object Notifications {
         )
     }
 
-    fun launchNotification(context: Context, requestCode: Int, title: String, subtitle: String, serviceId: Long) {
+    fun launchNotification(
+        context: Context,
+        extras: Bundle?
+    ) {
+        val chatRequest =
+            SerializationUtils.deserialize<ChatRequestModel>(extras?.getByteArray(CHAT_REQUEST_KEY))
         val pendingIntent = NavDeepLinkBuilder(context)
             .setGraph(R.navigation.nav_graph)
-            .setDestination(R.id.chatListFragment)
-            .setArguments(bundleOf(SERVICE_ID_KEY to serviceId))
+            .setDestination(R.id.chatFragment)
+            .setArguments(bundleOf(CHAT_REQUEST_KEY to chatRequest))
             .createPendingIntent()
 
+        val requestCode = extras?.getInt(REQUEST_CODE_KEY) ?: 0
+        val title = extras?.getString(TITLE_KEY) ?: ""
+        val subtitle = extras?.getString(SUBTITLE_KEY) ?: ""
         val notification = NotificationCompat.Builder(context, NOTIFICATIONS_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_doy_logo_green)
             .setContentTitle(title)
@@ -81,12 +93,6 @@ object Notifications {
         with(NotificationManagerCompat.from(context)) {
             // requestCode is a unique int for each notification that you must define
             notify(requestCode, notification)
-        }
-    }
-
-    fun cancelNotification(context: Context, requestCode: Int) {
-        with(NotificationManagerCompat.from(context)) {
-            cancel(requestCode)
         }
     }
 }

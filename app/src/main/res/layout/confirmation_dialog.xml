@@ -3,24 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     android:padding="@dimen/margin_large">
 
     <TextView
+        android:id="@+id/confirmDialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_large"
         android:fontFamily="@font/raleway_bold"
-        android:text="@string/confirm_attend_event_cancel"
         android:textColor="@color/grayStrong"
-        android:textSize="@dimen/text_size_l" />
+        android:textSize="@dimen/text_size_l"
+        tools:text="@string/confirm_attend_event_cancel" />
 
     <TextView
-        android:id="@+id/cancelAssistanceButton"
+        android:id="@+id/confirmDialogButton"
         style="@style/App.ServiceDetail.Data"
-        android:padding="@dimen/padding_small"
-        android:text="@string/confirm_attend_event_cancel_yes"
-        android:textColor="@color/red" />
+        android:paddingStart="0dp"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingEnd="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
+        android:textColor="@color/red"
+        tools:text="@string/confirm_attend_event_cancel_yes" />
 
 </LinearLayout>

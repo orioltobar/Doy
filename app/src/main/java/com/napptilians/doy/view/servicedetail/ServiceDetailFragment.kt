@@ -1,39 +1,55 @@
 package com.napptilians.doy.view.servicedetail
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
+import androidx.core.graphics.ColorUtils
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatRequestModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.invisible
+import com.napptilians.doy.extensions.marginPx
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.HourFormatter
 import com.napptilians.doy.util.Notifications
-import com.napptilians.doy.view.customviews.CancelAssistDialog
+import com.napptilians.doy.view.customviews.ConfirmationDialog
 import com.napptilians.doy.view.customviews.DoyDialog
 import com.napptilians.doy.view.customviews.DoyErrorDialog
+import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ServiceDetailViewModel
+import kotlinx.android.synthetic.main.service_detail_fragment.appBar
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceButton
 import kotlinx.android.synthetic.main.service_detail_fragment.cancelAssistanceView
+import kotlinx.android.synthetic.main.service_detail_fragment.collapsingToolbar
 import kotlinx.android.synthetic.main.service_detail_fragment.confirmAssistanceButton
 import kotlinx.android.synthetic.main.service_detail_fragment.progressBar
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailAttendees
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDate
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDescription
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailDuration
+import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailOwner
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailSpots
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceDetailTitle
 import kotlinx.android.synthetic.main.service_detail_fragment.serviceOwnerImage
@@ -53,8 +69,6 @@ class ServiceDetailFragment : BaseFragment() {
 
     private val viewModel: ServiceDetailViewModel by viewModels { vmFactory }
     private val args: ServiceDetailFragmentArgs by navArgs()
-    private lateinit var alarmManager: AlarmManager
-    private var pendingIntent: PendingIntent? = null
 
     private val formatter = HourFormatter()
 
@@ -72,30 +86,90 @@ class ServiceDetailFragment : BaseFragment() {
         setupListeners()
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        (appBar?.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+            val heightDp = resources.displayMetrics.heightPixels * APP_BAR_PERCENTAGE_HEIGHT
+            height = heightDp.toInt()
+        }
+    }
+
     private fun initToolbar() {
         context?.let {
-            toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white)
+            toolbar?.apply {
+                navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                setNavigationOnClickListener { findNavController().popBackStack() }
+                if (args.service.ownerId == firebaseAuth.currentUser?.uid) {
+                    menu.clear()
+                    overflowIcon = it.getDrawable(R.drawable.ic_contextual_menu)
+                    inflateMenu(R.menu.service_detail_menu)
+                    toolbar.setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.delete -> {
+                                args.service.serviceId?.let { serviceId ->
+                                    context?.let { context ->
+                                        ConfirmationDialog(context) {
+                                            viewModel.executeDeleteService(serviceId)
+                                        }.apply {
+                                            setTitle(context.getString(R.string.confirm_delete_event_title))
+                                            setButtonText(context.getString(R.string.menu_delete))
+                                            show()
+                                        }
+                                    }
+                                }
+                                return@setOnMenuItemClickListener true
+                            }
+                            else -> return@setOnMenuItemClickListener true
+                        }
+                    }
+                }
+            }
         }
-        toolbar?.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     private fun initObservers() {
         viewModel.addAttendeeServiceDataStream.observe(
             viewLifecycleOwner,
-            Observer { handleUiStates(it, ::processConfirmAssistNewValue) })
+            Observer { handleUiStates(it, ::processConfirmAttendNewValue) })
         viewModel.deleteAttendeeServiceDataStream.observe(
             viewLifecycleOwner,
             Observer { handleUiStates(it, ::processCancelAssistNewValue) })
+        // SingleLiveEvent Observer
+        viewModel.userDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
+                handleUiStates(status) { scheduleNotification(it) }
+            }
+        )
+        viewModel.deleteServiceDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<Unit, ErrorModel>> { status ->
+                handleUiStates(status) { processDeleteEvent() }
+            }
+        )
     }
 
     private fun initViews() {
+        // Disable scroll of App Bar only: https://stackoverflow.com/a/40750707
+        (appBar.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+            val heightDp = resources.displayMetrics.heightPixels * APP_BAR_PERCENTAGE_HEIGHT
+            height = heightDp.toInt()
+            behavior = AppBarLayout.Behavior().apply {
+                setDragCallback(object : DragCallback() {
+                    override fun canDrag(@NonNull appBarLayout: AppBarLayout): Boolean = false
+                })
+            }
+        }
+
+        // Init views that require service detail data
         with(args.service) {
             Glide.with(toolbarImage)
                 .load(image)
                 .into(toolbarImage)
             Glide.with(serviceOwnerImage)
                 .load(ownerImage)
-                .placeholder(R.drawable.ic_profile)
+                .placeholder(R.drawable.ic_service_owner_placeholder)
+                .transform(CircleCrop())
                 .into(serviceOwnerImage)
             serviceDetailTitle.text = name
             serviceDetailDescription.text = description
@@ -104,15 +178,15 @@ class ServiceDetailFragment : BaseFragment() {
             serviceDetailSpots.text = "${spots ?: 0}"
             setAttendees(attendees)
             if (ownerId?.equals(firebaseAuth.currentUser?.uid) == true) {
+                serviceDetailOwner.visible()
+                serviceDetailAttendees.marginPx(bottom = 0)
                 confirmAssistanceButton.gone()
                 cancelAssistanceView.gone()
-                context?.let {
-                    Toast.makeText(it, it.getString(R.string.your_service), Toast.LENGTH_LONG)
-                        .show()
-                }
             } else {
+                serviceDetailOwner.gone()
+                serviceDetailAttendees.marginPx(bottom = resources.getDimension(R.dimen.margin_space_bottom).toInt())
                 if (assistance) {
-                    confirmAssistanceButton.invisible()
+                    confirmAssistanceButton.gone()
                     cancelAssistanceView.visible()
                 } else {
                     confirmAssistanceButton.visible()
@@ -141,12 +215,47 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun setupListeners() {
+        appBar.addOnOffsetChangedListener(OnOffsetChangedListener { _, verticalOffset ->
+            val currentHeight = collapsingToolbar.height + verticalOffset
+            val collapsedHeight = ViewCompat.getMinimumHeight(collapsingToolbar)
+            val startCollapsingHeight = 2 * collapsedHeight
+            context?.let {
+                when {
+                    currentHeight <= collapsedHeight -> {
+                        // Collapsed
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_no_shadow)
+                    }
+                    currentHeight < startCollapsingHeight -> {
+                        // Between collapsed and middle
+                        val opacity = MAX_ALPHA * currentHeight / startCollapsingHeight
+                        val alpha = ((MAX_ALPHA - opacity) * ALPHA_OFFSET).toInt()
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                        toolbar?.navigationIcon?.colorFilter =
+                            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                                ColorUtils.setAlphaComponent(
+                                    ContextCompat.getColor(it, R.color.white),
+                                    alpha
+                                ),
+                                BlendModeCompat.SRC_ATOP
+                            )
+                    }
+                    else -> {
+                        // Between middle and expanded
+                        toolbar?.navigationIcon = it.getDrawable(R.drawable.ic_back_white_shadow)
+                    }
+                }
+            }
+        })
         confirmAssistanceButton.setOnClickListener {
             viewModel.executeAdd(args.service.serviceId ?: -1L)
         }
         cancelAssistanceButton.setOnClickListener {
             context?.let { context ->
-                CancelAssistDialog(context) { performCancelAssist() }.show()
+                ConfirmationDialog(context) { performCancelAssist() }.apply {
+                    setTitle(context.getString(R.string.confirm_attend_event_cancel))
+                    setButtonText(context.getString(R.string.confirm_attend_event_cancel_yes))
+                    show()
+                }
             }
         }
     }
@@ -155,10 +264,14 @@ class ServiceDetailFragment : BaseFragment() {
         viewModel.executeDelete(args.service.serviceId ?: -1L)
     }
 
-    private fun processConfirmAssistNewValue(unit: Unit) {
+    private fun processConfirmAttendNewValue(unit: Unit) {
+        viewModel.executeGetChatInformation(
+            args.service.serviceId ?: -1L,
+            args.service.name ?: ""
+        )
         progressBar.gone()
-        activity?.let { activity ->
-            DoyDialog(activity).apply {
+        context?.let { context ->
+            DoyDialog(context).apply {
                 setPopupIcon(R.drawable.ic_thumb_up)
                 setPopupTitle(context.resources.getString(R.string.add_attendee_success))
                 setPopupSubtitle(context.resources.getString(R.string.add_attendee_success_message))
@@ -169,7 +282,6 @@ class ServiceDetailFragment : BaseFragment() {
         setAttendees(args.service.attendees)
         confirmAssistanceButton.invisible()
         cancelAssistanceView.visible()
-        scheduleNotification()
     }
 
     private fun processCancelAssistNewValue(unit: Unit) {
@@ -181,8 +293,20 @@ class ServiceDetailFragment : BaseFragment() {
         cancelNotification()
     }
 
+    private fun processDeleteEvent() {
+        context?.let { context ->
+            DoyDialog(context).apply {
+                setPopupIcon(R.drawable.ic_thumb_up)
+                setPopupTitle(context.resources.getString(R.string.delete_event_success))
+                setPopupSubtitle("")
+                show()
+                setOnDismissListener { findNavController().popBackStack() }
+            }
+        }
+    }
+
     override fun onError(error: ErrorModel) {
-        progressBar.gone()
+        progressBar.invisible()
         activity?.let { DoyErrorDialog(it).show() }
     }
 
@@ -190,27 +314,26 @@ class ServiceDetailFragment : BaseFragment() {
         progressBar.visible()
     }
 
-    private fun scheduleNotification() {
+    private fun scheduleNotification(requestModel: ChatRequestModel) {
         context?.let {
-            alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val title = serviceDetailTitle.text.toString()
             val subtitle = getString(
                 R.string.event_reminder_subtitle,
-                MINUTES
+                Notifications.MINUTES
             )
-            val serviceId = args.service.serviceId ?: -1L
-            pendingIntent =
+            val pendingIntent =
                 Notifications.preparePendingIntent(
                     it,
                     args.service.serviceId?.toInt() ?: 0,
                     title,
                     subtitle,
-                    serviceId
+                    requestModel
                 )
             args.service.date?.let { date ->
                 alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-                    date.toInstant().toEpochMilli().minus(1000 * 60 * MINUTES),
+                    date.toInstant().toEpochMilli().minus(1000 * 60 * Notifications.MINUTES),
                     pendingIntent
                 )
             }
@@ -218,13 +341,29 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     private fun cancelNotification() {
-        pendingIntent?.let {
+        context?.let {
+            val alarmManager = it.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val title = serviceDetailTitle.text.toString()
+            val subtitle = getString(
+                R.string.event_reminder_subtitle,
+                Notifications.MINUTES
+            )
+            val pendingIntent =
+                Notifications.preparePendingIntent(
+                    it,
+                    args.service.serviceId?.toInt() ?: 0,
+                    title,
+                    subtitle,
+                    null
+                )
             alarmManager.cancel(pendingIntent)
         }
     }
 
     companion object {
         private const val DATE_FORMAT_USER = "EEEE d MMM, k:mm"
-        private const val MINUTES = 5
+        private const val MAX_ALPHA = 255
+        private const val ALPHA_OFFSET = 0.85
+        private const val APP_BAR_PERCENTAGE_HEIGHT = 0.35
     }
 }

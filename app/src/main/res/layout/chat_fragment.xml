@@ -61,8 +61,8 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingTop="@dimen/margin_small"
-        android:paddingBottom="@dimen/margin_small"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@id/start_vertical_guideline">
