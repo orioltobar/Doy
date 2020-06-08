@@ -31,8 +31,6 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines_version}"
 
-    api "com.jakewharton.threetenabp:threetenabp:${Versions.threetenapb_version}"
-
     // Testing
     testImplementation "junit:junit:${Versions.junit_version}"
     testImplementation "io.mockk:mockk:${Versions.mockk_version}"

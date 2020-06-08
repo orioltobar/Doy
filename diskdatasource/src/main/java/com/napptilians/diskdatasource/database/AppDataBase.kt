@@ -6,14 +6,24 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.napptilians.diskdatasource.Converters
+import com.napptilians.diskdatasource.dao.ChatDao
 import com.napptilians.diskdatasource.dao.DeviceDao
 import com.napptilians.diskdatasource.dao.ExampleDao
 import com.napptilians.diskdatasource.dao.UserDao
+import com.napptilians.diskdatasource.models.ChatMessageDbModel
 import com.napptilians.diskdatasource.models.DeviceDbModel
 import com.napptilians.diskdatasource.models.MovieDbModel
 import com.napptilians.diskdatasource.models.UserDbModel
 
-@Database(version = 1, entities = [MovieDbModel::class, DeviceDbModel::class, UserDbModel::class])
+@Database(
+    version = 1, entities =
+    [
+        MovieDbModel::class,
+        DeviceDbModel::class,
+        UserDbModel::class,
+        ChatMessageDbModel::class
+    ]
+)
 @TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
 
@@ -22,6 +32,8 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun deviceDao(): DeviceDao
 
     abstract fun userDao(): UserDao
+
+    abstract fun chatDao(): ChatDao
 
     companion object {
 

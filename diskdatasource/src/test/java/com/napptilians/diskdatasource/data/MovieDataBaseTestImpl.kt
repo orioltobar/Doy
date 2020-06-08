@@ -29,7 +29,12 @@ class MovieDataBaseTestImpl {
     private val dbDataSource by lazy {
         DbDataBaseImpl(
             exampleDao,
-            movieDbMapper
+            movieDbMapper,
+            mockk(),
+            mockk(),
+            mockk(),
+            mockk(),
+            mockk()
         )
     }
 
