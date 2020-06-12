@@ -68,7 +68,6 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
 
     companion object {
         private const val TAG = "ServiceInMapper"
-        private const val TIMEZONE = "Z"
         private const val UTC_REGION = "Europe/London"
     }
 }
