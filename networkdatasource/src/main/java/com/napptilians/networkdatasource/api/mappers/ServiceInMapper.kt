@@ -38,7 +38,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.image ?: "",
             from.day ?: "",
             from.hour ?: "",
-            parseDate(from.day, from.hour),
+            parseDate(from.date),
             from.spots ?: 1,
             from.attendees ?: 0,
             from.durationMin ?: 30,
@@ -52,17 +52,15 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             ?.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
     }
 
-    private fun parseDate(day: String?, hour: String?): ZonedDateTime? {
-        return if (day == null || hour == null) {
+    private fun parseDate(date: String?): ZonedDateTime? {
+        return if (date == null) {
             null
         } else {
-            // TODO: Use the date field directly once it's in the backend
-            val dateString = "${day}T$hour$TIMEZONE"
             try {
-                ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                ZonedDateTime.parse(date, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                     .toOffsetDateTime().atZoneSameInstant(ZoneId.systemDefault())
             } catch (e: Exception) {
-                Log.d(TAG, "There was an error parsing: $dateString")
+                Log.d(TAG, "There was an error parsing: $date")
                 null
             }
         }
