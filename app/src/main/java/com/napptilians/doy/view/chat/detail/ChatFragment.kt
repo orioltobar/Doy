@@ -82,8 +82,6 @@ class ChatFragment : BaseFragment() {
         val chatId = serviceId.toString()
         adapter.setUserId(currentUserId.toString())
         fireBaseChatMessages.adapter = adapter
-        // Show bottom messages first: https://stackoverflow.com/a/27069845
-        (fireBaseChatMessages?.layoutManager as? LinearLayoutManager)?.stackFromEnd = true
 
         chatFragmentSendButton.setOnClickListener {
             if (chatFragmentEditText.text?.isNotEmpty() == true) {

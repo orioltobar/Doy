@@ -24,7 +24,9 @@ class ChatAdapter @Inject constructor() :
         chatMessages.takeIf { !it.contains(message) }?.let {
             chatMessages.add(message)
         }
-        chatMessages.filter { it.message.isNotEmpty() }
-        updateItems(chatMessages)
+        val resultList = chatMessages
+            .filter { it.message.isNotEmpty() }
+            .sortedByDescending { it.timeStamp }
+        updateItems(resultList)
     }
 }
