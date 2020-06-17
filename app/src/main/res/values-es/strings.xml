@@ -115,7 +115,7 @@
     <!-- My events -->
     <string name="your_events">Tus eventos</string>
     <string name="tab_upcoming">Próximos</string>
-    <string name="tab_active">Activos</string>
+    <string name="tab_active">En curso</string>
     <string name="tab_past">Pasados</string>
     <string name="loading_events">Cargando eventos…</string>
     <string name="no_events">Parece que no tienes ningún evento en esta sección.</string>
@@ -123,7 +123,7 @@
     <!-- Chat -->
     <string name="chat">Chat</string>
     <string name="loading_chats">Cargando chats…</string>
-    <string name="no_chats">Todavía no tienes ningún chat abierto. \n\nApúntate a un evento para iniciar un chat</string>
+    <string name="no_chats">Todavía no tienes ningún chat abierto. \n\nApúntate a un evento para iniciar un chat.\n\nCuando llegue la hora del evento, te aparecerá un botón para unirte a la videollamada.</string>
     <string name="chat_in_progress">Estamos trabajando a toda velocidad para implementar un chat grupal con soporte de videollamadas. Por el momento, ¡escribe unos mensajes al organizador!</string>
     <string name="send_message_hint">Escribe un mensaje</string>
     <string name="event_started_title">¡El evento ha empezado!</string>

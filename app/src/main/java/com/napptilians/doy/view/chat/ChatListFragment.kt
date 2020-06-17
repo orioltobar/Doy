@@ -108,7 +108,6 @@ class ChatListFragment : BaseFragment() {
         )
         (chatsAdapter.getItem(2) as ChatTabFragment).apply {
             setItems(model[ChatListItemModel.PAST] ?: listOf())
-            setAlphaToPastChats(0.4f)
         }
     }
 
