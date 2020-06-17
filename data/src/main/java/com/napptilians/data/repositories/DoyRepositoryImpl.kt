@@ -9,6 +9,7 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.flatMap
 import com.napptilians.commons.map
 import com.napptilians.commons.singleSourceOfTruth
+import com.napptilians.commons.valueOrNull
 import com.napptilians.data.datasources.DbDataSource
 import com.napptilians.data.datasources.FirebaseDataSource
 import com.napptilians.data.datasources.NetworkDataSource
@@ -19,6 +20,8 @@ import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
 import com.napptilians.domain.repositories.DoyRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class DoyRepositoryImpl @Inject constructor(
@@ -145,7 +148,39 @@ class DoyRepositoryImpl @Inject constructor(
     ): Response<Unit, ErrorModel> = firebaseDataSource.sendChatMessage(chatId, message)
 
     override fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>> =
-        firebaseDataSource.getChatMessages(chatId)
+        flow {
+            firebaseDataSource.getChatMessages(chatId).collect { response ->
+                response.valueOrNull()?.let { networkChat ->
+                    dbDataSource.insertChatMessage(networkChat)
+                    val dbChat =
+                        dbDataSource.getChatMessage(networkChat.chatId, networkChat.timeStamp)
+                    emit(dbChat)
+                }
+            }
+        }
+
+    override fun getLastChatMessage(chatId: String): Flow<Response<Pair<ChatModel, Int>, ErrorModel>> =
+        flow {
+            firebaseDataSource.getLastChatMessage(chatId).collect { response ->
+                response.valueOrNull()?.let { networkChatList ->
+                    networkChatList.forEach { networkChat ->
+                        dbDataSource.insertChatMessage(
+                            networkChat
+                        )
+                    }
+                }
+                dbDataSource.getChatMessages(chatId).valueOrNull()?.let { dbList ->
+                    val unreadMessages = dbList.filter { !it.read }.size
+                    dbList.takeIf { it.isNotEmpty() }?.let { safeList ->
+                        val chatWithUnreadMessages = Pair(safeList.last(), unreadMessages)
+                        emit(Success(chatWithUnreadMessages))
+                    }
+                }
+            }
+        }
+
+    override suspend fun updateMessageReadStatus(message: ChatModel) =
+        dbDataSource.updateMessageReadStatus(message)
 
     override suspend fun deleteService(serviceId: Long): Response<Unit, ErrorModel> =
         networkDataSource.deleteService(serviceId)

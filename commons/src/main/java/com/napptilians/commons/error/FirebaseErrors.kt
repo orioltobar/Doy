@@ -7,5 +7,5 @@ sealed class FirebaseErrors : Errors {
     object UserAlreadyExists : FirebaseErrors()
     object ErrorSendingMessage : FirebaseErrors()
     object ErrorReceivingMessage : FirebaseErrors()
-    object EmptyMessage : FirebaseErrors()
+    object EmptyChat : FirebaseErrors()
 }

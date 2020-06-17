@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatListItemModel
 import com.napptilians.domain.models.chat.ChatRequestModel
-import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.GetChatsUseCase
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -22,7 +22,6 @@ import com.napptilians.features.viewmodel.ChatListViewModel
 import kotlinx.android.synthetic.main.chat_list_fragment.chatListTitle
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsTabLayout
 import kotlinx.android.synthetic.main.chat_list_fragment.chatsViewPager
-import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 class ChatListFragment : BaseFragment() {
@@ -44,19 +43,25 @@ class ChatListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
 
-        // SingleLiveEvent Observer
+        viewModel.getChats()
+
+        // SingleLiveEvent Observers
         viewModel.userDataStream.observe(
             viewLifecycleOwner,
             Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
                 handleUiStates(status) { processTargetUser(it) }
             }
         )
-
-        // LiveData Observer
         viewModel.chatListDataStream.observe(
             viewLifecycleOwner,
-            Observer<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>> {
+            Observer<UiStatus<Map<String, List<ChatListItemModel>>, ErrorModel>> {
                 handleUiStates(it, ::processNewValue)
+            }
+        )
+        viewModel.chatUpdateDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatListItemModel, ErrorModel>> {
+                handleUiStates(it) { response -> processNewMessage(response) }
             }
         )
     }
@@ -93,17 +98,38 @@ class ChatListFragment : BaseFragment() {
     override fun onLoading() {
     }
 
-    private fun processNewValue(model: Map<String, List<ServiceModel>>) {
+    private fun processNewValue(model: Map<String, List<ChatListItemModel>>) {
         chatsViewPager.visible()
         (chatsAdapter.getItem(0) as ChatTabFragment).setItems(
-            model[GetChatsUseCase.UPCOMING] ?: listOf()
+            model[ChatListItemModel.UPCOMING] ?: listOf()
         )
         (chatsAdapter.getItem(1) as ChatTabFragment).setItems(
-            model[GetChatsUseCase.ACTIVE] ?: listOf()
+            model[ChatListItemModel.ACTIVE] ?: listOf()
         )
         (chatsAdapter.getItem(2) as ChatTabFragment).apply {
-            setItems(model[GetChatsUseCase.PAST] ?: listOf())
+            setItems(model[ChatListItemModel.PAST] ?: listOf())
             setAlphaToPastChats(0.4f)
+        }
+    }
+
+    private fun processNewMessage(model: ChatListItemModel) {
+        when (model.status) {
+            ChatListItemModel.Status.Upcoming -> {
+                (chatsAdapter.getItem(0) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Active -> {
+                (chatsAdapter.getItem(1) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Past -> {
+                (chatsAdapter.getItem(2) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Unknown -> { }
         }
     }
 
@@ -114,12 +140,12 @@ class ChatListFragment : BaseFragment() {
         findNavController().navigate(direction)
     }
 
-    private fun navigateToChat(serviceModel: ServiceModel) {
+    private fun navigateToChat(chatUiModel: ChatListItemModel) {
         viewModel.getChatInformation(
-            serviceModel.serviceId ?: -1L,
-            serviceModel.name ?: "",
-            serviceModel.date ?: ZonedDateTime.now(),
-            serviceModel.durationMin ?: 0
+            chatUiModel.id,
+            chatUiModel.name,
+            chatUiModel.date,
+            chatUiModel.duration
         )
     }
 }

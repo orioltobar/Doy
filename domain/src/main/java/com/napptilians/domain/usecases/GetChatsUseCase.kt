@@ -23,41 +23,7 @@ class GetChatsUseCase @Inject constructor(
         serviceId: Long? = null,
         uid: String? = null,
         ascending: Boolean = true
-    ): Response<Map<String, List<ServiceModel>>, ErrorModel> {
-        val upcomingEvents = mutableListOf<ServiceModel>()
-        val activeEvents = mutableListOf<ServiceModel>()
-        val pastEvents = mutableListOf<ServiceModel>()
-        return withContext(ioDispatcher) {
-            val request = doyRepository.getServices(categoryIds, serviceId, uid, ascending)
-            request.flatMap { serviceList ->
-                serviceList.map { service ->
-                    service.date?.let { date ->
-                        val currentTime = Instant.now().atZone(ZoneId.systemDefault())
-                        val serviceEndTime = date.plusMinutes(service.durationMin?.toLong() ?: 0)
-                        if (currentTime >= date && currentTime <= serviceEndTime) {
-                            activeEvents.add(service)
-                        } else if (date >= currentTime) {
-                            upcomingEvents.add(service)
-                        } else {
-                            pastEvents.add(service)
-                        }
-                    }
-                }
-                Success(
-                    mapOf(
-                        UPCOMING to upcomingEvents,
-                        ACTIVE to activeEvents,
-                        PAST to pastEvents
-                    )
-                )
-            }
-        }
-    }
-
-    companion object {
-        const val UPCOMING = "upcoming"
-        const val ACTIVE = "active"
-        const val PAST = "past"
+    ): Response<List<ServiceModel>, ErrorModel> = withContext(ioDispatcher) {
+        doyRepository.getServices(categoryIds, serviceId, uid, ascending)
     }
 }
-

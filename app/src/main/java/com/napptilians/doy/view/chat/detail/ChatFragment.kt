@@ -118,11 +118,6 @@ class ChatFragment : BaseFragment() {
 
     private fun refreshRecycler(messages: ChatModel) {
         adapter.updateItem(messages)
-        // Apply smooth scroll in order to make it work: https://stackoverflow.com/a/37719465
-        val nonEmptyMessages = adapter.getItems().filter { it.message.isNotEmpty() }
-        if (nonEmptyMessages.isNotEmpty()) {
-            fireBaseChatMessages?.smoothScrollToPosition(nonEmptyMessages.size - 1)
-        }
     }
 
     private fun initVideoChatSettings() {
@@ -166,7 +161,7 @@ class ChatFragment : BaseFragment() {
     override fun onError(error: ErrorModel) {
         chatFragmentProgressView.gone()
         when (error.errorCause) {
-            FirebaseErrors.EmptyMessage -> {
+            FirebaseErrors.EmptyChat -> {
             }
             else -> {
                 activity?.let {

@@ -110,6 +110,8 @@
         android:layout_marginTop="@dimen/margin_xsmall"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/chatFragmentTextContainer"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
