@@ -24,6 +24,7 @@ import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 class ChatListViewModel @Inject constructor(
@@ -57,7 +58,12 @@ class ChatListViewModel @Inject constructor(
         }
     }
 
-    fun getChatInformation(serviceId: Long, serviceName: String) {
+    fun getChatInformation(
+        serviceId: Long,
+        serviceName: String,
+        serviceStartDate: ZonedDateTime,
+        serviceDuration: Int
+    ) {
         viewModelScope.launch {
             _userDataStream.setValue(emitLoadingState())
             val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
@@ -67,7 +73,9 @@ class ChatListViewModel @Inject constructor(
                         userModel.id,
                         serviceId,
                         userModel.name,
-                        serviceName
+                        serviceName,
+                        serviceStartDate,
+                        serviceDuration
                     )
                     _userDataStream.setValue(NewValue(requestModel))
                 },
@@ -78,23 +86,44 @@ class ChatListViewModel @Inject constructor(
         }
     }
 
-    private suspend fun processServicesResponse(request: Response<Map<String, List<ServiceModel>>, ErrorModel>)
+    private suspend fun processServicesResponse(request: Response<List<ServiceModel>, ErrorModel>)
             : Response<Map<String, List<ChatListItemModel>>, ErrorModel> =
         supervisorScope {
             if (request is Success) {
                 val filteredResult: MutableMap<String, List<ChatListItemModel>> = mutableMapOf()
-                val mapOfEvents = request.result
-                for ((key, services) in mapOfEvents) {
-                    val chatUiList = mutableListOf<ChatListItemModel>()
-                    services.map { service ->
-                        chatUiList.add(getChatListItemModel(service, null))
-                        viewModelScope.launch {
-                            initChatObserver(service)
+                val services = request.result
+
+                val upcomingChats = mutableListOf<ChatListItemModel>()
+                val activeChats = mutableListOf<ChatListItemModel>()
+                val pastChats = mutableListOf<ChatListItemModel>()
+                services.map { service ->
+                    val chat = getChatListItemModel(service, null)
+                    when (chat.status) {
+                        ChatListItemModel.Status.Upcoming -> {
+                            upcomingChats.add(chat)
+                        }
+                        ChatListItemModel.Status.Active -> {
+                            activeChats.add(chat)
+                        }
+                        ChatListItemModel.Status.Past -> {
+                            pastChats.add(chat)
+                        }
+                        ChatListItemModel.Status.Unknown -> {
                         }
                     }
-                    filteredResult[key] = chatUiList.toList()
+                    //chatUiList.add(element)
+                    viewModelScope.launch {
+                        initChatObserver(service)
+                    }
                 }
-                Success(filteredResult)
+
+                Success(
+                    mapOf(
+                        ChatListItemModel.UPCOMING to upcomingChats,
+                        ChatListItemModel.ACTIVE to activeChats,
+                        ChatListItemModel.PAST to pastChats
+                    )
+                )
             } else {
                 Failure((request as Failure).error)
             }
@@ -112,17 +141,24 @@ class ChatListViewModel @Inject constructor(
 
     private fun getChatListItemModel(
         service: ServiceModel,
-        response: Response<Pair<ChatModel,Int>, ErrorModel>?
-    ) =
-        ChatListItemModel(
+        response: Response<Pair<ChatModel, Int>, ErrorModel>?
+    ): ChatListItemModel {
+
+        val chatModel = (response as? Success)?.result?.first
+        val unreadMessages = (response as? Success)?.result?.second
+        return ChatListItemModel(
             service.serviceId ?: -1L,
             service.name ?: "",
             service.image ?: "",
-            (response as? Success)?.result?.first?.senderName ?: "",
-            (response as? Success)?.result?.first?.message ?: "",
-            (response as? Success)?.result?.first?.timeStamp?.let { DateFormatter.format(it) } ?: "",
-            ChatListItemModel.getCurrentStatus(service.date),
-            (response as? Success)?.result?.first?.read ?: false,
-            (response as? Success)?.result?.second ?: 0
+            chatModel?.senderName ?: "",
+            chatModel?.message ?: "",
+            chatModel?.timeStamp?.let { DateFormatter.format(it) }
+                ?: "",
+            ChatListItemModel.getCurrentStatus(service.date, service.durationMin),
+            chatModel?.read ?: false,
+            unreadMessages ?: 0,
+            service.date ?: ZonedDateTime.now(),
+            service.durationMin ?: 0
         )
+    }
 }

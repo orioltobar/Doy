@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:fontFamily="@font/raleway_bold"
         android:gravity="center"
-        android:text="@string/loading_events"
+        android:text="@string/loading_chats"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         android:visibility="visible"

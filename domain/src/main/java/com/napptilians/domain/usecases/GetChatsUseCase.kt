@@ -23,30 +23,7 @@ class GetChatsUseCase @Inject constructor(
         serviceId: Long? = null,
         uid: String? = null,
         ascending: Boolean = true
-    ): Response<Map<String, List<ServiceModel>>, ErrorModel> {
-        val upcomingEvents = mutableListOf<ServiceModel>()
-        val pastEvents = mutableListOf<ServiceModel>()
-        return withContext(ioDispatcher) {
-            val request = doyRepository.getServices(categoryIds, serviceId, uid, ascending)
-            request.flatMap { serviceList ->
-                serviceList.map { service ->
-                    service.date?.let {
-                        if (it >= Instant.now().atZone(ZoneId.of(TIMEZONE))) {
-                            upcomingEvents.add(service)
-                        } else {
-                            pastEvents.add(service)
-                        }
-                    }
-                }
-                Success(mapOf(UPCOMING to upcomingEvents, PAST to pastEvents))
-            }
-        }
-    }
-
-    companion object {
-        private const val TIMEZONE = "Europe/Madrid"
-        const val UPCOMING = "upcoming"
-        const val PAST = "past"
+    ): Response<List<ServiceModel>, ErrorModel> = withContext(ioDispatcher) {
+        doyRepository.getServices(categoryIds, serviceId, uid, ascending)
     }
 }
-

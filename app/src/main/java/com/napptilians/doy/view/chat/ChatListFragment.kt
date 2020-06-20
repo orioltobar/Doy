@@ -78,11 +78,15 @@ class ChatListFragment : BaseFragment() {
             )
             addFragment(
                 ChatTabFragment { navigateToChat(it) },
+                getString(R.string.tab_active)
+            )
+            addFragment(
+                ChatTabFragment { navigateToChat(it) },
                 getString(R.string.tab_past)
             )
         }
         chatsViewPager.adapter = chatsAdapter
-        chatsViewPager.offscreenPageLimit = 2
+        chatsViewPager.offscreenPageLimit = 3
         chatsTabLayout.setupWithViewPager(chatsViewPager)
     }
 
@@ -97,11 +101,13 @@ class ChatListFragment : BaseFragment() {
     private fun processNewValue(model: Map<String, List<ChatListItemModel>>) {
         chatsViewPager.visible()
         (chatsAdapter.getItem(0) as ChatTabFragment).setItems(
-            model[GetChatsUseCase.UPCOMING] ?: listOf()
+            model[ChatListItemModel.UPCOMING] ?: listOf()
         )
-        (chatsAdapter.getItem(1) as ChatTabFragment).apply {
-            setItems(model[GetChatsUseCase.PAST] ?: listOf())
-            setAlphaToPastChats(0.4f)
+        (chatsAdapter.getItem(1) as ChatTabFragment).setItems(
+            model[ChatListItemModel.ACTIVE] ?: listOf()
+        )
+        (chatsAdapter.getItem(2) as ChatTabFragment).apply {
+            setItems(model[ChatListItemModel.PAST] ?: listOf())
         }
     }
 
@@ -112,11 +118,17 @@ class ChatListFragment : BaseFragment() {
                     model
                 )
             }
-            ChatListItemModel.Status.Past -> {
+            ChatListItemModel.Status.Active -> {
                 (chatsAdapter.getItem(1) as ChatTabFragment).updateSingleItem(
                     model
                 )
             }
+            ChatListItemModel.Status.Past -> {
+                (chatsAdapter.getItem(2) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Unknown -> { }
         }
     }
 
@@ -130,7 +142,9 @@ class ChatListFragment : BaseFragment() {
     private fun navigateToChat(chatUiModel: ChatListItemModel) {
         viewModel.getChatInformation(
             chatUiModel.id,
-            chatUiModel.name
+            chatUiModel.name,
+            chatUiModel.date,
+            chatUiModel.duration
         )
     }
 }

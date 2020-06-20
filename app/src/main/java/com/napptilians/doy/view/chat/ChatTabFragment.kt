@@ -52,10 +52,6 @@ class ChatTabFragment(
         chatListAdapter.updateItem(chat)
     }
 
-    fun setAlphaToPastChats(alpha: Float) {
-        chatsList.alpha = alpha
-    }
-
     override fun onError(error: ErrorModel) {}
 
     override fun onLoading() {}
