@@ -29,7 +29,7 @@
         <View
             android:id="@+id/profileNameReadModeShape"
             android:layout_width="0dp"
-            android:layout_height="116dp"
+            android:layout_height="@dimen/profile_box_size"
             android:background="@drawable/bg_dashed_rectangle" />
 
         <TextView

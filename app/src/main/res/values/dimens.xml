@@ -63,6 +63,7 @@
 
     <!-- User profile -->
     <dimen name="profile_image_size">116dp</dimen>
+    <dimen name="profile_box_size">116dp</dimen>
     <dimen name="profile_card_radius">58dp</dimen>
     <dimen name="profile_card_elevation">6dp</dimen>
 
