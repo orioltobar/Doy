@@ -306,7 +306,7 @@ class ServiceDetailFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        progressBar.invisible()
+        progressBar.gone()
         activity?.let { DoyErrorDialog(it).show() }
     }
 

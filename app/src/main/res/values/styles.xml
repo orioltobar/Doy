@@ -17,6 +17,18 @@
         <item name="android:textColor">@color/grayStrong</item>
         <item name="android:layout_gravity">center</item>
     </style>
+    
+    <style name="App.LineProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/margin_medium</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="App.CircleProgressBar">
+        <item name="android:layout_width">@dimen/loading_progress_size</item>
+        <item name="android:layout_height">@dimen/loading_progress_size</item>
+    </style>
 
     <style name="App.Intro">
         <item name="android:layout_width">0dp</item>
