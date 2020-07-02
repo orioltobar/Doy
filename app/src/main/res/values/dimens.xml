@@ -40,7 +40,11 @@
     <dimen name="dashed_rectangle_dash_width">3dp</dimen>
     <dimen name="dashed_rectangle_dash_gap_size">3dp</dimen>
 
-    <!-- Category List items -->
+    <!-- Line spacing -->
+    <dimen name="line_spacing_extra">6sp</dimen>
+
+
+    <!-- Category list -->
     <dimen name="category_text_size">16sp</dimen>
     <dimen name="category_radius">8dp</dimen>
     <dimen name="category_max_height">100dp</dimen>

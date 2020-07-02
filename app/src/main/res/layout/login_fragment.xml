@@ -67,7 +67,6 @@
             app:layout_constraintTop_toBottomOf="@+id/compoundLogoBackground">
 
             <TextView
-                android:id="@+id/loginText"
                 style="@style/App.Intro"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"

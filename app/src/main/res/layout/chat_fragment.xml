@@ -71,7 +71,7 @@
             android:id="@+id/chatFragmentEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="1"
             android:background="@drawable/bg_round_corners"
             android:fontFamily="@font/raleway_medium"
             android:hint="@string/send_message_hint"

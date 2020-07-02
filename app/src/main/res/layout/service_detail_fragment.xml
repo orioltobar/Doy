@@ -69,7 +69,8 @@
 
             <TextView
                 android:id="@+id/serviceDetailTitle"
-                style="@style/App.ServiceDetail.Title"
+                style="@style/App.TitleXl"
+                android:lineSpacingExtra="@dimen/line_spacing_extra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xsmall"

@@ -22,11 +22,9 @@
 
     <TextView
         android:id="@+id/titleText"
+        style="@style/App.TitleXl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/raleway_extrabold"
-        android:textColor="@color/grayStrong"
-        android:textSize="@dimen/text_size_xl"
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
