@@ -124,7 +124,7 @@
     <string name="chat">Chat</string>
     <string name="loading_chats">Cargando chats…</string>
     <string name="loading_chat_messages">Cargando mensajes…</string>
-    <string name="no_chats">Todavía no tienes ningún chat abierto. \n\nApúntate a un evento para iniciar un chat</string>
+    <string name="no_chats">Todavía no tienes ningún chat abierto.\n\nApúntate a un evento para iniciar un chat.\n\nCuando llegue la hora del evento, te aparecerá un botón para unirte a la videollamada.</string>
     <string name="chat_in_progress">Estamos trabajando a toda velocidad para implementar un chat grupal con soporte de videollamadas. Por el momento, ¡escribe unos mensajes al organizador!</string>
     <string name="send_message_hint">Escribe un mensaje</string>
     <string name="event_started_title">¡El evento ha empezado!</string>

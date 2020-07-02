@@ -124,7 +124,7 @@
     <string name="chat">Xat</string>
     <string name="loading_chats">Carregant xats…</string>
     <string name="loading_chat_messages">Carregant missatges…</string>
-    <string name="no_chats">Encara no tens cap xat obert. \n\nApunta\'t a un esdeveniment per iniciar un xat</string>
+    <string name="no_chats">Encara no tens cap xat obert.\n\nApunta\'t a un esdeveniment per iniciar un xat.\n\nQuan arribi l\'hora de l\'esdeveniment, et sortirà un botó per a unir-te a la videotrucada.</string>
     <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un xat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
     <string name="send_message_hint">Escriu un missatge</string>
     <string name="event_started_title">L\'esdeveniment ha començat!</string>
