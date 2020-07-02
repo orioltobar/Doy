@@ -45,7 +45,6 @@
     <!-- Line spacing -->
     <dimen name="line_spacing_extra">6sp</dimen>
 
-
     <!-- Category list -->
     <dimen name="category_text_size">16sp</dimen>
     <dimen name="category_radius">8dp</dimen>
