@@ -23,7 +23,8 @@ import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ChatViewModel
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentHeaderTitle
-import kotlinx.android.synthetic.main.chat_fragment.chatFragmentProgressView
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentLoadingProgress
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentLoadingText
 import kotlinx.android.synthetic.main.chat_fragment.chatFragmentSendButton
 import kotlinx.android.synthetic.main.chat_fragment.fireBaseChatMessages
 import javax.inject.Inject
@@ -85,7 +86,8 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun processResponse(response: ChatModel) {
-        chatFragmentProgressView.gone()
+        chatFragmentLoadingProgress.gone()
+        chatFragmentLoadingText.gone()
         refreshRecycler(response)
     }
 
@@ -99,7 +101,8 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        chatFragmentProgressView.gone()
+        chatFragmentLoadingProgress.gone()
+        chatFragmentLoadingText.gone()
         when (error.errorCause) {
             FirebaseErrors.EmptyMessage -> {
             }
@@ -114,6 +117,7 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onLoading() {
-        chatFragmentProgressView.visible()
+        chatFragmentLoadingProgress.visible()
+        chatFragmentLoadingText.visible()
     }
 }

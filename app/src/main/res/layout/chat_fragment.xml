@@ -110,12 +110,26 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/chatFragmentProgressView"
-        style="@style/App.LineProgressBar"
-        android:visibility="gone"
+        android:id="@+id/chatFragmentLoadingProgress"
+        style="@style/App.CircleProgressBar"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chatFragmentLoadingText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:fontFamily="@font/raleway_bold"
+        android:gravity="center"
+        android:text="@string/loading_chat_messages"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatFragmentLoadingProgress" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/center_vertical_guideline"

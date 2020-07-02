@@ -12,24 +12,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/chatsLoadingText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_margin="@dimen/margin_medium"
         android:fontFamily="@font/raleway_bold"
         android:gravity="center"
         android:text="@string/loading_events"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginEnd="@dimen/margin_medium"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chatsLoadingProgress"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="@id/chatsLoadingProgress" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatsList"
@@ -44,4 +40,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible"
         tools:listitem="@layout/chat_list_view_holder"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
