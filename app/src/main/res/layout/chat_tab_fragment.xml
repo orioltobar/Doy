@@ -21,7 +21,7 @@
         android:layout_margin="@dimen/margin_medium"
         android:fontFamily="@font/raleway_bold"
         android:gravity="center"
-        android:text="@string/loading_events"
+        android:text="@string/loading_chats"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

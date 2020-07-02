@@ -19,6 +19,7 @@ import com.napptilians.features.base.BaseViewModel
 import com.napptilians.features.base.SingleLiveEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -63,7 +64,12 @@ class ServiceDetailViewModel @Inject constructor(
         }
     }
 
-    fun executeGetChatInformation(serviceId: Long, serviceName: String) {
+    fun executeGetChatInformation(
+        serviceId: Long,
+        serviceName: String,
+        serviceStartDate: ZonedDateTime,
+        serviceDuration: Int
+    ) {
         viewModelScope.launch {
             _userDataStream.setValue(emitLoadingState())
             val currentUserRequest = getUserUseCase(firebaseAuth.uid ?: "")
@@ -73,7 +79,9 @@ class ServiceDetailViewModel @Inject constructor(
                         userModel.id,
                         serviceId,
                         userModel.name,
-                        serviceName
+                        serviceName,
+                        serviceStartDate,
+                        serviceDuration
                     )
                     _userDataStream.setValue(NewValue(requestModel))
                 },

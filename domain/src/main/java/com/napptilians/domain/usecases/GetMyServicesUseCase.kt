@@ -30,7 +30,7 @@ class GetMyServicesUseCase @Inject constructor(
             request.flatMap { serviceList ->
                 serviceList.map { service ->
                     service.date?.let {
-                        if (it >= Instant.now().atZone(ZoneId.of(TIMEZONE))) {
+                        if (it >= Instant.now().atZone(ZoneId.systemDefault())) {
                             myUpcomingEvents.add(service)
                         } else {
                             myPastEvents.add(service)
@@ -43,7 +43,6 @@ class GetMyServicesUseCase @Inject constructor(
     }
 
     companion object {
-        private const val TIMEZONE = "Europe/Madrid"
         const val UPCOMING = "upcoming"
         const val PAST = "past"
     }

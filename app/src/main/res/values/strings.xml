@@ -44,7 +44,7 @@
 
     <!-- Service list -->
     <string name="loading_services">Please wait while we load the list of services</string>
-    <string name="no_services">It looks like there are no services for this category. ¡Check later!</string>
+    <string name="no_services">It looks like there are no services for this category. Check later!</string>
     <string name="max_spots">Max. %1$d</string>
     <string name="service_duration" translatable="false">%1$d min.</string>
 
@@ -116,16 +116,21 @@
     <!-- My events -->
     <string name="your_events">Your events</string>
     <string name="tab_upcoming">Upcoming</string>
+    <string name="tab_active">In progress</string>
     <string name="tab_past">Past</string>
     <string name="loading_events">Loading events…</string>
     <string name="no_events">It looks like you don\'t have any events in this section.</string>
 
     <!-- Chat -->
     <string name="chat">Chat</string>
+    <string name="loading_chats">Loading chats…</string>
     <string name="loading_chat_messages">Loading messages…</string>
     <string name="no_chats">You don\'t have any open chat yet.\n\nJoin or create an event to open a new chat.</string>
     <string name="chat_in_progress">We are working at full capacity to implement a group chat with video call support, at the moment, try to write a message to the host of the event!</string>
     <string name="send_message_hint">Write a message</string>
+    <string name="event_started_title">The event has started!</string>
+    <string name="event_started_subtitle">Sign into the videochat</string>
+    <string name="chat_button_text">Sign in</string>
 
     <!-- Notifications -->
     <string name="event_reminder_channel_name">Event reminders</string>

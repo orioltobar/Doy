@@ -33,6 +33,7 @@ object Versions {
     const val fragment_test_version = "1.2.2"
     const val threetenapb_version = "1.2.3"
     const val apachecommons_version = "3.10"
+    const val jitsi_version = "2.+"
 
     // AndroidX
     const val androidx_appcompat_version = "1.0.2"

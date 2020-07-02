@@ -4,6 +4,7 @@ import android.util.Log
 import com.napptilians.commons.Mapper
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.networkdatasource.api.models.ServiceApiModel
+import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
@@ -18,10 +19,11 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from?.description ?: "",
             from?.image ?: "",
             from?.day ?: "",
+            from?.hour ?: "",
+            convertDateToUtc(from?.date),
             from?.spots ?: 1,
             from?.attendees ?: 0,
             from?.durationMin ?: 30,
-            from?.hour ?: "",
             from?.ownerId ?: "",
             from?.ownerImage ?: "",
             null
@@ -36,7 +38,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.image ?: "",
             from.day ?: "",
             from.hour ?: "",
-            parseDate(from),
+            parseDate(from.date),
             from.spots ?: 1,
             from.attendees ?: 0,
             from.durationMin ?: 30,
@@ -45,16 +47,20 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
             from.assistance?.equals("1") ?: false
         )
 
-    private fun parseDate(model: ServiceApiModel): ZonedDateTime? {
-        return if (model.day == null || model.hour == null) {
+    private fun convertDateToUtc(date: ZonedDateTime?): String? {
+        return date?.toOffsetDateTime()?.atZoneSameInstant(ZoneId.of(UTC_REGION))
+            ?.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+    }
+
+    private fun parseDate(date: String?): ZonedDateTime? {
+        return if (date == null) {
             null
         } else {
-            // Hardcoded to Spanish time
-            val dateString = "${model.day}T${model.hour}$TIMEZONE"
             try {
-                ZonedDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                ZonedDateTime.parse(date, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                    .toOffsetDateTime().atZoneSameInstant(ZoneId.systemDefault())
             } catch (e: Exception) {
-                Log.d(TAG, "There was an error parsing: $dateString")
+                Log.d(TAG, "There was an error parsing: $date")
                 null
             }
         }
@@ -62,7 +68,7 @@ class ServiceInMapper @Inject constructor() : Mapper<ServiceModel, ServiceApiMod
 
     companion object {
         private const val TAG = "ServiceInMapper"
-        private const val TIMEZONE = "+01:00"
+        private const val UTC_REGION = "Europe/London"
     }
 }
 
