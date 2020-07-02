@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_xlargex"
+        android:layout_marginTop="@dimen/margin_profile"
         android:text="@string/profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -111,14 +111,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/margin_medium" />
+                app:layout_constraintGuide_begin="@dimen/margin_large" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/endGuideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/margin_medium" />
+                app:layout_constraintGuide_end="@dimen/margin_large" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_semibold"
-        android:padding="@dimen/margin_medium"
+        android:padding="@dimen/margin_large"
         android:text="@string/logout"
         android:textColor="@color/red"
         android:textSize="@dimen/text_size_s"

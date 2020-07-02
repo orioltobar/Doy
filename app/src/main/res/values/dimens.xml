@@ -12,6 +12,7 @@
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="margin_space_bottom">54dp</dimen>
     <dimen name="margin_login">40dp</dimen>
+    <dimen name="margin_profile">40dp</dimen>
     <dimen name="margin_button">22dp</dimen>
 
     <!-- Divider -->
