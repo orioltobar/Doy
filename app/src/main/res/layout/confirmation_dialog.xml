@@ -9,11 +9,10 @@
 
     <TextView
         android:id="@+id/confirmDialogTitle"
+        style="@style/App.TitleXl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_large"
-        android:fontFamily="@font/raleway_bold"
-        android:textColor="@color/grayStrong"
+        android:layout_marginBottom="@dimen/margin_medium"
         android:textSize="@dimen/text_size_l"
         tools:text="@string/confirm_attend_event_cancel" />
 

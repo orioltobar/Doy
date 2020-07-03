@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.common.hash.Hashing
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.commons.error.FirebaseErrors
@@ -22,7 +21,14 @@ import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.util.Notifications
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.viewmodel.ChatViewModel
-import kotlinx.android.synthetic.main.chat_fragment.*
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentEditText
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentHeaderTitle
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentLoadingProgress
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentLoadingText
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentSendButton
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentVideoChatButton
+import kotlinx.android.synthetic.main.chat_fragment.chatFragmentVideoChatContainer
+import kotlinx.android.synthetic.main.chat_fragment.fireBaseChatMessages
 import org.jitsi.meet.sdk.JitsiMeet
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
@@ -110,7 +116,8 @@ class ChatFragment : BaseFragment() {
     }
 
     private fun processResponse(response: ChatModel) {
-        chatFragmentProgressView.gone()
+        chatFragmentLoadingProgress.gone()
+        chatFragmentLoadingText.gone()
         refreshRecycler(response)
     }
 
@@ -157,7 +164,8 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onError(error: ErrorModel) {
-        chatFragmentProgressView.gone()
+        chatFragmentLoadingProgress.gone()
+        chatFragmentLoadingText.gone()
         when (error.errorCause) {
             FirebaseErrors.EmptyChat -> {
             }
@@ -172,7 +180,8 @@ class ChatFragment : BaseFragment() {
     }
 
     override fun onLoading() {
-        chatFragmentProgressView.visible()
+        chatFragmentLoadingProgress.visible()
+        chatFragmentLoadingText.visible()
     }
 
     companion object {
