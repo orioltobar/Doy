@@ -1,5 +1,6 @@
 package com.napptilians.data.repositories
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Failure
 import com.napptilians.commons.Response
@@ -57,6 +58,32 @@ class DoyRepositoryImpl @Inject constructor(
         password: String
     ): Response<AuthResult, ErrorModel> =
         firebaseDataSource.login(email, password)
+
+    override suspend fun loginWithGoogle(
+        credential: AuthCredential,
+        idToken: String
+    ): Response<String, ErrorModel> {
+        // Login in with Google through Firebase
+        val fireBaseRequest = firebaseDataSource.loginWithGoogle(credential)
+
+        return fireBaseRequest.either(
+            onSuccess = { authResult ->
+                // Then send tokens to serve
+                val displayName = authResult.user?.displayName ?: ""
+                val email = authResult.user?.email ?: ""
+                val uid = authResult.user?.uid ?: ""
+                val request = networkDataSource.addUser(displayName, email, uid, idToken)
+                request.either(
+                    onSuccess = { Success(authResult.user?.displayName ?: "") },
+                    onFailure = { error ->
+                        firebaseDataSource.removeCurrentUser()
+                        Failure(error)
+                    }
+                )
+            },
+            onFailure = { Failure(it) }
+        )
+    }
 
     override suspend fun register(
         name: String, password: String, email: String, token: String

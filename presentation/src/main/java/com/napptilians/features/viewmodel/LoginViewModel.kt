@@ -33,7 +33,6 @@ class LoginViewModel @Inject constructor(
                 _loginDataStream.value = processModel(request)
             }
         }
-
     }
 
     @SuppressLint("NewApi")

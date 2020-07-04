@@ -7,6 +7,8 @@
     <string name="create_account">Crear cuenta</string>
     <string name="login">Iniciar sesión</string>
     <string name="google_sign_in">Continuar con Google</string>
+    <string name="google_sign_in_failed">Error iniciando sesión</string>
+    <string name="google_auth_failed">Error de autenticación</string>
 
     <!-- Register -->
     <string name="account_created">¡Cuenta creada!</string>

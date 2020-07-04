@@ -102,6 +102,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
     implementation "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
 
+    implementation "com.google.android.gms:play-services-auth:${Versions.play_services_auth_version}"
+
     implementation "org.apache.commons:commons-lang3:${Versions.apachecommons_version}"
 
     implementation ("org.jitsi.react:jitsi-meet-sdk:${Versions.jitsi_version}") { transitive = true }
