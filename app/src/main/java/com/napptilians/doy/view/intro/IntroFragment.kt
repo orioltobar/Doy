@@ -111,7 +111,6 @@ class IntroFragment : BaseFragment() {
                 (task.getResult(ApiException::class.java))?.run {
                     // Google Sign In was successful, authenticate with Firebase
                     loginWithGoogle(idToken ?: "")
-
                 }
             } catch (e: ApiException) {
                 // Google Sign In failed, display a message to the user
