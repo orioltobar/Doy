@@ -48,6 +48,7 @@ import kotlinx.android.synthetic.main.add_service_fragment.selectTimeEditText
 import kotlinx.android.synthetic.main.add_service_fragment.serviceImageView
 import kotlinx.android.synthetic.main.add_service_fragment.uploadImageBox
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.threeten.bp.ZonedDateTime
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -209,7 +210,9 @@ class AddServiceFragment : BaseFragment() {
         this.serviceId = serviceId
         viewModel.executeGetChatInformation(
             this.serviceId,
-            viewModel.service.name ?: ""
+            viewModel.service.name ?: "",
+            viewModel.service.date ?: ZonedDateTime.now(),
+            viewModel.service.durationMin ?: 0
         )
         progressBar.invisible()
         activity?.let { activity ->

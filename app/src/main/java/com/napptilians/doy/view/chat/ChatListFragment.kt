@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.napptilians.commons.error.ErrorModel
+import com.napptilians.domain.models.chat.ChatListItemModel
 import com.napptilians.domain.models.chat.ChatRequestModel
-import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.usecases.GetChatsUseCase
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
@@ -43,19 +43,25 @@ class ChatListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
 
-        // SingleLiveEvent Observer
+        viewModel.getChats()
+
+        // SingleLiveEvent Observers
         viewModel.userDataStream.observe(
             viewLifecycleOwner,
             Observer<UiStatus<ChatRequestModel, ErrorModel>> { status ->
                 handleUiStates(status) { processTargetUser(it) }
             }
         )
-
-        // LiveData Observer
         viewModel.chatListDataStream.observe(
             viewLifecycleOwner,
-            Observer<UiStatus<Map<String, List<ServiceModel>>, ErrorModel>> {
+            Observer<UiStatus<Map<String, List<ChatListItemModel>>, ErrorModel>> {
                 handleUiStates(it, ::processNewValue)
+            }
+        )
+        viewModel.chatUpdateDataStream.observe(
+            viewLifecycleOwner,
+            Observer<UiStatus<ChatListItemModel, ErrorModel>> {
+                handleUiStates(it) { response -> processNewMessage(response) }
             }
         )
     }
@@ -72,11 +78,15 @@ class ChatListFragment : BaseFragment() {
             )
             addFragment(
                 ChatTabFragment { navigateToChat(it) },
+                getString(R.string.tab_active)
+            )
+            addFragment(
+                ChatTabFragment { navigateToChat(it) },
                 getString(R.string.tab_past)
             )
         }
         chatsViewPager.adapter = chatsAdapter
-        chatsViewPager.offscreenPageLimit = 2
+        chatsViewPager.offscreenPageLimit = 3
         chatsTabLayout.setupWithViewPager(chatsViewPager)
     }
 
@@ -88,14 +98,37 @@ class ChatListFragment : BaseFragment() {
     override fun onLoading() {
     }
 
-    private fun processNewValue(model: Map<String, List<ServiceModel>>) {
+    private fun processNewValue(model: Map<String, List<ChatListItemModel>>) {
         chatsViewPager.visible()
         (chatsAdapter.getItem(0) as ChatTabFragment).setItems(
-            model[GetChatsUseCase.UPCOMING] ?: listOf()
+            model[ChatListItemModel.UPCOMING] ?: listOf()
         )
-        (chatsAdapter.getItem(1) as ChatTabFragment).apply {
-            setItems(model[GetChatsUseCase.PAST] ?: listOf())
-            setAlphaToPastChats(0.4f)
+        (chatsAdapter.getItem(1) as ChatTabFragment).setItems(
+            model[ChatListItemModel.ACTIVE] ?: listOf()
+        )
+        (chatsAdapter.getItem(2) as ChatTabFragment).apply {
+            setItems(model[ChatListItemModel.PAST] ?: listOf())
+        }
+    }
+
+    private fun processNewMessage(model: ChatListItemModel) {
+        when (model.status) {
+            ChatListItemModel.Status.Upcoming -> {
+                (chatsAdapter.getItem(0) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Active -> {
+                (chatsAdapter.getItem(1) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Past -> {
+                (chatsAdapter.getItem(2) as ChatTabFragment).updateSingleItem(
+                    model
+                )
+            }
+            ChatListItemModel.Status.Unknown -> { }
         }
     }
 
@@ -106,10 +139,12 @@ class ChatListFragment : BaseFragment() {
         findNavController().navigate(direction)
     }
 
-    private fun navigateToChat(serviceModel: ServiceModel) {
+    private fun navigateToChat(chatUiModel: ChatListItemModel) {
         viewModel.getChatInformation(
-            serviceModel.serviceId ?: -1L,
-            serviceModel.name ?: ""
+            chatUiModel.id,
+            chatUiModel.name,
+            chatUiModel.date,
+            chatUiModel.duration
         )
     }
 }

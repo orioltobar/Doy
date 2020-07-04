@@ -3,6 +3,7 @@ package com.napptilians.networkdatasource.api.data
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.napptilians.commons.Failure
@@ -83,35 +84,62 @@ class FirebaseDataSourceImpl @Inject constructor(
                 .collection(FIRESTORE_CHAT_TABLE)
                 .document(chatId)
                 .collection(FIRESTORE_CHAT_MESSAGE)
-                .orderBy("timeStamp", Query.Direction.ASCENDING)
-                .addSnapshotListener { messageSnapshot, firebaseError ->
+                .orderBy("timeStamp", Query.Direction.DESCENDING)
+                .addSnapshotListener { snapshot, firebaseError ->
                     firebaseError?.let {
                         val error =
                             Failure(ErrorModel(it.message, FirebaseErrors.ErrorReceivingMessage))
                         offer(error)
                         return@addSnapshotListener
-
                     }
-                    if (messageSnapshot == null || messageSnapshot.isEmpty) {
-                        val error = Failure(ErrorModel(null, FirebaseErrors.EmptyMessage))
+                    if (snapshot == null || snapshot.isEmpty) {
+                        val error = Failure(ErrorModel(null, FirebaseErrors.EmptyChat))
                         offer(error)
                         return@addSnapshotListener
                     }
-
-                    for (data in messageSnapshot.documents) {
-                        val message = ChatModel(
-                            data["chatId"] as String,
-                            data["message"] as String,
-                            data["senderName"] as String,
-                            data["senderId"] as String,
-                            data["timeStamp"] as Long
-                        )
-                        offer(Success(message))
+                    for (data in snapshot.documents) {
+                        offer(Success(getChatModelFromSnapshot(data)))
                     }
                 }
-
             awaitClose { subscription.remove() }
         }
+
+    override fun getLastChatMessage(chatId: String): Flow<Response<List<ChatModel>, ErrorModel>> =
+        callbackFlow {
+            val subscription = firestore
+                .collection(FIRESTORE_CHAT_TABLE)
+                .document(chatId)
+                .collection(FIRESTORE_CHAT_MESSAGE)
+                .orderBy("timeStamp", Query.Direction.DESCENDING)
+                .addSnapshotListener { snapshot, firebaseError ->
+                    firebaseError?.let {
+                        val error =
+                            Failure(ErrorModel(it.message, FirebaseErrors.ErrorReceivingMessage))
+                        offer(error)
+                        return@addSnapshotListener
+                    }
+                    if (snapshot == null || snapshot.isEmpty) {
+                        val error = Failure(ErrorModel(null, FirebaseErrors.EmptyChat))
+                        offer(error)
+                        return@addSnapshotListener
+                    }
+                    snapshot.documents
+                        .takeIf { it.isNotEmpty() }
+                        ?.let {
+                            val list = it.map { snapshot -> getChatModelFromSnapshot(snapshot) }
+                            offer(Success(list))
+                        }
+                }
+            awaitClose { subscription.remove() }
+        }
+
+    private fun getChatModelFromSnapshot(data: DocumentSnapshot) = ChatModel(
+        data["chatId"] as String,
+        data["message"] as String,
+        data["senderName"] as String,
+        data["senderId"] as String,
+        data["timeStamp"] as Long
+    )
 
     companion object {
         private const val FIRESTORE_CHAT_TABLE = "Chats"

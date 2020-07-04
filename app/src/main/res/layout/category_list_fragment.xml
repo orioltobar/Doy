@@ -23,39 +23,34 @@
 
     <ProgressBar
         android:id="@+id/loadingProgress"
-        android:layout_width="@dimen/loading_progress_size"
-        android:layout_height="@dimen/loading_progress_size"
+        style="@style/App.CircleProgressBar"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/loadingText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_margin="@dimen/margin_medium"
         android:fontFamily="@font/raleway_bold"
         android:gravity="center"
         android:text="@string/loading_categories"
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@id/loadingProgress"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="@id/loadingProgress" />
 
     <TextView
         android:id="@+id/titleText"
+        style="@style/App.TitleXl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_large"
         android:paddingBottom="@dimen/padding_medium"
-        android:fontFamily="@font/raleway_bold"
         android:text="@string/add_service_to_category"
-        android:textColor="@color/grayStrong"
-        android:textSize="@dimen/text_size_xl"
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"

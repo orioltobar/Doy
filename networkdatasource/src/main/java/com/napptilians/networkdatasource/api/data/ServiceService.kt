@@ -37,6 +37,11 @@ interface ServiceService {
         @Query(SERVICE_ID) serviceId: Long? = null
     )
 
+    @POST("/deleteService")
+    suspend fun deleteService(
+        @Query(SERVICE_ID) serviceId: Long
+    )
+
     companion object {
         private const val CATEGORY_ID = "category_id"
         private const val SERVICE_ID = "service_id"

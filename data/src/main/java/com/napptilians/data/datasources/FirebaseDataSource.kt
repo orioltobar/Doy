@@ -13,7 +13,7 @@ interface FirebaseDataSource {
 
     suspend fun loginWithGoogle(credential: AuthCredential): Response<AuthResult, ErrorModel>
 
-    suspend fun register(email:String, password:String): Response<AuthResult, ErrorModel>
+    suspend fun register(email: String, password: String): Response<AuthResult, ErrorModel>
 
     suspend fun removeCurrentUser(): Response<Unit?, ErrorModel>
 
@@ -22,4 +22,6 @@ interface FirebaseDataSource {
     suspend fun sendChatMessage(chatId: String, message: ChatModel): Response<Unit, ErrorModel>
 
     fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>>
+
+    fun getLastChatMessage(chatId: String): Flow<Response<List<ChatModel>, ErrorModel>>
 }

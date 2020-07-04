@@ -20,7 +20,9 @@ class PagerAdapter(fragmentManager: FragmentManager) :
 
     fun addFragment(fragment: Fragment, title: String?) {
         fragmentList.add(fragment)
-        fragmentTitleList.add(title!!)
+        title?.let {
+            fragmentTitleList.add(it)
+        }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

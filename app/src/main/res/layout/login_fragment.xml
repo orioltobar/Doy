@@ -13,17 +13,9 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
-
     <ProgressBar
         android:id="@+id/loginFragmentProgressView"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_medium"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/gray"
+        style="@style/App.LineProgressBar"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -75,7 +67,6 @@
             app:layout_constraintTop_toBottomOf="@+id/compoundLogoBackground">
 
             <TextView
-                android:id="@+id/loginText"
                 style="@style/App.Intro"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"

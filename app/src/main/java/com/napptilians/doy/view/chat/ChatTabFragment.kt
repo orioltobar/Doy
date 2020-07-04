@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.napptilians.commons.error.ErrorModel
-import com.napptilians.domain.models.service.ServiceModel
+import com.napptilians.domain.models.chat.ChatListItemModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.chat_tab_fragment.chatsLoadingText
 import javax.inject.Inject
 
 class ChatTabFragment(
-    private val onChatClicked: (ServiceModel) -> Unit = {}
+    private val onChatClicked: (ChatListItemModel) -> Unit = {}
 ) : BaseFragment() {
 
     @Inject
@@ -34,7 +34,7 @@ class ChatTabFragment(
         initViews()
     }
 
-    fun setItems(chats: List<ServiceModel>) {
+    fun setItems(chats: List<ChatListItemModel>) {
         if (chats.isNotEmpty()) {
             chatListAdapter.updateItems(chats)
             chatsList.visible()
@@ -48,8 +48,8 @@ class ChatTabFragment(
         }
     }
 
-    fun setAlphaToPastChats(alpha: Float) {
-        chatsList.alpha = alpha
+    fun updateSingleItem(chat: ChatListItemModel) {
+        chatListAdapter.updateItem(chat)
     }
 
     override fun onError(error: ErrorModel) {}
