@@ -5,9 +5,28 @@ import com.napptilians.domain.models.chat.ChatModel
 import com.napptilians.doy.base.BaseAdapter
 import javax.inject.Inject
 
-class ChatAdapter @Inject constructor() : BaseAdapter<ChatModel, ChatMessageViewHolder>() {
+class ChatAdapter @Inject constructor() :
+    BaseAdapter<ChatModel, ChatMessageViewHolder>() {
+
+    private var userId: String = ""
+
+    private val chatMessages: MutableList<ChatModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatMessageViewHolder {
-        return ChatMessageViewHolder(parent)
+        return ChatMessageViewHolder(parent, userId)
+    }
+
+    fun setUserId(userId: String) {
+        this.userId = userId
+    }
+
+    fun updateItem(message: ChatModel) {
+        chatMessages.takeIf { !it.contains(message) }?.let {
+            chatMessages.add(message)
+        }
+        val resultList = chatMessages
+            .filter { it.message.isNotEmpty() }
+            .sortedByDescending { it.timeStamp }
+        updateItems(resultList)
     }
 }

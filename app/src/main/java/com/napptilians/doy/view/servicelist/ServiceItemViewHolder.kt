@@ -1,7 +1,5 @@
 package com.napptilians.doy.view.servicelist
 
-
-import android.util.TypedValue
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.napptilians.domain.models.service.ServiceModel
@@ -14,31 +12,20 @@ import kotlinx.android.synthetic.main.service_item.view.serviceDurationText
 import kotlinx.android.synthetic.main.service_item.view.serviceImage
 import kotlinx.android.synthetic.main.service_item.view.serviceMaxSpotsText
 import kotlinx.android.synthetic.main.service_item.view.serviceNameText
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
-
-class ServiceItemViewHolder(private val parent: ViewGroup, private val isPastService: Boolean) :
+class ServiceItemViewHolder(parent: ViewGroup) :
     BaseViewHolder<ServiceModel>(parent, R.layout.service_item) {
 
     override fun update(model: ServiceModel) {
         with(model) {
-            if (isPastService) {
-                itemView.setBackgroundResource(0)
-            } else {
-                val outValue = TypedValue()
-                parent.context.theme.resolveAttribute(
-                    R.attr.selectableItemBackground,
-                    outValue,
-                    true
-                )
-                itemView.setBackgroundResource(outValue.resourceId)
-            }
             setImage(this)
             setName(this)
             setDate(this)
             setMaxSpots(this)
             setDuration(this)
+            setAlpha(this)
         }
     }
 
@@ -87,6 +74,14 @@ class ServiceItemViewHolder(private val parent: ViewGroup, private val isPastSer
         itemView.serviceDurationText.text =
             itemView.resources.getString(R.string.service_duration, model.durationMin)
         itemView.serviceDurationText.visible()
+    }
+
+    private fun setAlpha(model: ServiceModel) {
+        if (model.isFull) {
+            itemView.alpha = 0.4f
+        } else {
+            itemView.alpha = 1f
+        }
     }
 
     companion object {

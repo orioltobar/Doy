@@ -1,91 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0.85"
-    android:background="@drawable/image_bg"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/startGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/margin_xlarge" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/endGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/margin_xlarge" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
-
     <ImageView
-        android:id="@+id/logoImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_doy_logo"
-        app:layout_constraintStart_toStartOf="@+id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@id/topGuideline" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.85"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_bg" />
 
-    <TextView
-        android:id="@+id/titleText"
-        style="@style/App.Intro"
-        android:text="@string/join_community"
-        android:textSize="@dimen/text_size_xl"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:layout_constraintStart_toStartOf="@+id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/logoImage" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <Button
-        android:id="@+id/signUpButton"
-        style="@style/App.Intro.Button"
-        android:layout_marginTop="@dimen/margin_xxlarge"
-        android:background="@drawable/filled_button_bg"
-        android:text="@string/sign_up"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:layout_constraintStart_toStartOf="@+id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@id/titleText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_xlarge">
 
-    <Button
-        android:id="@+id/signInButton"
-        style="@style/App.Intro.Button"
-        android:layout_marginTop="@dimen/margin_large"
-        android:background="@drawable/empty_button_bg"
-        android:foreground="?attr/selectableItemBackground"
-        android:text="@string/sign_in"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:layout_constraintStart_toStartOf="@+id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@id/signUpButton" />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/continueGoogleButton"
-        style="@style/App.Intro.Button"
-        android:background="@drawable/google_button_bg"
-        android:drawableStart="@drawable/ic_google"
-        android:fontFamily="@font/raleway_bold"
-        android:paddingStart="@dimen/margin_large"
-        android:paddingEnd="@dimen/margin_large"
-        android:text="@string/google_sign_in"
-        android:textColor="@color/gray"
-        app:layout_constraintBottom_toTopOf="@id/bottomGuideline"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:layout_constraintStart_toStartOf="@+id/startGuideline" />
+            <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_doy_logo" />
+
+            <TextView
+                android:id="@+id/titleText"
+                style="@style/App.Intro"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/join_community"
+                android:textSize="@dimen/text_size_xl" />
+
+            <Button
+                android:id="@+id/signUpButton"
+                style="@style/App.Intro.Button"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_xlargex"
+                android:background="@drawable/filled_button_bg"
+                android:text="@string/create_account" />
+
+            <Button
+                android:id="@+id/signInButton"
+                style="@style/App.Intro.Button"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/empty_button_bg"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/login" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:minHeight="@dimen/margin_xlarge" />
+
+            <Button
+                android:id="@+id/continueGoogleButton"
+                style="@style/App.Intro.Button"
+                android:layout_width="match_parent"
+                android:background="@drawable/google_button_bg"
+                android:drawableStart="@drawable/ic_google"
+                android:fontFamily="@font/raleway_bold"
+                android:paddingStart="@dimen/margin_large"
+                android:paddingEnd="@dimen/margin_large"
+                android:text="@string/google_sign_in"
+                android:textColor="@color/gray" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

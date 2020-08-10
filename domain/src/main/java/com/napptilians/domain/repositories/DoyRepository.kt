@@ -4,9 +4,11 @@ import com.google.firebase.auth.AuthResult
 import com.napptilians.commons.Response
 import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.category.CategoryModel
+import com.napptilians.domain.models.chat.ChatModel
 import com.napptilians.domain.models.device.DeviceModel
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.models.user.UserModel
+import kotlinx.coroutines.flow.Flow
 
 interface DoyRepository {
 
@@ -38,7 +40,8 @@ interface DoyRepository {
     suspend fun getServices(
         categoryIds: List<Long> = emptyList(),
         serviceId: Long? = null,
-        uid: String? = null
+        uid: String? = null,
+        ascending: Boolean = true
     ): Response<List<ServiceModel>, ErrorModel>
 
     suspend fun getUser(userUid: String): Response<UserModel, ErrorModel>
@@ -52,4 +55,14 @@ interface DoyRepository {
     ): Response<UserModel, ErrorModel>
 
     suspend fun getMyServices(uid: String? = null): Response<List<ServiceModel>, ErrorModel>
+
+    suspend fun sendChatMessage(chatId: String, message: ChatModel): Response<Unit, ErrorModel>
+
+    fun getChatMessages(chatId: String): Flow<Response<ChatModel, ErrorModel>>
+
+    suspend fun deleteService(serviceId: Long): Response<Unit, ErrorModel>
+
+    fun getLastChatMessage(chatId: String): Flow<Response<Pair<ChatModel, Int>, ErrorModel>>
+
+    suspend fun updateMessageReadStatus(message: ChatModel): Response<Unit, ErrorModel>
 }

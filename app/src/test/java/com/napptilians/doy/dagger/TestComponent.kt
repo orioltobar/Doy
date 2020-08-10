@@ -97,7 +97,10 @@ object TestNetworkModule {
     ): NetworkProvider = object : NetworkProvider {
         override val valueToBeProvided: String
             get() = apiKey
+
+        override val language: String
+            get() = "ca"
     }
 
-    const val RETROFIT_TIMEOUT = 60L
+    private const val RETROFIT_TIMEOUT = 60L
 }

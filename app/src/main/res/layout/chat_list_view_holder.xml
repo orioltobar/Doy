@@ -7,13 +7,14 @@
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:paddingTop="@dimen/margin_medium">
+    android:paddingTop="@dimen/padding_small">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatListItemPhotoContainer"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/chat_thumbnail_image_size"
+        android:layout_height="@dimen/chat_thumbnail_image_size"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -26,8 +27,8 @@
 
         <ImageView
             android:id="@+id/profilePhotoSmiley"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/chat_placeholder_image_size"
+            android:layout_height="@dimen/chat_placeholder_image_size"
             android:background="@drawable/ic_smile"
             app:layout_constraintBottom_toBottomOf="@id/chatListItemPhotoShape"
             app:layout_constraintEnd_toEndOf="@id/chatListItemPhotoShape"
@@ -36,13 +37,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/chatListItemPhotoCardView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/chat_thumbnail_image_size"
+            android:layout_height="@dimen/chat_thumbnail_image_size"
             android:clickable="false"
             android:focusable="false"
             android:visibility="gone"
-            app:cardCornerRadius="@dimen/profile_card_radius"
             app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="@dimen/chat_thumbnail_card_radius"
             app:layout_constraintBottom_toBottomOf="@+id/chatListItemPhotoShape"
             app:layout_constraintEnd_toEndOf="@+id/chatListItemPhotoShape"
             app:layout_constraintStart_toStartOf="@+id/chatListItemPhotoShape"
@@ -63,33 +64,87 @@
     <LinearLayout
         android:id="@+id/chatListItemEventContainer"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="30dp"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/chatListItemMessageCounterContainer"
         app:layout_constraintStart_toEndOf="@id/chatListItemPhotoContainer"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/chatListItemEventName"
             style="@style/App.Intro"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:ellipsize="end"
             android:fontFamily="@font/raleway_bold"
+            android:maxLines="1"
             android:textColor="@color/grayStrong"
             android:textSize="@dimen/text_size_m_2"
             tools:text="¿Hacemos la comida juntos?" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/chatListItemLastMessageText"
-            style="@style/App.Intro"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_xsmall"
-            android:fontFamily="@font/raleway_semibold"
-            android:textColor="@color/grayStrong"
-            android:textSize="@dimen/text_size_s"
-            tools:text="David: ¡Qué hambre!" />
+            <TextView
+                android:id="@+id/chatListItemLastMessageText"
+                style="@style/App.Intro"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:layout_marginEnd="2dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/raleway_semibold"
+                android:gravity="start"
+                android:maxLines="1"
+                android:textColor="@color/grayStrong"
+                android:textSize="@dimen/text_size_s"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@id/chatListItemLastMessageDate"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="David: ¡Qué hambre!" />
+
+            <TextView
+                android:id="@+id/chatListItemLastMessageTextBold"
+                style="@style/App.Intro"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:layout_marginEnd="2dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/raleway_bold"
+                android:gravity="start"
+                android:maxLines="1"
+                android:textColor="@color/grayStrong"
+                android:textSize="@dimen/text_size_s"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@id/chatListItemLastMessageDate"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="David: ¡Qué hambre!"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/chatListItemLastMessageDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:fontFamily="@font/raleway"
+                android:textColor="@color/grayStrong"
+                android:textSize="@dimen/text_size_s"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="· 1/1/2020"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
@@ -97,9 +152,11 @@
         android:id="@+id/chatListItemMessageCounterContainer"
         android:layout_width="17dp"
         android:layout_height="17dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <View
             android:id="@+id/chatListItemMessageShape"
@@ -111,10 +168,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/chatListItemMessageCounterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="@dimen/margin_small"
+            android:textSize="@dimen/text_size_xxs"
             app:layout_constraintBottom_toBottomOf="@id/chatListItemMessageShape"
             app:layout_constraintEnd_toEndOf="@id/chatListItemMessageShape"
             app:layout_constraintStart_toStartOf="@id/chatListItemMessageShape"
@@ -123,10 +181,9 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider_size"
         android:layout_marginTop="@dimen/margin_medium"
         android:background="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"

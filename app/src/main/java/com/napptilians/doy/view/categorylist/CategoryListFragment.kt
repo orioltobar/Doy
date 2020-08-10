@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -14,10 +13,10 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.category.CategoryModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.setNavigationResult
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.CategoriesViewModel
 import kotlinx.android.synthetic.main.category_list_fragment.*
@@ -25,9 +24,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class CategoryListFragment : BaseFragment() {
 
     private val viewModel: CategoriesViewModel by viewModels { vmFactory }
     private val args: CategoryListFragmentArgs by navArgs()
@@ -64,15 +61,15 @@ class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
             categoryList.gone()
             loadingProgress.gone()
             loadingText.text = resources.getString(R.string.no_categories)
-            loadingText.text = "${resources.getString(R.string.error_title)}\n${resources.getString(R.string.error_message)}"
             loadingText.visible()
         }
     }
 
     override fun onError(error: ErrorModel) {
         categoryList.gone()
-        loadingProgress.visible()
-        loadingText.visible()
+        loadingProgress.gone()
+        loadingText.gone()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
     override fun onLoading() {
@@ -83,29 +80,24 @@ class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
 
     private fun initViews() {
         if (args.isAddingService) {
-            enableHomeAsUp(true) { findNavController().popBackStack() }
             titleText.visible()
             with(saveButton) {
-                visible()
-                isEnabled = false
                 setOnClickListener {
                     setNavigationResult(selectedCategoryId.toString(), "selectCategoryId")
                     setNavigationResult(selectedCategoryName, "selectCategoryName")
                     findNavController().popBackStack()
                 }
             }
-            // TODO: Also show toolbar for back button
-        } else {
-            genericToolbar?.gone()
         }
         val layoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
         categoryList.layoutManager = layoutManager
         categoriesAdapter = CategoryListAdapter().apply { isAddingService = args.isAddingService }
         categoriesAdapter.setOnClickListener { clickedCategory ->
             if (args.isAddingService) {
-                saveButton.isEnabled = true
+                saveButton.visible()
                 categoriesAdapter.getItems().forEachIndexed { index, categoryModel ->
-                    if (categoryModel != clickedCategory && categoryModel.isSelected) {
+                    if (categoryModel != clickedCategory && (categoryModel.isSelected || categoryModel.shouldBeSelected)) {
+                        categoryModel.shouldBeSelected = false
                         categoryModel.isSelected = false
                         categoriesAdapter.notifyItemChanged(index)
                     } else if (categoryModel == clickedCategory && !categoryModel.isSelected) {
@@ -113,6 +105,7 @@ class CategoryListFragment : BaseFragment(), ToolbarBehaviour {
                         selectedCategoryName = categoryModel.name
                         categoryModel.isSelected = true
                         categoriesAdapter.notifyItemChanged(index)
+                        categoryList.scrollToPosition(index)
                     }
                 }
             } else {

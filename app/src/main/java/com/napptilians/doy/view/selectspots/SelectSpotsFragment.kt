@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -14,8 +13,8 @@ import com.napptilians.commons.error.ErrorModel
 import com.napptilians.domain.models.service.SpotsModel
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.setNavigationResult
+import com.napptilians.doy.extensions.visible
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.SelectSpotsViewModel
 import kotlinx.android.synthetic.main.select_spots_fragment.saveButton
@@ -24,9 +23,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class SelectSpotsFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class SelectSpotsFragment : BaseFragment() {
 
     private val viewModel: SelectSpotsViewModel by viewModels { vmFactory }
     private var selectedSpots: Int = 0
@@ -42,7 +39,6 @@ class SelectSpotsFragment : BaseFragment(), ToolbarBehaviour {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHomeAsUp(true) { findNavController().popBackStack() }
         setupListeners()
         viewModel.execute()
         viewModel.spotsDataStream.observe(viewLifecycleOwner,
@@ -68,15 +64,17 @@ class SelectSpotsFragment : BaseFragment(), ToolbarBehaviour {
         spotListAdapter = SpotListAdapter()
         spotsList.adapter = spotListAdapter
         spotListAdapter.setOnClickListener { clickedCategory ->
-            saveButton.isEnabled = true
+            saveButton.visible()
             spotListAdapter.getItems().forEachIndexed { index, spotsModel ->
-                if (spotsModel != clickedCategory && spotsModel.isSelected) {
+                if (spotsModel != clickedCategory && (spotsModel.isSelected || spotsModel.shouldBeSelected)) {
+                    spotsModel.shouldBeSelected = false
                     spotsModel.isSelected = false
                     spotListAdapter.notifyItemChanged(index)
                 } else if (spotsModel == clickedCategory && !spotsModel.isSelected) {
                     selectedSpots = spotsModel.numberOfSpots
                     spotsModel.isSelected = true
                     spotListAdapter.notifyItemChanged(index)
+                    spotsList.scrollToPosition(index)
                 }
             }
         }

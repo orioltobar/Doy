@@ -8,17 +8,23 @@
     <LinearLayout
         android:id="@+id/chatFragmentHeader"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_medium"
+        android:paddingBottom="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
-        app:layout_constraintStart_toStartOf="@id/start_vertical_guideline">
+        app:layout_constraintStart_toStartOf="@id/start_vertical_guideline"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/chatFragmentHeaderTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/margin_xlarge"
+            android:layout_marginEnd="@dimen/margin_large"
             android:fontFamily="@font/raleway_semibold"
             android:gravity="center"
+            android:paddingTop="@dimen/margin_xsmall"
             android:textColor="@color/grayStrong"
             android:textSize="@dimen/text_size_m"
             tools:text="¿Hacemos la comida juntos?" />
@@ -28,11 +34,74 @@
     <View
         android:id="@+id/chatFragmentHeaderSeparator"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider_size"
         android:background="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chatFragmentHeader" />
+
+    <LinearLayout
+        android:id="@+id/chatFragmentVideoChatContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/margin_medium"
+        android:paddingBottom="@dimen/margin_medium"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatFragmentHeaderSeparator">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/event_started_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_m_2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:fontFamily="@font/raleway_semibold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_m"
+                android:text="@string/event_started_subtitle" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/chatFragmentVideoChatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:background="@drawable/bg_videochat"
+            android:drawableEnd="@drawable/ic_chat"
+            android:drawablePadding="@dimen/padding_small"
+            android:drawableTint="@color/green"
+            android:fontFamily="@font/raleway_semibold"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingEnd="@dimen/margin_large"
+            android:text="@string/chat_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+
+            android:textSize="@dimen/text_size_m" />
+
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fireBaseChatMessages"
@@ -41,44 +110,91 @@
         android:layout_marginTop="@dimen/margin_xsmall"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/chatFragmentTextContainer"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@id/start_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@id/chatFragmentHeader" />
+        app:layout_constraintTop_toBottomOf="@id/chatFragmentVideoChatContainer"
+        tools:listitem="@layout/chat_message_view_holder" />
 
     <LinearLayout
         android:id="@+id/chatFragmentTextContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@id/start_vertical_guideline">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordWrapper"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/chatFragmentEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8">
-
-            <EditText
-                android:id="@+id/chatFragmentEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter text to send..." />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/chatFragmentSendButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_send" />
+            android:background="@drawable/bg_round_corners"
+            android:fontFamily="@font/raleway_medium"
+            android:hint="@string/send_message_hint"
+            android:padding="@dimen/padding_medium"
+            android:textSize="@dimen/text_size_m" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/chat_send_button_size"
+            android:layout_height="@dimen/chat_send_button_size"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/chatFragmentSendButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_filled_oval_selector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sent"
+                app:layout_constraintBottom_toBottomOf="@id/chatFragmentSendButton"
+                app:layout_constraintEnd_toEndOf="@id/chatFragmentSendButton"
+                app:layout_constraintStart_toStartOf="@id/chatFragmentSendButton"
+                app:layout_constraintTop_toTopOf="@id/chatFragmentSendButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/chatFragmentLoadingProgress"
+        style="@style/App.CircleProgressBar"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chatFragmentLoadingText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:fontFamily="@font/raleway_bold"
+        android:gravity="center"
+        android:text="@string/loading_chat_messages"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatFragmentLoadingProgress" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/center_vertical_guideline"
@@ -92,13 +208,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="@dimen/margin_medium" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end_vertical_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="20dp" />
+        app:layout_constraintGuide_end="@dimen/margin_medium" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

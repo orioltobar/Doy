@@ -9,8 +9,8 @@ import com.napptilians.commons.flatMap
 import com.napptilians.domain.models.service.ServiceModel
 import com.napptilians.domain.repositories.DoyRepository
 import kotlinx.coroutines.withContext
-import java.time.Instant
-import java.time.ZoneId
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
 import javax.inject.Inject
 
 class GetEventsUseCase @Inject constructor(
@@ -19,7 +19,6 @@ class GetEventsUseCase @Inject constructor(
 ) {
     private val ioDispatcher = appDispatchers.io
 
-    @SuppressLint("NewApi")
     suspend fun execute(
         categoryIds: List<Long> = emptyList(),
         serviceId: Long? = null,
@@ -32,7 +31,7 @@ class GetEventsUseCase @Inject constructor(
             request.flatMap { serviceList ->
                 serviceList.map { service ->
                     service.date?.let {
-                        if (service.date >= Instant.now().atZone(ZoneId.of(TIMEZONE))) {
+                        if (it >= Instant.now().atZone(ZoneId.systemDefault())) {
                             upcomingEvents.add(service)
                         } else {
                             pastEvents.add(service)
@@ -45,7 +44,6 @@ class GetEventsUseCase @Inject constructor(
     }
 
     companion object {
-        private const val TIMEZONE = "Europe/Madrid"
         const val UPCOMING = "upcoming"
         const val PAST = "past"
     }

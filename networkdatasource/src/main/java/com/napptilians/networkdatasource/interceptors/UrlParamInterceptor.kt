@@ -12,13 +12,13 @@ class UrlParamInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val newUrl = request.url().newBuilder().apply {
-            addQueryParameter(IDIOMA, networkProvider.language)
+            addQueryParameter(LANGUAGE, networkProvider.language)
         }
         val newRequest = request.newBuilder().url(newUrl.build()).build()
         return chain.proceed(newRequest)
     }
 
     companion object {
-        private const val IDIOMA = "idioma"
+        private const val LANGUAGE = "language"
     }
 }

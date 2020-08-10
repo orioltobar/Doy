@@ -2,139 +2,146 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/profileContainer"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/profileTitle"
-        style="@style/App.Intro"
+        style="@style/App.TitleXl"
         android:layout_width="wrap_content"
-        android:fontFamily="@font/raleway_bold"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_profile"
         android:text="@string/profile"
-        android:textColor="@color/grayStrong"
-        android:textSize="@dimen/text_size_xl"
-        app:layout_constraintStart_toStartOf="@id/startGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/profileEditMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_edit"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:layout_constraintTop_toTopOf="@id/topGuideline" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileImageCardView"
-        android:layout_width="0dp"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:clickable="false"
-        android:focusable="false"
-        android:visibility="gone"
-        app:cardCornerRadius="@dimen/profile_card_radius"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="@+id/profilePhotoPlaceHolder"
-        app:layout_constraintEnd_toEndOf="@+id/profilePhotoPlaceHolder"
-        app:layout_constraintStart_toStartOf="@+id/profilePhotoPlaceHolder"
-        app:layout_constraintTop_toTopOf="@+id/profilePhotoPlaceHolder">
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/profileInfoLogOutText"
+        app:layout_constraintTop_toBottomOf="@id/profileTitle">
 
-        <ImageView
-            android:id="@+id/profileImageView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="false"
-            android:focusable="false"
-            android:scaleType="centerCrop" />
+            android:layout_height="wrap_content">
 
-    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profileImageCardView"
+                android:layout_width="@dimen/profile_image_size"
+                android:layout_height="@dimen/profile_image_size"
+                android:clickable="false"
+                android:focusable="false"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="@dimen/profile_card_radius"
+                app:cardElevation="@dimen/profile_card_elevation"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintBottom_toBottomOf="@+id/profilePhotoPlaceHolder"
+                app:layout_constraintEnd_toEndOf="@+id/profilePhotoPlaceHolder"
+                app:layout_constraintStart_toStartOf="@+id/profilePhotoPlaceHolder"
+                app:layout_constraintTop_toTopOf="@+id/profilePhotoPlaceHolder">
 
-    <View
-        android:id="@+id/profilePhotoPlaceHolder"
-        android:layout_width="116dp"
-        android:layout_height="116dp"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/bg_dashed_oval"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:layout_constraintStart_toStartOf="@id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@id/profileTitle" />
+                <ImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:scaleType="centerCrop" />
 
-    <ImageView
-        android:id="@+id/profilePhotoSmiley"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_smile"
-        app:layout_constraintBottom_toBottomOf="@id/profilePhotoPlaceHolder"
-        app:layout_constraintEnd_toEndOf="@id/profilePhotoPlaceHolder"
-        app:layout_constraintStart_toStartOf="@id/profilePhotoPlaceHolder"
-        app:layout_constraintTop_toTopOf="@id/profilePhotoPlaceHolder" />
+            </androidx.cardview.widget.CardView>
 
-    <FrameLayout
-        android:id="@+id/profileInfoFrameLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:layout_constraintStart_toStartOf="@id/startGuideline"
-        app:layout_constraintTop_toBottomOf="@id/profilePhotoPlaceHolder" />
+            <View
+                android:id="@+id/profilePhotoPlaceHolder"
+                android:layout_width="@dimen/profile_image_size"
+                android:layout_height="@dimen/profile_image_size"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/bg_dashed_oval"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@id/startGuideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/profilePhotoSmiley"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_smile"
+                app:layout_constraintBottom_toBottomOf="@id/profilePhotoPlaceHolder"
+                app:layout_constraintEnd_toEndOf="@id/profilePhotoPlaceHolder"
+                app:layout_constraintStart_toStartOf="@id/profilePhotoPlaceHolder"
+                app:layout_constraintTop_toTopOf="@id/profilePhotoPlaceHolder" />
+
+            <FrameLayout
+                android:id="@+id/profileInfoFrameLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@id/startGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/profilePhotoPlaceHolder" />
+
+            <Button
+                android:id="@+id/profileInfoSaveChangesButton"
+                style="@style/App.PrimaryButton"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/update_profile"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/topGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/margin_medium" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/bottomGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="@dimen/margin_medium" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/startGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/margin_large" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/endGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/margin_large" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/profileFragmentProgressView"
+        style="@style/App.LineProgressBar"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/profileInfoLogOutText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_semibold"
+        android:padding="@dimen/margin_large"
         android:text="@string/logout"
         android:textColor="@color/red"
         android:textSize="@dimen/text_size_s"
-        app:layout_constraintBottom_toBottomOf="@id/bottomGuideline"
-        app:layout_constraintStart_toStartOf="@id/startGuideline" />
-
-    <Button
-        android:id="@+id/profileInfoSaveChangesButton"
-        style="@style/App.PrimaryButton"
-        android:layout_marginTop="@dimen/margin_small"
-        android:text="@string/update_profile"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/profileFragmentProgressView"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_medium"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/gray"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/startGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/margin_large" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/endGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/margin_large" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

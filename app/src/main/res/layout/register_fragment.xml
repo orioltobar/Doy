@@ -5,66 +5,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/logoGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
 
     <ProgressBar
         android:id="@+id/registerFragmentProgressView"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_medium"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/gray"
+        style="@style/App.LineProgressBar"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_logo_colour_green"
+        app:layout_constraintBottom_toTopOf="@+id/logoGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.30" />
+
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.75">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/registerFragmentLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_logo_colour_green"
-                app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                app:layout_constraintStart_toStartOf="@id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/topGuideline" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_large">
 
             <TextView
                 android:id="@+id/registerFragmentTitle"
                 style="@style/App.TitleL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_xlarge"
-                android:text="@string/create_account"
-                app:layout_constraintStart_toStartOf="@id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentLogo" />
+                android:text="@string/create_account" />
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentNameField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/App.Input"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:hint="@string/name"
                 app:errorEnabled="true"
                 app:errorTextAppearance="@style/ErrorTheme"
-                app:helperTextEnabled="true"
-                app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                app:layout_constraintStart_toStartOf="@id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentTitle">
+                app:helperTextEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentNameEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/App.Input.Edit"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1" />
@@ -72,22 +74,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentEmailField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/App.Input"
                 android:hint="@string/email"
                 app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                app:layout_constraintStart_toStartOf="@id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentNameField">
+                app:helperTextEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentEmailEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/App.Input.Edit"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1" />
@@ -95,23 +90,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentPasswordField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/App.Input"
                 android:hint="@string/password"
                 app:errorEnabled="true"
                 app:helperTextEnabled="true"
-                app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                app:layout_constraintStart_toStartOf="@id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentEmailField"
                 app:passwordToggleDrawable="@drawable/password_selector"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/green">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentPasswordEditText"
+                    style="@style/App.Input.Edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -120,25 +110,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/App.AddService.Input"
                 android:id="@+id/registerFragmentRepeatPasswordField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/App.Input"
                 android:hint="@string/repeat_password"
                 app:errorEnabled="true"
                 app:helperTextEnabled="true"
-                app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                app:layout_constraintStart_toStartOf="@id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentPasswordField"
                 app:passwordToggleDrawable="@drawable/password_selector"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/green">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/App.AddService.Input"
                     android:id="@+id/registerFragmentRepeatPasswordEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/App.Input.Edit"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword" />
 
@@ -147,26 +130,25 @@
             <Button
                 android:id="@+id/registerFragmentCreateButton"
                 style="@style/App.Intro.Button"
+                android:layout_width="match_parent"
                 android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_xlarge"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:background="@drawable/filled_button_bg"
-                android:text="@string/create"
-                app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                app:layout_constraintStart_toStartOf="@+id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentRepeatPasswordField" />
+                android:text="@string/create_account" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minHeight="@dimen/margin_large" />
 
             <LinearLayout
                 android:id="@+id/registerFragmentExistingAccountContainer"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="84dp"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                app:layout_constraintStart_toEndOf="@id/startGuideline"
-                app:layout_constraintStart_toStartOf="@+id/startGuideline"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentCreateButton">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/registerFragmentExistingAccountText"
@@ -180,50 +162,17 @@
                     android:id="@+id/registerFragmentSignInText"
                     style="@style/App.Intro"
                     android:layout_width="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
                     android:fontFamily="@font/raleway_semibold"
-                    android:text="@string/sign_in"
+                    android:paddingStart="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_medium"
+                    android:paddingEnd="@dimen/padding_small"
+                    android:paddingBottom="@dimen/padding_medium"
+                    android:text="@string/login"
                     android:textColor="@color/green" />
 
             </LinearLayout>
 
-            <Space
-                android:id="@+id/space"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_space_bottom"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/registerFragmentExistingAccountContainer" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/topGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.05" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/bottomGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.95" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/startGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/margin_large" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/endGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/margin_large" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 

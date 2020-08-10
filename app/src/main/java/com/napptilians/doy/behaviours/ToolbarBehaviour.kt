@@ -2,6 +2,7 @@ package com.napptilians.doy.behaviours
 
 import androidx.appcompat.widget.Toolbar
 import com.napptilians.doy.R
+import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 
 interface ToolbarBehaviour {
@@ -24,5 +25,16 @@ interface ToolbarBehaviour {
             }
             setNavigationOnClickListener { up.invoke() }
         }
+    }
+
+    fun disableToolbar() {
+        genericToolbar?.run {
+            menu.clear()
+            gone()
+        }
+    }
+
+    fun enableToolbar() {
+        genericToolbar?.visible()
     }
 }

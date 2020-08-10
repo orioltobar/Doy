@@ -2,6 +2,8 @@
 <layout>
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="com.napptilians.features.viewmodel.AddServiceViewModel" />
@@ -15,29 +17,31 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_medium"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/gray"
-            android:visibility="gone" />
+            style="@style/App.LineProgressBar"
+            android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/loginText"
-            style="@style/App.AddService"
-            android:layout_marginTop="@dimen/margin_large"
-            android:padding="@dimen/margin_xlarge"
+            style="@style/App.TitleXl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_large"
             android:text="@string/add_service" />
 
         <ScrollView
+            android:id="@+id/addServiceScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/margin_xlarge">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_small"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -48,14 +52,16 @@
                     <LinearLayout
                         android:id="@+id/uploadImageBox"
                         style="@style/App.AddService.ImageBox"
-                        android:layout_margin="@dimen/margin_large"
-                        android:padding="@dimen/margin_medium">
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_large"
+                        android:padding="@dimen/padding_medium">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/ic_add_picture"
                             android:drawablePadding="@dimen/margin_small"
+                            android:fontFamily="@font/raleway_semibold"
                             android:gravity="center_vertical"
                             android:text="@string/upload_image"
                             android:textColor="@color/colorPrimary"
@@ -78,8 +84,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_small"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -88,12 +92,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/App.AddService.Input"
+                            style="@style/App.Input"
                             android:hint="@string/select_category">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/selectCategoryEditText"
-                                style="@style/App.AddService.Input"
+                                style="@style/App.Input.Edit"
                                 android:clickable="true"
                                 android:focusable="false"
                                 android:inputType="text"
@@ -113,12 +117,12 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/serviceTitleInput"
-                        style="@style/App.AddService.Input"
+                        style="@style/App.Input"
                         android:hint="@string/service_title">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/serviceTitleEditText"
-                            style="@style/App.AddService.Input"
+                            style="@style/App.Input.Edit"
                             android:inputType="text"
                             android:text="@={viewModel.serviceName}" />
 
@@ -126,12 +130,12 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/selectDayInput"
-                        style="@style/App.AddService.Input"
+                        style="@style/App.Input"
                         android:hint="@string/select_day">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/selectDayEditText"
-                            style="@style/App.AddService.Input"
+                            style="@style/App.Input.Edit"
                             android:clickable="true"
                             android:focusable="false"
                             android:inputType="date"
@@ -141,12 +145,12 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/selectTimeInput"
-                        style="@style/App.AddService.Input"
+                        style="@style/App.Input"
                         android:hint="@string/select_date">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/selectTimeEditText"
-                            style="@style/App.AddService.Input"
+                            style="@style/App.Input.Edit"
                             android:clickable="true"
                             android:focusable="false"
                             android:inputType="date"
@@ -161,12 +165,12 @@
                         android:layout_gravity="center">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/App.AddService.Input"
+                            style="@style/App.Input"
                             android:hint="@string/select_duration">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/selectDurationEditText"
-                                style="@style/App.AddService.Input"
+                                style="@style/App.Input.Edit"
                                 android:clickable="true"
                                 android:focusable="false"
                                 android:inputType="text"
@@ -191,12 +195,12 @@
                         android:layout_gravity="center">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/App.AddService.Input"
+                            style="@style/App.Input"
                             android:hint="@string/select_spots">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/selectSpotsEditText"
-                                style="@style/App.AddService.Input"
+                                style="@style/App.Input.Edit"
                                 android:clickable="true"
                                 android:focusable="false"
                                 android:inputType="text"
@@ -216,12 +220,12 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/descriptionView"
-                        style="@style/App.AddService.Input"
+                        style="@style/App.Input"
                         android:hint="@string/description">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/descriptionEditText"
-                            style="@style/App.AddService.Input"
+                            style="@style/App.Input.Edit"
                             android:inputType="textMultiLine"
                             android:text="@={viewModel.serviceDescription}" />
 
@@ -236,8 +240,7 @@
         <Button
             android:id="@+id/createEventButton"
             style="@style/App.PrimaryButton"
-            android:layout_marginTop="@dimen/margin_small"
-            android:enabled="@{viewModel.isValidService}"
+            android:visibility="@{viewModel.isValidService ? View.VISIBLE : View.GONE}"
             android:text="@string/add_service" />
 
     </LinearLayout>

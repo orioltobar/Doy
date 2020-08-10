@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -30,7 +31,6 @@ import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.ProfileViewModel
-import kotlinx.android.synthetic.main.profile_fragment.profileEditMode
 import kotlinx.android.synthetic.main.profile_fragment.profileFragmentProgressView
 import kotlinx.android.synthetic.main.profile_fragment.profileImageCardView
 import kotlinx.android.synthetic.main.profile_fragment.profileImageView
@@ -39,15 +39,17 @@ import kotlinx.android.synthetic.main.profile_fragment.profileInfoLogOutText
 import kotlinx.android.synthetic.main.profile_fragment.profileInfoSaveChangesButton
 import kotlinx.android.synthetic.main.profile_fragment.profilePhotoPlaceHolder
 import kotlinx.android.synthetic.main.profile_fragment.profileTitle
-import kotlinx.android.synthetic.main.toolbar.toolbar
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
-
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
+
+    override val genericToolbar: Toolbar?
+        get() = activity?.findViewById(R.id.toolbar)
+
+    private var editAction: MenuItem? = null
 
     // TODO: Re-do the logic after MVP
 
@@ -56,13 +58,8 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     private val viewModel: ProfileViewModel by viewModels { vmFactory }
 
-    private val editModeView: ProfileEditView? by lazy {
-        context?.let { ProfileEditView(it) }
-    }
-
-    private val readModeView: ProfileReadView? by lazy {
-        context?.let { ProfileReadView(it, onMyEventsClicked = { navigateToMyEvents() }) }
-    }
+    private var editModeView: ProfileEditView? = null
+    private var readModeView: ProfileReadView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,13 +69,20 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        genericToolbar?.let {
+            it.menu.clear()
+            it.inflateMenu(R.menu.profile_menu)
+            editAction = it.menu.findItem(R.id.menuEdit)
+            it.navigationIcon = null
+        }
 
+        editAction?.setOnMenuItemClickListener {
+            switchEditMode()
+            return@setOnMenuItemClickListener false
+        }
         // Show read view as default.
         defaultView()
 
-        profileEditMode.setOnClickListener {
-            switchEditMode()
-        }
         profilePhotoPlaceHolder.setOnClickListener {
             openGallery()
         }
@@ -118,11 +122,6 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        genericToolbar?.gone()
-    }
-
     private fun openGallery() {
         activity?.let {
             val galleryIntent =
@@ -159,7 +158,6 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
         profileFragmentProgressView.gone()
         val errorString = error.message
             ?.takeIf { it.isNotEmpty() }
-            ?.let { it }
             ?: run { getString(R.string.error_message) }
 
         Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
@@ -185,7 +183,11 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
 
     private fun defaultView() {
         context?.let {
-            profileInfoFrameLayout.removeAllViews()
+            readModeView = ProfileReadView(
+                it,
+                onAddDescriptionClicked = { switchEditMode() },
+                onMyEventsClicked = { navigateToMyEvents() })
+            editModeView = ProfileEditView(it)
             profileInfoFrameLayout.addView(readModeView)
         }
     }
@@ -193,19 +195,27 @@ class ProfileFragment : BaseFragment(), ToolbarBehaviour {
     private fun switchEditMode(user: UserModel? = null) {
         context?.let {
             if (!isEditMode) {
+                editAction?.isVisible = false
+                enableHomeAsUp { switchEditMode() }
                 profileTitle.text = getString(R.string.edit_profile)
                 profileInfoLogOutText.gone()
                 profileInfoSaveChangesButton.visible()
                 editModeView?.apply {
                     setUserMail(viewModel.getUserEmail())
                     setUserName(viewModel.getUserName())
-                    setUserDescription(viewModel.getUserDescription())
+                    if (viewModel.getUserDescription().isNotEmpty()) {
+                        setUserDescription(viewModel.getUserDescription())
+                    } else {
+                        setFocusOnUserDescription()
+                    }
                     profileInfoFrameLayout.removeAllViews()
                     profileInfoFrameLayout.addView(this)
                     isEditMode = true
                 }
 
             } else {
+                editAction?.isVisible = true
+                genericToolbar?.navigationIcon = null
                 profileTitle.text = getString(R.string.profile)
                 profileInfoLogOutText.visible()
                 profileInfoSaveChangesButton.gone()

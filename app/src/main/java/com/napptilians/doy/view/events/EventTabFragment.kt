@@ -12,13 +12,12 @@ import com.napptilians.doy.base.BaseFragment
 import com.napptilians.doy.extensions.gone
 import com.napptilians.doy.extensions.visible
 import com.napptilians.doy.view.servicelist.ServiceListAdapter
-import kotlinx.android.synthetic.main.event_page.eventsList
-import kotlinx.android.synthetic.main.event_page.eventsLoadingProgress
-import kotlinx.android.synthetic.main.event_page.eventsLoadingText
+import kotlinx.android.synthetic.main.event_tab_fragment.eventsList
+import kotlinx.android.synthetic.main.event_tab_fragment.eventsLoadingProgress
+import kotlinx.android.synthetic.main.event_tab_fragment.eventsLoadingText
 import javax.inject.Inject
 
 class EventTabFragment(
-    private val isPastService: Boolean = false,
     private val onEventClicked: (ServiceModel) -> Unit = {}
 ) : BaseFragment() {
 
@@ -29,11 +28,11 @@ class EventTabFragment(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.event_page, container, false)
+    ): View? = inflater.inflate(R.layout.event_tab_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews(isPastService)
+        initViews()
     }
 
     fun setItems(events: List<ServiceModel>) {
@@ -58,10 +57,10 @@ class EventTabFragment(
 
     override fun onLoading() {}
 
-    private fun initViews(isPastService: Boolean) {
+    private fun initViews() {
         val layoutManager = LinearLayoutManager(context)
         eventsList.layoutManager = layoutManager
-        eventsAdapter= ServiceListAdapter().apply { isPastService }
+        eventsAdapter = ServiceListAdapter()
         eventsAdapter.setOnClickListener {
             onEventClicked(it)
         }

@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,47 +15,28 @@ import com.napptilians.domain.usecases.GetEventsUseCase.Companion.PAST
 import com.napptilians.domain.usecases.GetEventsUseCase.Companion.UPCOMING
 import com.napptilians.doy.R
 import com.napptilians.doy.base.BaseFragment
-import com.napptilians.doy.behaviours.ToolbarBehaviour
 import com.napptilians.doy.extensions.gone
+import com.napptilians.doy.extensions.marginPx
 import com.napptilians.doy.extensions.visible
+import com.napptilians.doy.view.customviews.DoyErrorDialog
 import com.napptilians.features.UiStatus
 import com.napptilians.features.viewmodel.EventsViewModel
-import kotlinx.android.synthetic.main.events_fragment.eventsErrorText
 import kotlinx.android.synthetic.main.events_fragment.eventsTabLayout
 import kotlinx.android.synthetic.main.events_fragment.eventsViewPager
 import kotlinx.android.synthetic.main.events_fragment.titleText
-import kotlinx.android.synthetic.main.toolbar.toolbar
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class EventsFragment : BaseFragment(), ToolbarBehaviour {
-
-    override val genericToolbar: Toolbar? by lazy { activity?.findViewById<Toolbar>(R.id.toolbar) }
+class EventsFragment : BaseFragment() {
 
     private val viewModel: EventsViewModel by viewModels { vmFactory }
     private val args: EventsFragmentArgs by navArgs()
-    private lateinit var eventAdapter: EventsPagerAdapter
+
+    private lateinit var eventAdapter: PagerAdapter
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (args.onlyMyEvents) {
-
-            val callback = object : OnBackPressedCallback(true /* enabled by default */) {
-                override fun handleOnBackPressed() {
-                    // Handle the back button event
-                    val navigation =
-                        EventsFragmentDirections.actionEventsFragmentToCategoryListFragment()
-                    findNavController().navigate(navigation)
-                }
-            }
-            requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-            // The callback can be enabled or disabled here or in handleOnBackPressed()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,23 +44,15 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.events_fragment, container, false)
 
-    override fun onError(error: ErrorModel) {
-        eventsErrorText.text =
-            "${resources.getString(R.string.error_title)}\n${resources.getString(R.string.error_message)}"
-        eventsErrorText.visible()
-        eventsViewPager.gone()
-    }
-
-    override fun onLoading() {}
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         if (args.onlyMyEvents) {
             viewModel.getMyServices(uid = firebaseAuth.currentUser?.uid)
+            titleText.marginPx(top = resources.getDimension(R.dimen.margin_xxlarge).toInt())
         } else {
             viewModel.getServices(uid = firebaseAuth.currentUser?.uid)
+            titleText.marginPx(top = resources.getDimension(R.dimen.margin_xlarge).toInt())
         }
         viewModel.eventsDataStream.observe(
             viewLifecycleOwner,
@@ -93,13 +64,14 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
             })
     }
 
-    override fun onResume() {
-        super.onResume()
-        genericToolbar?.gone()
+    override fun onError(error: ErrorModel) {
+        eventsViewPager.gone()
+        activity?.let { DoyErrorDialog(it).show() }
     }
 
+    override fun onLoading() {}
+
     private fun processNewValue(model: Map<String, List<ServiceModel>>) {
-        eventsErrorText.gone()
         eventsViewPager.visible()
         (eventAdapter.getItem(0) as EventTabFragment).setItems(model[UPCOMING] ?: listOf())
         (eventAdapter.getItem(1) as EventTabFragment).apply {
@@ -111,19 +83,19 @@ class EventsFragment : BaseFragment(), ToolbarBehaviour {
     private fun initViews() {
         titleText.visible()
         if (args.onlyMyEvents) {
-            titleText.text = context?.resources?.getText(R.string.my_own_events)
+            titleText.text = context?.resources?.getText(R.string.events_by_user)
         } else {
             titleText.text = context?.resources?.getText(R.string.your_events)
         }
-        eventAdapter = EventsPagerAdapter(childFragmentManager)
+        eventAdapter = PagerAdapter(childFragmentManager)
         eventAdapter.apply {
             addFragment(
                 EventTabFragment { navigateToServiceDetail(it) },
-                context?.resources?.getString(R.string.tab_upcoming)
+                context?.resources?.getString(R.string.tab_upcoming) ?: ""
             )
             addFragment(
-                EventTabFragment(false),
-                context?.resources?.getString(R.string.tab_past)
+                EventTabFragment(),
+                context?.resources?.getString(R.string.tab_past) ?: ""
             )
         }
         eventsViewPager.adapter = eventAdapter

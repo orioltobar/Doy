@@ -1,115 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Doy</string>
-    <string name="menu_section_1">Secció 1</string>
-    <string name="menu_section_2">Secció 2</string>
-    <string name="under_construction">En construcció</string>
+
+    <!-- Intro -->
     <string name="join_community">Uneix-te a la comunitat DOY</string>
-    <string name="sign_up">Crear compte</string>
-    <string name="sign_in">Iniciar sessió</string>
     <string name="create_account">Crear compte</string>
+    <string name="login">Iniciar sessió</string>
     <string name="google_sign_in">Continuar amb Google</string>
+
+    <!-- Register -->
+    <string name="account_created">Compte creat!</string>
+    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Xats per iniciar la videotrucada.</string>
+    <string name="start_enjoying">Comença a gaudir de formar part de la comunitat DOY.</string>
+    <string name="password_too_short">La contrasenya ha de tenir almenys 6 caracters.</string>
+    <string name="passwords_dont_match">Les contrasenyes no coincideixen.</string>
+    <string name="invalid_email">Uy! Aquest e-mail no es vàlid.</string>
+    <string name="empty_name">Necessitem el teu nom per a registrar-te</string>
     <string name="email">E-mail</string>
     <string name="name">Nom</string>
     <string name="password">Contrasenya</string>
     <string name="repeat_password">Repetir contrasenya</string>
-    <string name="password_forgot">Has oblidat la contrasenya?</string>
-    <string name="recover_password">Revisa el teu compte de correu electrònic per recuperar la teva contraseña!</string>
-    <string name="no_account">No tens compte?</string>
     <string name="existing_account">Ja tens compte?</string>
     <string name="create">Crear</string>
-    <string name="wrong_credentials">Credencials errònies</string>
-    <string name="server_error">Hi ha hagut un error</string>
-    <string name="generic_error">En aquest moment no pot completar la teva petició.</string>
 
-    <!-- Register & Login & Recover Password-->
-    <string name="account_created">¡Compte creat!</string>
-    <string name="welcome">Benvingut a la comunitat DOY. A partir d\'ara ja pots unir-te als esdeveniments que més t\'interessin. ¡És molt fàcil! Quan arribi el dia i l\'hora de l\'esdeveniment, únicament hauràs d\'entrar a la secció Chats per iniciar la videotrucada.</string>
-    <string name="start_enjoying">Comença a gauidr de formar part de la comunitat DOY.</string>
-    <string name="password_too_short">La contrasenya ha de tenir mínim 6 caracters.</string>
-    <string name="passwords_dont_match">Les contrasenyes no coincideixen.</string>
-    <string name="invalid_email">¡Uy! Aquest e-mail no es vàlid.</string>
-    <string name="empty_name">Necessitem el teu nom per a registrarte</string>
+    <!-- Login -->
+    <string name="password_forgot">Has oblidat la contrasenya?</string>
     <string name="firebase_invalid_user">Aquest usuari no existeix a la nostra base de dades</string>
     <string name="firebase_invalid_credentials">Sembla que les credencials son errònies. Torna a provar.</string>
     <string name="firebase_user_already_exists">Aquest nom d\'usuari no està disponible. Si us plau, escull un altre.</string>
-    <string name="forgot_password">Has oblidat la teva contrasenya?</string>
-    <string name="forgot_password_no_problem">No hi ha cap problema, ens passa a tots!</string>
-    <string name="forgot_password_message">Sisplau, introdueix la direcció d\'e-mail que vas utilitzar al registrar-te i t\'enviarem un enllaç per restableixer la teva contrasenya.</string>
-    <string name="send">Enviar</string>
+    <string name="no_account">No tens compte?</string>
+
+    <!-- Recover password -->
+    <string name="recover_password_title">Has oblidat la teva contrasenya?</string>
+    <string name="recover_password_no_problem">No hi ha cap problema, ens passa a tots!</string>
+    <string name="recover_password_message">Si us plau, introdueix l\'adreça de correu amb què et vas registrar i t\'enviarem un enllaç per restablir la teva contrasenya.</string>
+    <string name="recover_password_send">Enviar</string>
+    <string name="recover_password_email_sent">Email enviat</string>
+    <string name="recover_password_email_reminder">Revisa el teu compte de correu electrònic per recuperar la teva contrasenya!</string>
 
     <!-- Category list -->
-    <string name="loading_categories">Estem carregant les teves categories. ¡Només serà un segon!</string>
+    <string name="loading_categories">Estem carregant les teves categories. Només serà un segon!</string>
     <string name="no_categories">Encara no tenim categories disponibles</string>
 
     <!-- Service list -->
     <string name="loading_services">Si us plau, espera mentre carreguem els teus serveis</string>
-    <string name="no_services">Sembla que no hi ha serveis per aquesta categoria. ¡Comprova més tard!</string>
+    <string name="no_services">Sembla que no hi ha serveis per aquesta categoria. Comprova més tard!</string>
     <string name="max_spots">Max. %1$d</string>
 
     <!-- Add service -->
-    <string name="add_service">Crear event</string>
+    <string name="add_service">Crear esdeveniment</string>
     <string name="upload_image">Pujar imatge</string>
     <string name="select_category">Seleccionar categoria</string>
-    <string name="service_title">Títol event</string>
+    <string name="service_title">Títol esdeveniment</string>
     <string name="select_day">Seleccionar dia</string>
     <string name="select_date">Seleccionar hora d\'inici</string>
     <string name="select_spots">Seleccionar places disponibles</string>
     <string name="select_duration">Seleccionar duració</string>
     <string name="description">Descripció</string>
-    <string name="add_service_to_category">¿A quina categoria pertany el teu esdeveniment?</string>
-    <string name="adding_service">Creant event...</string>
-    <string name="how_many_spots">Quanta gent es pot unir al teu event?</string>
+    <string name="add_service_to_category">A quina categoria pertany el teu esdeveniment?</string>
+    <string name="how_many_spots">Quanta gent es pot unir al teu esdeveniment?</string>
     <string name="save">Guardar</string>
-    <string name="person">persona</string>
-    <string name="persons">persones</string>
-    <string name="how_long_duration">Quanta gent es pot unir al teu event?</string>
-    <string name="hour">hora</string>
-    <string name="hours">hores</string>
-    <string name="add_service_success">Has creat el teu event!</string>
-    <string name="add_service_success_message">Recorda ser puntual y tenir-ho tot preparat amb antelació.</string>
+    <plurals name="people">
+        <item quantity="one">%d persona</item>
+        <item quantity="other">%d persones</item>
+    </plurals>
+    <string name="how_long_duration">Quant durarà aproximadament?</string>
+    <string name="minutes">%1$d minuts</string>
+    <string name="hours_and_minutes">%1$s i %2$d minuts</string>
+    <plurals name="hours">
+        <item quantity="one">%d hora</item>
+        <item quantity="other">%d hores</item>
+    </plurals>
+    <string name="add_service_success">Has creat el teu esdeveniment!</string>
+    <string name="add_service_success_message">Recorda ser puntual i tenir-ho tot preparat amb antelació.</string>
 
     <!-- Service detail -->
-    <string name="when">¿Quan?</string>
+    <string name="when">Quan?</string>
     <string name="duration">Duració:</string>
     <string name="spots">Places:</string>
-    <string name="spot_reserved">%1d persona apuntada</string>
-    <string name="spots_reserved">%1d persones apuntades</string>
+    <plurals name="spots_reserved">
+        <item quantity="one">%d persona apuntada</item>
+        <item quantity="other">%d persones apuntades</item>
+    </plurals>
     <string name="confirm_assistance">Assistiré</string>
     <string name="add_attendee_success">T\'has apuntat correctament!</string>
-    <string name="add_attendee_success_message">L\'esdeveniment s\'acaba d\'afegir a la secció <b>Xat</b> perquè puguis resoldre qualsevol dubte abans de l\'esdeveniment.\n\nRecorda ser puntual, i si finalment no vas a poder assistir-hi, cancel·lar-amb antelació.</string>
-    <string name="assist_to_event_yes">Assistiràs a aquest event!</string>
-    <string name="assist_to_event_cancel">No vull assistir</string>
-    <string name="confirm_assist_to_event_cancel">¿Estàs segur de què no vols assistir a l\'event?</string>
-    <string name="confirm_assist_to_event_cancel_yes">Estic segur, no vull assistir</string>
-    <string name="your_service">Aquest event és teu. Gràcies per ajudar!</string>
+    <string name="add_attendee_success_message">L\'esdeveniment s\'acaba d\'afegir a la secció <b>Xat</b> perquè puguis resoldre qualsevol dubte abans de l\'esdeveniment.\n\nRecorda ser puntual, i si finalment no hi podràs assitir, cancel·la\'l amb antelació per tal que algú altre es pugui apuntar.</string>
+    <string name="attend_event_yes">Assistiràs a aquest esdeveniment!</string>
+    <string name="attend_event_cancel">Ja no hi vull assistir</string>
+    <string name="confirm_attend_event_cancel">Estàs segur de què no vols assistir a l\'esdeveniment?</string>
+    <string name="confirm_attend_event_cancel_yes">Estic segur, no hi vull assistir</string>
+    <string name="your_service">Ets l\'organitzador de l\'esdeveniment!</string>
+    <string name="menu_delete">Eliminar esdeveniment</string>
+    <string name="menu_edit_event">Editar esdeveniment</string>
+    <string name="confirm_delete_event_title">Estàs segur que vols eliminar l\'esdeveniment?</string>
+    <string name="delete_event_success">Esdeveniment eliminat correctament</string>
 
     <!-- Generic Dialog -->
     <string name="wip">En construcció…</string>
-    <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis disfrutar d\'aquesta funcionalitat quant abans millor.</string>
+    <string name="wip_explanation">Estem treballant a tota velocitat per a que puguis gaudir d\'aquesta funcionalitat quant abans millor.</string>
 
     <!-- Generic Error Dialog -->
     <string name="error_title">Ups! Alguna cosa ha anat malament</string>
-    <string name="error_message">Torna a intentar-ho en uns segons.</string>
+    <string name="error_message">Torna-ho a intentar en uns segons.</string>
 
     <!-- Profile -->
     <string name="profile">Perfil</string>
     <string name="edit_profile">Editar perfil</string>
     <string name="bio_default">Vols explicar alguna cosa sobre tu?</string>
-    <string name="events_by_user">Eventos creados por mi</string>
+    <string name="events_by_user">Esdeveniment creats per mi</string>
     <string name="logout">Tancar sessió</string>
     <string name="update_profile">Actualitzar perfil</string>
+    <string name="menu_edit">Editar</string>
 
     <!-- My events -->
     <string name="your_events">Els teus esdeveniments</string>
-    <string name="my_own_events">Events created by me</string>
     <string name="tab_upcoming">Propers</string>
+    <string name="tab_active">En curs</string>
     <string name="tab_past">Passats</string>
-    <string name="loading_events">Carregant esdeveniments...</string>
+    <string name="loading_events">Carregant esdeveniments…</string>
     <string name="no_events">Sembla que no tens cap esdeveniment en aquesta secció.</string>
 
     <!-- Chat -->
-    <string name="chat">Chat</string>
-    <string name="no_chats">Encara no tens cap chat obert. \n\nApunta\'t a un event per iniciar un event</string>
-    <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un chat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
+    <string name="chat">Xat</string>
+    <string name="loading_chats">Carregant xats…</string>
+    <string name="loading_chat_messages">Carregant missatges…</string>
+    <string name="no_chats">Encara no tens cap xat obert.\n\nApunta\'t a un esdeveniment per iniciar un xat.\n\nQuan arribi l\'hora de l\'esdeveniment, et sortirà un botó per a unir-te a la videotrucada.</string>
+    <string name="chat_in_progress">Estem treballant a tota velocitat per implementar un xat grupal amb suport de videotrucades. De moment, prova a escriure uns missatges a l\'organitzador!</string>
+    <string name="send_message_hint">Escriu un missatge</string>
+    <string name="event_started_title">L\'esdeveniment ha començat!</string>
+    <string name="event_started_subtitle">Entra a la videotrucada</string>
+    <string name="chat_button_text">Entrar</string>
+
+    <!-- Notifications -->
+    <string name="event_reminder_channel_name">Recordatoris d\'esdedeveniments</string>
+    <string name="event_reminder_channel_description">Notificacions relacionades amb esdeveniments</string>
+    <string name="event_reminder_subtitle">El teu esdeveniment començarà en %1$d minuts. Clica aquí per unir-te i passar-ho bé!</string>
+
 </resources>

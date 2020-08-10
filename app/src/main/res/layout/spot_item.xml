@@ -4,7 +4,7 @@
     android:id="@+id/spot_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_medium"
+    android:padding="@dimen/padding_medium"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -17,7 +17,7 @@
         android:padding="@dimen/padding_small"
         android:textColor="@color/grayStrong"
         android:textSize="@dimen/category_text_size"
-        tools:text="2 personas" />
+        tools:text="1 persona" />
 
     <ImageView
         android:id="@+id/tickImageView"

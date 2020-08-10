@@ -6,6 +6,6 @@
         android:width="@dimen/button_border_width"
         android:color="@color/colorPrimary" />
 
-    <corners android:radius="10dp" />
+    <corners android:radius="@dimen/chat_message_box_radius" />
 
 </shape>

@@ -18,8 +18,8 @@ android {
         applicationId "com.napptilians.doy"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "com.napptilians.doy.di.TestRunner"
         // Add only alternative resources of the supported locales
         resConfigs "es", "ca", "en"
@@ -68,9 +68,9 @@ dependencies {
     implementation "com.google.android.material:material:${Versions.material_design}"
 
     // Firebase SDK
+    implementation "com.google.firebase:firebase-firestore-ktx:${Versions.firestore_ktx}"
     implementation "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
     implementation "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
-    implementation "com.google.firebase:firebase-database:${Versions.firebase_database}"
     implementation "com.google.firebase:firebase-core:${Versions.firebase_core_version}"
     implementation "com.google.firebase:firebase-messaging:${Versions.firebase_messaging_version}"
 
@@ -101,6 +101,10 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
     implementation "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
+
+    implementation "org.apache.commons:commons-lang3:${Versions.apachecommons_version}"
+
+    implementation ("org.jitsi.react:jitsi-meet-sdk:${Versions.jitsi_version}") { transitive = true }
 
     implementation "androidx.appcompat:appcompat:${Versions.androidx_version}"
     implementation "androidx.core:core-ktx:${Versions.androidx_core_version}"
