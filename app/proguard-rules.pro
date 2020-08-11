@@ -78,3 +78,17 @@
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
+
+### Videocall using Jitsi Meet ###
+# Source: https://github.com/jitsi/jitsi-meet/blob/master/android/app/proguard-rules.pro
+
+# WebRTC
+-keep class org.webrtc.** { *; }
+-dontwarn org.chromium.build.BuildHooksAndroid
+
+# Jisti Meet SDK
+-keep class org.jitsi.meet.** { *; }
+-keep class org.jitsi.meet.sdk.** { *; }
+
+# Rule to avoid build errors related to SVGs
+-keep public class com.horcrux.svg.** { *; }
